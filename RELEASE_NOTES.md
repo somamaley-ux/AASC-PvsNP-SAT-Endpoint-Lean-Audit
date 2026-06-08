@@ -13,6 +13,9 @@ Included:
 - SAT negative occupation-exhaustion anchors, including
   `cnfSATNegativeOccupation_exhaustion` and
   `cnfSATNegativeOccupation_nonoptional`.
+- SAT endpoint-status bivalence anchors, including
+  `cnfSATGovernedEndpointUse_bivalent` and
+  `cnfSATNegativeGovernedEndpointUse_has_separatorStatus`.
 - Audit runner: `scripts/check-pvsnp-sat-operator-bridge-audit.ps1`.
 - Manuscript-facing PDF/source and ledger artifacts when available from the
   workspace.

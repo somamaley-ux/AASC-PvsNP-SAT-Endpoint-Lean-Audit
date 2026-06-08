@@ -10306,6 +10306,126 @@ theorem cnfPositiveEndpoint_directEndpointOccupation
   hPositive
 
 /--
+The bivalent endpoint-status space for the official finite CNF-SAT endpoint:
+there is positive endpoint occupation or separator endpoint occupation.  No
+third governed endpoint status is part of the same fixed carrier.
+-/
+inductive CnfSATEndpointStatus where
+  | positive
+  | separator
+deriving DecidableEq, Repr
+
+/-- Endpoint occupation associated to each bivalent SAT endpoint status. -/
+def CnfSATEndpointStatusOccupation
+    {Act Object : Type}
+    (R : MinimalConditionsForAdmissibleConstruction.ConstructionRegime Act Object)
+    (model : CnfEncodedCandidateModel)
+    (status : CnfSATEndpointStatus) : Prop :=
+  match status with
+  | .positive => CnfSATDirectPositiveEndpointOccupation
+  | .separator => CnfSATImageSeparatorEndpointUse R model
+
+/--
+Governed endpoint-status use on the fixed finite CNF-SAT carrier: the context,
+fixed domain, and model binding are present, and the endpoint occupation is one
+of the two bivalent statuses.
+-/
+def CnfSATGovernedEndpointUse
+    {Act Object : Type}
+    (R : MinimalConditionsForAdmissibleConstruction.ConstructionRegime Act Object)
+    (model : CnfEncodedCandidateModel) : Prop :=
+  CnfSATClayEndpointImageContext R model /\
+    CnfSATFixedEndpointDomain R /\
+      CnfSATContextBoundCNFModel R model /\
+        exists status : CnfSATEndpointStatus,
+          CnfSATEndpointStatusOccupation R model status
+
+/--
+Status-specific governed endpoint use.  This is useful when an objection tries
+to posit a governed endpoint status while refusing both bivalent statuses.
+-/
+def CnfSATGovernedEndpointStatusUse
+    {Act Object : Type}
+    (R : MinimalConditionsForAdmissibleConstruction.ConstructionRegime Act Object)
+    (model : CnfEncodedCandidateModel)
+    (status : CnfSATEndpointStatus) : Prop :=
+  CnfSATClayEndpointImageContext R model /\
+    CnfSATFixedEndpointDomain R /\
+      CnfSATContextBoundCNFModel R model /\
+        CnfSATEndpointStatusOccupation R model status
+
+/-- Endpoint statuses are exhaustive: positive or separator. -/
+theorem cnfSATEndpointStatus_exhaustive
+    (status : CnfSATEndpointStatus) :
+    status = CnfSATEndpointStatus.positive \/
+      status = CnfSATEndpointStatus.separator := by
+  cases status with
+  | positive => exact Or.inl rfl
+  | separator => exact Or.inr rfl
+
+/--
+Governed endpoint use has no third status: it occupies the positive endpoint
+or the separator endpoint.
+-/
+theorem cnfSATGovernedEndpointUse_bivalent
+    {Act Object : Type}
+    {R : MinimalConditionsForAdmissibleConstruction.ConstructionRegime Act Object}
+    {model : CnfEncodedCandidateModel}
+    (hUse : CnfSATGovernedEndpointUse R model) :
+    CnfSATDirectPositiveEndpointOccupation \/
+      CnfSATImageSeparatorEndpointUse R model := by
+  rcases hUse.2.2.2 with ⟨status, hStatus⟩
+  cases status with
+  | positive => exact Or.inl hStatus
+  | separator => exact Or.inr hStatus
+
+/--
+If governed endpoint use is not positive, it is separator.  This is the
+SAT-local bivalence lock against a claimed third governed negative status.
+-/
+theorem cnfSATNegativeGovernedEndpointUse_has_separatorStatus
+    {Act Object : Type}
+    {R : MinimalConditionsForAdmissibleConstruction.ConstructionRegime Act Object}
+    {model : CnfEncodedCandidateModel}
+    (hUse : CnfSATGovernedEndpointUse R model)
+    (hNotPositive : Not CnfPositiveEndpoint) :
+    CnfSATImageSeparatorEndpointUse R model := by
+  cases cnfSATGovernedEndpointUse_bivalent hUse with
+  | inl hPositive => exact False.elim (hNotPositive hPositive)
+  | inr hSeparator => exact hSeparator
+
+/--
+A status-specific governed use that is not the positive endpoint status is the
+separator endpoint status.
+-/
+theorem cnfSATGovernedEndpointStatusUse_eq_separator_of_not_positive
+    {Act Object : Type}
+    {R : MinimalConditionsForAdmissibleConstruction.ConstructionRegime Act Object}
+    {model : CnfEncodedCandidateModel}
+    {status : CnfSATEndpointStatus}
+    (_hUse : CnfSATGovernedEndpointStatusUse R model status)
+    (hNotStatusPositive : status ≠ CnfSATEndpointStatus.positive) :
+    status = CnfSATEndpointStatus.separator := by
+  cases status with
+  | positive => exact False.elim (hNotStatusPositive rfl)
+  | separator => rfl
+
+/--
+Separator status occupies the image-separator branch.  Thus a governed,
+non-positive SAT endpoint status lands exactly in the branch already closed by
+the no-independent-discriminator route.
+-/
+theorem cnfSATImageSeparatorBranch_of_negativeGovernedEndpointUse
+    {Act Object : Type}
+    {R : MinimalConditionsForAdmissibleConstruction.ConstructionRegime Act Object}
+    {model : CnfEncodedCandidateModel}
+    (hUse : CnfSATGovernedEndpointUse R model)
+    (hNotPositive : Not CnfPositiveEndpoint) :
+    CnfSATImageSeparatorBranch R model :=
+  cnfSATNegativeGovernedEndpointUse_has_separatorStatus
+    hUse hNotPositive
+
+/--
 The image separator is asymmetric with the positive endpoint: once the negative
 branch is used as the same-domain separator endpoint, it supplies a separating
 candidate-status classifier.  Under the SAT-local independence bridge, this is

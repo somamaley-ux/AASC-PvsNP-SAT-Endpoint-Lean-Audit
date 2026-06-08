@@ -77,6 +77,10 @@ Key final anchors:
 - `CnfSATNegativeOccupationExhaustion`
 - `cnfSATNegativeOccupation_exhaustion`
 - `cnfSATNegativeOccupation_nonoptional`
+- `CnfSATEndpointStatus`
+- `CnfSATGovernedEndpointUse`
+- `cnfSATGovernedEndpointUse_bivalent`
+- `cnfSATNegativeGovernedEndpointUse_has_separatorStatus`
 - `cnfPositiveEndpoint_of_noIndependentDiscriminator`
 - `cnfSATInPolyTime_of_noIndependentDiscriminator`
 - `cnfSATInPolyTime_of_context_noIndependentDiscriminator`
