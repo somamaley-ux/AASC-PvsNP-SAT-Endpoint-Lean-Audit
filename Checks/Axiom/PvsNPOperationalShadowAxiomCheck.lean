@@ -1,0 +1,12 @@
+import MaleyLean.Papers.PvsNP.OperationalShadow
+
+open MaleyLean.Papers.PvsNP
+
+#print axioms CnfExternalOperationalShadow
+#print axioms CnfShadowedAnticheckerPackage
+#print axioms cnfTrivialExternalOperationalShadow
+#print axioms encodedAntichecker_of_shadowed
+#print axioms shadowedAntichecker_of_encoded
+#print axioms cnfShadowedAnticheckerPackage_nonempty_iff_encoded
+#print axioms counterexampleLowerBound_of_shadowedAntichecker
+#print axioms noCnfMachineTarget_of_shadowedAntichecker

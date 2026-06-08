@@ -1,0 +1,1655 @@
+\documentclass[11pt]{article}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage{array,booktabs,longtable,tabularx}
+\usepackage{enumitem}
+\usepackage{xcolor}
+\usepackage{listings}
+\usepackage{microtype}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{hyperref}
+\hypersetup{colorlinks=false,linkcolor=blue!55!black,citecolor=blue!55!black,urlcolor=blue!55!black,pdfborder={0 0 0}}
+\lstset{basicstyle=\ttfamily\small,breaklines=true,columns=fullflexible,keepspaces=true,frame=single,framerule=0.3pt}
+\emergencystretch=3em
+\hbadness=10000
+\setlist[itemize]{topsep=3pt,itemsep=2pt,parsep=0pt,leftmargin=1.5em}
+\setlist[enumerate]{topsep=3pt,itemsep=2pt,parsep=0pt,leftmargin=1.7em}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{criterion}[theorem]{Criterion}
+\newtheorem{protocol}[theorem]{Protocol}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+\newcommand{\Lean}[1]{\texttt{#1}}
+\newcommand{\PosRaw}{\mathsf{Pos}_{\mathsf{raw}}}
+\newcommand{\SepBare}{\mathsf{Sep}_{\mathsf{bare}}}
+\newcommand{\SepRes}{\mathsf{Sep}_{\mathsf{res}}}
+\newcommand{\SepImg}{\mathsf{Sep}_{\mathsf{img}}}
+\newcommand{\Asep}{\mathsf{A}_{\mathsf{sep}}}
+\newcommand{\SepClay}{\mathsf{Sep}_{\mathsf{Clay}}}
+\newcommand{\Apos}{\mathsf{A}_{\mathsf{pos}}}
+\newcommand{\PosClay}{\mathsf{Pos}_{\mathsf{Clay}}}
+\newcommand{\RawLB}{\mathsf{RawLB}}
+\newcommand{\AClass}{\mathsf{AASCClass}}
+\newcommand{\AASCCons}{\mathsf{AASCConsequences}}
+\newcommand{\ClassOf}[1]{\mathsf{AASCClass}(#1)}
+\newcommand{\Kernel}{\mathsf{Kernel}}
+\newcommand{\Aplus}{\mathsf{A}^{+}}
+\newcommand{\CnfSATP}{\mathsf{CnfSATInPolyTime}}
+\newcommand{\CnfLB}{\mathsf{CnfCounterexampleLowerBound}}
+\newcommand{\CnfBareSep}{\mathsf{CnfCounterexampleLowerBound}}
+\newcommand{\CnfImageSep}{\mathsf{CnfSATImageSeparatorBranch}}
+\newcommand{\CnfBareNeg}{\mathsf{CnfSATBareNegativeBranch}}
+\newcommand{\KP}{\mathsf{KernelPackage}}
+\newcommand{\RSAT}{R_{\mathsf{SAT\text{-}Clay}}}
+\newcommand{\UEAP}{\mathsf{UEAP}}
+\newcommand{\ATS}{\mathsf{ATS}}
+\newcommand{\NonDeg}{\mathsf{NonDegenerate}}
+\newcommand{\APlusCert}{\mathsf{KernelAPlusAuditCertificate}}
+\newcommand{\EndpointImage}{\mathsf{EndpointImage}}
+\newcommand{\OrdNeg}{\mathsf{OrdNeg}}
+\newcommand{\OrdNegUn}{\mathsf{OrdNeg}^{\mathsf{unclass}}}
+\newcommand{\OrdNegCls}{\mathsf{OrdNeg}^{\mathsf{class}}}
+\newcommand{\OrdNegStd}{\mathsf{OrdNeg}^{\mathsf{std}}}
+\newcommand{\OrdNegDistinct}{\mathsf{OrdNeg}^{\mathsf{distinct}}}
+\newcommand{\Aneg}{\mathsf{A}_{\mathsf{neg}}}
+\newcommand{\Aord}{\mathsf{A}_{\mathsf{ord}}}
+\newcommand{\EndpointStand}{\mathsf{EndpointStanding}}
+\newcommand{\Occupies}{\mathsf{Occupies}}
+\newcommand{\BoundaryCross}{\mathsf{BoundaryCross}}
+\newcommand{\AMetric}{\mathsf{AMetricBoundary}}
+\newcommand{\ProofR}{\mathsf{Proof}_{R}}
+\newcommand{\Pclass}{\mathsf{P}}
+\newcommand{\NPclass}{\mathsf{NP}}
+\newcommand{\ClayCtx}{\mathcal{C}_{\mathsf{SAT}}(R,m)}
+\newcommand{\CnfCtx}{\mathsf{CnfSATClayEndpointImageContext}}
+\newcommand{\Der}{\operatorname{Der}}
+\newcommand{\Constr}{\operatorname{Constr}}
+\newcommand{\law}{\mathrel{\simeq_{\mathrm{gov}}}}
+\newcommand{\Adm}{\mathrm{Adm}}
+\newcommand{\St}{\mathrm{St}}
+\newcommand{\RefK}{\mathrm{Ref}}
+\newcommand{\Irr}{\mathrm{Irr}}
+\newcommand{\ReportClay}[1]{\mathsf{Report}_{\mathsf{Clay}}(#1)}
+
+\newcommand{\RSATctx}{R_{\mathsf{SAT}}^{\mathsf{ctx}}}
+\newcommand{\EndpointUse}{\mathsf{EndpointUse}}
+\newcommand{\EndpointDisc}{\mathsf{EndpointDisc}}
+\newcommand{\IndDisc}{\mathsf{IndependentDisc}}
+\newcommand{\GovEquiv}{\mathsf{GovEquivalent}}
+\newcommand{\Bookkeep}{\mathsf{Bookkeeping}}
+\newcommand{\DomShift}{\mathsf{DomainShift}}
+\newcommand{\FixedDom}{\mathsf{FixedDomain}}
+\newcommand{\NegThm}{\mathsf{OrdNegThm}}
+\newcommand{\RawTrace}{\mathsf{RawTrace}}
+\newcommand{\KernelCons}{\mathsf{KernelConsequence}}
+\newcommand{\CnfPositiveEndpoint}{\mathsf{CnfPositiveEndpoint}}
+\newcommand{\CnfDirectPos}{\mathsf{CnfSATDirectPositiveEndpointOccupation}}
+\newcommand{\CnfIndSepDisc}{\mathsf{CnfSATIndependentSeparatorEndpointStatusDiscriminator}}
+\newcommand{\CnfNoIndSepClass}{\mathsf{CnfNoIndependentSeparatingClassifier}}
+\newcommand{\CnfSepClassInd}{\mathsf{CnfSeparatingClassifierIsIndependentSameDomain}}
+\newcommand{\CnfSepClassifier}{\mathsf{CnfCandidateStatusClassifier}}
+\newcommand{\CnfSameDomainSep}{\mathsf{CnfSameDomainSeparator}}
+\newcommand{\CnfSeparatesPoly}{\mathsf{CnfClassifierSeparatesPolynomialCandidates}}
+\newcommand{\DirPos}{\mathcal{P}_{\mathsf{dir}}}
+\newcommand{\SepIndBridge}{\mathcal{I}_{\mathsf{sep}}}
+\newcommand{\SepDisc}{\mathcal{D}_{\mathsf{sep}}}
+\newcommand{\NoSepDisc}{\mathcal{N}_{\mathsf{sep}}}
+\newcommand{\ModelOfCnf}{\mathsf{Model}_{\mathsf{CNF}}}
+\newcommand{\SepRel}{\mathsf{SepRel}}
+\newcommand{\CandStatusClass}{\mathsf{CandCls}}
+\newcommand{\PolyCandSep}{\mathsf{PolySep}}
+\newcommand{\SameDomClass}{\mathsf{SameDomCls}}
+\newcommand{\NonBookSep}{\mathsf{NonBook}}
+\newcommand{\NonGovEqSep}{\mathsf{NonGovEq}}
+
+
+\title{
+\(P=NP\) by Exclusion of the SAT Separator Endpoint\\[0.5em]
+{\normalsize An AASC Endpoint-Rigidity Proof for Arbitrary Finite CNF-SAT}
+}
+\author{Amos Jay Maley}
+\date{June 2026}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+This manuscript proves \(P=NP\) by excluding the SAT separator endpoint on the unrestricted finite CNF-SAT carrier. The proof is AASC-owned: AASC supplies the endpoint-rigidity argument that excludes the bare negative branch, while Cook--Levin/Karp supplies only the standard endpoint correspondence from polynomial-time CNF-SAT to \(P=NP\). The positive raw branch is \(\PosRaw := \CnfSATP\), asserting deterministic polynomial-time decidability of arbitrary finite CNF-SAT. The bare negative branch \(\SepBare\) is the raw complement of \(\PosRaw\) on the same carrier.
+
+The proof is kernel-first. Theorem-bearing endpoint use is treated as governed construction, and governed construction is possible only under the kernel of admissibility, standing, reference, and irreversibility. The downstream AASC machinery is therefore not an external classifier or a source of theorem standing; it is the fixed-domain consequence layer forced by kernel necessity. Ordinary theoremhood, positive or negative, is kernel-internal when it is genuine theoremhood rather than raw trace.
+
+The decisive step is the SAT-local endpoint asymmetry. The positive branch directly occupies the constructive endpoint carrier. The raw negative branch, by contrast, is transported by the SAT lower-bound/no-positive equivalence into the SAT image-separator branch. That branch induces an independent same-domain endpoint-status discriminator on the fixed CNF-SAT carrier. Kernel-forced structural rigidity excludes such discriminators. Hence the SAT separator route is unavailable.
+
+It follows that \(\SepBare\) is excluded. By raw complementarity, \(\SepBare \leftrightarrow \neg\PosRaw\), the positive branch follows. Therefore arbitrary finite CNF-SAT is decidable in deterministic polynomial time. The final passage from \(\CnfSATP\) to \(P=NP\) is the standard Cook--Levin/Karp endpoint correspondence. The proof of branch exclusion is AASC-internal; external complexity theory is used only to identify the official endpoint consequence.
+\end{abstract}
+
+\tableofcontents
+\newpage
+
+\section{Proof Class, Endpoint Validity, and Kernel-First Discipline}
+
+\subsection{Proof-class lock}
+The proof class is
+\[
+  \textbf{kernel-forced endpoint-image discriminator closure.}
+\]
+It is not a circuit lower bound, diagonalization argument, relativization argument, natural-proofs argument, algebrization argument, proof-complexity lower bound, exhaustive-search lower bound, or empirical solver-hardness claim. It is a main-text mathematical proof about which theorem-bearing endpoint statuses can survive on the fixed SAT endpoint image once the kernel of non-degenerate construction is in force.
+
+\subsection{Clay-valid as official mathematical endpoint}
+
+\begin{definition}[Clay-valid mathematical endpoint]\label{def:clay-valid-math-endpoint}
+In this manuscript, ``Clay-valid'' is used only in the mathematical endpoint sense. A Clay-valid endpoint targets the official P versus NP problem, preserves the standard definitions of \(\Pclass\), \(\NPclass\), polynomial time, SAT, CNF-SAT, polynomial-time reductions, and NP-completeness, and reaches one of the official mathematical branches. The term is used only for this mathematical endpoint property.
+\end{definition}
+
+\subsection{Endpoint and method}
+The solution is AASC-owned. AASC supplies the branch-exclusion proof on the official SAT carrier: kernel necessity, fixed-domain consequence machinery, SAT image-separator asymmetry, and no independent same-domain endpoint-status discriminator. The proof is not a diagonalization argument, circuit lower-bound argument, relativization argument, natural-proofs argument, proof-complexity argument, or constructive algorithm search. Classical complexity theory enters only at the endpoint-correspondence layer: unrestricted finite CNF-SAT is the standard NP-complete carrier, and deterministic polynomial-time decidability of that carrier entails \(\Pclass=\NPclass\) by the Cook--Levin/Karp correspondence. The proof of \(\neg\SepBare\) is AASC-internal.
+
+\subsection{Kernel-first ordering}
+The central dependency is
+\[
+  \EndpointUse_R(B)
+  \Rightarrow
+  \text{governed construction}
+  \Rightarrow
+  K_R
+  \Rightarrow
+  \Aplus_R(B).
+\]
+The reverse dependency is not used. AASC does not create standing, and reportability does not supply standing. Standing is one member of the kernel already presupposed by genuine governed construction. A proof of a proposition, when it is a proof rather than raw syntax, is therefore already kernel-internal.
+
+\begin{proposition}[Downstream status of AASC machinery]\label{prop:aasc-downstream-status}
+In this manuscript, AASC, UEAP, ATS, AMetricity, no-selector discipline, no-third-status discipline, unique-interior discipline, standing conservation, and report-preservation discipline are downstream consequence machinery forced by the kernel under fixed-domain theorem-bearing endpoint use. None of them is a primitive source of theorem standing.
+\end{proposition}
+
+\begin{proof}
+The kernel proof in Section~\ref{sec:self-contained-kernel} begins with raw step-sequences and kernel-neutral target adequacy, then proves that target determinacy, step evaluability, act-time finality, and same-regime fidelity force reference, standing, irreversibility, and admissibility. The later AASC machinery is the endpoint interface of those roles: it preserves target, carrier, admissibility boundary, theorem-status reuse, redescription stability, and report integrity. Therefore it records forced consequences of the kernel rather than adding an independent source of standing.
+\end{proof}
+
+\subsection{The SAT context object is neutral}
+
+\begin{definition}[Fixed SAT endpoint context]\label{def:context}
+The context object
+\[
+  \ClayCtx
+\]
+records only the official SAT/P-vs-NP endpoint setting: the unrestricted finite CNF-SAT carrier, the raw positive branch \(\PosRaw\), the raw negative branch \(\SepBare\), the SAT image-separator branch \(\SepImg\), and the fixed model/carrier on which the raw branches are evaluated. It is a carrier-and-slot object. It is not an A+ certificate, not an AMetric premise, not a no-selector axiom, not a separator-classification premise, and not a positive endpoint premise.
+\end{definition}
+
+\begin{theorem}[Context non-smuggling]\label{thm:context-non-smuggling}
+The context object \(\ClayCtx\) does not assert any of
+\[
+  \Aplus_R(B),\quad \AMetric(R),\quad \Asep,\quad \neg\SepBare,
+  \quad \neg\SepImg,\quad \PosRaw.
+\]
+It fixes the official SAT carrier and branch slots only.
+\end{theorem}
+
+\begin{proof}
+By Definition~\ref{def:context}, the clauses of \(\ClayCtx\) are carrier and slot clauses. They say which endpoint image is under evaluation and which raw branches are being evaluated on that image. They do not classify any branch, exclude any branch, or assert the positive branch. All endpoint-status consequences are derived later from endpoint use plus the kernel.
+\end{proof}
+
+\subsection{Endpoint layers}
+
+\begin{definition}[Bare proposition layer]\label{def:bare}
+The raw positive proposition is
+\[
+  \PosRaw := \CnfSATP.
+\]
+The bare negative proposition \(\SepBare\) is the raw complement branch for the same unrestricted finite CNF-SAT carrier.
+\end{definition}
+
+\begin{definition}[SAT image-separator branch]\label{def:image}
+The SAT image-separator branch \(\SepImg\) denotes the exact manuscript counterpart of the formal object \(\CnfImageSep(R,model)\). It is the SAT lower-bound/no-positive branch after transport through the fixed SAT operator bridge. The manuscript does not insert an additional residual layer between the raw negative branch and \(\SepImg\): the formal bridge used below is exactly
+\[
+  \CnfBareNeg(R,model)\Rightarrow\CnfImageSep(R,model).
+\]
+Thus \(\SepImg\) is not a generic report act, not ordinary negative theoremhood by itself, and not an A+ premise. It is the image-separator branch used by the SAT-local discriminator theorem.
+\end{definition}
+
+\begin{definition}[Endpoint classification layer]\label{def:clay-layer}
+The symbol \(\Asep\) denotes the role-specific separator endpoint-status factor, if such a factor is asserted for endpoint-image separator occupation \(\SepImg\). The Clay-valid separator endpoint is
+\[
+  \SepClay := \SepImg\wedge\Asep.
+\]
+The positive report classification is \(\Apos\), and the Clay-valid positive endpoint is
+\[
+  \PosClay:=\PosRaw\wedge\Apos.
+\]
+These classification symbols are downstream status factors; they do not create kernel standing.
+\end{definition}
+
+\section{Official Target and SAT Endpoint Carrier}
+
+\subsection{The official P versus NP target}
+The official P versus NP problem asks whether every language accepted by a nondeterministic polynomial-time algorithm is also accepted by a deterministic polynomial-time algorithm. The problem statement is
+\[
+  \Pclass \stackrel{?}{=} \NPclass.
+\]
+The proof works through encoded CNF satisfiability as the SAT endpoint carrier.
+
+\subsection{CNF satisfiability}
+For a CNF formula \(\varphi\), an assignment \(a\) assigns Boolean values to its variables, and
+\[
+  SAT(\varphi) \quad\Longleftrightarrow\quad \exists a\, Eval(\varphi,a)=1.
+\]
+The formal carrier uses finite encodings of CNF formulas, the Boolean characteristic function \(\mathsf{satChar}\), and a Turing-machine polynomial-time certificate for the positive endpoint.
+
+\begin{definition}[Unrestricted finite CNF carrier; bounded-CNF clarification]\label{def:bounded-cnf-clarification}
+Throughout this manuscript, ``bounded-CNF'' means the ordinary finitely encoded CNF-SAT carrier: arbitrary finite CNF formulas over a finite Boolean alphabet, with input length equal to the size of the encoded formula. It does not mean fixed-width \(k\)-CNF, fixed clause count, fixed variable count, bounded instance size, bounded search depth, promise-restricted CNF, parameterized tractable fragments, or any other restricted SAT fragment. Thus
+\[
+  \CnfSATP
+\]
+is the assertion that arbitrary finite CNF-SAT is decidable by a deterministic polynomial-time machine.
+\end{definition}
+
+\subsection{Raw bivalence is bare-level bivalence}
+Raw bivalence is stated at the bare layer:
+\[
+  \PosRaw\vee\SepBare.
+\]
+The final proof does not infer reportability from the raw disjunction. It uses the SAT-local lower-bound/no-positive bridge
+\[
+  \SepBare\Rightarrow\SepImg
+\]
+to move the raw negative branch directly into the SAT image-separator branch. No reportability theorem is used in the bare-branch exclusion. Report acts reappear only after the positive endpoint has been derived.
+
+
+\section{Self-Contained Kernel Proof for Non-Degenerate Construction}\label{sec:self-contained-kernel}
+
+This section internalizes the kernel proof in the manuscript. The kernel is not cited as an external AASC preference and is not treated as an appendix assumption. The definitions below begin with raw step-sequences and kernel-neutral target adequacy, prove that the roles of reference, standing, irreversibility, and admissibility are forced by determinate same-domain construction, prove non-derivability and no-faithful-lower-generator results, and derive the fixed-domain consequence package used later by the SAT endpoint argument.
+
+\subsection{Fixed-Domain Construction and Minimal Setting}
+
+This section records the minimal structural conditions under which a raw step-sequence is assessable as construction of a determinate object on a fixed domain. They are not introduced as optional definitions for a preferred formalism. They are fixed here because without them object identity, admissible stephood, and the distinction between continuation and repair are not stably assessable at all.
+
+\begin{definition}[Raw step-sequence]\label{def:raw-step-sequence}
+A raw step-sequence on a domain $D$ is an ordered sequence of inscriptions, rewrites, transitions, or operations on $D$. As such it carries no automatic claim to determinate target identity, admissible stephood, or preservation of object identity across the sequence.
+\end{definition}
+
+
+\begin{definition}[Kernel-neutral target adequacy]\label{def:target-adequacy}
+A raw-sequence regime is target-adequate for the present inquiry iff some of its raw sequences are assessable under the following four requirements, stated without yet using the kernel as a definition of construction:
+\begin{enumerate}[label=(A\arabic*)]
+\item \emph{Target determinacy:} the sequence has a repeatable object of evaluation rather than merely a presentation-dependent trace.
+\item \emph{Step evaluability:} its transitions are assessable as advancing, failing to advance, or departing from that same target rather than merely occurring after one another.
+\item \emph{Act-time finality:} a later intervention that changes the status of an earlier performance yields a distinct act or distinct sequence rather than retroactively making the same performance admissible.
+\item \emph{Same-regime fidelity:} identity-preserving redescription, encoding, or translation preserves target, step-status, and act-time classification; otherwise the presentation has changed regime or changed the object of evaluation.
+\end{enumerate}
+These adequacy requirements are neutral with respect to the later vocabulary. They specify what must be preserved if a raw trace is to be assessed as construction of a determinate same-domain object at all. They are not proprietary terms of the present framework. They are the minimal commitments already incurred by any opponent who claims to have a counterexample to the paper's target: there must be something fixed, something done toward it, a stable distinction between the original act and later correction, and a preservation condition under redescription. A regime that denies any of these does not refute the target; it declines to instantiate it.
+\end{definition}
+
+\begin{lemma}[Target adequacy forces the kernel roles]\label{lem:target-adequacy-forces-kernel}
+Any target-adequate raw-sequence regime already requires the governance roles later named reference, standing, irreversibility, and admissibility.
+\end{lemma}
+
+\begin{proof}
+Target determinacy supplies the role later called reference: without a fixed target, there is no object whose construction could be assessed. Step evaluability supplies the role later called standing: without licit or illicit step-status, a transition is only a transition, not a construction step of the same target. Act-time finality supplies the role later called irreversibility: if later normalization can preserve the same act while changing its status, the difference between continuation and repair is not fixed at the time of performance. Finally, same-regime fidelity requires a boundary that holds those classifications together under identity-preserving redescription; that boundary is the role later called admissibility. Thus the kernel terms are introduced as names for forced roles, not as stipulative entry conditions.
+\end{proof}
+
+\begin{definition}[Act identity]\label{def:act-identity}
+Two performances count as the same act only if they agree on the admissibility-relevant invariant bundle, fix the same target on the same fixed domain, and have the same admissibility status at act-time. Any alteration that changes target, repairs inadmissibility, or reclassifies the admissibility status of the original performance yields a numerically distinct act or a distinct construction sequence.
+\end{definition}
+
+\begin{definition}[Governed construction and non-degenerate construction]\label{def:governed-construction}
+Let $X$ be a target object on a fixed domain $D$. A governed construction of $X$, written $\Constr(X)$, is a raw step-sequence on $D$ that preserves, at each step, determinate reference to $X$, standing of the step as an admissible construction step, and irreversibility of inadmissible steps. A governed construction is \emph{non-degenerate} iff those three conditions hold together on the same fixed domain. A regime is \emph{degenerate relative to the present target} iff it may still compute, transform, symbolize, or produce outputs but fails to preserve target identity, admissible stephood, act-time finality, or redescription fidelity as conditions of determinate same-domain construction.
+
+This definition is classificatory rather than generative: it does not assume that all raw step-sequences already count as governed constructions, but distinguishes exactly those sequences for which admissibility-assessable construction is well-defined on the fixed domain.
+
+Admissibility is not a fifth ingredient placed beside reference, standing, and irreversibility; it names the governance boundary under which those three conditions are jointly enforceable on the same sequence.
+\end{definition}
+
+\medskip
+\noindent\textbf{Meaningful regime.} A regime is meaningful for the present target iff it is target-adequate in the sense of Definition~\ref{def:target-adequacy} and some of its raw step-sequences are assessable as governed constructions of determinate objects rather than as bare symbol manipulations, encodings, or bookkeeping traces. This is not a stipulative filter. It is the least class in which object identity, admissible stephood, and act-time distinction between continuation and repair are available for assessment at all.
+
+\medskip
+\noindent\textbf{Fixed domain.} A fixed domain is the domain on which target identity, identity-preserving transformation, and admissibility-relevant status are all evaluated. Operationally, two constructions remain on the same fixed domain iff there exists a translation between them that preserves (i) object identity under the admissibility-relevant invariant bundle, (ii) the admissibility classification invariant distinguishing admissible continuation from prohibited repair, and (iii) the class of governed constructions up to governance equivalence. A purported continuation remains on the same fixed domain only when these preservation conditions are met.
+
+\medskip
+\noindent\textbf{Why this target class is forced.} The target class is not selected because it already contains the conclusion. It is the minimal class in which outputs are evaluable as determinate objects rather than presentation-dependent artifacts. By Lemma~\ref{lem:target-adequacy-forces-kernel}, the roles later named reference, standing, irreversibility, and admissibility are forced by target adequacy before governed construction is defined. If identity-preserving transformation is weakened, object identity becomes redescription-relative; if standing is weakened, there is no licit stephood rather than mere inscription; if irreversibility is weakened, the distinction between admissible continuation and retrospective rescue is unstable at act-time. A regime lacking these conditions may still support transformation, search, or computation, but it does not instantiate a weaker version of the same target phenomenon. The class is therefore fixed by evaluability conditions, not by convenience or stipulation.
+
+\medskip
+\noindent\textbf{Adequacy note.} The question is not which extra norms we prefer to impose on an already functioning calculus. The question is what the weakest conditions are under which a raw step-sequence is assessable as construction of a determinate object at all. The next definitions and lemmas argue that stable reference, standing, and irreversibility are forced by that adequacy demand rather than borrowed from a thicker prior theory.
+
+\medskip
+\noindent\textbf{Scope restriction.} All universal claims below are restricted to meaningful regimes in this adequacy sense. Systems lacking the adequacy conditions uncovered below are not counterexamples to the present thesis; they are different kinds of formal process because they lack the resources required for governed construction of a determinate same-domain object.
+
+\begin{definition}[Derivation]\label{def:derivation}
+When the target object $X$ is a proposition or proof conclusion, the corresponding proposition-targeted special case of governed construction is called a derivation and is written $\Der(X)$.
+\end{definition}
+
+\begin{definition}[Governance equivalence]\label{def:governance-equivalence}
+Two governance conditions $P$ and $Q$ are governance-equivalent, written $P \law Q$, iff they perform the same governance work for identity-preserving construction on the same fixed domain; that is, replacing $P$ by $Q$ leaves the class of governed constructions unchanged.
+\end{definition}
+
+\begin{remark}[Equivalence as identity-level invariance]
+For the present target, governance-equivalence is not a loose behavioral similarity relation. Once admissibility-assessable, identity-preserving construction is fixed, admissibility classification is bivalent on acts and standing-bearing continuation is fixed by the same admissibility-relevant invariant bundle. Accordingly, any purported alternative governance structure that differs on any act, or on the admissibility-preserving continuation of any act, is not governance-equivalent on the fixed domain. Conversely, where no such divergence exists, the purported alternative contributes no distinct governance content for the target phenomenon.
+
+The companion equivalence and conservation closures sharpen this point further: admissibility and standing do not form two merely coextensive tracks but collapse to the same standing-bearing classification, and conservation is not an auxiliary constraint but the invariant form of that classification. In that sense, equivalence collapses to identity at the level that matters here: any same-domain invariant that agrees with admissibility and standing on all acts and admissibility-preserving continuations is not merely extensionally similar but identical in governance content for admissibility-assessable construction.
+\end{remark}
+
+\begin{definition}[Admissibility-relevant invariant bundle]\label{def:invariant-bundle}
+An admissibility-relevant invariant bundle is any family of invariants sufficient to determine when two construction acts on a fixed domain preserve the same target, the same standing-bearing status, and the same admissibility boundary. Two acts or presentations count as belonging to the same fixed domain only when they agree on this invariant bundle up to governance equivalence.
+\end{definition}
+
+\medskip
+\noindent\textbf{Independent governance work.} A condition performs independent governance work on a fixed domain iff its addition changes the set of governed constructions on that domain.
+
+\medskip
+\noindent\textbf{Same fixed domain.} References below to ``the same meaningful regime'' are governed by preservation, not by mere reuse of vocabulary. Two presentations, encodings, or meta-systems count as the same fixed domain for the present target only when translation between them preserves determinate target, standing-bearing step status, the admissibility boundary between admissible continuation and prohibited repair, and the class of governed constructions up to governance equivalence. Failure of any one of these preservation conditions constitutes a change of domain rather than a redescription of the same one.
+
+\begin{definition}[Derivable from below]\label{def:derivable-from-below}
+A governance condition $P$ is derivable from below iff there exists a governed construction of $P$ whose admissibility can be certified using only governance conditions strictly independent of $P$, does not already presuppose $P$ or any governance-equivalent condition, and does not rely on any condition whose own governance validity already requires $P$. In particular, approximation, convergence, limit, or emergent characterization of $P$ counts as derivation from below only if the admissibility of the approximating, convergent, or emergent process itself does not presuppose $P$ or any governance-equivalent condition.
+\end{definition}
+
+\noindent The phrase ``governed construction'' in this definition is not meant to smuggle in the target conclusion. It marks the minimal condition under which the alleged lower derivation counts as a derivation rather than an unlicensed trace. A purported lower derivation may begin from any formal substrate it likes, but it must eventually explain how its own sequence obtains constructional license without using the role it claims to generate.
+
+\begin{definition}[Governance generation versus definability]\label{def:generation-definability}
+A condition is \emph{defined} in a system when the system can write down, encode, or characterize it. A condition is \emph{generated} in the present sense only when the system can produce that condition as new governance work from a lower basis. Definability without new governance work is not generation from below.
+\end{definition}
+
+\begin{definition}[Externally proposed construction or derivation system]\label{def:kernel-respecting}
+Let $\Sigma$ be any purported construction system, derivation system, meta-theory, logical framework, encoding, or external presentation under which a statement $P$ is said to be derivable. We say that $\Sigma$ is \emph{kernel-respecting with respect to $P$} iff the admissibility conditions under which sequences in $\Sigma$ count as governed constructions already enforce $P$, some governance-equivalent condition, or some condition whose own admissibility already requires $P$. This definition classifies the admissibility conditions of $\Sigma$; whether a non-kernel-respecting system can still count as a system of non-degenerate construction for the present target is a theorem proved below, not a stipulation built into the definition.
+\end{definition}
+
+\begin{definition}[Kernel of non-degenerate construction]\label{def:kernel}
+The kernel of non-degenerate construction is the governance-role set
+\[
+K := \{\Adm, \St, \RefK, \Irr\},
+\]
+where $\Adm$ abbreviates admissibility, $\St$ standing, $\RefK$ reference, and $\Irr$ irreversibility. The minimality and uniqueness claims below concern governance roles and governance work on the fixed domain, not uniqueness of one four-part bookkeeping decomposition.
+\end{definition}
+
+\begin{remark}
+The point of the kernel definition is not to present four independent axioms, nor to shield four merely stipulated starting points from scrutiny. It is to name the lowest invariant cluster that any genuine governed construction already presupposes. Theorems below show that the members of $K$ are neither optional nor independently eliminable.
+\end{remark}
+
+
+\medskip
+\noindent\textbf{Why standing is not redundant with admissibility.} Admissibility marks gate status: whether an act may enter licensed construction. Standing marks act-carried eligibility for later licensed use, continuation, or commitment. The term ``standing'' is used because the relevant property is not merely that an act has passed a gate, but that it can stand as a source for subsequent licensed construction. The two coincide extensionally only after fixed-domain closure is proved in Theorem~\ref{thm:standing-reuse}; they are not introduced as the same role. Before that closure theorem, admissibility answers whether the act is admitted, while standing answers whether the admitted act can function as a standing-bearing source for subsequent construction. The later collapse is therefore a result, not a definition.
+
+\begin{definition}[Same-regime faithful counterexample]\label{def:same-regime-faithful-counterexample}
+A same-regime faithful counterexample to the kernel is a target-adequate raw-sequence regime together with a class of candidate constructions such that all of the following are preserved on the same fixed domain: determinate target identity, step evaluability, act-time finality, identity-preserving redescription, and the class of standing-bearing continuations. The counterexample must nevertheless omit at least one member of $K$, and not merely replace it by a governance-equivalent role. Any example that loses one of the preservation conditions is a different formal process; any example that restores the missing work by an auxiliary selector, bridge, ranking, tolerance, or repair channel imports fresh governance rather than omitting the role.
+\end{definition}
+
+\begin{proposition}[Burden of a successful objection]\label{prop:burden-of-objection}
+To refute the kernel result for the present target, one must do at least one of two things: derive some $P\in K$ from below in the sense of Definition~\ref{def:derivable-from-below}, or exhibit a same-regime faithful counterexample in the sense of Definition~\ref{def:same-regime-faithful-counterexample}. Pointing to a different formal practice, a reversible search regime, a bookkeeping encoding, or a system with weaker target identity does not meet this burden.
+\end{proposition}
+
+\begin{proof}
+The target is fixed by target adequacy and same-domain fidelity. If an objection claims that a kernel role is generated rather than presupposed, then it must satisfy the strict lower-generation condition; otherwise the alleged derivation already uses the role it claims to produce. If the objection instead claims that the role is unnecessary, then it must preserve the same target phenomenon while omitting that role; otherwise it has changed the object of evaluation. Within the present target, a substantive challenge therefore alleges either lower generation or same-regime dispensability. The former is governed by derivability from below; the latter is governed by same-regime faithful counterexample. Anything else changes subject, imports structure, or supplies only notation.
+\end{proof}
+
+\noindent This burden is not an artificial raising of the evidential standard. It follows from target preservation. A counterexample to a necessity claim about determinate same-domain construction must preserve determinate same-domain construction. A regime that abandons target identity, step evaluability, act-time classification, or redescription fidelity is not a counterexample to the necessity claim; it is a different target.
+
+\begin{lemma}[Raw sequences are not yet constructions]\label{lem:raw-not-construction}
+A raw step-sequence does not count as a construction of a determinate object merely in virtue of being a sequence.
+\end{lemma}
+
+\begin{proof}
+A raw sequence may be written, executed, or transformed while leaving open what object, if any, it fixes; whether its steps are admissible steps of the same act; and whether later repair preserves or changes the act being assessed. Those are exactly the governance matters at issue. So raw sequentiality alone yields, at most, a trace. It does not yet yield construction of a determinate same-domain object.
+\end{proof}
+
+\begin{lemma}[Same-act repair is impossible]\label{lem:same-act-repair-impossible}
+If a later intervention changes an inadmissible performance into an admissible one, then the later intervention does not preserve the same act.
+\end{lemma}
+
+\begin{proof}
+By Definition~\ref{def:act-identity}, act identity requires preservation of the admissibility-relevant invariant bundle together with preservation of act-time admissibility status. A later intervention that converts inadmissibility into admissibility changes that status and therefore fails to preserve act identity. What results is either a distinct act or a distinct construction sequence, not repair of the same act.
+\end{proof}
+
+\begin{lemma}[Reference is necessary for determinate construction output]\label{lem:reference-necessity}
+If a purported construction act lacks determinate reference, then it does not yield a determinate object of the regime.
+\end{lemma}
+
+\begin{proof}
+A construction must be about or directed toward a target in a fixed way in order to preserve identity through its steps. If the act's expressions refer equivocally or vacuously, then no single governed target is fixed: different readings, or none at all, remain equally compatible with the same mark sequence. What remains is a trace, not a determinate object. Hence determinate construction output requires determinate reference.
+\end{proof}
+
+\begin{lemma}[Standing is necessary for admissible stephood]\label{lem:standing-necessity}
+If a purported step lacks standing, it does not function as an admissible construction step, but only as an unsupported inscription or transition.
+\end{lemma}
+
+\begin{proof}
+A construction step is not merely something that occurs between two inscriptions. It purports to advance a target under some licensed governance status. Without standing, there is no governed construction act whose role could be assessed. The item may still be written, computed, or recorded, but it does not count as an admissible step. Therefore standing is necessary for constructional stephood.
+\end{proof}
+
+\begin{lemma}[Irreversibility is necessary for stable construction status]\label{lem:irreversibility-necessity}
+If invalid steps are repairable post hoc without loss, then the distinction between admissible continuation and retrospective rescue is not stably fixed at act-time.
+\end{lemma}
+
+\begin{proof}
+Suppose invalidity could later be removed while preserving the same act as fully admissible. By Lemma~\ref{lem:same-act-repair-impossible}, that preservation claim is false: any intervention that changes inadmissibility into admissibility changes the act identity of what is being assessed. So if repair is allowed, the later admissible outcome is not the same act but a distinct act or distinct sequence. The original act therefore remains inadmissible, and any regime that treats later repair as preserving the same act loses a stable act-time distinction between continuation and rescue. Stable constructional status consequently requires irreversibility.
+\end{proof}
+
+\begin{lemma}[Admissibility is the governance boundary of joint enforceability]\label{lem:admissibility-joint}
+Whenever determinate reference, standing, and irreversibility are jointly enforceable on the same construction acts, admissibility is already in force there as the governance boundary of that joint enforceability.
+\end{lemma}
+
+\begin{proof}
+By Lemmas~\ref{lem:reference-necessity}--\ref{lem:irreversibility-necessity}, a regime that treats its acts as determinate, admissibility-assessable construction acts must already maintain determinate reference, licit step-status, and stable non-repairability of invalid steps. The point is not that one first has three free-standing ingredients and then adds admissibility as an extra fifth clause. Rather, once those three conditions are jointly enforceable on the same acts as conditions of construction, the regime already has a governance boundary distinguishing admissible from non-admissible acts and distinguishing continuation from retrospective rescue. That governance-boundary status is exactly what is here called admissibility. Conversely, a regime lacking that joint governance boundary does not govern construction as non-degenerate construction in the present sense. Hence admissibility is already in force wherever the three conditions are jointly enforceable.
+\end{proof}
+
+\begin{proposition}[Boundary closure is forced by admissibility]\label{prop:boundary-closure-forced}
+Let a regime support admissibility-assessable, identity-preserving construction with irreversibility. Then any admissibility-relevant discriminator, selector, or classification rule must be invariant under identity-preserving transformation on the fixed domain.
+
+Consequently, any attempt to introduce additional admissibility-relevant structure not preserved under such transformations either:
+\begin{enumerate}[label=(\roman*)]
+    \item changes admissibility classification and so introduces a competing gate, or
+    \item leaves admissibility classification unchanged and is therefore inert bookkeeping.
+\end{enumerate}
+Hence the admissibility classification invariant is closed under same-domain construction: no additional admissibility-relevant discriminator can be introduced without either collapsing to governance-equivalence or changing the domain of evaluation.
+\end{proposition}
+
+\begin{proof}
+If an admissibility-relevant discriminator is not invariant under identity-preserving transformation, then two presentations of what purports to be the same target on the same fixed domain receive different admissibility significance. If that difference changes what counts as admissible continuation, standing-bearing reuse, or prohibited repair, then the regime has introduced a second admissibility classifier for the same fixed-domain acts. But the distinction between admissible continuation and prohibited repair is exactly the governance work fixed by admissibility together with irreversibility; reclassifying same-domain acts therefore yields a competing gate rather than a mere refinement. If, by contrast, the additional discriminator does not change any admissibility verdict, then it contributes no independent governance work and is only bookkeeping. There is no third possibility: a same-domain addition either changes admissibility significance or it does not. Accordingly, admissibility-assessable, identity-preserving construction with irreversibility already forces closure of the admissibility classification invariant against further same-domain discriminators.
+\end{proof}
+
+\begin{theorem}[Minimal assessability boundary]\label{thm:minimal-assessability-boundary}
+Let $R$ be any system whose outputs are treated as determinate objects and whose transitions are evaluated as construction steps. Then determinate reference, admissible stephood, and non-repairable invalidity are jointly necessary and minimal for that evaluability. More exactly:
+\begin{enumerate}[label=(\roman*)]
+    \item if determinate reference is removed, object identity is lost and the outputs are no longer evaluable as determinate content;
+    \item if standing is removed, no transition qualifies as an admissible construction step and the outputs are no longer evaluable as construction steps;
+    \item if irreversibility is removed, there is no stable distinction between admissible continuation and retrospective rescue, and the outputs are no longer evaluable as constructions; and
+    \item if an additional condition is imposed as an independent governance requirement beyond those three, then the regime is governed more tightly than evaluability itself requires.
+\end{enumerate}
+Accordingly, these three conditions mark the minimal assessability boundary for identity-preserving construction as such. The minimality claim is a claim about governance work on the fixed domain, not about uniqueness of one bookkeeping decomposition.
+\end{theorem}
+
+\begin{proof}
+Items (i)--(iii) are exactly the failure modes identified in Lemmas~\ref{lem:reference-necessity}--\ref{lem:irreversibility-necessity}. Without determinate reference there is no fixed object identity and therefore no evaluable content; without standing there is no licensed act and therefore no evaluable construction step; without irreversibility there is no stable admissibility distinction and therefore no evaluable construction rather than retrospective normalization. The point is not merely that these failures are bad outcomes. It is that, once any one of them occurs, the target phenomenon itself is no longer present: what remains is trace-production, transformation, or bookkeeping rather than governed construction of a determinate same-domain object. This also blocks nearby weakenings and substitutes. Any purported weaker replacement for one of the three conditions must either preserve exactly the same governance work, in which case it is merely a notational variant of that condition; or else it must relax some part of that work, in which case one of the same excluded failures reappears---presentation-dependent object identity, indeterminate target, or collapse of the distinction between continuation and repair. If a purported weakening avoids those failures only by adding a new admissibility-relevant ranking, selector, tolerance, or repair-sensitive middle status, then it no longer weakens the package but supplements it by fresh governance structure. For minimality, suppose an additional condition $Q$ is imposed as an independent governance requirement on every admissibility-assessable construction act. Then either $Q$ is already enforced by the joint assessability work of reference, standing, and irreversibility, in which case it is not additional; or else $Q$ excludes some act-sequences that already satisfy those three conditions, in which case $Q$ governs more tightly than evaluability itself requires. There is no third possibility. So the three conditions are jointly necessary and minimal for that evaluability.
+\end{proof}
+
+\begin{corollary}[Non-arbitrariness of the target class]\label{cor:non-arbitrariness-target-class}
+The class of meaningful regimes is not defined by pre-selecting the kernel. It is exactly the class of systems in which determinate, admissibility-assessable construction is possible for the present target. Restriction to that class is therefore not protective but forced by the target of inquiry.
+\end{corollary}
+
+\begin{proof}
+By Theorem~\ref{thm:minimal-assessability-boundary}, determinate reference, standing, and irreversibility are not optional entry criteria appended in advance of the argument. They are the minimal conditions under which outputs and transitions are evaluable as construction at all. So to restrict attention to regimes in which those conditions are assessable is simply to restrict attention to the subject matter of the paper rather than to protect the thesis from counterexample by fiat.
+\end{proof}
+
+\begin{theorem}[The target class is forced, not stipulated]\label{thm:forced-target-class}
+Let $R$ be any regime of raw step-sequences. If $R$ lacks determinate reference, standing, or irreversibility in the senses fixed above, then $R$ does not support governed construction of determinate same-domain objects. It supports only raw transformation, encoding, or bookkeeping processes.
+\end{theorem}
+
+\begin{proof}
+If determinate reference is lacking, Lemma~\ref{lem:reference-necessity} shows that no determinate target object is fixed. If standing is lacking, Lemma~\ref{lem:standing-necessity} shows that no step counts as an admissible construction step. If irreversibility is lacking, Lemma~\ref{lem:irreversibility-necessity} together with Lemma~\ref{lem:same-act-repair-impossible} shows that act-time distinction between continuation and repair collapses. By Lemma~\ref{lem:raw-not-construction}, raw sequentiality does not by itself restore those losses. So a regime lacking any one of these conditions may still execute sequences, but it does not instantiate governed construction of determinate same-domain objects.
+\end{proof}
+
+\begin{lemma}[Exhaustion of failure modes for non-kernel regimes]\label{lem:failure-mode-exhaustion}
+Let $R$ be a regime of raw step-sequences. Suppose $R$ lacks at least one member of $K$ while claiming to support determinate, identity-preserving construction on a fixed domain. Then exactly one of the following holds:
+\begin{enumerate}[label=(\roman*)]
+\item object identity is not fixed, because determinate reference fails;
+\item step status is not evaluable as admissible or inadmissible, because standing fails;
+\item the distinction between continuation and repair is not stable at act-time, because irreversibility fails; or
+\item the regime restores one or more of these distinctions only by adding additional governance-bearing structure not fixed on the original domain, and so proceeds by illicit import rather than same-domain construction.
+\end{enumerate}
+These cases cover the preservation failures relevant to the present target.
+\end{lemma}
+
+\begin{proof}
+If $R$ lacks reference, then by Lemma~\ref{lem:reference-necessity} no determinate target is fixed, giving (i). If $R$ lacks standing, then by Lemma~\ref{lem:standing-necessity} no step counts as an admissible construction step, giving (ii). If $R$ lacks irreversibility, then by Lemmas~\ref{lem:same-act-repair-impossible} and \ref{lem:irreversibility-necessity} the distinction between admissible continuation and retrospective rescue is unstable at act-time, giving (iii). The only remaining possibility is that $R$ attempts to preserve determinate identity, admissible stephood, or stable act-status while omitting one of the kernel roles. But then those distinctions are being reintroduced by fresh governance-bearing structure not fixed on the original domain. That is illicit import rather than a same-domain realization below the kernel, giving (iv). Within the present target, every purported non-kernel regime either loses one of the three assessability goods directly or restores it by extra same-domain authority.
+\end{proof}
+
+\begin{lemma}[Reduction to kernel failure modes]\label{lem:reduction-kernel-failure}
+Let $R$ be any regime that deviates from the kernel while claiming to preserve determinate, identity-preserving construction on a fixed domain. Then every such deviation induces at least one of the following:
+\begin{enumerate}[label=(\roman*)]
+\item non-uniqueness of target under identity-preserving transformation;
+\item indeterminacy of admissible stephood;
+\item instability of admissibility under continuation; or
+\item introduction of a selector, ranking, or auxiliary structure not invariant under identity-preserving transformation.
+\end{enumerate}
+Hence every deviation reduces to a kernel failure mode.
+\end{lemma}
+
+\begin{proof}
+If a deviation changes which target is fixed under identity-preserving transformation, then same-target identity is not preserved, giving (i). If it leaves target fixed but no longer preserves evaluable admissible stephood, then licensed step status becomes indeterminate, giving (ii). If it preserves target and stephood while allowing admissibility status to vary under purported same-act continuation, then the act-time distinction between continuation and repair is unstable, giving (iii). The only remaining possibility is that the regime preserves these goods by introducing some selector, ranking, tolerance class, or other auxiliary governance-bearing discriminator not already fixed by the original admissibility-relevant invariant bundle. But such a discriminator is fresh same-domain authority rather than preservation of the original regime, giving (iv). Since every deviation changes target, step-status, continuation-status, or the authority by which these are fixed, the partition covers the relevant ways a same-domain deviation can proceed. Therefore every deviation reduces to a kernel failure mode.
+\end{proof}
+
+\begin{theorem}[Non-degenerate construction forces the kernel]\label{thm:construction-forces-kernel}
+If a meaningful regime admits non-degenerate construction in the sense of Definition~\ref{def:governed-construction}, then the full kernel $K$ is already in force in that regime. Equivalently, no meaningful regime supports non-degenerate construction in that sense while lacking admissibility, standing, reference, irreversibility, or some governance-equivalent replacement for one of them.
+\end{theorem}
+
+\begin{proof}
+Let $R$ be a meaningful regime admitting non-degenerate construction in the sense of Definition~\ref{def:governed-construction}. By Theorem~\ref{thm:minimal-assessability-boundary}, any regime in which outputs are assessable as determinate, admissibility-assessable constructions already requires determinate reference, admissible stephood, and irreversibility as the minimal assessability boundary of that evaluability. By Lemma~\ref{lem:admissibility-joint}, the joint enforceability of those conditions already places admissibility in force as the governance boundary constituted by their coherence on the same acts. Hence $R$ already enforces $\RefK$, $\St$, $\Irr$, and $\Adm$, that is, the full kernel $K$.
+\end{proof}
+
+\begin{corollary}[No non-degenerate regime below the kernel]\label{cor:no-regime-below-kernel}
+No meaningful regime can both support non-degenerate construction in the sense of Definition~\ref{def:governed-construction} and generate any member of $K$ from a strictly lower governance-free basis while remaining within that same fixed domain.
+\end{corollary}
+
+\begin{proof}
+Assume some meaningful regime $R$ supports non-degenerate construction in the sense of Definition~\ref{def:governed-construction} and nevertheless generates some $P \in K$ from a strictly lower governance-free basis. By Theorem~\ref{thm:construction-forces-kernel}, the full kernel $K$ is already in force in $R$ before any such generation begins. So the alleged generator does not produce $P$ from below; it operates only within a regime whose meaningfulness already depends on $P$. That contradicts the claim that $P$ was first generated from a lower basis.
+\end{proof}
+
+\begin{remark}
+The point of Theorem~\ref{thm:construction-forces-kernel} is not to build the package into construction by stipulation. It is to show that, for the target domain fixed in the fixed-domain construction subsection, any regime that already supports non-degenerate construction already instantiates the kernel by necessity. The derivation lemmas of Section~3 therefore record a local reflection of a prior construction-level fact.
+\end{remark}
+
+\subsection{Presupposition Structure of Derivation}
+
+With Theorem~\ref{thm:construction-forces-kernel} in place, derivation is the proposition-targeted special case of licensed construction. The present section records the derivation-level presupposition facts. These lemmas do not generate the package. They state what the fixed-domain construction subsection result looks like once the focus narrows from non-degenerate construction in general to derivation in particular: a sequence counts here as a derivation only if it already operates with admissibility, standing, reference, and irreversibility in place.
+
+\begin{lemma}[Derivation presupposes admissibility]
+If $\Der(P)$ holds for any proposition $P$, then admissibility is already in force.
+\end{lemma}
+
+\begin{proof}
+By Definition~\ref{def:derivation}, a governed derivation is not merely a formal trace but a governed construction act whose target is a proposition. Its steps therefore count as steps only under an admissibility regime. So if $\Der(P)$ exists, admissibility has already been presupposed.
+\end{proof}
+
+\begin{lemma}[Derivation presupposes standing]
+If $\Der(P)$ holds, then standing is already in force.
+\end{lemma}
+
+\begin{proof}
+A derivation with no standing would be a sequence of acts with no admissible target-bearing status. Such a sequence might be written down, but it would not count as a derivation of anything. Licensed derivation therefore presupposes standing.
+\end{proof}
+
+\begin{lemma}[Derivation presupposes reference]
+If $\Der(P)$ holds, then determinate reference is already in force.
+\end{lemma}
+
+\begin{proof}
+A derivation whose expressions fail to refer determinately does not derive a determinate conclusion. It supplies marks, not governed content. Since $\Der(P)$ names a derivation of a proposition rather than a mere syntactic trail, reference is presupposed.
+\end{proof}
+
+\begin{lemma}[Derivation presupposes irreversibility]
+If $\Der(P)$ holds, then irreversibility is already in force.
+\end{lemma}
+
+\begin{proof}
+Without irreversibility, invalid steps could be repaired retroactively into acceptable ones, and the distinction between admissible continuation and post hoc rescue would collapse. In that case the derivation would not possess a stable governance status at all. Hence governed derivation presupposes irreversibility.
+\end{proof}
+
+\begin{corollary}[Global presupposition lemma]\label{cor:global-presupposition}
+For every proposition $P$, if $\Der(P)$ holds, then the full kernel $K$ is already in force.
+\end{corollary}
+
+\begin{proof}
+Combine the four previous lemmas.
+\end{proof}
+
+\begin{theorem}[Definability is not governance generation]\label{thm:definability-not-generation}
+Let $P$ be any governance condition. A system may define, encode, or represent $P$ without generating $P$ from below. Generation from below occurs only if the system contributes new governance work sufficient to produce $P$ for the original acts on the original fixed domain.
+\end{theorem}
+
+\begin{proof}
+A definition or encoding may restate a governance condition, give it a symbol, embed it in a meta-language, or characterize its extension. None of those activities by itself changes the class of governed constructions on the original fixed domain. By definition, governance generation requires independent governance work. So definability, representation, and coding are not by themselves generation from below.
+\end{proof}
+
+\begin{remark}
+Accordingly, the non-derivability claims below are not claims that one cannot write down or characterize admissibility, standing, reference, or irreversibility. They are claims that no lower same-domain basis generates the governance work those conditions perform for the original acts.
+\end{remark}
+
+\subsection{Non-Derivability of the Kernel}
+
+The results of this section have two directions. Internally, they show that no lower same-domain basis generates the governance work performed by the kernel. Externally, they identify the construction-level form of a broader meta-necessity: in any non-degenerate irreversible compositional regime, the invariant required to make irreversibility well-defined is exactly the invariant characterized here under the fixed-domain conditions of identity-preserving construction. The kernel is therefore not an optional refinement layered on top of admissibility. It is the minimal decomposition of the admissibility invariant once the target object is fixed.
+
+The argumentative standard in this section is deliberately adversarial. A proposed defeat of the kernel must either supply a faithful lower generator for one of its roles, or supply a same-regime faithful counterexample that preserves the target phenomenon while lacking that role. The former fails because any licensed construction of the role already relies on the role or a governance-equivalent substitute. The latter fails because any same-regime omission either loses target identity, loses licit stephood, loses act-time irreversibility, imports a replacement selector, or collapses extensionally back to the same governance work.
+
+\begin{theorem}[Non-derivability of admissibility]
+Admissibility is not derivable from below.
+\end{theorem}
+
+\begin{proof}
+Assume for contradiction that admissibility is derivable from below. Then there exists a governed construction of $\Adm$ whose admissibility does not already presuppose $\Adm$ or a governance-equivalent condition. But by the previous section, any licensed construction already presupposes admissibility. So the alleged construction uses what it claims to produce. This is precisely the forbidden circularity in the definition of derivability from below. Therefore admissibility is not derivable from below.
+\end{proof}
+
+\begin{theorem}[Non-derivability of standing]
+Standing is not derivable from below.
+\end{theorem}
+
+\begin{proof}
+Suppose standing were derivable from below. Then there would exist a governed construction of $\St$ whose admissibility did not already presuppose standing. By the previous section, however, the very existence of such a construction already presupposes standing. The construction therefore fails the ``from below'' condition by collapsing into the very status it was supposed to generate.
+\end{proof}
+
+\begin{theorem}[Non-derivability of reference]
+Reference is not derivable from below.
+\end{theorem}
+
+\begin{proof}
+If reference were derivable from below, there would be a governed construction of $\RefK$ whose admissibility did not already rely on determinate reference. But by the previous section, no licensed construction exists without determinate reference. Hence the putative construction again presupposes what it claims to derive. Reference is therefore not derivable from below.
+\end{proof}
+
+\begin{theorem}[Non-derivability of irreversibility]
+Irreversibility is not derivable from below.
+\end{theorem}
+
+\begin{proof}
+Assume irreversibility is derivable from below. Then a governed construction of $\Irr$ exists whose admissibility does not already presuppose irreversibility. The previous section rules this out: a licensed construction already relies on the stable difference between admissible continuation and invalid repair. So irreversibility cannot be derived from beneath itself.
+\end{proof}
+
+\begin{corollary}[Kernel non-derivability]\label{cor:kernel-non-derivability}
+No member of $K$ is derivable from below.
+\end{corollary}
+
+\begin{proof}
+Immediate from the four preceding theorems.
+\end{proof}
+
+\begin{theorem}[No faithful lower generator / structural non-derivability]\label{thm:kernel-no-lower-generator}
+Let $P \in K$. No system supporting non-degenerate construction can generate $P$ from a genuinely lower condition while remaining within the same fixed domain. Equivalently, any such system already has $P$ in force before internal construction begins.
+\end{theorem}
+
+\begin{proof}
+Assume for contradiction that some system or meaningful regime $R$ supports non-degenerate construction in the sense of Definition~\ref{def:governed-construction} and nevertheless generates some $P \in K$ from a purportedly lower package. There are only two cases.
+
+First, the alleged generator operates on the same fixed domain as the original acts. Then by Theorem~\ref{thm:construction-forces-kernel}, the full package $K$ is already in force in $R$, and hence $P$ is already in force there. So the alleged lower package does not generate $P$ from below; it operates only inside a regime whose meaningfulness already depends on $P$. In this same-domain case the remaining escape routes are exhausted. A purported lower generator must either (i) introduce additional same-domain structure not already licensed on the fixed domain, (ii) collapse to triviality by adding no independent governance work, (iii) alter identity-preserving transformation, reference conditions, or act-identity conditions so that the original target phenomenon is no longer preserved, or (iv) reproduce the original admissibility boundary extensionally under a different presentation. Route (i) is illicit same-domain import rather than lower generation. Route (ii) is not generation at all. Route (iii) changes domain rather than generating the kernel within the same one. Route (iv) is extensional redescription of what was already in force. Any further same-domain route would have to do independent governance work while avoiding all four branches, which is precisely what the preceding results exclude.
+
+Second, the alleged generator operates outside the original fixed domain and then attempts to re-enter it. But then the resulting construction does not govern the original acts on their original fixed domain without an additional transfer principle, selector, or authority connecting the external regime back to the old one. That additional bridge is exactly fresh structure not fixed by the original domain. More sharply: the admissibility boundary together with standing classification fixes the identity of the domain under evaluation. So any purported derivation that changes that boundary or that classification has not generated the kernel for the original domain; it has changed the object of evaluation and is therefore a scope change rather than a lower derivation. The maneuver is consequently scope change or illicit import rather than lower generation of the kernel for the original acts.
+
+Thus neither same-domain nor cross-domain generation succeeds. Re-describing the alleged generator as belonging to a regime that lacks $P$ therefore does not help, because either it fails to govern the original domain or, if it does govern it, $P$ was already in force there. The obstruction is structural rather than a peculiarity of one proof format.
+\end{proof}
+
+\begin{theorem}[Regime-invariant non-derivability]\label{thm:regime-invariant}
+Let $P \in K$. No system $\Sigma$ can derive $P$ from below unless the admissibility conditions under which a $\Sigma$-construction counts as a construction already enforce $P$, something governance-equivalent to $P$, or a condition that already requires $P$.
+\end{theorem}
+
+\begin{proof}
+Let $P \in K$, and suppose some system $\Sigma$ is offered as a construction or derivation system for $P$. There are two cases.
+
+First, the admissibility conditions under which a $\Sigma$-construction counts as a licensed construction already enforce $P$, a governance-equivalent condition, or a condition whose own admissibility already requires $P$. Then $\Sigma$ is kernel-respecting with respect to $P$ by Definition~\ref{def:kernel-respecting}, and the alleged construction does not generate $P$ from below.
+
+Second, those conditions do not already enforce $P$ in any of those ways. If $\Sigma$ nevertheless supported non-degenerate construction in the same fixed domain, Theorem~\ref{thm:construction-forces-kernel} would force the whole package, including $P$, already to be in force there. So a non-kernel-respecting $\Sigma$ cannot both lack $P$ and still count as a system of non-degenerate construction for the present target. Its output is therefore, at best, an external coding, a bookkeeping device, or a purely formal trace; it is not a construction of $P$ from below for the target phenomenon at issue.
+
+Changing formal dress, moving to a meta-theory, or recoding the language therefore does not remove the need for the work that $P$ names. By Theorem~\ref{thm:definability-not-generation}, such recodings may define or represent $P$ without generating it from below.
+\end{proof}
+
+\begin{theorem}[No faithful lower generator and no faithful same-domain extension]\label{thm:no-faithful-same-domain-extension}
+For the admissibility boundary on a fixed domain, there is no faithful lower generator and no faithful same-domain extension that converts admissibility, standing, reference, or irreversibility into lower theorems for the original acts on the original fixed domain. Any purported attempt ends in exactly one of four outcomes: illicit structure import, triviality, violation of the base goods, or extensional collapse back to the gate itself.
+\end{theorem}
+
+\begin{proof}
+Any genuinely pre-boundary constraining device must be available and meaningful on the fixed pre-admissible side. If it is not, it is illicit import. If it is, then under the same-domain invariance conditions relevant here it either has no independent constraining force on individual acts, destroys reference, identity, or irreversibility, or coincides extensionally with the gate already being determined. These four branches cover the ways a purported pre-boundary device could relate to the original acts. A further case would have to contribute independent same-domain governance work while neither importing structure, trivializing the construction, violating the base goods, nor collapsing extensionally to the gate. But independent same-domain governance work is exactly what the non-derivability and no-faithful-same-domain-extension results exclude. The same exhaustion therefore remains in force under faithful same-domain extension, because fresh same-domain authority for the original acts is itself illicit structure import unless it changes nothing or collapses back to the original gate.
+\end{proof}
+
+\begin{proposition}[Cross-domain closure and admissibility transport]\label{prop:cross-domain-closure}
+The non-derivability results above exclude not only same-domain lower generators but also cross-domain simulation attempts. In particular, let $\Sigma$ be any external system and let $\phi$ be a mapping from $\Sigma$ into the fixed domain of the original acts. If $\phi$ preserves (i) target identity under identity-preserving transformation, (ii) admissibility classification, and (iii) standing-bearing continuation, then $\phi$ is governance-equivalent to the original domain on the relevant image. If $\phi$ fails to preserve any of (i)--(iii), then the attempted transport changes the admissibility-relevant invariant bundle and constitutes a scope change rather than a derivation. Accordingly, cross-domain simulation does not provide a lower generator for admissibility on the fixed domain: it either collapses to governance-equivalence or exits the domain of evaluation.
+\end{proposition}
+
+\begin{proof}
+The fixed domain is identified by preservation of target identity, admissibility classification, and the class of governed constructions up to governance equivalence (Definition~\ref{def:governed-construction} and the fixed-domain clause of the fixed-domain construction subsection). By Proposition~\ref{prop:boundary-closure-forced}, admissibility-assessable, identity-preserving construction with irreversibility already forces closure of the admissibility classification invariant against further same-domain discriminators. So if a mapping $\phi$ from an external system preserves target identity, admissibility classification, and standing-bearing continuation for the original acts, then it preserves exactly the invariant bundle that individuates the fixed domain for the present target. On the relevant image, $\phi$ therefore contributes no independent governance work beyond what is already counted as the same domain; it is governance-equivalent rather than a lower generator.
+
+If, by contrast, $\phi$ fails to preserve any one of those items, then the transported construction no longer governs the original acts as the same fixed-domain objects with the same admissibility classification and standing-bearing continuation. That is not derivation of admissibility for the original acts, but change of the object under evaluation. Hence cross-domain transport either collapses to governance-equivalence or exits the domain of evaluation.
+\end{proof}
+
+\begin{remark}
+The previous results do not show that one may never write down statements asserting admissibility, standing, reference, or irreversibility. They show something sharper: these conditions cannot be generated as foundations by a construction that does not already rely on them. Their non-derivability is thus a minimality result, not an expressive prohibition.
+\end{remark}
+\begin{theorem}[No governance-effective deeper same-domain invariant]\label{thm:no-deeper-invariant}
+Let a system support admissibility-assessable, identity-preserving construction with irreversibility. Then no governance-effective invariant strictly beneath admissibility exists for that same fixed-domain target.
+
+More exactly, any purported invariant that claims to ground, constrain, or underwrite admissibility must fall into exactly one of the following cases:
+\begin{enumerate}[label=(\roman*)]
+\item it imports structure not invariant under identity-preserving transformation and therefore changes domain rather than grounding admissibility on the fixed domain;
+\item it carries no constraining power on admissibility-assessable construction and is therefore vacuous with respect to the present target; or
+\item it is governance-equivalent to admissibility or standing under renaming and therefore performs no deeper governance work.
+\end{enumerate}
+Accordingly, no governance-effective deeper same-domain invariant remains compatible with irreversible, identity-preserving construction on the fixed domain.
+\end{theorem}
+
+\begin{proof}
+Any purported deeper invariant must, by hypothesis, do one of two things: either it constrains admissibility, or it fails to constrain it. If it fails to constrain admissibility, then it does no governance work for the target phenomenon and is vacuous relative to identity-preserving construction. So only the constraining case remains.
+
+Now any invariant that constrains admissibility must be available wherever admissibility is being fixed for the same acts on the same domain. If it is introduced only by adding structure not preserved under identity-preserving transformation, then it does not underwrite admissibility on the fixed domain but changes the admissibility-relevant invariant bundle and thus changes domain. If instead it is presented as same-domain and same-target while avoiding such imported structure, then by the non-derivability and no-faithful-same-domain-extension results above, it cannot contribute independent deeper governance work beneath or prior to admissibility. In that case either it leaves the admissibility classification unchanged, in which event it is inert bookkeeping, or it reproduces the same governance work already performed by admissibility or standing under a different presentation, in which event it is governance-equivalent under renaming.
+
+A further option would have to constrain admissibility on the same fixed domain while neither importing structure, nor being vacuous, nor collapsing to governance-equivalent admissibility work. But that is exactly the kind of independent deeper same-domain invariant excluded by the preceding non-derivability results together with Proposition~\ref{prop:cross-domain-closure} and the fixed-domain-extension result. Therefore no governance-effective invariant strictly beneath admissibility exists for the present fixed-domain target.
+\end{proof}
+
+\begin{remark}[Dependency status of invariant impossibility]
+Here and throughout, ``deeper invariant'' means any invariant that purports to ground or constrain admissibility without being reducible to it.
+
+The preceding theorem is eliminative, not generative. It does not serve as a premise for the existence or necessity of admissibility. Rather, it constrains the space of possible alternatives once admissibility is already required by irreversibility and identity-preserving construction and once the fixed-domain kernel has been established in the kernel forcing and non-derivability subsections.
+
+In particular, the impossibility of deeper invariants is not used to derive admissibility itself, but only to exclude competing invariant structures that might otherwise be proposed in its place. Any dependence on architectural commitments such as non-transmissive closure or boundary discipline is therefore downstream: within the argumentative order of the present paper, those commitments are consequences of the admissibility structure already established in the kernel forcing and non-derivability subsections or eliminative restatements of what those sections exclude, not independent assumptions on which the kernel results rely.
+\end{remark}
+
+\subsection{Mutual Closure and Minimality}
+
+\begin{proposition}[Admissibility requires standing]\label{prop:admissibility-requires-standing}
+Any regime lacking standing is not an admissibility regime.
+\end{proposition}
+
+\begin{proof}
+A regime without standing does not distinguish licit construction from unsupported utterance or transition. It therefore lacks the governance force required to count as admissibility. At best it describes transitions; it does not govern construction.
+\end{proof}
+
+\begin{proposition}[Standing requires reference]\label{prop:standing-requires-reference}
+Standing without determinate reference is incoherent.
+\end{proposition}
+
+\begin{proof}
+Standing is the licitness of a construction act. But where reference is indeterminate, there is no determinate target whose licitness could be assessed. A purported standing relation with no reference relation underneath it licenses emptiness or equivocation, not governed construction.
+\end{proof}
+
+\begin{proposition}[Governed reference requires irreversibility]\label{prop:reference-requires-irreversibility}
+The reference relevant to non-degenerate construction is not bare denotation but reference fixed for governed use at act-time. That form of reference cannot be maintained if invalid construction acts are repairable post hoc without loss.
+\end{proposition}
+
+\begin{proof}
+A symbol may still bear a denotational relation under later reinterpretation or repair. That is not yet the kernel notion of reference. The issue here is whether the act, as performed, fixes a determinate target for governed constructive use. If later repair can retroactively convert the same invalid act into a fully admissible one without loss, then the constructive status under which the act's target is fixed is not settled at act-time. What remains may be denotation, but not governed reference in the sense required for non-degenerate construction. Hence kernel-reference requires irreversibility of invalidity.
+\end{proof}
+
+\begin{proposition}[Governance irreversibility requires admissibility]\label{prop:irreversibility-requires-admissibility}
+The irreversibility relevant here is not mere temporal one-wayness or procedural non-rewindability. It is the governance distinction between licensed continuation and prohibited repair, and that distinction is available only under an admissibility boundary.
+\end{proposition}
+
+\begin{proof}
+One may define other senses of irreversibility---causal, temporal, computational, or procedural---without invoking admissibility. Those are not the senses at issue here. The kernel member $\Irr$ concerns irreversible invalidity of construction acts. Without admissibility there is no principled governance boundary under which one continuation counts as licensed while another counts as illicit repair. One can still speak of sequence or alteration, but not of irreversible invalidity in the governance sense. Thus governance irreversibility presupposes admissibility.
+\end{proof}
+
+\begin{theorem}[Mutual closure of the kernel]\label{thm:mutual-closure-kernel}
+The members of $K$ form a mutually closed necessity set: none can be coherently asserted while denying the others' governance role.
+\end{theorem}
+
+\begin{proof}
+Propositions~\ref{prop:admissibility-requires-standing}--\ref{prop:irreversibility-requires-admissibility} exhibit a governance-specific necessity loop: admissibility requires standing, standing requires reference, governed reference requires irreversibility, and governance irreversibility requires admissibility. Hence no member can be detached from the rest while retaining its intended governance content. What remains after detachment is either vacuous, equivocal, or degenerate.
+\end{proof}
+
+\begin{remark}
+The last two arrows of the loop concern the governance senses fixed in the fixed-domain construction subsection. Proposition~\ref{prop:reference-requires-irreversibility} is not a claim about bare denotation independently of construction; it concerns reference as fixed for governed constructive use at act-time. Proposition~\ref{prop:irreversibility-requires-admissibility} is not a claim about every temporal or procedural notion of irreversibility; it concerns irreversible invalidity of construction acts. In those senses, the loop is closed.
+\end{remark}
+
+\begin{theorem}[Minimality of the kernel]\label{thm:minimality-kernel}
+The kernel $K$ is minimal for non-degenerate construction: no proper subset of $K$ suffices for non-degenerate construction.
+\end{theorem}
+
+\begin{proof}
+Assume a proper subset $K_0 \subsetneq K$ suffices for non-degenerate construction. Let $X \in K \setminus K_0$ be an omitted member. Since non-degenerate construction allegedly remains possible, either $X$ is unnecessary or $X$ is generated from the remaining members. The first option contradicts Theorem~\ref{thm:mutual-closure-kernel}, since the governance role of each member depends on the rest. The second option contradicts Corollary~\ref{cor:kernel-non-derivability}, since $X$ would then be derivable from below from a lower basis. Both possibilities fail. Therefore no proper subset suffices.
+\end{proof}
+
+\begin{corollary}[No lower generator]\label{cor:kernel-no-lower-generator}
+There exists no governance condition or package strictly below $K$ that generates $K$.
+\end{corollary}
+
+\begin{proof}
+If such a lower generator existed, at least one member of $K$ would be produced from below by a package not already equivalent to that member. That contradicts Corollary~\ref{cor:kernel-non-derivability}.
+\end{proof}
+
+\begin{theorem}[Uniqueness of governance work, not of bookkeeping decomposition]\label{thm:governance-work-uniqueness}
+If $K'$ is any governance package sufficient for non-degenerate construction in the sense of Definition~\ref{def:governed-construction}, then $K'$ must cover the same governance roles as $K$ and is governance-equivalent to $K$ at that role level. Coarser or finer decompositions may exist; what cannot exist is a governance-non-equivalent alternative package, where governance-non-equivalent means inducing a different class of governed constructions.
+\end{theorem}
+
+\begin{proof}
+Any package sufficient for non-degenerate construction must, by Theorem~\ref{thm:construction-forces-kernel}, already secure admissibility, standing, reference, and irreversibility, or governance-equivalent replacements for those roles. If it fails to supply any one of those governance roles, non-degenerate construction collapses by Theorem~\ref{thm:mutual-closure-kernel}. A coarser package may compress multiple roles into one clause, and a finer package may split one role across several clauses. But if the total governance work and the resulting class of governed constructions remain unchanged, then by Definition~\ref{def:governance-equivalence} the package is governance-equivalent to $K$ at the level that matters here. If the governance work changes, the package is governance-non-equivalent and is not sufficient for non-degenerate construction in the present sense. Therefore the uniqueness claim concerns required governance work, not the uniqueness of one four-part bookkeeping decomposition.
+\end{proof}
+
+\begin{remark}
+This theorem concerns governance-role equivalence, not representational identity and not uniqueness of a particular factorization. It does not exclude alternative formal encodings, type-theoretic or categorical implementations, game-semantic presentations, or coarser/finer decompositions that preserve the same governance work. It excludes only packages that alter the class of governed constructions and therefore perform different governance work.
+\end{remark}
+
+\subsection{Fixed-Domain Closure Results}
+
+In the present section, ``same domain'' always means preservation of the admissibility-relevant invariant bundle and hence preservation of the class of governed constructions up to governance equivalence. The point is not to classify arbitrary statuses or metrics, but to describe what fixed-domain admissibility can and cannot look like once the kernel is in place.
+
+The bivalence and AMetricity claims below concern only gate status for standing-bearing commitment, licensed reuse, and admissible continuation. They do not deny object-language many-valued semantics, paraconsistent valuations, probabilistic confidence, proof-search rankings, approximation orders, proof-state metadata, type refinements, or graded measures internal to an already admitted construction regime. Such structures are admissible only when they do not themselves decide standing-bearing entry. If they do decide entry, they are part of the admissibility gate and fall under the present results; if they do not, they are downstream bookkeeping or internal structure.
+
+These results do more than describe one convenient interface. Taken together, they close the remaining underdetermination question for the admissibility invariant itself. Once a fixed domain already requires an admissibility boundary, every same-domain realization must either reproduce the interface proved in this section up to governance-equivalence or else fall into one of the failure modes already excluded: hidden selector work, repair-sensitive middle status, illicit structure import, domain change, or inert bookkeeping. The point of the section is therefore structural rigidity: necessity plus uniqueness of same-domain realization.
+
+\begin{lemma}[No intermediate admissibility state]\label{lem:no-intermediate-status}
+Let $S$ be any admissibility-relevant status distinct from admitted and not-admitted on a fixed domain. Then exactly one of the following holds:
+\begin{enumerate}[label=(\roman*)]
+\item $S$ affects admissible continuation, commitment, or licensed reuse, in which case $S$ performs hidden selector work or reopens a repair-sensitive middle status; or
+\item $S$ affects none of those, in which case $S$ is inert bookkeeping rather than an admissibility-relevant status.
+\end{enumerate}
+Hence no third admissibility-relevant status exists.
+\end{lemma}
+
+\begin{proof}
+Take any status $S$ distinct from admitted and not-admitted. If possession of $S$ changes what may later count as licensed continuation, commitment, or reuse, then $S$ adds governance-relevant discrimination beyond the gate itself. In that case it either selects among otherwise eligible acts or preserves a repair-sensitive middle state between rejection and admission. If instead possession of $S$ changes nothing about later licensed use, then $S$ contributes no governance work and is merely descriptive bookkeeping. Since every admissibility-relevant status must either affect licensed use or fail to affect it, these two cases are exhaustive. Therefore no third admissibility-relevant status survives.
+\end{proof}
+
+\begin{theorem}[Necessity and bivalence of admissibility]\label{thm:bivalence}
+On every fixed domain supporting licensed construction, a prior admissibility predicate is forced, and any admissibility-relevant status interface on that same fixed domain is extensionally equivalent to a binary one. Equivalently, every admissibility-relevant status falls into exactly one of two classes: admitted for commitment, reuse, and standing-bearing continuation, or not admitted.
+\end{theorem}
+
+\begin{proof}
+Without a prior admissibility predicate, entry into licensed composition would have to occur before evaluation, by post hoc repair, by scope transport, or by injected parameterization. Each route breaks reference, composition, or irreversibility. So a prior gate is forced. Now suppose the resulting admissibility interface were not extensionally binary. Then some additional same-domain status would have to survive between, or alongside, admitted and not admitted. If that status changes later admissible use, it is hidden gate work or a repair-sensitive middle state and therefore contradicts the fail-closed consequences of irreversibility. Any state whose admissibility status can change without constituting a numerically distinct act violates irreversibility and is therefore excluded. If it changes no later admissible use, it is inert bookkeeping and not an admissibility-relevant status at all. There is no third possibility. So every admissibility-relevant interface collapses extensionally to admitted or not admitted.
+\end{proof}
+
+\begin{theorem}[AMetric boundary and non-parameterization]\label{thm:ametric}
+At the admissibility boundary, no admissibility-relevant selector, ranking, ordering, grading, metric, or discrete indexing survives. In particular, there is no admissibility-relevant family of distinct positive statuses beyond the binary admitted / not-admitted split.
+\end{theorem}
+
+\begin{proof}
+On the pre-boundary side, no representative, coordinate, or labeling choice may carry admissibility-relevant authority for the same fixed domain. This label-neutrality is not a free modeling preference. If admissibility were allowed to depend on labels, coordinates, or presentation indices as such, then two identity-preserving presentations of the same candidate would receive different admissibility significance solely by representation. That would make representation itself a same-domain selector and would violate the requirement that admissibility be invariant under identity-preserving transformation. So any admissibility-relevant differentiator must be invariant under governance-preserving relabeling. Under that invariance condition, only equality-pattern structure survives: there is no nontrivial unary grading, no admissibility-relevant order, no selector of a privileged positive route, and no meaningful metric beyond discrete equality. Suppose, then, that a parameterized or ranked boundary nevertheless existed. If the parameter or ranking makes a governance-relevant difference, it selects among otherwise admissible candidates or routes and therefore introduces a same-domain selector not preserved by the relabeling symmetry just described. If it makes no governance-relevant difference, it is bookkeeping rather than boundary structure. Likewise, if the extra structure is used to encode an intermediate positive status rather than a selector, it reopens a repair-sensitive middle state between admitted and not admitted, contrary to the fail-closed consequence of irreversibility. Thus every purported admissibility-relevant parameterization or metric either contradicts the boundary invariance conditions or collapses to bookkeeping. Accordingly, any purported admissibility-relevant parameterization at the boundary is forbidden.
+\end{proof}
+
+\begin{theorem}[Standing equals reuse-stable admissibility]\label{thm:standing-reuse}
+Let $\mathrm{Stand}_D$ be any predicate claimed to mark those evaluated acts on a fixed domain $D$ that are eligible for standing-bearing continuation, commitment, or licensed reuse. Then for every act $a \in D$,
+\[
+\mathrm{Stand}_D(a)=1 \iff a \text{ is reuse-stably admissible on } D.
+\]
+Equivalently, standing is not an extra primitive or interface-level classifier beyond admissibility on a fixed scope. It is the persistence condition of admissibility under licensed same-scope continuation.
+\end{theorem}
+
+\begin{proof}
+If $\mathrm{Stand}_D(a)=1$, then standing is already doing admissibility-relevant gate work on the fixed scope, so by Theorem~\ref{thm:bivalence} there is no additional governance-relevant classifier beyond the unique gate. Thus $a$ is admitted, and if it were not reuse-stable some licensed same-scope continuation would silently retarget or reclassify the act. Conversely, if $a$ is reuse-stably admissible but denied standing, then admitted acts are split into two substantive positive subclasses. If that split affects later continuation, it is forbidden same-side gate work; if it affects nothing, it is inert bookkeeping. So the split is impossible as a substantive classification.
+\end{proof}
+
+\begin{theorem}[Extensional uniqueness of the admissible interior]\label{thm:unique-interior}
+For a fixed system $S$ on a fixed domain, the admissible interior is unique up to extensional, or lawful, equivalence. More precisely, if $I_1$ and $I_2$ are predicates on acts such that each contains exactly the standing acts of $S$, then for every act $a$,
+\[
+I_1(a) \iff I_2(a).
+\]
+Equivalently: in the standing-instantiated regime, there are no plural admissible interiors in extension; any adequate encoding of the admissible interior collapses pointwise to the standing predicate.
+\end{theorem}
+
+\begin{proof}
+Assume that $I_1$ and $I_2$ both capture exactly the standing acts on the same fixed domain but that they disagree on some act $a$. Then the same act receives two different standing verdicts on the same fixed scope. If one now adds a selector deciding which interior governs $a$, the selector itself becomes a new same-domain admissibility-relevant parameter, contrary to Theorems~\ref{thm:bivalence} and \ref{thm:ametric}. If one adds no such selector, then the fixed-domain standing classification is indeterminate, contrary to the role of standing in Theorem~\ref{thm:standing-reuse}. So two extensional interiors capturing exactly the standing acts cannot disagree on any act. Their apparent plurality therefore collapses extensionally to one admissible interior.
+\end{proof}
+
+\begin{theorem}[Conservation of standing]\label{thm:conservation}
+For each fixed domain, no internal operation of the licensed construction regime creates, amplifies, transfers, or recovers standing. Standing can only be preserved or destroyed.
+\end{theorem}
+
+\begin{proof}
+Recovery would be same-act repair; creation would be standing from a failed act without fresh evaluation; amplification would require standing to admit degrees despite Theorem~\ref{thm:bivalence}; and transfer would require an independent carrier of standing distinct from the gate. Each branch is excluded by the preceding kernel packet. So only preservation or destruction remain.
+\end{proof}
+
+\begin{theorem}[Structural rigidity of the admissibility invariant]\label{thm:rigidity}
+Let $D$ be any fixed domain supporting governed construction. Let $J_D$ be any candidate same-domain realization of the admissibility invariant sufficient to fix eligibility, standing-bearing continuation, and reference-preserving commitment on $D$. Then exactly one of the following holds:
+\begin{enumerate}[label=(\roman*)]
+\item $J_D$ is governance-equivalent to the interface already fixed by the present results: a binary admissibility gate with an AMetric boundary, standing equal to reuse-stable admissibility, a unique admissible interior, and conservation of standing;
+\item $J_D$ introduces fresh same-domain selector work, repair-sensitive middle status, or other illicit structure and therefore fails as a faithful realization on $D$;
+\item $J_D$ changes the admissibility-relevant invariant bundle and therefore changes domain rather than realizing the same invariant on the same domain; or
+\item $J_D$ contributes no independent governance work and collapses to bookkeeping.
+\end{enumerate}
+In particular, the admissibility invariant required for standing-bearing construction admits no governance-non-equivalent same-domain realization.
+\end{theorem}
+
+\begin{proof}
+By Theorem~\ref{thm:governance-work-uniqueness}, any package sufficient for non-degenerate construction must already cover the same governance roles as $K$ up to governance-equivalence; there is no further governance-non-equivalent package that preserves the same class of governed constructions. Theorems~\ref{thm:bivalence} and \ref{thm:ametric} fix the interface shape of any such package on a fixed domain: admissibility-relevant status collapses extensionally to admitted or not admitted, and no same-domain selector, ranking, metric, or parameter survives at the boundary. Theorem~\ref{thm:standing-reuse} then eliminates any additional positive-side classifier beyond reuse-stable admissibility; Theorem~\ref{thm:unique-interior} eliminates plural same-domain admissible interiors; and Theorem~\ref{thm:conservation} eliminates creation, amplification, transfer, and same-act recovery of standing.
+
+Suppose, then, that $J_D$ is a candidate realization of the required invariant on the same fixed domain. If it preserves all of the governance work just listed, then by Theorem~\ref{thm:governance-work-uniqueness} it is governance-equivalent to the interface already proved, giving (i). If it differs by introducing fresh selector work, middle statuses, repair channels, or imported authority, then it contradicts Theorems~\ref{thm:bivalence}, \ref{thm:ametric}, and \ref{thm:conservation}, yielding (ii). If it preserves some other boundary only by altering what counts as the same target, the same standing-bearing continuation, or the same admissibility-relevant invariant bundle, then it is no longer realizing the same invariant on the same fixed domain, yielding (iii). If it changes no governance verdict at all, then it is an extensional redescription or bookkeeping layer, yielding (iv). Any further candidate would have to change governance work while avoiding the listed branches, which is exactly what the rigidity result excludes.
+\end{proof}
+
+\subsection{Consequences for Admissible Structure}
+
+The previous sections establish that the foundational layer is fixed, minimal, and non-derivable. The present section derives several structural consequences once that package is in place. These are not additional assumptions; they are strict consequences of the fixed package itself. All consequences in this section follow strictly from the impossibility of same-domain selector introduction, repair-sensitive status, or invariant violation established in Sections~4--6. The forcing pattern is uniform. A purported same-domain alternative to the results below must either (i) introduce an additional admissibility-relevant parameter or selector, (ii) reopen a repair channel or middle status between admission and rejection, or (iii) preserve all same-domain governance work and therefore collapse extensionally to the original interface. The first two branches contradict the kernel results already established; the third yields only bookkeeping redescription. The arguments below therefore proceed by contradiction against those three possibilities rather than by stipulating an interface in advance.
+
+\begin{definition}[Invariant bundle and same target]
+An invariant bundle is a family of admissibility-relevant invariants sufficient to determine when two acts have the same governed target. For acts $a$ and $b$, write $a \sim b$ to mean that they agree on every invariant in the bundle.
+\end{definition}
+
+\begin{definition}[Scope-preserving continuation]
+A continuation $C$ is scope-preserving iff it remains within one admissibility-relevant frame and does not change target by illicit redescription.
+\end{definition}
+
+\begin{definition}[Admissible operator]
+An operator or relation is admissible iff its application respects the governance of standing and admissibility rather than introducing distinctions by redescription alone.
+\end{definition}
+
+\begin{theorem}[Scope-preserving invariance]\label{thm:scope-preserving-invariance}
+If $C$ is scope-preserving, then for every admissible act $a$, one has $a \sim C(a)$.
+\end{theorem}
+
+\begin{proof}
+Assume $C$ is scope-preserving but changes an admissibility-relevant invariant of $a$. Then $a$ and $C(a)$ do not fix the same target. The continuation would therefore have introduced a governance-bearing difference while still claiming to remain within the same scope. That is precisely a silent redescription or hidden reparameterization, which admissibility excludes. Hence every scope-preserving continuation preserves the invariant bundle pointwise.
+\end{proof}
+
+\begin{theorem}[Transport closure]\label{thm:transport-closure}
+Let $R$ be an admissible relation. If $b_1 \sim b_2$, then for every $q$,
+\[
+R(q,b_1) \Longleftrightarrow R(q,b_2).
+\]
+\end{theorem}
+
+\begin{proof}
+If $R$ could distinguish $b_1$ from $b_2$ despite $b_1 \sim b_2$, then the distinction would arise from presentation rather than governed target. But admissible construction cannot allow standing-bearing content to depend on mere redescription. Once target is fixed, admissible transport must be closed under that fixing. Therefore admissible relations cannot distinguish same-target presentations.
+\end{proof}
+
+\begin{theorem}[Domain-defined operators]
+An admissible operator is defined exactly on the admissible domain, and in particular must be defined on every standing point applied to itself.
+\end{theorem}
+
+\begin{proof}
+If an admissible operator were undefined on a standing point applied to itself, then a standing act would fail to lie in its own governed domain. The operator would not govern the admissible act as such. Conversely, if the operator had governance-bearing force outside the admissible domain, it would confer structure where standing is absent and thereby violate the admissibility boundary. Hence admissible operators are defined exactly on the admissible domain.
+\end{proof}
+
+\begin{theorem}[Quotient identity]
+Identity of admissible presentation is exactly same-target identity. Equivalently, the admissible redescription orbit of an act coincides with its invariant bundle class.
+\end{theorem}
+
+\begin{proof}
+Suppose two presentations lie in the same admissible orbit but differ in same-target identity. Then admissible redescription would change governed target, violating Theorem~\ref{thm:scope-preserving-invariance}. Conversely, suppose two presentations agree on every admissibility-relevant invariant but fail to count as identical for admissible purposes. Then admissibility would preserve a surplus distinction not grounded in target, violating Theorem~\ref{thm:transport-closure}. Therefore orbit identity and invariant identity coincide.
+\end{proof}
+
+\begin{corollary}[No silent redescription]
+Any purported continuation that changes admissibility-relevant status while claiming same scope is illicit.
+\end{corollary}
+
+\begin{proof}
+A same-scope continuation must preserve the invariant bundle by Theorem~\ref{thm:scope-preserving-invariance}. A status-changing continuation would therefore either leave scope or introduce illicit redescription. In either case it is not admissible as same-scope transport.
+\end{proof}
+
+\begin{remark}
+The formal consequences listed here---transport closure, quotient identity, domain-defined operators, and scope-preserving invariance---therefore do not stand as fresh assumptions. They are structural fallout from the fixedness of the kernel. They belong downstream of foundational closure, not alongside it.
+\end{remark}
+
+\subsection{Closure Against Additional Foundational Conditions}
+
+In this section, an \emph{additional foundational condition} means a putative further bearer of irreducible constructional work. It does not mean a merely declared symbol, shorthand, or presentational starting point. The question is whether anything beyond $K$ can function as a further base-level condition of non-degenerate construction.
+
+Any such purported further condition can enter only in one of three ways: it can refine admissibility classification on the same fixed domain, purport to generate admissibility-relevant governance from a lower basis, or serve as an independent same-domain invariant alongside the kernel. These possibilities cover the relevant ways an additional condition could relate to fixed-domain admissibility: it may change admissibility classification, supply or generate it, or leave it untouched. If it leaves admissibility untouched, then it performs no independent governance work and is derivative rather than foundational.
+
+\begin{theorem}[Exhaustion of foundational conditions]\label{thm:exhaustion-foundational-conditions}
+Let $Q$ be any purported additional foundational condition. Then exactly one of the following holds:
+\begin{enumerate}[label=(\roman*)]
+\item $Q$ performs no independent governance work beyond the kernel $K$, in which case $Q$ is derivative rather than foundational;
+\item $Q$ purports to generate admissibility-relevant governance from a lower same-domain basis; or
+\item $Q$ purports to persist as an independent same-domain classifier or invariant alongside the kernel.
+\end{enumerate}
+Cases (ii) and (iii) are impossible: generation from below is excluded by the non-derivability and no-faithful-lower-generator results, while independent same-domain persistence is excluded by the no-faithful-same-domain-extension results together with the absence of any faithful same-domain counterexample. Therefore no additional foundational condition survives on the same fixed domain as an independent bearer of governance work.
+\end{theorem}
+
+\begin{proof}
+Take any proposed foundational candidate $Q$. If $Q$ makes no difference to the class of governed constructions once $K$ is fixed, then by definition it is not foundational; it is descriptive, not load-bearing. Suppose instead that $Q$ performs independent governance work on the same fixed domain. Then, by the classification just stated, that extra work must enter in one of two nontrivial ways: either $Q$ is supposed to generate admissibility-relevant governance from a lower same-domain basis, or it is supposed to survive as an independent same-domain classifier or invariant alongside the kernel.
+
+If $Q$ is claimed to be generated from a lower same-domain basis, then Corollary~\ref{cor:kernel-non-derivability} together with Theorem~\ref{thm:kernel-no-lower-generator} excludes the claim: no member of the kernel, and no genuinely foundational governance role, is generated from below while remaining on the same fixed domain.
+
+If $Q$ is instead claimed to persist as an independent same-domain classifier or invariant, then it would constitute an additional same-domain bearer of governance work. But this is excluded by Theorem~\ref{thm:no-faithful-same-domain-extension}: there is no faithful same-domain extension that converts the original acts into a second independent governance architecture rather than collapsing back to the original admissibility boundary, importing illicit structure, violating the base goods, or proving trivial.
+
+A purported fourth option would have to leave admissibility untouched while still doing independent foundational work. But a condition that leaves admissibility untouched leaves the class of governed constructions untouched as well, and so is derivative rather than foundational. Therefore the listed cases are complete. Hence any such condition either does no independent work or falls into one of the two excluded branches. Therefore no additional foundational condition survives as an independent bearer of governance work on the same fixed domain.
+\end{proof}
+
+\begin{corollary}[Foundational closure]
+The foundational layer of non-degenerate construction is complete in the following sense: no admissible extension below or alongside $K$ survives on the same fixed domain as an independent bearer of governance work.
+\end{corollary}
+
+\begin{proof}
+Immediate from Theorem~\ref{thm:exhaustion-foundational-conditions}.
+\end{proof}
+
+\subsection{Mechanization Boundary and Proof-Theoretic Scope}
+
+\begin{theorem}[Internal mechanization boundary]
+No proof system can establish the package $K$ as a genuinely new internal theorem from a lower layer while preserving the target domain fixed in the fixed-domain construction subsection.
+\end{theorem}
+
+\begin{proof}
+Any proof system that already counts its outputs as admissibility-assessable constructions belongs to the target class of the fixed-domain construction subsection. By Theorem~\ref{thm:construction-forces-kernel}, any such system already operates with admissibility, standing, reference, and irreversibility in place. An ``internal construction'' of $K$ therefore begins under the very conditions it purports to generate. By Theorems~\ref{thm:kernel-no-lower-generator}, \ref{thm:regime-invariant}, and \ref{thm:no-faithful-same-domain-extension}, this is not generation from below but restatement, encoding, or circular recapture.
+\end{proof}
+
+\begin{remark}
+The point is not anti-formal. It is to mark where formal work properly begins. Once the fixed package is in place, the remaining consequence layer is ordinary derivable mathematics and is an entirely appropriate target for mechanization.
+\end{remark}
+
+\begin{corollary}[No lower internal substrate]
+A faithful mechanization of the present framework begins at the consequence layer rather than beneath admissibility and standing.
+\end{corollary}
+
+\begin{proof}
+If a lower internal layer still counted as part of the same construction regime, then Theorem~\ref{thm:construction-forces-kernel} would already place admissibility and standing there. If it did not count as part of that regime, it would not amount to a lower constructional substrate for the present target. So the correct starting point for mechanization is the downstream consequence layer.
+\end{proof}
+
+\begin{remark}
+A companion formalization is included only as corroboration of this downstream layer. It is not a premise in the argument of the self-contained kernel proof, and the non-derivability results do not depend on repository-level or file-level detail. For present purposes it is enough that representative families---split-collapse, standing/reuse closure, no same-act repair, no generators, no independent carriers, uniqueness of the admissible interior, conservation, and the supporting transport/invariance lemmas---have been machine-checked. That mechanized layer matters here not as a substitute for the present proofs, but as an external check that the equivalence-level uniqueness claims do not rest on merely verbal factorization.
+\end{remark}
+
+
+
+\subsection{Endpoint-facing kernel wrappers}\label{subsec:endpoint-facing-kernel-wrappers}
+
+\begin{definition}[Theorem-bearing endpoint use]\label{def:endpoint-use}
+For a fixed endpoint context \(R\) and a branch \(B\),
+\[
+  \EndpointUse_R(B)
+\]
+means that \(B\) is offered as a theorem-bearing resolution of the official endpoint image of \(R\). Endpoint use is not raw inscription and not mere report language; it is a governed mathematical act with target, carrier, theorem-status, redescription stability, and downstream reuse.
+\end{definition}
+
+\begin{theorem}[Endpoint use is governed construction]\label{thm:endpoint-use-governed}
+For every fixed endpoint context \(R\) and branch \(B\),
+\[
+  \EndpointUse_R(B)\Rightarrow \Constr(B).
+\]
+Consequently endpoint use is subject to the kernel of non-degenerate construction.
+\end{theorem}
+
+\begin{proof}
+A theorem-bearing endpoint must fix the target it resolves, preserve the carrier on which the problem is stated, distinguish theorem-status from raw trace or failed proof, permit downstream mathematical reuse, and remain stable under admissible redescription. These are precisely the features of governed construction for a determinate object on a fixed domain. Therefore endpoint use is governed construction.
+\end{proof}
+
+\begin{theorem}[Kernel necessity for theorem-bearing endpoints]\label{thm:kernel-necessity}
+If \(\EndpointUse\), then the full kernel
+\[
+  K=\{\Adm,\St,\RefK,\Irr\}
+\]
+is already in force for that endpoint use.
+\end{theorem}
+
+\begin{proof}
+By Theorem~\ref{thm:endpoint-use-governed}, endpoint use is governed construction. By Theorem~\ref{thm:construction-forces-kernel}, every meaningful non-degenerate governed construction already instantiates admissibility, standing, reference, and irreversibility. Thus the kernel is already in force for theorem-bearing endpoint use.
+\end{proof}
+
+\begin{theorem}[Ordinary theoremhood is kernel-internal]\label{thm:ordinary-theoremhood-kernel-internal}
+For any proposition \(P\), if \(\ProofR(P)\) is a genuine proof rather than raw trace, then
+\[
+  \ProofR(P)\Rightarrow \Der(P)\Rightarrow K_R.
+\]
+In particular, an ordinary theorem of \(\neg\PosRaw\), if it exists as a theorem, is not rejected merely because it is negative.
+\end{theorem}
+
+\begin{proof}
+A genuine proof is a proposition-targeted governed derivation. By Definition~\ref{def:derivation}, derivation is the proposition-targeted special case of governed construction. Corollary~\ref{cor:global-presupposition} states that every governed derivation already presupposes the full kernel. Therefore ordinary theoremhood is kernel-internal. The sign or polarity of the proposition does not change this conclusion.
+\end{proof}
+
+\section{A+ as Kernel-Forced Consequence Layer}\label{sec:aplus-endpoint-consequence-layer}
+
+\begin{definition}[A+ endpoint consequence package]\label{def:aplus-certificate}
+For an endpoint context \(R\) and branch \(B\), \(\Aplus\) denotes the fixed-domain consequence package forced by kernel-instantiated theorem-bearing endpoint use. It consists of boundary fixation, endpoint bivalence, AMetric boundary, standing as reuse-stable admissibility, conservation of standing, unique admissible interior, no raw trace sufficiency, no selector import, no carrier/domain transfer, no third endpoint status, no auxiliary endpoint-status refinement, and report-preserving output discipline.
+\end{definition}
+
+\begin{theorem}[Kernel forces A+ consequences]\label{thm:a-plus}
+For every fixed endpoint context \(R\) and branch \(B\),
+\[
+  \EndpointUse_R(B)\wedge \FixedDom(R)\Rightarrow \Aplus_R(B).
+\]
+\end{theorem}
+
+\begin{proof}
+By Theorem~\ref{thm:kernel-necessity}, endpoint use instantiates the kernel. Fixed-domain closure then applies the consequences proved in the kernel section. Boundary fixation is admissibility as the joint governance boundary. Endpoint bivalence follows from Theorem~\ref{thm:bivalence}. The AMetric boundary follows from Theorem~\ref{thm:ametric}. Standing as reuse-stable admissibility follows from Theorem~\ref{thm:standing-reuse}. Unique admissible interior follows from Theorem~\ref{thm:unique-interior}. Conservation follows from Theorem~\ref{thm:conservation}. No raw trace sufficiency follows from Lemma~\ref{lem:raw-not-construction}. No selector import and no carrier/domain transfer follow from Proposition~\ref{prop:cross-domain-closure} and Theorem~\ref{thm:rigidity}. No third endpoint status follows from Lemma~\ref{lem:no-intermediate-status}. No auxiliary endpoint-status refinement follows from structural rigidity. Report-preserving output discipline is the claim-report interface of the same reference, standing, admissibility, and irreversibility roles. Thus A+ is a consequence package, not an independent premise.
+\end{proof}
+
+\begin{corollary}[AMetricity from endpoint use]\label{cor:context-ametric}
+On the fixed SAT endpoint image,
+\[
+  \ClayCtx\wedge\EndpointUse_R(B)\wedge\FixedDom(R)\Rightarrow \AMetric(R).
+\]
+\end{corollary}
+
+\begin{proof}
+The context supplies the carrier and branch slots. Endpoint use plus fixed-domain closure supplies \(\Aplus\) by Theorem~\ref{thm:a-plus}; the AMetric boundary is one of the listed kernel-forced A+ consequences.
+\end{proof}
+
+
+\section{Endpoint-Status Discriminator Discipline}\label{sec:discriminator-discipline}
+
+\begin{definition}[Endpoint-status discriminator]\label{def:endpoint-discriminator}
+An endpoint-status discriminator for a branch \(B\) on context \(R\), written
+\[
+  \EndpointDisc_R(C,B),
+\]
+is a status factor, rule, classifier, role-marker, selector, or admissibility-relevant distinction by which \(B\) is asserted to occupy an endpoint status on the fixed endpoint image of \(R\).
+\end{definition}
+
+\begin{definition}[Independent same-domain discriminator]\label{def:independent-discriminator}
+A discriminator \(C\) is independent same-domain governance work for \(B\), written \(\IndDisc_R(C,B)\), iff it changes endpoint-status, admissibility, standing-bearing continuation, or reportable theorem use on the same fixed domain while not being governance-equivalent to the already fixed admissibility/standing interface.
+\end{definition}
+
+\begin{theorem}[Endpoint discriminator trichotomy with domain exit]\label{thm:endpoint-discriminator-trichotomy}
+Let \(C\) be any endpoint-status discriminator attached to branch \(B\) on a fixed domain \(R\). Exactly one of the following governance cases applies:
+\[
+\begin{array}{ll}
+\Bookkeep_R(C,B), & \GovEquiv_R(C,B),\\[2pt]
+\IndDisc_R(C,B), & \DomShift_R(C,B).
+\end{array}
+\]
+That is, \(C\) either changes no endpoint-governance verdict, reproduces the existing kernel-forced interface, performs independent same-domain governance work, or changes the admissibility-relevant invariant bundle and leaves the domain.
+\end{theorem}
+
+\begin{proof}
+If \(C\) changes no admissibility, standing, continuation, endpoint-status, or reportability verdict, it is bookkeeping. If it changes verdicts only in a way already fixed by the kernel-forced admissibility/standing interface, it is governance-equivalent. If it changes endpoint-status verdicts on the same invariant bundle without being governance-equivalent, it performs independent same-domain governance work. If it changes the invariant bundle by which target, carrier, standing-bearing continuation, or admissibility classification are individuated, it changes domain. These cases exhaust whether a discriminator changes governance work and whether the change remains on the fixed domain.
+\end{proof}
+
+\begin{theorem}[Independent same-domain discriminator is forbidden]\label{thm:independent-discriminator-forbidden}
+For theorem-bearing endpoint use on a fixed domain,
+\[
+  \EndpointUse_R(B)\wedge\FixedDom(R)\Rightarrow
+  \neg\exists C\,\IndDisc_R(C,B).
+\]
+\end{theorem}
+
+\begin{proof}
+Endpoint use plus fixed-domain closure yields the A+ consequence package by Theorem~\ref{thm:a-plus}. The AMetric boundary excludes selector, ranking, metric, or parameter work at the endpoint boundary. Bivalence excludes third endpoint status. Standing as reuse-stable admissibility and the unique admissible interior exclude a second same-domain endpoint gate. Conservation excludes creation, recovery, transfer, or amplification of standing by an extra carrier. Transport closure excludes same-domain redescription changes. Therefore no independent same-domain endpoint-status discriminator survives. By Theorem~\ref{thm:rigidity}, any attempted realization is governance-equivalent, illicit same-domain selector work, domain-changing, or bookkeeping; the independent same-domain case is the illicit case.
+\end{proof}
+
+\begin{corollary}[Role-specific classification is consequence, not source]\label{cor:role-specific-classification}
+If a branch has a role-specific endpoint status, that status is admissible only as a consequence of endpoint use under the kernel-forced fixed-domain interface. It does not create standing for the branch.
+\end{corollary}
+
+\begin{proof}
+By Theorem~\ref{thm:kernel-necessity}, endpoint use already presupposes the kernel. By Theorem~\ref{thm:a-plus}, the endpoint-status interface is downstream of that kernel. Hence role-specific classification may record the status a branch has under the fixed interface, but cannot be a source of kernel standing.
+\end{proof}
+
+\section{SAT Branch Asymmetry and Separator Occupation}\label{sec:sat-branch-asymmetry}
+
+\begin{definition}[Ordinary negative theorem]\label{def:ordinary-negative-theorem}
+\[
+  \NegThm_R := \ProofR(\neg\PosRaw).
+\]
+This denotes ordinary theoremhood of the negative SAT proposition inside a governed theorem regime. It is not, by itself, a distinct separator endpoint-status discriminator.
+\end{definition}
+
+\begin{theorem}[Negative theoremhood is not automatically defective]\label{thm:negative-theorem-not-defective}
+\[
+  \NegThm_R\Rightarrow K_R.
+\]
+Thus the manuscript does not reject \(\ProofR(\neg\PosRaw)\) merely for being negative.
+\end{theorem}
+
+\begin{proof}
+This is Theorem~\ref{thm:ordinary-theoremhood-kernel-internal} applied to \(P=\neg\PosRaw\). Genuine theoremhood is governed derivation and is already kernel-internal. The excluded object below is not theoremhood of a negative proposition; it is the same-domain separator discrimination induced by the SAT image-separator branch.
+\end{proof}
+
+
+\begin{theorem}[Ordinary negative theoremhood is not the rejected discriminator]\label{thm:ordinary-negative-not-discriminator}
+Ordinary theoremhood of the negative proposition is not, merely as theoremhood, the independent same-domain separator discriminator excluded below:
+\[
+  \NegThm_R \;\text{by theorem status alone does not equal}\; \SepDisc(model).
+\]
+When the content proved is the raw negative branch \(\SepBare\), the SAT-specific lower-bound/no-positive bridge transports that content directly to the image-separator branch \(\SepImg\); the resulting contradiction targets the discriminator induced by that branch, not negative theoremhood as such.
+\end{theorem}
+
+\begin{proof}
+Ordinary theoremhood is a proposition-targeted governed derivation, hence kernel-internal by Theorem~\ref{thm:negative-theorem-not-defective}. The discriminator excluded below is not a theorem-status predicate. It is the endpoint-status discriminator induced by the SAT image-separator branch obtained in Theorem~\ref{thm:bare-negative-forces-image}. Thus an ordinary negative theorem is not rejected for polarity or for being theoremhood; the rejected object is the same-domain separator endpoint-status discrimination induced by the raw negative branch through the image-separator bridge.
+\end{proof}
+
+\begin{theorem}[Positive branch is direct constructive endpoint occupation]\label{thm:positive-direct-occupation}
+The positive CNF-SAT branch directly occupies the constructive endpoint carrier:
+\[
+  \CnfPositiveEndpoint\Rightarrow\CnfDirectPos .
+\]
+Equivalently, when \(\PosRaw\) is obtained as \(\CnfSATP\), its endpoint role is the direct polynomial-time CNF-SAT endpoint. It is not a same-domain separator classifier and does not require an independent endpoint-status discriminator.
+\end{theorem}
+
+\begin{proof}
+The positive branch asserts the existence of a deterministic polynomial-time decision procedure for arbitrary finite CNF-SAT. That assertion directly occupies the constructive endpoint carrier named by \(\CnfSATP\). No further separator relation over the endpoint image is introduced: the branch does not classify the positive route from outside; it is the positive route. The corresponding audited formal theorem is listed in Appendix~A.
+\end{proof}
+
+\begin{theorem}[Raw positive branch equals the formal CNF positive endpoint]\label{thm:raw-positive-formal-positive}
+On any context-bound CNF-SAT endpoint model,
+\[
+\begin{aligned}
+  &\ClayCtx\wedge\FixedDom(R)\wedge\ModelOfCnf(model,R)\\
+  &\qquad\Rightarrow
+  (\PosRaw\leftrightarrow\CnfPositiveEndpoint).
+\end{aligned}
+\]
+\end{theorem}
+
+\begin{proof}
+The premise \(\ModelOfCnf(model,R)\) fixes the formal CNF-SAT endpoint model associated with the manuscript's raw carrier. By Definition~\ref{def:bare}, \(\PosRaw:=\CnfSATP\), the assertion that arbitrary finite CNF-SAT is decidable in deterministic polynomial time. In the formal SAT operator layer, \(\CnfPositiveEndpoint\) names that same positive endpoint on the encoded CNF model. Thus the raw positive branch and the formal positive endpoint are equivalent on the fixed model.
+\end{proof}
+
+\begin{corollary}[Bare negative branch equals the formal bare negative branch]\label{cor:bare-negative-formal}
+On any context-bound CNF-SAT endpoint model,
+\[
+\begin{aligned}
+  &\ClayCtx\wedge\FixedDom(R)\wedge\ModelOfCnf(model,R)\wedge\SepBare\\
+  &\qquad\Rightarrow
+  \CnfBareNeg(R,model).
+\end{aligned}
+\]
+\end{corollary}
+
+\begin{proof}
+By Theorem~\ref{thm:bare-complement}, \(\SepBare\leftrightarrow\neg\PosRaw\). By Theorem~\ref{thm:raw-positive-formal-positive}, \(\PosRaw\leftrightarrow\CnfPositiveEndpoint\) on the context-bound CNF model. Hence \(\SepBare\) gives \(\neg\CnfPositiveEndpoint\), which is exactly \(\CnfBareNeg(R,model)\) in the formal SAT operator notation.
+\end{proof}
+
+\begin{definition}[Context-bound CNF model]\label{def:cnf-model-of-context}
+\[
+  \ModelOfCnf(model,R)
+\]
+means that \(model\) is the encoded CNF-SAT endpoint model associated with the fixed SAT context \(R\): the carrier is arbitrary finite CNF over finite Boolean alphabets, the input measure is formula length, and admissible encodings preserve the same endpoint-image carrier.
+\end{definition}
+
+\begin{theorem}[Canonical CNF model binding is instantiated, not arbitrary]\label{thm:canonical-cnf-model-binding}
+The fixed SAT context supplies its own canonical encoded CNF model, denoted \(m_{\mathsf{SAT}}\), rather than making an arbitrary \(model\) context-bound:
+\[
+  \ClayCtx_{\RSATctx}\wedge\FixedDom(\RSATctx)\Rightarrow\ModelOfCnf(m_{\mathsf{SAT}},\RSATctx).
+\]
+All branch-local theorems below keep \(\ModelOfCnf(model,R)\) as an explicit premise until the final instantiated SAT context supplies \(m_{\mathsf{SAT}}\).
+\end{theorem}
+
+\begin{proof}
+The CNF model is fixed by the official SAT endpoint carrier: arbitrary finite CNF instances over finite Boolean alphabets, evaluated by formula size, with admissible encodings preserving the same endpoint-image carrier. This determines the canonical context-bound model for \(\RSATctx\). It does not license the stronger and false reading that every arbitrary \(model\) is context-bound.
+\end{proof}
+
+\begin{theorem}[Raw negative branch forces the SAT image-separator branch]\label{thm:bare-negative-forces-image}
+In the fixed SAT endpoint setting, the raw negative branch transports directly to the formal SAT image-separator branch:
+\[
+  \ClayCtx\wedge\FixedDom(R)\wedge\ModelOfCnf(model,R)\wedge\SepBare\Rightarrow\SepImg.
+\]
+\end{theorem}
+
+\begin{proof}
+The implication is not a reportability principle and does not assert that raw truth creates a Clay report act. By Corollary~\ref{cor:bare-negative-formal}, the manuscript-level assumption \(\SepBare\) is identified with the formal SAT operator branch \(\CnfBareNeg(R,model)\), i.e. with \(\neg\CnfPositiveEndpoint\) on the context-bound CNF model. The audited theorem listed in Appendix~A proves
+\[
+  \CnfBareNeg(R,model)\Rightarrow\CnfImageSep(R,model),
+\]
+using the lower-bound/no-positive equivalence
+\[
+  \Lean{cnfDirectGateLowerBoundResidualTarget\_iff\_noSatInPolyTime}.
+\]
+In this manuscript, \(\CnfImageSep(R,model)\) is denoted by \(\SepImg\). Thus the raw negative SAT branch is not laundered through reportability, not treated as defective theoremhood, and not routed through an additional residual layer. It is transported directly into the SAT image-separator branch by the formal SAT lower-bound/no-positive bridge.
+\end{proof}
+
+\begin{definition}[SAT-local independence bridge]\label{def:sat-local-independence-bridge}
+\(\SepIndBridge(model)\) denotes the SAT-local same-domain independence bridge: a separating candidate-status classifier for the context-bound CNF-SAT model is independent same-domain endpoint-status discrimination. In the Lean surface this is the predicate \(\CnfSepClassInd(model)\). It is not a source of standing and not an A+ premise; it records the SAT-local condition under which an image-separator branch produces the independent discriminator excluded by kernel-forced rigidity.
+\end{definition}
+
+\begin{definition}[Separator discriminator and no-independent closure]\label{def:sepdisc-nosepdisc}
+For the context-bound CNF-SAT model, \(\SepDisc(model)\) denotes the independent same-domain endpoint-status discriminator induced by the SAT image-separator branch:
+\[
+  \SepDisc(model):=\CnfIndSepDisc(model).
+\]
+The predicate \(\NoSepDisc(model)\) denotes the kernel-forced no-independent-separator-classifier closure for that same model:
+\[
+  \NoSepDisc(model):=\CnfNoIndSepClass(model).
+\]
+It is used only at the endpoint-use consequence layer, and its operative content is that no independent same-domain separator discriminator survives on the fixed CNF-SAT endpoint carrier.
+\end{definition}
+
+\begin{theorem}[No-independent closure excludes the separator discriminator]\label{thm:no-sepdisc-excludes-sepdisc}
+For the context-bound CNF-SAT model,
+\[
+  \NoSepDisc(model)\Rightarrow\neg\SepDisc(model).
+\]
+\end{theorem}
+
+\begin{proof}
+By Definition~\ref{def:sepdisc-nosepdisc}, \(\SepDisc(model)\) is the formal independent separator endpoint-status discriminator and \(\NoSepDisc(model)\) is the corresponding no-independent-separator-classifier closure. The latter is precisely the negation of the former at the fixed SAT endpoint carrier: independent same-domain separator discrimination is excluded. Thus \(\NoSepDisc(model)\Rightarrow\neg\SepDisc(model)\).
+\end{proof}
+
+\begin{theorem}[SAT-local bridge instantiated by the image-separator branch]\label{thm:sat-local-bridge-instantiated}
+In the fixed SAT context, the SAT-local independence bridge is invoked only by the image-separator branch:
+\[
+  \ClayCtx\wedge\FixedDom(R)\wedge\ModelOfCnf(model,R)\wedge\SepImg
+  \Rightarrow
+  \SepIndBridge(model).
+\]
+\end{theorem}
+
+\begin{proof}
+The model-binding clause fixes the encoded CNF-SAT carrier: arbitrary finite CNF instances over finite Boolean alphabets, evaluated by formula size, with admissible encodings preserving the same SAT endpoint image. When \(\SepImg\) is present, the branch is the SAT image-separator branch on that same carrier. The separating classifier induced by that branch is therefore same-domain rather than transported, external, or report-bookkeeping. This is the SAT-local bridge represented in Lean by \(\CnfSepClassInd(model)\). The theorem does not assert an independent discriminator from context alone; it states the branch-local condition under which the image-separator theorem applies.
+\end{proof}
+
+\begin{theorem}[Image-separator branch requires independent separator discriminator]\label{thm:image-separator-requires-independent-discriminator}
+For the fixed SAT endpoint carrier,
+\[
+  \ClayCtx\wedge\FixedDom(R)\wedge\ModelOfCnf(model,R)\wedge\SepIndBridge(model)\wedge\SepImg
+  \Rightarrow
+  \SepDisc(model).
+\]
+\end{theorem}
+
+\begin{proof}
+The formal SAT operator theorem states exactly the displayed manuscript implication: a context-bound independent same-domain separating classifier together with the SAT image-separator branch yields the independent separator endpoint-status discriminator. The corresponding Lean anchor is listed in Appendix~A. This is the exact branch asymmetry: the positive branch is direct endpoint occupation, while the image-separator branch induces independent same-domain endpoint-status discrimination.
+\end{proof}
+
+\begin{theorem}[Bare negative branch requires independent separator discriminator]\label{thm:bare-negative-requires-independent-discriminator}
+For the fixed SAT endpoint carrier,
+\[
+  \ClayCtx\wedge\FixedDom(R)\wedge\ModelOfCnf(model,R)\wedge\SepBare
+  \Rightarrow
+  \SepDisc(model).
+\]
+\end{theorem}
+
+\begin{proof}
+By Theorem~\ref{thm:bare-negative-forces-image}, \(\SepBare\) gives \(\SepImg\). The branch-local bridge theorem then gives \(\SepIndBridge(model)\) from that same \(\SepImg\). Theorem~\ref{thm:image-separator-requires-independent-discriminator} gives \(\SepDisc(model)\). The direct audited formal counterpart is listed in Appendix~A.
+\end{proof}
+
+\begin{theorem}[Image-separator branch is endpoint use]\label{thm:image-separator-endpoint-use}
+In the fixed SAT context,
+\[
+  \ClayCtx\wedge\FixedDom(R)\wedge\ModelOfCnf(model,R)\wedge\SepImg
+  \Rightarrow
+  \EndpointUse_R(\SepImg).
+\]
+\end{theorem}
+
+\begin{proof}
+The symbol \(\SepImg\) denotes the formal SAT image-separator branch, not raw syntax and not a reportability act. In formal notation,
+\[
+  \SepImg \equiv \CnfImageSep(R,model).
+\]
+In the endpoint-image layer, that branch is the separator branch occupying the SAT endpoint image. Therefore, under the fixed carrier and bound CNF model, its presence is theorem-bearing endpoint use of the image-separator branch.
+\end{proof}
+
+\begin{theorem}[Branch-local no independent SAT separator classifier]\label{thm:no-independent-sat-separator-classifier}
+For the fixed SAT endpoint carrier, image-separator endpoint use triggers the kernel-forced no-independent-discriminator consequence:
+\[
+  \ClayCtx\wedge\FixedDom(R)\wedge\ModelOfCnf(model,R)\wedge\EndpointUse_R(\SepImg)
+  \Rightarrow
+  \NoSepDisc(model).
+\]
+\end{theorem}
+
+\begin{proof}
+Endpoint use is governed construction, hence it instantiates the kernel by Theorem~\ref{thm:kernel-necessity}. The fixed-domain A+ consequence layer then supplies the AMetric boundary, unique admissible interior, standing conservation, no-selector discipline, transport closure, and structural rigidity. On a fixed SAT endpoint carrier, an endpoint-status discriminator must be bookkeeping, governance-equivalent, domain-changing, or independent same-domain governance work by Theorem~\ref{thm:endpoint-discriminator-trichotomy}. The first two cases do not yield \(\SepDisc(model)\), the third is not the same SAT endpoint domain, and the fourth is excluded by the kernel-forced consequence layer. Thus image-separator endpoint use on the context-bound SAT model yields \(\NoSepDisc(model)\).
+\end{proof}
+
+\begin{theorem}[Image-separator branch impossible]\label{thm:no-image-sep}
+In the fixed SAT context,
+\[
+  \ClayCtx\wedge\FixedDom(R)\wedge\ModelOfCnf(model,R)\Rightarrow\neg\SepImg.
+\]
+\end{theorem}
+
+\begin{proof}
+Assume \(\ClayCtx\wedge\FixedDom(R)\wedge\ModelOfCnf(model,R)\) and suppose \(\SepImg\). The branch-local bridge theorem gives \(\SepIndBridge(model)\). Theorem~\ref{thm:image-separator-endpoint-use} gives \(\EndpointUse_R(\SepImg)\), and Theorem~\ref{thm:no-independent-sat-separator-classifier} gives \(\NoSepDisc(model)\). By Theorem~\ref{thm:no-sepdisc-excludes-sepdisc}, \(\neg\SepDisc(model)\). But Theorem~\ref{thm:image-separator-requires-independent-discriminator} gives \(\SepDisc(model)\). Contradiction. Therefore \(\neg\SepImg\).
+\end{proof}
+
+\begin{theorem}[Bare negative branch impossible]\label{thm:no-bare-sep}
+In the fixed SAT context,
+\[
+  \ClayCtx\wedge\FixedDom(R)\wedge\ModelOfCnf(model,R)\Rightarrow\neg\SepBare.
+\]
+\end{theorem}
+
+\begin{proof}
+Assume \(\ClayCtx\wedge\FixedDom(R)\wedge\ModelOfCnf(model,R)\) and suppose \(\SepBare\). By Theorem~\ref{thm:bare-negative-forces-image}, \(\SepImg\). But Theorem~\ref{thm:no-image-sep} excludes \(\SepImg\) under the same fixed context. Contradiction. Equivalently, the direct audited formal theorem listed in Appendix~A gives the same exclusion of \(\CnfBareNeg(R,model)\).
+\end{proof}
+
+\section{Endpoint-Image Resolution}\label{sec:final}
+
+\begin{theorem}[Bare SAT endpoint complementarity]\label{thm:bare-complement}
+At the raw unrestricted finite CNF-SAT layer,
+\[
+  \SepBare\leftrightarrow\neg\PosRaw.
+\]
+\end{theorem}
+
+\begin{proof}
+By Definition~\ref{def:bare}, \(\PosRaw:=\CnfSATP\), the assertion that arbitrary finite CNF-SAT is decidable by a deterministic polynomial-time machine. The bare negative branch \(\SepBare\) is the official raw complement branch: failure of polynomial-time decidability for that same unrestricted finite CNF-SAT carrier. Definition~\ref{def:bounded-cnf-clarification} prevents any shift to a restricted CNF fragment. Therefore the raw branches are exact complements on the same carrier.
+\end{proof}
+
+\begin{theorem}[Bare endpoint bivalence]\label{thm:bare-bivalence}
+\[
+  \PosRaw\vee\SepBare.
+\]
+\end{theorem}
+
+\begin{proof}
+Classical bivalence gives \(\PosRaw\vee\neg\PosRaw\). By Theorem~\ref{thm:bare-complement}, \(\neg\PosRaw\) is equivalent to \(\SepBare\). Hence \(\PosRaw\vee\SepBare\).
+\end{proof}
+
+\begin{theorem}[Positive SAT endpoint]\label{thm:positive}
+In the fixed SAT context,
+\[
+  \ClayCtx\wedge\FixedDom(R)\wedge\ModelOfCnf(model,R)\Rightarrow\PosRaw.
+\]
+\end{theorem}
+
+\begin{proof}
+Assume \(\ClayCtx\wedge\FixedDom(R)\wedge\ModelOfCnf(model,R)\). By Theorem~\ref{thm:bare-bivalence}, either \(\PosRaw\) or \(\SepBare\). If \(\PosRaw\), the conclusion is immediate. If \(\SepBare\), Theorem~\ref{thm:no-bare-sep} contradicts \(\SepBare\). Therefore \(\PosRaw\).
+\end{proof}
+
+\begin{theorem}[Instantiated SAT endpoint context]\label{thm:rsat-context}
+The official unrestricted finite CNF-SAT endpoint carrier instantiates the fixed context, fixed-domain, and bound-model hypotheses:
+\[
+  \ClayCtx_{\RSATctx}\wedge\FixedDom(\RSATctx)\wedge\ModelOfCnf(m_{\mathsf{SAT}},\RSATctx).
+\]
+\end{theorem}
+
+\begin{proof}
+The official SAT endpoint carrier is arbitrary finite CNF over finite Boolean alphabets with formula length as input size; the positive branch is deterministic polynomial-time CNF-SAT decidability; the raw negative branch is its complement on the same carrier; and admissible encodings preserve the carrier and endpoint image. This is exactly the fixed context of Definition~\ref{def:context} together with fixed-domain preservation and the context-bound CNF model of Definition~\ref{def:cnf-model-of-context}.
+\end{proof}
+
+\begin{theorem}[Instantiated positive SAT endpoint]\label{thm:positive-instantiated}
+\[
+  \CnfSATP.
+\]
+\end{theorem}
+
+\begin{proof}
+By Theorem~\ref{thm:rsat-context}, the official SAT carrier supplies \(\ClayCtx_{\RSATctx}\wedge\FixedDom(\RSATctx)\wedge\ModelOfCnf(m_{\mathsf{SAT}},\RSATctx)\). Applying Theorem~\ref{thm:positive} with \(R=\RSATctx\) and \(model=m_{\mathsf{SAT}}\) yields \(\PosRaw\). By Definition~\ref{def:bare}, \(\PosRaw:=\CnfSATP\).
+\end{proof}
+
+\section{Positive Report Classification}\label{sec:positive-classification}
+
+\begin{definition}[Positive Clay report act]\label{def:positive-report}
+\(\ReportClay{\PosRaw}\) is the report act that presents \(\PosRaw\) as the positive mathematical endpoint after the separator branch has been excluded.
+\end{definition}
+
+\begin{theorem}[Positive report act]\label{thm:positive-report}
+\[
+  \ClayCtx\wedge\FixedDom(R)\wedge\ModelOfCnf(model,R)\wedge\PosRaw\Rightarrow\ReportClay{\PosRaw}.
+\]
+\end{theorem}
+
+\begin{proof}
+Once the fixed SAT context is in force and the raw positive endpoint has been derived after exclusion of the separator branch, the manuscript's theorem-bearing output is the report of \(\PosRaw\) as the positive mathematical endpoint. That report act does not supply standing; it records the already derived endpoint under the report-preserving interface forced by the kernel.
+\end{proof}
+
+\begin{theorem}[Positive endpoint classification]\label{thm:pos-class}
+\[
+  \ClayCtx\wedge\FixedDom(R)\wedge\ModelOfCnf(model,R)\wedge\PosRaw\wedge\ReportClay{\PosRaw}
+  \Rightarrow \Apos.
+\]
+\end{theorem}
+
+\begin{proof}
+The positive branch is a theorem-bearing endpoint report on the fixed SAT carrier. By Theorem~\ref{thm:positive-direct-occupation}, the positive branch is direct constructive endpoint occupation rather than separator classification. By Theorem~\ref{thm:kernel-necessity}, endpoint use is kernel-instantiated; by Theorem~\ref{thm:a-plus}, the report-preserving A+ consequence layer applies. The positive classification \(\Apos\) records that downstream status. It is not a source of standing and is not an independent separator discriminator.
+\end{proof}
+
+\begin{corollary}[Positive Clay mathematical endpoint]\label{cor:pos-clay}
+\[
+  \ClayCtx\wedge\FixedDom(R)\wedge\ModelOfCnf(model,R)\Rightarrow\PosClay.
+\]
+\end{corollary}
+
+\begin{proof}
+Theorem~\ref{thm:positive} gives \(\PosRaw\). Theorem~\ref{thm:positive-report} gives \(\ReportClay{\PosRaw}\). Theorem~\ref{thm:pos-class} gives \(\Apos\). Therefore \(\PosClay:=\PosRaw\wedge\Apos\).
+\end{proof}
+
+\section{AASC Closure and Endpoint Correspondence}
+
+The manuscript does not redefine \(P\), \(NP\), CNF, satisfiability, polynomial time, reduction, or NP-completeness. AASC proves the positive raw SAT endpoint by excluding the separator endpoint image through kernel-forced fixed-domain discriminator closure. Once \(\CnfSATP\) is obtained, the final move to \(P=NP\) is the standard Cook--Levin/Karp endpoint correspondence. Cook--Levin/Karp is not the branch-exclusion method; it identifies the official endpoint consequence after the AASC proof has delivered unrestricted finite CNF-SAT in deterministic polynomial time.
+
+\begin{theorem}[Cook--Levin/Karp endpoint correspondence]\label{cor:pnp}
+\[
+  \CnfSATP\Rightarrow \Pclass=\NPclass.
+\]
+\end{theorem}
+
+\begin{proof}
+Arbitrary finite CNF-SAT is NP-complete under the standard Cook--Levin/Karp polynomial-time many-one reduction framework. If CNF-SAT has a deterministic polynomial-time decider, then every language in \(\NPclass\) is decided in deterministic polynomial time by composing its polynomial-time reduction to CNF-SAT with that decider. Hence \(\NPclass\subseteq\Pclass\). Since \(\Pclass\subseteq\NPclass\) by definition, \(\Pclass=\NPclass\).
+\end{proof}
+
+\begin{corollary}[Positive P versus NP endpoint]\label{cor:pnp-final}
+\[
+  \Pclass=\NPclass.
+\]
+\end{corollary}
+
+\begin{proof}
+Theorem~\ref{thm:positive-instantiated} gives \(\CnfSATP\). Theorem~\ref{cor:pnp} gives \(\Pclass=\NPclass\).
+\end{proof}
+
+\section{Denial Burden and Exhaustion of Remaining Routes}\label{sec:denial-burden}
+
+A standing mathematical objection must attack one of the following load-bearing AASC endpoint or endpoint-correspondence claims.
+\begin{enumerate}
+\item A theorem-bearing endpoint can preserve fixed target, fixed carrier, theorem-status distinction, downstream reuse, redescription stability, and act-time finality while lacking one of \(\Adm,\St,\RefK,\Irr\).
+\item Some A+ component used here is not forced by the kernel plus fixed-domain closure.
+\item Ordinary theoremhood is not kernel-internal.
+\item The raw negative SAT branch can avoid the SAT image-separator branch despite the SAT lower-bound/no-positive equivalence, contrary to Theorem~\ref{thm:bare-negative-forces-image}.
+\item The positive CNF-SAT branch is not direct constructive endpoint occupation.
+\item The SAT image-separator branch can avoid inducing independent same-domain endpoint-status discrimination under the SAT-local independence bridge.
+\item The image-separator branch does not instantiate the SAT-local independence bridge on the fixed context-bound CNF model, or the image-separator branch plus that branch-local bridge does not yield \(\SepDisc(model)\).
+\item An independent same-domain endpoint-status discriminator can survive structural rigidity, AMetricity, unique interior, conservation, and transport closure.
+\item \(\SepBare\not\leftrightarrow\neg\PosRaw\) at the raw unrestricted finite-CNF layer.
+\item \(\CnfSATP\) does not imply \(P=NP\) under the standard Cook--Levin/Karp endpoint correspondence.
+\end{enumerate}
+
+Objections outside these classes are non-standing unless they identify a theorem-level failure in one of the cited bridges. The relevant question is whether the manuscript reaches the official mathematical endpoint. In particular, it is not a standing objection to say that AASC is an external overlay; in this manuscript AASC machinery is used only as the kernel-forced consequence layer. It is also not a standing objection to say that a negative theorem would be kernel-defective; the manuscript expressly denies that. The eliminated negative route is the raw SAT lower-bound/no-positive branch, because that branch transports directly to the SAT image-separator branch; the image-separator branch then induces independent same-domain endpoint-status discrimination under the SAT-local bridge, and the kernel-forced consequence layer excludes such discrimination.
+
+\section{Conclusion}
+
+The proof has been arranged so that AASC owns the branch-exclusion argument: the kernel is the source of necessity, and AASC is the downstream fixed-domain consequence interface. Raw traces do not become constructions merely by being written. Genuine theoremhood is already governed derivation and is therefore kernel-internal. The positive SAT branch is direct constructive endpoint occupation. The negative SAT branch is not rejected for being negative; what is rejected is the SAT image-separator route, because raw negative branch status transports directly to the image-separator branch, and that branch invokes the branch-local SAT independence bridge and induces an independent same-domain endpoint-status discriminator. The kernel-forced consequence layer excludes such discriminators. Bare complementarity then yields the positive unrestricted finite CNF-SAT endpoint. The Cook--Levin/Karp endpoint correspondence then identifies this AASC-derived endpoint as \(\Pclass=\NPclass\).
+
+
+\appendix
+
+
+\section{Lean Formalization Support}
+The proof above is the manuscript proof. Lean4 material is appendix-level support for the AASC SAT-operator bridge and negative-branch closure, and reproducibility infrastructure only. The kernel proof and the endpoint-discriminator closure are stated and proved in the main text.
+
+\subsection{Representative audited Lean theorem families}
+The available Lean-facing material supports the following families of claims. The names below are audit anchors rather than premises of the manuscript proof.
+\begin{enumerate}
+\item kernel non-derivability and no-faithful-generator statements;
+\item raw-sequence versus governed-construction separation;
+\item no same-act repair;
+\item AMetric boundary closure;
+\item no independent carriers or selectors at the admissibility boundary;
+\item uniqueness of the admissible interior;
+\item standing conservation;
+\item transport and fixed-domain invariance lemmas;
+\item CNF-SAT endpoint-context declarations;
+\item raw lower-bound/no-positive bridge from the bare SAT negative branch to the SAT image-separator branch;
+\item direct positive endpoint occupation;
+\item SAT-local image-separator asymmetry;
+\item direct raw-negative contradiction under no-independent-discriminator closure;
+\item exclusion of the image-separator branch and raw negative branch under no-independent-discriminator closure.
+\end{enumerate}
+
+\subsection{SAT operator bridge audit anchors}
+The file \Lean{source\_material/SATOperatorProofQueue.lean} contains the branch-asymmetry objects used to audit the manuscript spine. The relevant anchors are:
+\begin{lstlisting}[basicstyle=\ttfamily\scriptsize]
+def CnfSATDirectPositiveEndpointOccupation : Prop :=\n  CnfPositiveEndpoint
+
+def CnfSATIndependentSeparatorEndpointStatusDiscriminator
+    (model : CnfEncodedCandidateModel) : Prop :=\n  exists classifier : CnfCandidateStatusClassifier model,
+    CnfClassifierSeparatesPolynomialCandidates model classifier /\
+      Nonempty (CnfClassifierIndependentSameDomain model classifier)
+
+theorem cnfPositiveEndpoint_directEndpointOccupation
+    (hPositive : CnfPositiveEndpoint) :
+    CnfSATDirectPositiveEndpointOccupation :=\n  hPositive
+
+def CnfSATBareNegativeBranch R model : Prop :=\n  Not CnfPositiveEndpoint
+
+theorem cnfBareNegativeBranch_forces_imageSeparatorBranch
+    (hBare : CnfSATBareNegativeBranch R model) :
+    CnfSATImageSeparatorBranch R model
+
+theorem cnfImageSeparatorBranch_of_not_positiveEndpoint
+    (hNotPos : Not CnfPositiveEndpoint) :
+    CnfSATImageSeparatorBranch R model
+
+theorem cnfBareNegativeBranch_requires_independentSeparatorDiscriminator
+    (hIndependent :
+      CnfSeparatingClassifierIsIndependentSameDomain model)
+    (hBare : CnfSATBareNegativeBranch R model) :
+    CnfSATIndependentSeparatorEndpointStatusDiscriminator model
+
+theorem cnfBareNegativeBranch_impossible_of_noIndependentDiscriminator
+    (hNoIndependent : CnfNoIndependentSeparatingClassifier model)
+    (hIndependent :
+      CnfSeparatingClassifierIsIndependentSameDomain model) :
+    Not (CnfSATBareNegativeBranch R model)
+
+theorem cnfNotPositiveEndpoint_impossible_of_noIndependentDiscriminator
+    (hNoIndependent : CnfNoIndependentSeparatingClassifier model)
+    (hIndependent :
+      CnfSeparatingClassifierIsIndependentSameDomain model)
+    (hBare : Not CnfPositiveEndpoint) :
+    False
+
+theorem cnfSATImageSeparatorBranch_requires_independentSeparatorDiscriminator
+    (hIndependent :
+      CnfSeparatingClassifierIsIndependentSameDomain model)
+    (hSep : CnfSATImageSeparatorBranch R model) :
+    CnfSATIndependentSeparatorEndpointStatusDiscriminator model
+
+theorem cnfSATImageSeparatorBranch_impossible_of_noIndependentDiscriminator
+    (hNoIndependent : CnfNoIndependentSeparatingClassifier model)
+    (hIndependent :
+      CnfSeparatingClassifierIsIndependentSameDomain model) :
+    Not (CnfSATImageSeparatorBranch R model)
+\end{lstlisting}
+These anchors express the manuscript's branch asymmetry and raw-negative closure: positive endpoint occupation is direct; raw negative branch status transports to the SAT image-separator branch by the lower-bound/no-positive equivalence; the image-separator branch together with the branch-local SAT independence bridge yields an independent endpoint-status discriminator; kernel-forced no-independent-discriminator closure excludes both the image-separator branch and the raw negative branch.
+
+\subsection{Axiom audit note}
+Lean support is not used as a substitute for the manuscript proof. The focused SAT operator bridge audit reported only the standard Lean/classical/mathlib base dependencies:
+\begin{lstlisting}[basicstyle=\ttfamily\scriptsize]
+[propext, Classical.choice, Quot.sound]
+\end{lstlisting}
+No custom endpoint axiom is required for the branch-asymmetry anchors listed above.
+\section{Standard CNF-SAT to P=NP Correspondence}
+The manuscript proof derives \(\CnfSATP\). Here ``bounded-CNF'' means finitely encoded CNF formulas of arbitrary instance size over a finite Boolean alphabet; it does not mean a fixed-width, fixed-size, bounded-variable, fixed-clause, bounded-depth, promise-restricted, parameterized, or otherwise tractable restricted CNF fragment. The equality \(\Pclass=\NPclass\) then uses the standard Cook--Levin/Karp endpoint correspondence: arbitrary finite CNF-SAT is NP-complete under polynomial-time many-one reductions; every \(L\in \NPclass\) reduces to CNF-SAT; composition of a polynomial reduction with a polynomial SAT decider gives a polynomial decider for \(L\); and \(\Pclass\subseteq\NPclass\). Hence \(\NPclass\subseteq\Pclass\) and \(\Pclass=\NPclass\). This correspondence is standard Cook--Levin/Karp background. It is not the proof of separator exclusion; AASC supplies that proof.
+
+\section{Reference Integrity Appendix}
+The proof ladder is ordered so that each theorem cites prior results only. The final endpoint theorem cites the context definition, positive direct-occupation theorem, model binding, the branch-local SAT image-separator bridge, raw complementarity, the raw-negative-to-image bridge, image-separator exclusion, and the standard CNF-SAT completeness bridge. No theorem cites itself.
+
+\section{Notation Ledger}
+\begin{longtable}{>{\raggedright\arraybackslash}p{0.16\linewidth}>{\raggedright\arraybackslash}p{0.60\linewidth}>{\raggedright\arraybackslash}p{0.16\linewidth}}
+\toprule
+Symbol & Meaning & Layer \\
+\midrule
+\(\ClayCtx\) & fixed SAT endpoint carrier and branch-slot context & context \\
+\(\PosRaw\) & \(\CnfSATP\) & raw positive \\
+\(\SepBare\) & raw complement branch \(\neg\PosRaw\) & bare negative \\
+\(\SepImg\) & formal SAT image-separator branch \(\CnfImageSep(R,model)\) induced by the raw negative branch under the lower-bound/no-positive bridge & image separator \\
+\(\EndpointUse\) & branch \(B\) offered as theorem-bearing endpoint use & endpoint act \\
+\(\EndpointDisc\) & endpoint-status discriminator attached to branch \(B\) & consequence layer \\
+\(\IndDisc\) & independent same-domain governance work by \(C\) & forbidden case \\
+\(\DirPos\) & direct constructive occupation of the positive CNF-SAT endpoint & SAT asymmetry \\
+\(\SepDisc\) & independent same-domain endpoint-status discriminator induced by the SAT image-separator branch & SAT asymmetry \\
+\(\SepIndBridge\) & branch-local SAT independence bridge invoked by \(\SepImg\) on the context-bound CNF model & SAT asymmetry \\
+\(\NoSepDisc\) & kernel-forced no-independent-separator-classifier closure triggered by image-separator endpoint use & consequence layer \\
+\(\Aplus\) & kernel-forced consequence package for endpoint use & consequence layer \\
+\(\Asep\) & role-specific separator status factor, downstream only & classification \\
+\(\Apos\) & positive report status factor, downstream only & classification \\
+\(\PosClay\) & \(\PosRaw\wedge\Apos\) & positive Clay mathematical endpoint \\
+\bottomrule
+\end{longtable}
+
+\begin{thebibliography}{9}
+\bibitem{CookClayPvsNP}
+S. Cook.
+\emph{The P versus NP Problem}.
+Clay Mathematics Institute Millennium Problem description.
+
+\bibitem{Kernel}
+A. J. Maley.
+\emph{Non-Degenerate Construction and the Kernel of Admissibility}.
+2026.
+
+\bibitem{UEAP}
+A. J. Maley.
+\emph{Claim Standing and Legitimacy}.
+2026.
+
+\bibitem{ATS}
+A. J. Maley.
+\emph{Anchor, Tensor, and Skin: A Fixed-Domain Decomposition Theorem for Admissible Description}.
+2026.
+
+\bibitem{Cook1971}
+S. A. Cook.
+The complexity of theorem-proving procedures.
+In \emph{Proceedings of the Third Annual ACM Symposium on Theory of Computing},
+pp. 151--158, 1971.
+
+\bibitem{Levin1973}
+L. A. Levin.
+Universal search problems.
+\emph{Problemy Peredachi Informatsii}, 9(3):115--116, 1973.
+English translation in \emph{Problems of Information Transmission}, 9(3):265--266, 1973.
+
+\bibitem{Karp1972}
+R. M. Karp.
+Reducibility among combinatorial problems.
+In R. E. Miller, J. W. Thatcher, and J. D. Bohlinger, editors,
+\emph{Complexity of Computer Computations},
+pp. 85--103. Plenum Press, 1972.
+
+\bibitem{AroraBarak}
+S. Arora and B. Barak.
+\emph{Computational Complexity: A Modern Approach}.
+Cambridge University Press, 2009.
+\end{thebibliography}
+
+\end{document}

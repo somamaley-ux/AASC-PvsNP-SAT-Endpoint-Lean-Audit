@@ -1,0 +1,3 @@
+import MaleyLean.Papers.BivalenceNonDegenerateReasoning.Verbatim.TheoremRegister
+import MaleyLean.Papers.BivalenceNonDegenerateReasoning.PaperStatements
+import MaleyLean.Papers.BivalenceNonDegenerateReasoning.Surface.Summary

@@ -1,0 +1,13 @@
+import MaleyLean.Papers.PvsNP.AuthenticClosureProgram
+
+open MaleyLean.Papers.PvsNP
+
+#print axioms CnfAuthenticSameScopeClosureLaw
+#print axioms cnfClosureSource_of_authenticLaw
+#print axioms cnfFixedQuotientReadoutDiagnostic_of_authenticLaw
+#print axioms cnfSourceReadoutPackage_of_authenticLaw
+#print axioms cnfPositiveEndpoint_of_authenticClosureLaw
+#print axioms cnfPositiveEndpoint_of_authenticClosureLaw_kernelScoped
+#print axioms cnfAuthenticClosureResidualTarget
+#print axioms cnfPositiveEndpoint_of_authenticClosureResidualTarget
+#print axioms cnfPositiveEndpoint_of_authenticClosureResidualTarget_kernelScoped

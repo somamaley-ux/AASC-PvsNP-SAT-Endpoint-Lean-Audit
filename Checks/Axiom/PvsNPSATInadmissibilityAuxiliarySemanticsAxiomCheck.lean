@@ -1,0 +1,8 @@
+import MaleyLean.Papers.PvsNP.SATInadmissibilityAuxiliarySemantics
+
+open MaleyLean.Papers.PvsNP
+
+#print axioms CnfSATInadmissibilityAuxiliaryStructuralSemantics
+#print axioms cnfSATInadmissibilityAuxiliaryStructuralSemantics_holds
+#print axioms cnfSATInadmissibilityAuxiliarySemantics
+#print axioms cnfSATInadmissibilityAuxiliarySemanticsResidualTarget_holds

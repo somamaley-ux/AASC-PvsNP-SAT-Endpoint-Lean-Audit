@@ -1,0 +1,21 @@
+import MaleyLean.Papers.PvsNP.EndpointAssembly
+
+open MaleyLean.Papers.PvsNP
+
+#print axioms CnfEndpointClosurePackage
+#print axioms cnfRemainingMachineTarget_of_endpointPackage
+#print axioms cnfNoSatInPolyTime_of_endpointPackage
+#print axioms cnfNoGate_of_endpointPackage
+#print axioms CnfEndpointAnticheckerPackage
+#print axioms cnfRemainingMachineTarget_of_endpointAnticheckerPackage
+#print axioms cnfNoSatInPolyTime_of_endpointAnticheckerPackage
+#print axioms cnfNoGate_of_endpointAnticheckerPackage
+#print axioms CnfEndpointShadowedAnticheckerPackage
+#print axioms cnfRemainingMachineTarget_of_endpointShadowedAnticheckerPackage
+#print axioms cnfNoSatInPolyTime_of_endpointShadowedAnticheckerPackage
+#print axioms cnfNoGate_of_endpointShadowedAnticheckerPackage
+#print axioms cnfEndpointMachineResidualInputCount
+#print axioms cnfEndpointMachineResidualInputCount_eq
+#print axioms CnfEndpointAssemblyCertificate
+#print axioms cnfEndpointAssemblyCertificate
+#print axioms CnfEndpointAssemblyCertificate.auditComplete_holds

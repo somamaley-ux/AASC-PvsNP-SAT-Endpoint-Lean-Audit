@@ -1,0 +1,14 @@
+import MaleyLean.Papers.PvsNP.ProfiledClosureProgram
+
+open MaleyLean.Papers.PvsNP
+
+#print axioms CnfFixedQuotientReadoutProfile
+#print axioms cnfPositiveEndpoint_of_fixedQuotientReadoutProfile
+#print axioms CnfCentralBoundaryTraceProfile
+#print axioms CnfProfiledSameScopeClosureLaw
+#print axioms cnfAuthenticClosureLaw_of_profiledLaw
+#print axioms cnfPositiveEndpoint_of_profiledClosureLaw
+#print axioms cnfPositiveEndpoint_of_profiledClosureLaw_kernelScoped
+#print axioms cnfProfiledClosureResidualTarget
+#print axioms cnfPositiveEndpoint_of_profiledClosureResidualTarget
+#print axioms cnfPositiveEndpoint_of_profiledClosureResidualTarget_kernelScoped

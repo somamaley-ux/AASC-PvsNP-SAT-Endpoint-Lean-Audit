@@ -1,0 +1,14 @@
+import MaleyLean.Papers.PvsNP.CNFArcSourceSupport
+
+open MaleyLean.Papers.PvsNP
+
+#print axioms CnfArcSourceDocument
+#print axioms CnfArcSource
+#print axioms cnfArcSourceDocuments
+#print axioms cnfArcSourceDocumentCount_eq
+#print axioms cnfArcSourceDocumentsPopulatedBool_eq_true
+#print axioms CnfArcBridgeSupportFact
+#print axioms cnfArcBridgeSupportFactCount_eq
+#print axioms cnfArcBridgeSupportFactLabelsPopulatedBool_eq_true
+#print axioms CnfArcNoLaunderingSourceSupport
+#print axioms cnfArcNoLaunderingSourceSupport_holds

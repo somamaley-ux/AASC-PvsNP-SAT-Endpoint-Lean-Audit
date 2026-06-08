@@ -1,0 +1,5 @@
+*.lean text eol=lf
+*.toml text eol=lf
+*.md text eol=lf
+*.ps1 text eol=crlf
+*.tex text eol=lf

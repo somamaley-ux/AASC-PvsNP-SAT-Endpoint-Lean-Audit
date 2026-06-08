@@ -1,0 +1,11 @@
+import MaleyLean.Papers.PvsNP.HorizonAnalogy
+
+open MaleyLean.Papers.PvsNP
+
+#print axioms CnfEndpointAnchorTransport
+#print axioms CnfShadowHorizon
+#print axioms CnfShadowStandingSink
+#print axioms CnfNoPermanentShadowHorizon
+#print axioms cnfEndpointAnchorTransport_of_shadowedAntichecker
+#print axioms cnfNoPermanentShadowHorizon_of_shadowedAntichecker
+#print axioms cnfAmetricBoundary_with_noPermanentShadowHorizon

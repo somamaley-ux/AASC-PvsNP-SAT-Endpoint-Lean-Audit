@@ -1,0 +1,14 @@
+import MaleyLean.Papers.PvsNP.CentralTraceIndependenceBridge
+
+open MaleyLean.Papers.PvsNP
+
+#print axioms cnfClassifierIndependentSameDomain_of_centralBoundaryTrace
+#print axioms CnfClassifierClosureDischargedByCentralTracePackage
+#print axioms CnfClassifierClosureSourceReadoutPackage
+#print axioms cnfCentralTracePackage_of_sourceReadoutPackage
+#print axioms cnfReadoutPackage_of_centralTracePackage
+#print axioms cnfSeparatingClassifierIndependent_of_centralTracePackage
+#print axioms cnfPositiveEndpoint_of_centralTracePackage
+#print axioms cnfPositiveEndpoint_of_centralTracePackage_kernelScoped
+#print axioms cnfPositiveEndpoint_of_sourceReadoutPackage
+#print axioms cnfPositiveEndpoint_of_sourceReadoutPackage_kernelScoped

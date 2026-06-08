@@ -1,0 +1,14 @@
+import MaleyLean.Papers.PvsNP.SeparatorImportBoundary
+
+open MaleyLean.Papers.PvsNP
+
+#print axioms CnfBoundarySelectorImported
+#print axioms CnfBoundaryCrossingAttempt
+#print axioms noCnfBoundaryCrossingAttempt_of_ametricBoundary
+#print axioms cnfBoundarySelectorImported_iff_boundaryCrossingAttempt
+#print axioms CnfSameDomainSeparatorWouldImportSelector
+#print axioms noCnfSameDomainSeparator_of_ametricBoundary_and_import
+#print axioms cnfPositiveEndpoint_of_ametricBoundary_and_separatorImport
+#print axioms cnfPositiveEndpoint_of_bivalentBoundary_and_separatorImport
+#print axioms CnfPositiveEndpointCollapsePackage
+#print axioms cnfPositiveEndpoint_of_collapsePackage

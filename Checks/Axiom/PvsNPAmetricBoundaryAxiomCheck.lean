@@ -1,0 +1,16 @@
+import MaleyLean.Papers.PvsNP.AmetricBoundary
+
+open MaleyLean.Papers.PvsNP
+
+#print axioms CnfAmetricBoundary
+#print axioms CnfBoundaryBivalence
+#print axioms CnfAmetricBoundaryInterface
+#print axioms CnfAmetricBivalentBoundaryInterface
+#print axioms cnfAmetricBoundary_preserved_by_shadow
+#print axioms CnfAmetricBoundaryInterface.ofAPlusCertificate
+#print axioms CnfAmetricBivalentBoundaryInterface.ofAPlusCertificate
+#print axioms cnfAmetricBivalentBoundaryInterface_nonempty_of_aPlusCertificate
+#print axioms cnfBivalence_of_ametricBoundary
+#print axioms cnfAmetricBoundary_of_bivalentBoundary
+#print axioms cnfAmetricCounterexampleLowerBound_of_shadowedAntichecker
+#print axioms noCnfMachineTarget_at_ametricBoundary

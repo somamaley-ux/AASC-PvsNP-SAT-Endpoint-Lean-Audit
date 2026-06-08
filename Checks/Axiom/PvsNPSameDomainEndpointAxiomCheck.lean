@@ -1,0 +1,16 @@
+import MaleyLean.Papers.PvsNP.SameDomainEndpoint
+
+open MaleyLean.Papers.PvsNP
+
+#print axioms CnfSameDomainSeparator
+#print axioms CnfPositiveEndpoint
+#print axioms CnfSameDomainEndpointImage
+#print axioms cnfSameDomainEndpointImage_classical
+#print axioms CnfDegenerateNegativeBranch
+#print axioms CnfDegenerateNegativeRealized
+#print axioms CnfNoDegenerateNegativeBranch
+#print axioms CnfNegativeEndpointDiagnostic
+#print axioms cnfEndpointAnchorTransport_of_sameDomainSeparator
+#print axioms cnfSameDomainSeparator_of_not_degenerate_negative
+#print axioms cnfEndpointAnchorTransport_of_live_negative_at_ametricBoundary
+#print axioms cnfPositiveEndpoint_of_no_separator_and_no_degenerate_negative

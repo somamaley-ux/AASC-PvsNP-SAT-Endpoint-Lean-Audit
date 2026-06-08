@@ -1,0 +1,13 @@
+import MaleyLean.Papers.PvsNP.SourceOperatorClosureBridge
+
+open MaleyLean.Papers.PvsNP
+
+#print axioms CnfSameScopeClassifierClosureSource
+#print axioms CnfClassifierClosureToIndependencePackage
+#print axioms cnfSeparatingClassifierIndependent_of_sourceClosure
+#print axioms cnfPositiveEndpoint_of_sourceClosurePackage
+#print axioms cnfPositiveEndpoint_of_sourceClosurePackage_kernelScoped
+#print axioms CnfPositiveEndpointSourceClosurePackage
+#print axioms CnfPositiveEndpointSourceClosurePackageKernelScoped
+#print axioms cnfPositiveEndpoint_of_positiveEndpointSourceClosurePackage
+#print axioms cnfPositiveEndpoint_of_positiveEndpointSourceClosurePackage_kernelScoped

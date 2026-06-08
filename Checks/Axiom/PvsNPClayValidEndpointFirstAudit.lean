@@ -1,0 +1,6 @@
+import MaleyLean.Papers.PvsNP.SATOperatorProofQueue
+
+open MaleyLean.Papers.PvsNP
+
+#print axioms cnfClayValidSATLowerBoundEndpointClosed_of_aPlus
+#print cnfClayValidSATLowerBoundEndpointClosed_of_aPlus

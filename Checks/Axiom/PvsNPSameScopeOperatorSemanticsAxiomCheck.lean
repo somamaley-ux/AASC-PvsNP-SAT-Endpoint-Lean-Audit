@@ -1,0 +1,14 @@
+import MaleyLean.Papers.PvsNP.SameScopeOperatorSemantics
+
+open MaleyLean.Papers.PvsNP
+
+#print axioms CnfSameScopeClassifierOperator
+#print axioms CnfSameScopeOperatorClassification
+#print axioms CnfSeparatingClassifierHasSameScopeOperator
+#print axioms CnfSameScopeOperatorClosureLaw
+#print axioms cnfProfiledClosureLaw_of_operatorClosureLaw
+#print axioms cnfPositiveEndpoint_of_operatorClosureLaw
+#print axioms cnfPositiveEndpoint_of_operatorClosureLaw_kernelScoped
+#print axioms cnfSameScopeOperatorClosureResidualTarget
+#print axioms cnfPositiveEndpoint_of_operatorClosureResidualTarget
+#print axioms cnfPositiveEndpoint_of_operatorClosureResidualTarget_kernelScoped

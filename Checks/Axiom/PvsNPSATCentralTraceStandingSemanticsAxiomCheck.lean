@@ -1,0 +1,8 @@
+import MaleyLean.Papers.PvsNP.SATCentralTraceStandingSemantics
+
+open MaleyLean.Papers.PvsNP
+
+#print axioms CnfCentralTraceStructuralStanding
+#print axioms cnfCentralTraceStructuralStanding_holds
+#print axioms cnfSATCentralTraceStandingSemantics
+#print axioms cnfSATCentralTraceStandingSemanticsResidualTarget_holds

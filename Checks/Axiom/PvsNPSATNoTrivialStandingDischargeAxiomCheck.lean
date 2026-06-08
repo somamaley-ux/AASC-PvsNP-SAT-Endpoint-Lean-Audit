@@ -1,0 +1,15 @@
+import MaleyLean.Papers.PvsNP.SATNoTrivialStandingDischarge
+
+open MaleyLean.Papers.PvsNP
+
+#print axioms CnfSATAllPlaceholderClassesSemanticallyCovered
+#print axioms CnfSATAllCanonicalPlaceholdersAudited
+#print axioms cnfSATAllPlaceholderClassesSemanticallyCovered_holds
+#print axioms cnfSATAllCanonicalPlaceholdersAudited_holds
+#print axioms cnfSATCanonicalPlaceholderFootprintClosed
+#print axioms cnfSATCanonicalPlaceholderFootprintClosed_holds
+#print axioms cnfSATPostStrengthenedInterfacePlaceholderOpenBool
+#print axioms cnfSATPostStrengthenedInterfacePlaceholderOpenBool_eq_false
+#print axioms cnfSATNoTrivialStandingDischarge
+#print axioms cnfSATNoTrivialStandingDischargeResidualTarget_holds
+#print axioms cnfSATStrengthenedOperatorInterfaceResidualTarget_holds

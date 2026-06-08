@@ -1,0 +1,10 @@
+import MaleyLean.Papers.PvsNP.SATRealizationStandingSemantics
+
+open MaleyLean.Papers.PvsNP
+
+#print axioms CnfSameScopeOperatorStructuralStanding
+#print axioms CnfRealizationProfileStructuralStanding
+#print axioms cnfSameScopeOperatorStructuralStanding_holds
+#print axioms cnfRealizationProfileStructuralStanding_holds
+#print axioms cnfSATRealizationStandingSemantics
+#print axioms cnfSATRealizationStandingSemanticsResidualTarget_holds

@@ -1,0 +1,14 @@
+import MaleyLean.Papers.PvsNP.FixedQuotientReadoutBridge
+
+open MaleyLean.Papers.PvsNP
+
+#print axioms cnfSameDomainSeparator_of_separatingClassifier
+#print axioms not_cnfPositiveEndpoint_of_sameDomainSeparator
+#print axioms not_cnfPositiveEndpoint_of_separatingClassifier
+#print axioms CnfFixedQuotientReadoutDiagnostic
+#print axioms cnfNoFixedQuotientSeparator_of_readoutDiagnostic
+#print axioms CnfClassifierClosureToIndependenceViaReadoutPackage
+#print axioms cnfClosureToIndependencePackage_of_readoutPackage
+#print axioms cnfSeparatingClassifierIndependent_of_readoutPackage
+#print axioms cnfPositiveEndpoint_of_readoutPackage
+#print axioms cnfPositiveEndpoint_of_readoutPackage_kernelScoped

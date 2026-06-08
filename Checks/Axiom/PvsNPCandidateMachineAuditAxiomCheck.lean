@@ -1,0 +1,19 @@
+import MaleyLean.Papers.PvsNP.CandidateMachineAudit
+
+open MaleyLean.Papers.PvsNP
+
+#print axioms CnfBooleanProcedure
+#print axioms CnfProcedureInPolyTime
+#print axioms CnfProcedureAgreesWithSAT
+#print axioms CnfProcedureFailsSAT
+#print axioms not_agreesWithSAT_of_failsSAT
+#print axioms satChar_agreesWithSAT
+#print axioms not_satChar_failsSAT
+#print axioms CnfCounterexampleLowerBound
+#print axioms noCnfSATInPolyTime_of_counterexampleLowerBound
+#print axioms cnfSATInPolyTime_of_agreeingProcedure
+#print axioms agreesWithSAT_of_not_failsSAT
+#print axioms counterexampleLowerBound_of_noCnfSATInPolyTime
+#print axioms counterexampleLowerBound_iff_noCnfSATInPolyTime
+#print axioms noCnfGate_of_noCnfSATInPolyTime
+#print axioms noCnfMachineTarget_of_counterexampleLowerBound

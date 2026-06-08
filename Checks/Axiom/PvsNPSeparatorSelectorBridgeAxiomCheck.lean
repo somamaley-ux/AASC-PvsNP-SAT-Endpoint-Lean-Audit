@@ -1,0 +1,13 @@
+import MaleyLean.Papers.PvsNP.SeparatorSelectorBridge
+
+open MaleyLean.Papers.PvsNP
+
+#print axioms CnfCandidateStatusClassifier
+#print axioms CnfClassifierSeparatesPolynomialCandidates
+#print axioms cnfClassifierOfSameDomainSeparator
+#print axioms cnfClassifierSeparates_of_sameDomainSeparator
+#print axioms CnfCandidateClassifierWouldImportSelector
+#print axioms cnfSeparatorWouldImportSelector_of_classifierImport
+#print axioms cnfPositiveEndpoint_of_classifierImport
+#print axioms CnfPositiveEndpointClassifierCollapsePackage
+#print axioms cnfPositiveEndpoint_of_classifierCollapsePackage
