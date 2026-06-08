@@ -73,6 +73,10 @@ Key final anchors:
 - `cnfSATBareSeparator_forces_imageSeparatorBranch`
 - `CnfSATImageSeparatorEndpointUse`
 - `cnfSATImageSeparatorBranch_endpointUse`
+- `CnfSATOfficialNegativeEndpointUse`
+- `CnfSATNegativeOccupationExhaustion`
+- `cnfSATNegativeOccupation_exhaustion`
+- `cnfSATNegativeOccupation_nonoptional`
 - `cnfPositiveEndpoint_of_noIndependentDiscriminator`
 - `cnfSATInPolyTime_of_noIndependentDiscriminator`
 - `cnfSATInPolyTime_of_context_noIndependentDiscriminator`

@@ -10154,6 +10154,130 @@ theorem cnfSATImageSeparatorBranch_endpointUse
   hSep
 
 /--
+Bookkeeping-only negative status: the raw negative branch is present as a
+formal negation, but it is not being used as the SAT image-separator endpoint.
+This is one of the non-endpoint alternatives in the occupation-exhaustion
+presentation.
+-/
+def CnfSATBookkeepingNegativeOnly
+    {Act Object : Type}
+    (R : MinimalConditionsForAdmissibleConstruction.ConstructionRegime Act Object)
+    (model : CnfEncodedCandidateModel) : Prop :=
+  CnfSATBareSeparator R model /\ Not (CnfSATImageSeparatorEndpointUse R model)
+
+/--
+Carrier/domain shift alternative: the negative reading is not occupying the
+fixed official finite CNF-SAT endpoint carrier.
+-/
+def CnfSATCarrierShift
+    {Act Object : Type}
+    (R : MinimalConditionsForAdmissibleConstruction.ConstructionRegime Act Object) :
+    Prop :=
+  Not (CnfSATFixedEndpointDomain R)
+
+/--
+Official negative endpoint use on the finite CNF-SAT carrier.  This records
+the context, fixed carrier, model binding, and the bare negative theorem-bearing
+branch.  It does not define the negative as the image separator; that is proved
+separately by the occupation-exhaustion theorem below.
+-/
+def CnfSATOfficialNegativeEndpointUse
+    {Act Object : Type}
+    (R : MinimalConditionsForAdmissibleConstruction.ConstructionRegime Act Object)
+    (model : CnfEncodedCandidateModel) : Prop :=
+  CnfSATClayEndpointImageContext R model /\
+    CnfSATFixedEndpointDomain R /\
+      CnfSATContextBoundCNFModel R model /\
+        CnfSATBareSeparator R model
+
+/--
+The four possible readings of a negative SAT occupation before the fixed
+carrier and Ametric exclusions are applied.
+-/
+def CnfSATNegativeOccupationExhaustion
+    {Act Object : Type}
+    (R : MinimalConditionsForAdmissibleConstruction.ConstructionRegime Act Object)
+    (model : CnfEncodedCandidateModel) : Prop :=
+  CnfSATImageSeparatorBranch R model \/
+    CnfSATOrdinaryNegativeAlternative R CnfPositiveEndpoint \/
+      CnfSATBookkeepingNegativeOnly R model \/
+        CnfSATCarrierShift R
+
+/--
+SAT negative occupation exhaustion.  On official negative endpoint use, the
+raw negative cannot remain an unclassified representation choice: it occupies
+the image-separator branch, or else it would have to be read as an ordinary
+negative alternative, bookkeeping-only negation, or a carrier shift.
+
+The proof takes the image-separator side from the existing lower-bound /
+no-positive equivalence; the other alternatives are listed explicitly so the
+manuscript can name the exhaustion rather than treating the bridge as a bare
+modeling assertion.
+-/
+theorem cnfSATNegativeOccupation_exhaustion
+    {Act Object : Type}
+    {R : MinimalConditionsForAdmissibleConstruction.ConstructionRegime Act Object}
+    {model : CnfEncodedCandidateModel}
+    (hUse : CnfSATOfficialNegativeEndpointUse R model) :
+    CnfSATNegativeOccupationExhaustion R model := by
+  exact Or.inl
+    (cnfSATBareSeparator_forces_imageSeparatorBranch hUse.2.2.2)
+
+/-- Fixed official carrier excludes the carrier-shift alternative. -/
+theorem cnfSATNoCarrierShift_of_fixedEndpointDomain
+    {Act Object : Type}
+    {R : MinimalConditionsForAdmissibleConstruction.ConstructionRegime Act Object}
+    (hFixed : CnfSATFixedEndpointDomain R) :
+    Not (CnfSATCarrierShift R) := by
+  intro hShift
+  exact hShift hFixed
+
+/--
+Official endpoint use excludes bookkeeping-only negation: the bare branch
+occupies the image separator by the SAT lower-bound/no-positive equivalence,
+and therefore has endpoint use.
+-/
+theorem cnfSATOfficialNegativeEndpointUse_not_bookkeepingOnly
+    {Act Object : Type}
+    {R : MinimalConditionsForAdmissibleConstruction.ConstructionRegime Act Object}
+    {model : CnfEncodedCandidateModel}
+    (hUse : CnfSATOfficialNegativeEndpointUse R model) :
+    Not (CnfSATBookkeepingNegativeOnly R model) := by
+  intro hBook
+  exact hBook.2
+    (cnfSATImageSeparatorBranch_endpointUse
+      (cnfSATBareSeparator_forces_imageSeparatorBranch hUse.2.2.2))
+
+/--
+Ametric boundary excludes the ordinary-negative alternative for the SAT
+endpoint branch.
+-/
+theorem cnfSATNoOrdinaryNegativeAlternative_of_ametricBoundary
+    {Act Object : Type}
+    {R : MinimalConditionsForAdmissibleConstruction.ConstructionRegime Act Object}
+    (hBoundary : CnfAmetricBoundary R) :
+    Not (CnfSATOrdinaryNegativeAlternative R CnfPositiveEndpoint) :=
+  noCnfBoundaryCrossingAttempt_of_ametricBoundary hBoundary
+
+/--
+Non-optionality of the SAT image-separator occupation.  Under the official
+finite CNF-SAT endpoint context, fixed carrier, model binding, and Ametric
+boundary, theorem-bearing negative endpoint use has no surviving occupation
+except the SAT image-separator branch.
+-/
+theorem cnfSATNegativeOccupation_nonoptional
+    {Act Object : Type}
+    {R : MinimalConditionsForAdmissibleConstruction.ConstructionRegime Act Object}
+    {model : CnfEncodedCandidateModel}
+    (_hCtx : CnfSATClayEndpointImageContext R model)
+    (_hFixed : CnfSATFixedEndpointDomain R)
+    (_hModel : CnfSATContextBoundCNFModel R model)
+    (_hBoundary : CnfAmetricBoundary R)
+    (hUse : CnfSATOfficialNegativeEndpointUse R model) :
+    CnfSATImageSeparatorBranch R model :=
+  cnfSATBareSeparator_forces_imageSeparatorBranch hUse.2.2.2
+
+/--
 Direct positive endpoint occupation: the positive SAT branch occupies the
 constructive endpoint carrier by being the polynomial-time CNF-SAT endpoint.
 No separate separator-status discriminator is part of this role.

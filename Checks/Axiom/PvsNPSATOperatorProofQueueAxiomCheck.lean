@@ -790,6 +790,15 @@ open MaleyLean.Papers.PvsNP
 #print axioms CnfSATBelowKernelDemand
 #print axioms CnfSATImageSeparatorEndpointUse
 #print axioms cnfSATImageSeparatorBranch_endpointUse
+#print axioms CnfSATBookkeepingNegativeOnly
+#print axioms CnfSATCarrierShift
+#print axioms CnfSATOfficialNegativeEndpointUse
+#print axioms CnfSATNegativeOccupationExhaustion
+#print axioms cnfSATNegativeOccupation_exhaustion
+#print axioms cnfSATNoCarrierShift_of_fixedEndpointDomain
+#print axioms cnfSATOfficialNegativeEndpointUse_not_bookkeepingOnly
+#print axioms cnfSATNoOrdinaryNegativeAlternative_of_ametricBoundary
+#print axioms cnfSATNegativeOccupation_nonoptional
 #print axioms CnfSATDirectPositiveEndpointOccupation
 #print axioms CnfSATIndependentSeparatorEndpointStatusDiscriminator
 #print axioms cnfPositiveEndpoint_directEndpointOccupation

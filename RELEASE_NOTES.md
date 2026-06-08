@@ -10,6 +10,9 @@ Included:
 - P vs NP SAT endpoint Lean files under `MaleyLean/Papers/PvsNP`.
 - The AASC support import spine required by the SAT route.
 - Focused P vs NP SAT endpoint axiom checks under `Checks/Axiom`.
+- SAT negative occupation-exhaustion anchors, including
+  `cnfSATNegativeOccupation_exhaustion` and
+  `cnfSATNegativeOccupation_nonoptional`.
 - Audit runner: `scripts/check-pvsnp-sat-operator-bridge-audit.ps1`.
 - Manuscript-facing PDF/source and ledger artifacts when available from the
   workspace.
