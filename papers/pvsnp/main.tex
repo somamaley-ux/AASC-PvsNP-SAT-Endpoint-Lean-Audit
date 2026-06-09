@@ -112,9 +112,27 @@
 \newcommand{\SepDisc}{\mathcal{D}_{\mathsf{sep}}}
 \newcommand{\NoSepDisc}{\mathcal{N}_{\mathsf{sep}}}
 \newcommand{\ModelOfCnf}{\mathsf{Model}_{\mathsf{CNF}}}
+\newcommand{\ModelAdeq}{\mathsf{Adeq}_{\mathsf{CNF}}}
+\newcommand{\ModelCoverage}{\mathsf{Coverage}_{\mathsf{CNF}}}
+\newcommand{\ModelSound}{\mathsf{Sound}_{\mathsf{CNF}}}
+\newcommand{\FailureAdeq}{\mathsf{FailAdeq}_{\mathsf{CNF}}}
+\newcommand{\ImageExact}{\mathsf{ImageExact}_{\mathsf{CNF}}}
+\newcommand{\PolyCand}{\mathsf{PolyCand}}
+\newcommand{\FailsSAT}{\mathsf{FailsSAT}}
+\newcommand{\Decode}{\mathsf{decode}}
+\newcommand{\CnfModel}{\mathsf{CnfEncodedCandidateModel}}
 \newcommand{\SepRel}{\mathsf{SepRel}}
 \newcommand{\CandStatusClass}{\mathsf{CandCls}}
 \newcommand{\PolyCandSep}{\mathsf{PolySep}}
+\newcommand{\StdLB}{\mathsf{StdLB}}
+\newcommand{\CandImageExcl}{\mathsf{CandImageExcl}}
+\newcommand{\ThmLevelDisc}{\mathsf{ThmLevelDisc}}
+\newcommand{\CandImageGov}{\mathsf{CandImageGov}}
+\newcommand{\CandidateUseKind}{\mathsf{CandImageUseKind}}
+\newcommand{\ProofSupportOnly}{\mathsf{ProofSupportOnly}}
+\newcommand{\EndResolvingNegThm}{\mathsf{EndpointResolvingNegThm}}
+\newcommand{\EndResolvingNonGov}{\mathsf{EndpointResolvingNonGov}}
+\newcommand{\CarrierChangingLB}{\mathsf{CarrierChangingLB}}
 \newcommand{\SameDomClass}{\mathsf{SameDomCls}}
 \newcommand{\NonBookSep}{\mathsf{NonBook}}
 \newcommand{\NonGovEqSep}{\mathsf{NonGovEq}}
@@ -266,59 +284,124 @@ Throughout this manuscript, ``bounded-CNF'' means the ordinary finitely encoded 
   \CnfSATP
 \]
 is the assertion that arbitrary finite CNF-SAT is decidable by a deterministic polynomial-time machine.
+
 \end{definition}
 
-\begin{definition}[Encoded candidate model adequacy for unrestricted finite CNF-SAT]\label{def:encoded-candidate-model-adequacy}
-The predicate \(\ModelOfCnf(model,R)\) uses an encoded candidate model only as ordinary complexity-theoretic bookkeeping for deterministic polynomial-time CNF-SAT candidates.  Its intended adequacy packet has the following components:
+\subsection{Encoded candidate model adequacy}\label{subsec:encoded-candidate-model-adequacy}
+
+This subsection fixes the ordinary coding burden for the unrestricted finite CNF-SAT carrier. The encoded candidate model is not an AASC source of standing, not a separator, and not a hidden proof device. It is the standard effective presentation of deterministic polynomial-time CNF-SAT candidates used to state the positive endpoint and its raw complement. Its role is to make explicit that the later branch proof quantifies over the full official candidate image.
+
+\begin{definition}[Context-bound encoded CNF model]\label{def:cnf-model-of-context}
+\[
+  \ModelOfCnf(model,R)
+\]
+means that \(model\) is the encoded CNF-SAT endpoint model associated with the fixed SAT context \(R\): the carrier is arbitrary finite CNF over finite Boolean alphabets, the input measure is formula length, admissible encodings preserve the same endpoint-image carrier, and the encoded candidate image satisfies the adequacy packet below. The corresponding Lean structure is \LeanName{CnfEncodedCandidateModel}; the adequacy packet is \LeanName{CnfEncodedCandidateModelAdequate}.
+\end{definition}
+
+\begin{definition}[Encoded candidate model adequacy]\label{def:encoded-candidate-model-adequacy}
+For a context-bound encoded CNF model, \(\ModelAdeq(model)\) is the conjunction of four ordinary coding conditions:
+\[
+\begin{aligned}
+  \ModelAdeq(model) := {}& \ModelCoverage(model)\wedge\ModelSound(model)\\
+  &{}\wedge\FailureAdeq(model)\wedge\ImageExact(model).
+\end{aligned}
+\]
+Here:
 \begin{enumerate}[label=(\roman*)]
-\item \emph{Coverage}: every deterministic polynomial-time CNF-SAT candidate procedure has a code \(c\) with \(model.codeInPolyTime(c)\) and \(model.decode(c)\) extensionally equal to that procedure.
-\item \emph{Sound decoding}: every code marked \(model.codeInPolyTime(c)\) decodes to a deterministic polynomial-time CNF-SAT candidate.
-\item \emph{Failure adequacy}: \(CnfProcedureFailsSAT(model.decode(c))\) is ordinary failure to decide arbitrary finite CNF-SAT correctly, witnessed by a finite CNF formula on which the decoded procedure disagrees with the SAT characteristic function.
-\item \emph{Extensional invariance}: equal decoded procedures have the same failure status, so endpoint-relevant status is not an artifact of which code names the procedure.
-\item \emph{No restriction}: the carrier remains arbitrary finite CNF-SAT, not \(k\)-SAT, bounded-size SAT, promise SAT, heuristic solver SAT, nonuniform circuit SAT, finite-test SAT, or any parameterized tractable fragment.
-\item \emph{No extra governance}: the encoding layer does not introduce a selector, classifier, AASC endpoint status, or separator authority.  It only presents the ordinary polynomial-time candidate image.
+\item \(\ModelCoverage(model)\) says every deterministic polynomial-time CNF-SAT candidate procedure has a code in the model;
+\item \(\ModelSound(model)\) says every code marked polynomial-time decodes to a deterministic polynomial-time CNF-SAT candidate procedure;
+\item \(\FailureAdeq(model)\) says SAT-failure status is invariant under equal decoded procedures, so no encoding artifact changes endpoint status;
+\item \(\ImageExact(model)\) says the positive endpoint \(\CnfSATP\) is equivalent to the existence of an encoded polynomial-time candidate whose decoded procedure has no SAT failure.
 \end{enumerate}
+These clauses are formalized by \LeanName{CnfSATCandidateModelCoverage}, \LeanName{CnfSATCandidateModelSoundness}, \LeanName{CnfSATCandidateFailureAdequacy}, \LeanName{CnfSATCandidateImageExactness}, and \LeanName{CnfEncodedCandidateModelAdequate} in \LeanName{AnticheckerReduction.lean}.
 \end{definition}
 
-\begin{theorem}[Encoded candidate image exactness]\label{thm:encoded-candidate-image-exactness}
-For an adequate encoded CNF-SAT candidate model,
+
+\begin{definition}[Standard encoded polynomial-time SAT model]\label{def:standard-encoded-cnf-model}
+The standard encoded polynomial-time CNF-SAT model is the ordinary uniform machine model whose codes are pairs
 \[
-  \CnfSATP
-  \Longleftrightarrow
-  \exists c\,
-  \bigl(model.codeInPolyTime(c)\wedge
-  \neg CnfProcedureFailsSAT(model.decode(c))\bigr),
+  (e,k),
 \]
-and therefore
+where \(e\) is an effective code for a deterministic Boolean procedure on finite CNF inputs and \(k\in\mathbb{N}\) is a declared global polynomial-time bound. A code is marked polynomial-time exactly when the decoded procedure is licensed as a uniform deterministic candidate running within its declared polynomial bound on every finite CNF input. The same decoded procedure handles all finite CNF inputs; no advice strings, promise restrictions, fixed-size test sets, nonuniform circuit families, or per-length classifiers are part of this model.
+\end{definition}
+
+\begin{proposition}[Standard model instantiation]\label{prop:standard-model-instantiation}
+The standard encoded polynomial-time CNF-SAT model of Definition~\ref{def:standard-encoded-cnf-model} instantiates the adequacy packet of Definition~\ref{def:encoded-candidate-model-adequacy}. In particular, it satisfies coverage, soundness, failure adequacy, and candidate-image exactness for the unrestricted finite CNF-SAT carrier.
+\end{proposition}
+
+\begin{proof}
+Deterministic procedures over finite binary strings, and hence deterministic procedures over finite CNF encodings, admit ordinary effective descriptions. Pairing such a description with a declared global polynomial bound gives the standard candidate code. Coverage follows because every uniform deterministic polynomial-time CNF-SAT decider has some effective description and some polynomial exponent or bound. Soundness follows because a code marked polynomial-time is admitted only when the decoded procedure runs within the declared global polynomial bound on every finite CNF input. Failure adequacy follows because SAT failure is a property of the decoded procedure on lawful finite CNF inputs, not a property of the presentation of its code. Candidate-image exactness follows because \(\CnfSATP\) is precisely the existence of a uniform deterministic polynomial-time procedure deciding arbitrary finite CNF-SAT correctly on all finite CNF inputs. Therefore the standard encoded model supplies the same candidate image as the ordinary definition of \(\Pclass\)-time CNF-SAT decidability.
+\end{proof}
+
+\begin{definition}[SAT-failure predicate and uniformity convention]\label{def:sat-failure-uniformity}
+For an encoded polynomial-time candidate, \(\FailsSAT_{model}(\Decode_{model}(c))\) means that there exists a lawful finite CNF formula \(\varphi\) such that the decoded uniform deterministic procedure either returns the wrong Boolean value relative to \(SAT(\varphi)\), fails to return a lawful Boolean answer on the encoded input, or fails to meet the declared global polynomial-time bound on that input. The predicate is evaluated over arbitrary finite CNF instances, not over a promise subset, a fixed-width fragment, a bounded-size table, a finite benchmark set, or a nonuniform family.
+\end{definition}
+
+\begin{remark}[Duplicate encodings and extensional harmlessness]\label{rem:duplicate-encodings}
+The model does not require a unique code for each extensional procedure. Multiple presentations may decode to the same candidate, or to extensionally equivalent candidates on all finite CNF inputs. Duplicate encodings do no endpoint work: endpoint status is read from the decoded procedure and the SAT-failure predicate. The formal Lean adequacy clause records invariance under equal decoded procedures; strengthening this to full extensional equivalence would leave the branch route unchanged, because the proof uses coverage, soundness, and candidate-image exactness rather than uniqueness of code representatives.
+\end{remark}
+
+\begin{theorem}[Context-bound model adequacy]\label{thm:context-bound-model-adequacy}
+For any context-bound encoded CNF-SAT endpoint model,
 \[
-  \neg\CnfSATP
-  \Longleftrightarrow
-  \forall c\,
-  \bigl(model.codeInPolyTime(c)\Rightarrow
-  CnfProcedureFailsSAT(model.decode(c))\bigr).
+  \ModelOfCnf(model,R)\Rightarrow \ModelAdeq(model).
 \]
-The corresponding Lean anchors are
-\LeanName{CnfEncodedCandidateModelAdequate},
-\LeanName{cnfSATInPolyTime_iff_exists_encoded_nonfailing_candidate}, and
-\LeanName{cnfSATNotInPolyTime_iff_all_encoded_candidates_fail}.
 \end{theorem}
 
 \begin{proof}
-The forward positive direction encodes the ordinary deterministic polynomial-time SAT procedure supplied by \(\CnfSATP\).  The backward positive direction decodes an encoded polynomial-time candidate and uses absence of a SAT-failure witness to obtain agreement with SAT on every finite CNF formula.  The negative equivalence is the contrapositive lower-bound form over the same encoded candidate image: failure of \(\CnfSATP\) means every encoded polynomial-time candidate fails SAT, and if every encoded polynomial-time candidate fails, then no polynomial-time SAT decider exists.  This is coding hygiene for the standard candidate space, not AASC proof machinery.
+By Definition~\ref{def:cnf-model-of-context}, \(\ModelOfCnf(model,R)\) fixes the ordinary effective presentation of deterministic polynomial-time CNF-SAT candidate procedures on the unrestricted finite CNF carrier. That presentation includes coverage, sound decoding, failure adequacy, and exactness of the encoded positive endpoint image. In Lean these clauses are assembled by \LeanName{cnfEncodedCandidateModelAdequate} from the model fields and the endpoint exactness theorem.
 \end{proof}
 
-\begin{remark}[Model-adequacy objection burden]\label{rem:model-adequacy-objection-burden}
-A model-adequacy objection has standing only if it identifies a deterministic polynomial-time CNF-SAT candidate not represented by the encoded candidate image, an encoded polynomial-time code whose decoding is not a lawful deterministic polynomial-time CNF-SAT candidate, or a mismatch between \(CnfProcedureFailsSAT\) and ordinary failure to decide arbitrary finite CNF-SAT.  Merely objecting that the proof uses an encoded model does not meet the burden, since every standard presentation of \(P\) quantifies over effective descriptions of deterministic machines together with polynomial-time bounds.
-\end{remark}
+\begin{theorem}[Encoded positive endpoint exactness]\label{thm:encoded-positive-endpoint-exactness}
+On a context-bound adequate encoded CNF-SAT model,
+\[
+\begin{aligned}
+  \ModelOfCnf(model,R)\Rightarrow{}&
+  \Bigl(\CnfSATP \leftrightarrow
+    \exists c\,\bigl(\PolyCand_{model}(c)\wedge{}\\
+  &\qquad\neg\FailsSAT_{model}(\Decode_{model}(c))\bigr)\Bigr).
+\end{aligned}
+\]
+The Lean anchor is \LeanName{cnfSATInPolyTime_iff_exists_encoded_nonfailing_candidate}.
+\end{theorem}
+
+\begin{proof}
+The forward direction is the coverage clause applied to a deterministic polynomial-time CNF-SAT decider for the unrestricted carrier: such a candidate has a code marked polynomial-time, and because it decides SAT correctly it has no SAT failure. The reverse direction is soundness plus failure adequacy: if an encoded polynomial-time candidate has no SAT failure, the decoded candidate is a deterministic polynomial-time procedure deciding arbitrary finite CNF-SAT. This is exactly \(\CnfSATP\). The Lean theorem records this equivalence over \LeanName{CnfEncodedCandidateModel}.
+\end{proof}
+
+\begin{theorem}[Encoded negative endpoint exactness]\label{thm:encoded-negative-endpoint-exactness}
+On a context-bound adequate encoded CNF-SAT model,
+\[
+\begin{aligned}
+  \ModelOfCnf(model,R)\Rightarrow{}&
+  \Bigl(\neg\CnfSATP \leftrightarrow
+    \forall c\,\bigl(\PolyCand_{model}(c)\Rightarrow{}\\
+  &\qquad \FailsSAT_{model}(\Decode_{model}(c))\bigr)\Bigr).
+\end{aligned}
+\]
+The Lean anchor is \LeanName{cnfSATNotInPolyTime_iff_all_encoded_candidates_fail}.
+\end{theorem}
+
+\begin{proof}
+Negating Theorem~\ref{thm:encoded-positive-endpoint-exactness} gives the standard lower-bound normal form on the exact encoded candidate image: if there is no deterministic polynomial-time CNF-SAT decider, then every encoded polynomial-time candidate fails SAT; conversely, if every encoded polynomial-time candidate fails, no encoded non-failing polynomial-time candidate exists, and by coverage no unencoded deterministic polynomial-time decider has been missed. This is the formal equivalence proved in \LeanName{cnfSATNotInPolyTime_iff_all_encoded_candidates_fail}.
+\end{proof}
+
+\begin{proposition}[Standing burden for model-adequacy objections]\label{prop:model-adequacy-objection-burden}
+A model-adequacy objection has standing only if it identifies a failure of standard-model instantiation, coverage, soundness, failure adequacy, or image exactness. Equivalently, the objector must exhibit a deterministic polynomial-time CNF-SAT candidate lost by the encoded image, an encoded candidate admitted despite not being a lawful uniform polynomial-time candidate, an encoding artifact that changes SAT-failure status, a mismatch between \(\FailsSAT\) and ordinary failure to decide arbitrary finite CNF-SAT, or a mismatch between \(\CnfSATP\) and the existence of an encoded non-failing polynomial-time candidate. Merely objecting that the proof uses an encoded candidate model does not meet the burden.
+\end{proposition}
+
+\begin{proof}
+Every standard formulation of \(\Pclass\) quantifies over effective descriptions of uniform deterministic procedures together with polynomial-time bounds. The standard encoded model of Definition~\ref{def:standard-encoded-cnf-model} makes that ordinary candidate image explicit. If standard-model instantiation, coverage, soundness, failure adequacy, and image exactness are preserved, the encoded image is neither smaller nor larger than the deterministic polynomial-time CNF-SAT candidate space relevant to \(\CnfSATP\). Therefore a standing objection must identify a concrete defect in one of those clauses rather than treat encoding itself as a defect.
+\end{proof}
 
 \subsection{Raw bivalence is bare-level bivalence}
 Raw bivalence is stated at the bare layer:
 \[
   \PosRaw\vee\SepBare.
 \]
-The final proof does not infer reportability from the raw disjunction. It uses the SAT-local lower-bound/no-positive bridge
+The final proof does not infer reportability from the raw disjunction. It uses the context-bound model adequacy packet of Subsection~\ref{subsec:encoded-candidate-model-adequacy} and the SAT-local lower-bound/no-positive bridge
 \[
-  \SepBare\Rightarrow\SepImg
+  \SepBare\Rightarrow\StdLB(model)\Rightarrow\CandImageExcl(model)\Rightarrow\SepImg
 \]
 to move the raw negative branch directly into the SAT image-separator branch. No reportability theorem is used in the bare-branch exclusion. Report acts reappear only after the positive endpoint has been derived.
 
@@ -1299,14 +1382,6 @@ On any context-bound CNF-SAT endpoint model,
 \begin{proof}
 By Theorem~\ref{thm:bare-complement}, \(\SepBare\leftrightarrow\neg\PosRaw\). By Theorem~\ref{thm:raw-positive-formal-positive}, \(\PosRaw\leftrightarrow\CnfPositiveEndpoint\) on the context-bound CNF model. Hence \(\SepBare\) gives \(\neg\CnfPositiveEndpoint\), which is exactly \(\CnfBareNeg(R,model)\) in the formal SAT operator notation.
 \end{proof}
-
-\begin{definition}[Context-bound CNF model]\label{def:cnf-model-of-context}
-\[
-  \ModelOfCnf(model,R)
-\]
-means that \(model\) is the encoded CNF-SAT endpoint model associated with the fixed SAT context \(R\): the carrier is arbitrary finite CNF over finite Boolean alphabets, the input measure is formula length, and admissible encodings preserve the same endpoint-image carrier.
-\end{definition}
-
 \begin{theorem}[Canonical CNF model binding is instantiated, not arbitrary]\label{thm:canonical-cnf-model-binding}
 The fixed SAT context supplies its own canonical encoded CNF model, denoted \(m_{\mathsf{SAT}}\), rather than making an arbitrary \(model\) context-bound:
 \[
@@ -1316,33 +1391,168 @@ All branch-local theorems below keep \(\ModelOfCnf(model,R)\) as an explicit pre
 \end{theorem}
 
 \begin{proof}
-The CNF model is fixed by the official SAT endpoint carrier: arbitrary finite CNF instances over finite Boolean alphabets, evaluated by formula size, with admissible encodings preserving the same endpoint-image carrier. This determines the canonical context-bound model for \(\RSATctx\). It does not license the stronger and false reading that every arbitrary \(model\) is context-bound.
+The CNF model is fixed by the official SAT endpoint carrier: arbitrary finite CNF instances over finite Boolean alphabets, evaluated by formula size, with admissible encodings preserving the same endpoint-image carrier. By Definition~\ref{def:cnf-model-of-context}, context binding includes the model-adequacy packet of Subsection~\ref{subsec:encoded-candidate-model-adequacy}: coverage, soundness, failure adequacy, and image exactness. This determines the canonical context-bound model for \(\RSATctx\). It does not license the stronger and false reading that every arbitrary \(model\) is context-bound.
+\end{proof}
+
+
+\subsection{SAT-native lower-bound normal form and endpoint-status governance}\label{subsec:sat-native-lower-bound-governance}
+
+The remaining SAT-local burden is to make the raw negative branch visible in ordinary lower-bound language before the endpoint-status exclusion theorem is applied. The point of this subsection is not to import Cook--Levin/Karp machinery and not to add a new source of AASC standing. It records the SAT-native bridge formalized across \LeanName{AnticheckerReduction.lean} and \LeanName{SATOperatorProofQueue.lean}: the context-bound candidate model is adequate for ordinary deterministic polynomial-time CNF-SAT candidates; the raw negative branch is standard lower-bound normal form over that exact encoded candidate image; that normal form is candidate endpoint-image exclusion; candidate endpoint-image exclusion supplies theorem-level endpoint-status discrimination; and an endpoint-resolving negative use of that exclusion is endpoint-status governance, not a harmless proof-support observation.
+
+\begin{definition}[Standard SAT lower-bound normal form]\label{def:standard-lower-bound-normal-form}
+For a context-bound encoded CNF-SAT candidate model, \(\StdLB(model)\) denotes the standard lower-bound normal form:
+\[
+  \forall c\,\bigl(\mathsf{PolyCand}_{model}(c)\Rightarrow\mathsf{FailsSAT}_{model}(c)\bigr).
+\]
+Here \(c\) ranges over encoded deterministic polynomial-time candidate SAT procedures, \(\mathsf{PolyCand}_{model}(c)\) says that the code is polynomial-time in the fixed encoded CNF model, and \(\mathsf{FailsSAT}_{model}(c)\) says that the decoded procedure fails to decide arbitrary finite CNF-SAT on that carrier. The corresponding Lean predicate is \LeanName{CnfSATStandardLowerBoundNormalForm}.
+\end{definition}
+
+\begin{definition}[Candidate endpoint-image exclusion]\label{def:candidate-endpoint-image-exclusion}
+\(\CandImageExcl(model)\) denotes universal exclusion of every encoded polynomial-time candidate from occupying the positive SAT endpoint image. In Lean this is \LeanName{CnfSATCandidateEndpointImageExclusion}. It is a theorem-level statement about the fixed encoded candidate image; it is not the assertion that a practical witness selector or uniform failing-instance generator has been constructed.
+\end{definition}
+
+\begin{definition}[Theorem-level endpoint-status discriminator]\label{def:theorem-level-endpoint-status-discriminator}
+\(\ThmLevelDisc(model)\) denotes the theorem-level discriminator induced by candidate endpoint-image exclusion: the global status assignment under which each encoded polynomial-time candidate is classified as a non-occupant of the positive CNF-SAT endpoint image. The corresponding Lean predicate is \LeanName{CnfSATTheoremLevelEndpointStatusDiscriminator}. This is not an algorithmic separator and not witness selection; it is endpoint-status classification at theorem level.
+\end{definition}
+
+\begin{theorem}[Bare negative branch has standard lower-bound normal form]\label{thm:bare-negative-standard-lower-bound-form}
+On the fixed context-bound CNF-SAT endpoint carrier,
+\[
+  \ClayCtx\wedge\FixedDom(R)\wedge\ModelOfCnf(model,R)\wedge\SepBare
+  \Rightarrow \StdLB(model).
+\]
+The audited Lean anchor is \LeanName{cnfSATBareNegativeBranch_standardLowerBoundNormalForm}.
+\end{theorem}
+
+\begin{proof}
+By Corollary~\ref{cor:bare-negative-formal}, \(\SepBare\) gives the formal bare negative branch:
+\[
+  \CnfBareNeg(R,model).
+\]
+This is the negation of the positive CNF-SAT endpoint on the context-bound encoded model. In ordinary machine-language form, it is precisely the universal lower-bound normal form: every encoded deterministic polynomial-time candidate fails to occupy the positive SAT endpoint. The cited Lean anchor records the same route from the formal bare negative branch to standard lower-bound normal form.
+\end{proof}
+
+\begin{theorem}[Lower-bound normal form is candidate endpoint-image exclusion]\label{thm:standard-lower-bound-candidate-image-exclusion}
+On the fixed encoded CNF-SAT candidate image,
+\[
+  \StdLB(model)\Rightarrow \CandImageExcl(model).
+\]
+The Lean counterpart is \LeanName{cnfSATImageSeparatorBranch_standardLowerBoundNormalForm} together with \LeanName{CnfSATCandidateEndpointImageExclusion}.
+\end{theorem}
+
+\begin{proof}
+The standard lower-bound normal form says that every encoded polynomial-time candidate fails SAT on the fixed unrestricted finite CNF carrier. By Theorem~\ref{thm:encoded-positive-endpoint-exactness}, the positive endpoint image is exactly the image of encoded polynomial-time candidates with no SAT failure. Universal failure of those candidates is therefore universal exclusion from the positive endpoint image. This is candidate endpoint-image exclusion.
+\end{proof}
+
+\begin{theorem}[Candidate endpoint-image exclusion induces theorem-level discrimination]\label{thm:candidate-image-exclusion-theorem-level-discriminator}
+For the context-bound CNF-SAT endpoint model,
+\[
+  \CandImageExcl(model)\Rightarrow \ThmLevelDisc(model).
+\]
+The Lean anchor is \LeanName{cnfSATTheoremLevelEndpointStatusDiscriminator_of_candidateImageExclusion}; the direct bare-negative form is \LeanName{cnfSATBareNegativeBranch_theoremLevelDiscriminator}.
+\end{theorem}
+
+\begin{proof}
+Candidate endpoint-image exclusion globally assigns each encoded polynomial-time candidate the endpoint-relevant status ``non-occupant of the positive CNF-SAT endpoint image.'' This is theorem-level endpoint-status discrimination. It does not compute a failing formula uniformly, does not select a canonical witness, and does not claim an algorithmic separator. Its role is classification of candidate endpoint occupation at theorem level, exactly as formalized by the cited Lean anchor.
+\end{proof}
+
+\begin{definition}[Legitimate invariant use versus endpoint-status governance]\label{def:invariant-use-kind}
+The Lean type \LeanName{CnfSATInvariantUseKind} separates three uses of invariant or obstruction material:
+\[
+  \mathsf{auxiliaryInvariant},\qquad \mathsf{localObstruction},\qquad \mathsf{endpointStatusGovernance}.
+\]
+Auxiliary invariants and local obstructions are legitimate proof-support material. Endpoint-status governance on the fixed SAT carrier is the forbidden same-domain endpoint classifier. This is recorded by \LeanName{CnfSATInvariantUseLegitimate} and \LeanName{cnfSATEndpointStatusGovernance_not_legitimate}.
+\end{definition}
+
+\begin{center}
+\small
+\begin{tabularx}{0.94\linewidth}{>{\raggedright\arraybackslash}p{0.30\linewidth}>{\centering\arraybackslash}p{0.14\linewidth}>{\raggedright\arraybackslash}X}
+\toprule
+Use kind & Legitimate? & Reason \\
+\midrule
+Auxiliary invariant & Yes & Supports a proof without governing the endpoint-status surface. \\
+Local obstruction & Yes & Records local incompatibility or proof support inside an already fixed route. \\
+Endpoint-status governance & No & Acts as independent same-domain authority over endpoint occupation on the fixed SAT carrier. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+\begin{definition}[Candidate-image use classification]\label{def:candidate-image-exclusion-use-classification}
+The Lean candidate-image-use type distinguishes four uses of candidate-image exclusion:
+\[
+\ProofSupportOnly,\quad
+\EndResolvingNegThm,\quad
+\EndResolvingNonGov,\quad
+\CarrierChangingLB .
+\]
+The corresponding Lean classifier is \LeanName{CnfSATCandidateImageExclusionUseClassification}. In manuscript language: proof-support-only use does not resolve the endpoint; endpoint-resolving negative theorem use is official negative endpoint use; endpoint-resolving non-governance is the hidden fifth case; and carrier-changing lower-bound use exits the fixed carrier.
+\end{definition}
+
+\begin{theorem}[Endpoint-resolving non-governance is the hidden fifth case]\label{thm:endpoint-resolving-nongovernance-hidden-fifth-impossible}
+There is no fixed-carrier use of candidate-image exclusion that both resolves the official endpoint negatively and avoids endpoint-status governance:
+\[
+  \neg\EndResolvingNonGov .
+\]
+The Lean anchor is \LeanName{cnfSATEndpointResolvingNonGovernance_hiddenFifthCase_impossible}.
+\end{theorem}
+
+\begin{proof}
+If candidate-image exclusion is only proof support, it does not resolve the official endpoint. If it resolves the official endpoint negatively on the fixed carrier, it governs the endpoint-status surface by classifying candidate positive endpoint occupants as non-occupants. If it avoids that governance by changing the carrier, it is a carrier/domain shift. The alleged fourth possibility--endpoint-resolving but not endpoint-governing on the same carrier--is exactly the hidden fifth case, and the Lean classifier assigns it no inhabitant.
+\end{proof}
+
+\begin{definition}[Candidate-image endpoint governance]\label{def:endpoint-status-governance-candidate-image-exclusion}
+\(\CandImageGov_R(model)\) means that candidate-image exclusion is used as endpoint-status governance on the fixed CNF-SAT carrier:
+\[
+\begin{aligned}
+  \CandImageGov_R(model) := {}& \FixedDom(R)\wedge \neg\CnfDirectPos\\
+  &{}\wedge\ThmLevelDisc(model).
+\end{aligned}
+\]
+This matches the Lean predicate \LeanName{CnfSATEndpointStatusGovernanceByCandidateImageExclusion}: the carrier is fixed, the use does not occupy the positive endpoint, and theorem-level candidate-status discrimination is present.
+\end{definition}
+
+\begin{theorem}[Official negative endpoint use is candidate-image endpoint-status governance]\label{thm:official-negative-use-candidate-image-governance}
+For the context-bound finite CNF-SAT carrier,
+\[
+  \CnfOfficialNegUse(R,model)\Rightarrow \CandImageGov_R(model).
+\]
+The Lean anchor is \LeanName{cnfSATOfficialNegativeEndpointUse_endpointStatusGovernance}.
+\end{theorem}
+
+\begin{proof}
+Official negative endpoint use contains the fixed endpoint domain, the context-bound CNF model, and the bare negative branch. The bare negative branch yields candidate-image exclusion and then the theorem-level endpoint-status discriminator by Theorems~\ref{thm:bare-negative-standard-lower-bound-form}--\ref{thm:candidate-image-exclusion-theorem-level-discriminator}. Since the use is negative, it does not occupy the direct positive endpoint. Therefore it is endpoint-status governance by candidate-image exclusion, exactly as stated by the Lean theorem.
+\end{proof}
+
+\begin{corollary}[Endpoint-resolving negative theorem use is endpoint-status governance]\label{cor:endpoint-resolving-negative-theorem-governance}
+If candidate-image exclusion is used as the endpoint-resolving negative theorem on the fixed CNF-SAT carrier, then it is endpoint-status governance:
+\[
+  \EndResolvingNegThm\Rightarrow \CandImageGov_R(model).
+\]
+The Lean anchor is \LeanName{cnfSATEndpointResolvingNegativeTheorem_is_endpointStatusGovernance}.
+\end{corollary}
+
+\begin{proof}
+By Definition~\ref{def:candidate-image-exclusion-use-classification}, the endpoint-resolving negative-theorem case is official negative endpoint use. Theorem~\ref{thm:official-negative-use-candidate-image-governance} then gives endpoint-status governance by candidate-image exclusion. Proof-support-only use does not resolve the endpoint, and carrier-changing use exits the fixed carrier; the alleged endpoint-resolving non-governance use is ruled out by Theorem~\ref{thm:endpoint-resolving-nongovernance-hidden-fifth-impossible}.
 \end{proof}
 
 \begin{theorem}[Raw negative branch forces the SAT image-separator branch]\label{thm:bare-negative-forces-image}
-In the fixed SAT endpoint setting, the raw negative branch transports directly to the formal SAT image-separator branch:
+In the fixed SAT endpoint setting, the raw negative branch transports through SAT-native lower-bound normal form to the formal SAT image-separator branch:
 \[
   \ClayCtx\wedge\FixedDom(R)\wedge\ModelOfCnf(model,R)\wedge\SepBare\Rightarrow\SepImg.
 \]
 \end{theorem}
 
 \begin{proof}
-The implication is not a reportability principle and does not assert that raw truth creates a Clay report act. By Corollary~\ref{cor:bare-negative-formal}, the manuscript-level assumption \(\SepBare\) is identified with the formal SAT operator branch \(\CnfBareNeg(R,model)\), i.e. with \(\neg\CnfPositiveEndpoint\) on the context-bound CNF model. The audited theorem listed in Appendix~A proves
-\[
-  \CnfBareNeg(R,model)\Rightarrow\CnfImageSep(R,model),
-\]
-using the lower-bound/no-positive equivalence
-\[
-  \Lean{cnfDirectGateLowerBoundResidualTarget\_iff\_noSatInPolyTime}.
-\]
-In this manuscript, \(\CnfImageSep(R,model)\) is denoted by \(\SepImg\). Thus the raw negative SAT branch is not laundered through reportability, not treated as defective theoremhood, and not routed through an additional residual layer. It is transported directly into the SAT image-separator branch by the formal SAT lower-bound/no-positive bridge.
+The implication is not a reportability principle and does not assert that raw truth creates a Clay report act. By Theorem~\ref{thm:bare-negative-standard-lower-bound-form}, \(\SepBare\) gives standard SAT lower-bound normal form over the fixed encoded candidate image. By Theorem~\ref{thm:standard-lower-bound-candidate-image-exclusion}, that normal form is candidate endpoint-image exclusion. In the formal SAT operator layer, candidate endpoint-image exclusion is exactly the lower-bound/no-positive form of the SAT image-separator branch. The audited anchors \LeanName{cnfSATBareNegativeBranch_standardLowerBoundNormalForm} and \LeanName{cnfSATImageSeparatorBranch_standardLowerBoundNormalForm} record this route. Therefore \(\CnfImageSep(R,model)\), denoted here by \(\SepImg\), follows.
+
+Thus the raw negative SAT branch is not laundered through reportability, not treated as defective theoremhood, and not routed through an additional residual layer. It is transported into the SAT image-separator branch by the SAT-native lower-bound normal form: universal exclusion of encoded polynomial-time candidate occupants from the positive SAT endpoint image.
 \end{proof}
 
 
 
 \subsection{SAT Negative Occupation Exhaustion and Endpoint-Status Bivalence}\label{subsec:sat-negative-occupation-bivalence}
 
-The preceding bridge is not a representational convention. It is the SAT-local lower-bound/no-positive equivalence on the context-bound unrestricted finite CNF-SAT endpoint model. The current Lean formalization separates two locks that make the negative-occupation step explicit. First, official negative endpoint use is exhausted into four cases: image-separator occupation, ordinary negative alternative, bookkeeping-only negative, or carrier/domain shift. Second, governed endpoint use on the fixed finite CNF-SAT carrier has only two endpoint statuses: positive occupation or separator occupation. These locks are included to block the claim that the official raw negative may remain a third theorem-bearing endpoint status that is neither positive nor separator.
+The preceding bridge is not a representational convention. It is the SAT-local lower-bound/no-positive equivalence on the context-bound unrestricted finite CNF-SAT endpoint model. The audited Lean formalization separates two locks that make the negative-occupation step explicit. First, official negative endpoint use is exhausted into four cases: image-separator occupation, ordinary negative alternative, bookkeeping-only negative, or carrier/domain shift. Second, governed endpoint use on the fixed finite CNF-SAT carrier has only two endpoint statuses: positive occupation or separator occupation. These locks are included to block the claim that the official raw negative may remain a third theorem-bearing endpoint status that is neither positive nor separator.
 
 The phrase ``official negative endpoint use'' is not a new escape hatch and not an AASC-added source of standing. By Theorem~\ref{thm:official-negative-theoremhood-endpoint-use}, ordinary theoremhood of \(\neg\PosRaw\) becomes negative endpoint use exactly when it is offered as the official negative resolution of the unrestricted finite CNF-SAT endpoint. If it is not so offered, it does not resolve the official target. If it is so offered, it enters the occupation-exhaustion and bivalence locks in this subsection.
 
@@ -1454,7 +1664,7 @@ In the fixed SAT context, the SAT-local independence bridge is invoked only by t
 \end{theorem}
 
 \begin{proof}
-The model-binding clause fixes the encoded CNF-SAT carrier: arbitrary finite CNF instances over finite Boolean alphabets, evaluated by formula size, with admissible encodings preserving the same SAT endpoint image. When \(\SepImg\) is present, the branch is the SAT image-separator branch on that same carrier. The separating classifier induced by that branch is therefore same-domain rather than transported, external, or report-bookkeeping. This is the SAT-local bridge represented in Lean by \(\CnfSepClassInd(model)\). The theorem does not assert an independent discriminator from context alone; it states the branch-local condition under which the image-separator theorem applies.
+The model-binding clause fixes the encoded CNF-SAT carrier: arbitrary finite CNF instances over finite Boolean alphabets, evaluated by formula size, with admissible encodings preserving the same SAT endpoint image. When \(\SepImg\) is present, the branch is the SAT image-separator branch on that same carrier. By the SAT-native bridge in Subsection~\ref{subsec:sat-native-lower-bound-governance}, such a branch is candidate endpoint-image exclusion; if it is used to resolve the official endpoint negatively, Theorem~\ref{thm:official-negative-use-candidate-image-governance} classifies it as endpoint-status governance by candidate-image exclusion. Hence the separating classifier is same-domain endpoint-status work rather than transported proof support or report bookkeeping. This is the SAT-local bridge represented in Lean by \(\CnfSepClassInd(model)\). The theorem does not assert an independent discriminator from context alone; it states the branch-local condition under which the image-separator theorem applies.
 \end{proof}
 
 \begin{theorem}[Image-separator branch requires independent separator discriminator]\label{thm:image-separator-requires-independent-discriminator}
@@ -1480,7 +1690,9 @@ For the fixed SAT endpoint carrier,
 \end{theorem}
 
 \begin{proof}
-By Theorem~\ref{thm:bare-negative-forces-image}, \(\SepBare\) gives \(\SepImg\). The official-negative-theoremhood lock of Theorem~\ref{thm:official-negative-theoremhood-endpoint-use} blocks the attempted escape in which an ordinary proof of \(\neg\PosRaw\) is offered as the official endpoint resolution while refusing endpoint-use status. Once it is endpoint use, the occupation-exhaustion and endpoint-status-bivalence locks in Theorems~\ref{thm:sat-negative-occupation-nonoptional}--\ref{thm:negative-governed-endpoint-use-separator} make explicit that this is not an optional representation choice: a governed official negative endpoint on the fixed CNF-SAT carrier cannot remain a third status. The branch-local bridge theorem then gives \(\SepIndBridge(model)\) from that same \(\SepImg\). Theorem~\ref{thm:image-separator-requires-independent-discriminator} gives \(\SepDisc(model)\). The direct audited formal counterpart is listed in Appendix~A.
+By Theorem~\ref{thm:bare-negative-forces-image}, \(\SepBare\) gives \(\SepImg\). The official-negative-theoremhood lock of Theorem~\ref{thm:official-negative-theoremhood-endpoint-use} blocks the attempted escape in which an ordinary proof of \(\neg\PosRaw\) is offered as the official endpoint resolution while refusing endpoint-use status. Once it is endpoint use, Theorem~\ref{thm:official-negative-use-candidate-image-governance} supplies the final hinge: the endpoint-resolving negative theorem is endpoint-status governance by candidate-image exclusion, not ordinary internal theorem content and not proof-support-only observation. The alleged endpoint-resolving non-governance alternative is the hidden fifth case excluded by Theorem~\ref{thm:endpoint-resolving-nongovernance-hidden-fifth-impossible}.
+
+The occupation-exhaustion and endpoint-status-bivalence locks in Theorems~\ref{thm:sat-negative-occupation-nonoptional}--\ref{thm:negative-governed-endpoint-use-separator} then make explicit that this is not an optional representation choice: a governed official negative endpoint on the fixed CNF-SAT carrier cannot remain a third status. The branch-local bridge theorem gives \(\SepIndBridge(model)\) from the same \(\SepImg\), and Theorem~\ref{thm:image-separator-requires-independent-discriminator} gives \(\SepDisc(model)\). The direct audited formal counterpart is listed in Appendix~A.
 \end{proof}
 
 \begin{theorem}[Image-separator branch is endpoint use]\label{thm:image-separator-endpoint-use}
@@ -1697,6 +1909,7 @@ A standing mathematical objection must attack one of the following load-bearing 
 \item The positive CNF-SAT branch is not direct constructive endpoint occupation.
 \item The SAT image-separator branch can avoid inducing independent same-domain endpoint-status discrimination under the SAT-local independence bridge.
 \item The image-separator branch does not instantiate the SAT-local independence bridge on the fixed context-bound CNF model, or the image-separator branch plus that branch-local bridge does not yield \(\SepDisc(model)\).
+\item Candidate-image exclusion can be used as an official endpoint-resolving negative theorem while remaining non-governing, contrary to Theorem~\ref{thm:endpoint-resolving-nongovernance-hidden-fifth-impossible} and Theorem~\ref{thm:official-negative-use-candidate-image-governance}.
 \item An independent same-domain endpoint-status discriminator can survive structural rigidity, AMetricity, unique interior, conservation, and transport closure.
 \item \(\SepBare\not\leftrightarrow\neg\PosRaw\) at the raw unrestricted finite-CNF layer.
 \item \(\CnfSATP\) does not imply \(P=NP\) under the standard Cook--Levin/Karp endpoint correspondence.
@@ -1706,7 +1919,7 @@ Objections outside these classes are non-standing unless they identify a theorem
 
 \section{Conclusion}
 
-The proof has been arranged so that AASC owns the branch-exclusion argument: the kernel is the source of necessity, and AASC is the downstream fixed-domain consequence interface. Raw traces do not become constructions merely by being written. Genuine theoremhood is already governed derivation and is therefore kernel-internal. The positive SAT branch is direct constructive endpoint occupation. The negative SAT branch is not rejected for being negative; ordinary negative theoremhood is harmless as theoremhood. But ordinary negative theoremhood offered as the official P versus NP endpoint resolution is endpoint use of the negative branch. If it refuses endpoint use, it is not the same theorem-bearing resolution act for the official target; if it accepts endpoint use, the SAT occupation-exhaustion and endpoint-status-bivalence locks apply. The raw negative branch then transports directly to the image-separator branch. The image-separator branch invokes the branch-local SAT independence bridge and induces an independent same-domain endpoint-status discriminator. The kernel-forced consequence layer excludes such discriminators. Bare complementarity then yields the positive unrestricted finite CNF-SAT endpoint. The Cook--Levin/Karp endpoint correspondence then identifies this AASC-derived endpoint as \(\Pclass=\NPclass\).
+The proof has been arranged so that AASC owns the branch-exclusion argument: the kernel is the source of necessity, and AASC is the downstream fixed-domain consequence interface. Raw traces do not become constructions merely by being written. Genuine theoremhood is already governed derivation and is therefore kernel-internal. The positive SAT branch is direct constructive endpoint occupation. The negative SAT branch is not rejected for being negative; ordinary negative theoremhood is harmless as theoremhood. But ordinary negative theoremhood offered as the official P versus NP endpoint resolution is endpoint use of the negative branch. If it refuses endpoint use, it is not the same theorem-bearing resolution act for the official target; if it accepts endpoint use, the SAT occupation-exhaustion and endpoint-status-bivalence locks apply. The raw negative branch then transports through standard SAT lower-bound normal form to candidate endpoint-image exclusion and the image-separator branch. When that exclusion is used as the official endpoint-resolving negative theorem, it is endpoint-status governance by candidate-image exclusion rather than proof-support-only observation; the endpoint-resolving non-governance alternative is the excluded hidden fifth case. The image-separator branch invokes the branch-local SAT independence bridge and induces an independent same-domain endpoint-status discriminator. The kernel-forced consequence layer excludes such discriminators. Bare complementarity then yields the positive unrestricted finite CNF-SAT endpoint. The Cook--Levin/Karp endpoint correspondence then identifies this AASC-derived endpoint as \(\Pclass=\NPclass\).
 
 
 
@@ -1747,7 +1960,7 @@ The verification command supplied by the release is:
 \begin{lstlisting}[basicstyle=\ttfamily\scriptsize]
 powershell -ExecutionPolicy Bypass -File scripts/check-pvsnp-sat-operator-bridge-audit.ps1
 \end{lstlisting}
-The runner prints the Lean toolchain, prints the pinned mathlib manifest revision, builds \LeanName{MaleyLean.Papers.PvsNP.SATOperatorAuditRunners}, evaluates the SAT-operator formalization-status and progress summaries, scans the audited AASC foundation plus P vs NP SAT endpoint surface for live \LeanName{axiom}, \LeanName{sorry}, \LeanName{admit}, or \LeanName{unsafe} declarations, builds the AASC foundation/kernel support modules, builds the SAT proof queue and bridge-callability modules, and runs ten audit files: the Minimal Conditions/A+ audit, the non-degenerate-kernel audit, the SAT endpoint checks, and the combined full-stack AASC/SAT check. The release notes record complete closure for the AASC SAT endpoint and CNF-SAT-in-polynomial-time status summaries. Focused axiom output for the bridge anchors is reported against only the standard Lean/classical/mathlib base dependencies \LeanName{propext}, \LeanName{Classical.choice}, and \LeanName{Quot.sound}.
+The runner prints the Lean toolchain, prints the pinned mathlib manifest revision, builds \LeanName{MaleyLean.Papers.PvsNP.SATOperatorAuditRunners}, evaluates the SAT-operator formalization-status and progress summaries, scans the audited AASC foundation plus P vs NP SAT endpoint surface for live \LeanName{axiom}, \LeanName{sorry}, \LeanName{admit}, or \LeanName{unsafe} declarations, builds the AASC foundation/kernel support modules, builds the SAT proof queue, antichecker/model-adequacy bridge, and bridge-callability modules, and runs ten audit files: the Minimal Conditions/A+ audit, the non-degenerate-kernel audit, the SAT endpoint checks, and the combined full-stack AASC/SAT check. The release notes record complete closure for the AASC SAT endpoint and CNF-SAT-in-polynomial-time status summaries. Focused axiom output for the bridge anchors is reported against only the standard Lean/classical/mathlib base dependencies \LeanName{propext}, \LeanName{Classical.choice}, and \LeanName{Quot.sound}.
 
 \subsection{Declaration locations}
 
@@ -2147,9 +2360,15 @@ theorem cnfSATImageSeparatorBranch_of_negativeGovernedEndpointUse
 
 The focused audit files in the release issue \texttt{\#print axioms} commands for the AASC foundation anchors and the SAT endpoint bridge anchors below. The release records the following focused axiom surface for these proof-spine theorems: the AASC foundation anchors report no project axioms, and the SAT bridge anchors report only the standard Lean/classical/mathlib base dependencies \LeanName{propext}, \LeanName{Classical.choice}, and \LeanName{Quot.sound}. No project-specific axiom, \LeanName{sorry}, \LeanName{admit}, or \LeanName{unsafe} declaration is used by these anchors.
 
-The final Lean audit also names the SAT-native form of the remaining bridge objection.  The theorem \LeanName{cnfSATBareNegativeBranch_standardLowerBoundNormalForm} records that the bare negative branch gives lower-bound normal form over the fixed encoded candidate image: every encoded polynomial-time candidate is excluded by SAT failure.  The theorem \LeanName{cnfSATBareNegativeBranch_theoremLevelDiscriminator} records the corresponding theorem-level endpoint-status discriminator.  This discriminator is not an algorithmic selector and does not assert uniform witness choice; it is the global candidate-status role of the separator endpoint branch.  The distinction between legitimate auxiliary invariants and forbidden endpoint-status governance is named by \LeanName{CnfSATInvariantUseKind}, \LeanName{CnfSATInvariantUseLegitimate}, and \LeanName{cnfSATEndpointStatusGovernance_not_legitimate}.
-
-The audit further isolates the final candidate-image exclusion fork.  The Lean objects \LeanName{CnfSATCandidateImageExclusionUseKind} and \LeanName{CnfSATCandidateImageExclusionUseClassification} classify candidate-image exclusion use as proof support, endpoint-resolving negative theorem, endpoint-resolving non-governance, or carrier-changing lower-bound claim.  Proof-support use is not endpoint-resolving; carrier-changing use is domain shift; the endpoint-resolving negative theorem case is endpoint-status governance by \LeanName{cnfSATOfficialNegativeEndpointUse_endpointStatusGovernance}; and the endpoint-resolving-but-not-governance alternative is the hidden fifth case ruled out by \LeanName{cnfSATEndpointResolvingNonGovernance_hiddenFifthCase_impossible}.  Thus theorem-level candidate-image exclusion is either non-resolving bookkeeping, domain-shifting, or same-domain endpoint-status governance; it is not ordinary internal theorem content when used as the official negative endpoint resolution.
+The model-adequacy audit in \LeanName{AnticheckerReduction.lean} names the ordinary coding bridge consumed by the SAT-native route. It records coverage, sound decoding, failure adequacy, candidate-image exactness, and the positive/negative endpoint equivalences for encoded deterministic polynomial-time CNF-SAT candidates. The final Lean audit also names the SAT-native form of the remaining bridge objection. The lower-bound and theorem-level discriminator anchors record that the bare negative branch gives lower-bound normal form over the fixed encoded candidate image, and that the resulting discriminator is theorem-level rather than algorithmic. The invariant-use and candidate-image-use classifications separate legitimate proof support from forbidden endpoint-status governance. The final hinge is formalized by the following Lean anchors:
+\begin{lstlisting}[basicstyle=\ttfamily\scriptsize]
+CnfSATCandidateImageExclusionUseKind
+CnfSATCandidateImageExclusionUseClassification
+CnfSATEndpointStatusGovernanceByCandidateImageExclusion
+cnfSATEndpointResolvingNonGovernance_hiddenFifthCase_impossible
+cnfSATOfficialNegativeEndpointUse_endpointStatusGovernance
+cnfSATEndpointResolvingNegativeTheorem_is_endpointStatusGovernance
+\end{lstlisting}
 
 \begin{center}
 \scriptsize
@@ -2157,9 +2376,6 @@ The audit further isolates the final candidate-image exclusion fork.  The Lean o
 \toprule
 Lean theorem & Focused axiom output \\
 \midrule
-\begin{tabular}[t]{@{}l@{}}\LeanName{cnfSATInPolyTime}\\\LeanName{iff_exists_encoded_nonfailing_candidate}\end{tabular} & \LeanName{[propext, Classical.choice, Quot.sound]} \\
-\begin{tabular}[t]{@{}l@{}}\LeanName{cnfSATNotInPolyTime}\\\LeanName{iff_all_encoded_candidates_fail}\end{tabular} & \LeanName{[propext, Classical.choice, Quot.sound]} \\
-\begin{tabular}[t]{@{}l@{}}\LeanName{cnfEncodedCandidateModel}\\\LeanName{Adequate}\end{tabular} & \LeanName{[propext, Classical.choice, Quot.sound]} \\
 \begin{tabular}[t]{@{}l@{}}\LeanName{cnfBareNegativeBranch}\\\LeanName{forces_imageSeparatorBranch}\end{tabular} & \LeanName{[propext, Classical.choice, Quot.sound]} \\
 \begin{tabular}[t]{@{}l@{}}\LeanName{cnfImageSeparatorBranch}\\\LeanName{of_not_positiveEndpoint}\end{tabular} & \LeanName{[propext, Classical.choice, Quot.sound]} \\
 \begin{tabular}[t]{@{}l@{}}\LeanName{cnfSATImageSeparatorBranch}\\\LeanName{endpointUse}\end{tabular} & \LeanName{[propext, Classical.choice, Quot.sound]} \\
@@ -2174,6 +2390,15 @@ Lean theorem & Focused axiom output \\
 \begin{tabular}[t]{@{}l@{}}\LeanName{cnfSATGovernedEndpointUse}\\\LeanName{bivalent}\end{tabular} & \LeanName{[propext, Classical.choice, Quot.sound]} \\
 \begin{tabular}[t]{@{}l@{}}\LeanName{cnfSATNegativeGovernedEndpointUse}\\\LeanName{has_separatorStatus}\end{tabular} & \LeanName{[propext, Classical.choice, Quot.sound]} \\
 \begin{tabular}[t]{@{}l@{}}\LeanName{cnfSATImageSeparatorBranch}\\\LeanName{of_negativeGovernedEndpointUse}\end{tabular} & \LeanName{[propext, Classical.choice, Quot.sound]} \\
+\begin{tabular}[t]{@{}l@{}}\LeanName{cnfSATCandidateModelCoverage}\end{tabular} & \LeanName{[propext, Classical.choice, Quot.sound]} \\
+\begin{tabular}[t]{@{}l@{}}\LeanName{cnfSATCandidateModelSoundness}\end{tabular} & \LeanName{[propext, Classical.choice, Quot.sound]} \\
+\begin{tabular}[t]{@{}l@{}}\LeanName{cnfSATCandidateFailureAdequacy}\end{tabular} & \LeanName{[propext, Classical.choice, Quot.sound]} \\
+\begin{tabular}[t]{@{}l@{}}\LeanName{cnfSATCandidateImageExactness}\end{tabular} & \LeanName{[propext, Classical.choice, Quot.sound]} \\
+\begin{tabular}[t]{@{}l@{}}\LeanName{cnfEncodedCandidateModelAdequate}\end{tabular} & \LeanName{[propext, Classical.choice, Quot.sound]} \\
+\begin{tabular}[t]{@{}l@{}}\LeanName{cnfSATInPolyTime_iff_exists}\\\LeanName{_encoded_nonfailing_candidate}\end{tabular} & \LeanName{[propext, Classical.choice, Quot.sound]} \\
+\begin{tabular}[t]{@{}l@{}}\LeanName{cnfSATNotInPolyTime_iff}\\\LeanName{_all_encoded_candidates_fail}\end{tabular} & \LeanName{[propext, Classical.choice, Quot.sound]} \\
+\begin{tabular}[t]{@{}l@{}}\LeanName{cnfSATBareNegativeBranch}\\\LeanName{standardLowerBoundNormalForm}\end{tabular} & \LeanName{[propext, Classical.choice, Quot.sound]} \\
+\begin{tabular}[t]{@{}l@{}}\LeanName{cnfSATBareNegativeBranch}\\\LeanName{theoremLevelDiscriminator}\end{tabular} & \LeanName{[propext, Classical.choice, Quot.sound]} \\
 \begin{tabular}[t]{@{}l@{}}\LeanName{cnfSATOfficialNegativeEndpointUse}\\\LeanName{endpointStatusGovernance}\end{tabular} & \LeanName{[propext, Classical.choice, Quot.sound]} \\
 \begin{tabular}[t]{@{}l@{}}\LeanName{cnfSATEndpointResolvingNonGovernance}\\\LeanName{hiddenFifthCase_impossible}\end{tabular} & \LeanName{[propext, Classical.choice, Quot.sound]} \\
 \begin{tabular}[t]{@{}l@{}}\LeanName{cnfSATEndpointResolvingNegativeTheorem}\\\LeanName{is_endpointStatusGovernance}\end{tabular} & \LeanName{[propext, Classical.choice, Quot.sound]} \\
@@ -2183,13 +2408,13 @@ Lean theorem & Focused axiom output \\
 
 \subsection{Audit scope and boundary}
 
-The Lean archive formalizes the AASC foundation audit surface consumed by the SAT route together with the SAT-operator bridge and negative-branch closeout used in the manuscript proof spine. The current SAT-operator proof queue also includes negative-occupation-exhaustion anchors and endpoint-status-bivalence anchors, corresponding to commits \LeanName{282d4ad} and \LeanName{a938648} in the public Lean repository; commit \LeanName{f2df564} exposes the combined full-stack AASC/SAT audit check. It does not attempt to formalize the external Cook--Levin/Karp theorem inside Lean. Its support role is local and reproducibility-oriented: it checks that the AASC foundation anchors and the formal SAT-side branch chain used by the manuscript have the advertised Lean anchors and that the audit surface is free of live project-level placeholders.
+The Lean archive formalizes the AASC foundation audit surface consumed by the SAT route together with the SAT-operator bridge and negative-branch closeout used in the manuscript proof spine. The SAT-operator proof queue also includes negative-occupation-exhaustion anchors and endpoint-status-bivalence anchors, corresponding to commits \LeanName{282d4ad} and \LeanName{a938648} in the public Lean repository; commit \LeanName{f2df564} exposes the combined full-stack AASC/SAT audit check. It does not attempt to formalize the external Cook--Levin/Karp theorem inside Lean. Its support role is local and reproducibility-oriented: it checks that the AASC foundation anchors and the formal SAT-side branch chain used by the manuscript have the advertised Lean anchors and that the audit surface is free of live project-level placeholders.
 
 \section{Standard CNF-SAT to P=NP Correspondence}
 The manuscript proof derives \(\CnfSATP\). Here ``bounded-CNF'' means finitely encoded CNF formulas of arbitrary instance size over a finite Boolean alphabet; it does not mean a fixed-width, fixed-size, bounded-variable, fixed-clause, bounded-depth, promise-restricted, parameterized, or otherwise tractable restricted CNF fragment. The equality \(\Pclass=\NPclass\) then uses the standard Cook--Levin/Karp endpoint correspondence: arbitrary finite CNF-SAT is NP-complete under polynomial-time many-one reductions; every \(L\in \NPclass\) reduces to CNF-SAT; composition of a polynomial reduction with a polynomial SAT decider gives a polynomial decider for \(L\); and \(\Pclass\subseteq\NPclass\). Hence \(\NPclass\subseteq\Pclass\) and \(\Pclass=\NPclass\). This correspondence is standard Cook--Levin/Karp background. It is not the proof of separator exclusion; AASC supplies that proof.
 
 \section{Reference Integrity Appendix}
-The proof ladder is ordered so that each theorem cites prior results only. The final endpoint theorem cites the context definition, positive direct-occupation theorem, model binding, the branch-local SAT image-separator bridge, raw complementarity, the raw-negative-to-image bridge, image-separator exclusion, and the standard CNF-SAT completeness bridge. No theorem cites itself.
+The proof ladder is ordered so that each theorem cites prior results only. The final endpoint theorem cites the context definition, the standard encoded-model instantiation, the encoded candidate model-adequacy packet, positive direct-occupation theorem, model binding, the branch-local SAT image-separator bridge, raw complementarity, the raw-negative-to-image bridge, image-separator exclusion, and the standard CNF-SAT completeness bridge. No theorem cites itself.
 
 \section{Notation Ledger}
 \begin{longtable}{>{\raggedright\arraybackslash}p{0.16\linewidth}>{\raggedright\arraybackslash}p{0.60\linewidth}>{\raggedright\arraybackslash}p{0.16\linewidth}}
@@ -2208,6 +2433,19 @@ Symbol & Meaning & Layer \\
 \(\SepDisc\) & independent same-domain endpoint-status discriminator induced by the SAT image-separator branch & SAT asymmetry \\
 \(\SepIndBridge\) & branch-local SAT independence bridge invoked by \(\SepImg\) on the context-bound CNF model & SAT asymmetry \\
 \(\NoSepDisc\) & kernel-forced no-independent-separator-classifier closure triggered by image-separator endpoint use & consequence layer \\
+\(\ModelOfCnf\) & context-bound encoded CNF-SAT model for the fixed SAT endpoint carrier & model adequacy \\
+\(\ModelAdeq\) & model-adequacy packet: coverage, soundness, failure adequacy, and candidate-image exactness & model adequacy \\
+\(\ModelCoverage\) & every deterministic polynomial-time CNF-SAT candidate has an encoded polynomial-time code & model adequacy \\
+\(\ModelSound\) & every encoded polynomial-time code decodes to a polynomial-time CNF-SAT candidate & model adequacy \\
+\(\FailureAdeq\) & equal decoded procedures have the same SAT-failure status & model adequacy \\
+\(\ImageExact\) & \(\CnfSATP\) is exactly existence of an encoded non-failing polynomial-time candidate & model adequacy \\
+\(\mathsf{StdModel}_{\mathsf{CNF}}\) & standard uniform encoded model whose codes are machine/bound pairs \((e,k)\) over arbitrary finite CNF inputs & model adequacy \\
+\(\FailsSAT\) & wrong answer, unlawful output, nontermination within the declared bound, or bound failure on some lawful finite CNF input & model adequacy \\
+\(\StdLB\) & standard SAT lower-bound normal form: every encoded polynomial-time candidate fails SAT on the fixed CNF carrier & SAT-native bridge \\
+\(\CandImageExcl\) & candidate endpoint-image exclusion: no encoded polynomial-time candidate occupies the positive SAT endpoint image & SAT-native bridge \\
+\(\ThmLevelDisc\) & theorem-level candidate-status discriminator; not an algorithmic witness selector & SAT-native bridge \\
+\(\CandImageGov\) & endpoint-status governance by candidate-image exclusion & final hinge \\
+\begin{tabular}[t]{@{}l@{}}\(\mathsf{CandImage}\)\\\(\mathsf{UseKind}\)\end{tabular} & four-way use classification for candidate-image exclusion & final hinge \\
 \(\mathsf{OfficialNegUse}\) & official negative endpoint use on the context-bound finite CNF-SAT model & SAT negative occupation \\
 \(\mathsf{NegOccExhaust}\) & four-way exhaustion of official negative occupation alternatives & SAT negative occupation \\
 \(\mathsf{GovUse}\) & governed endpoint use on the finite CNF-SAT endpoint carrier & endpoint-status bivalence \\
