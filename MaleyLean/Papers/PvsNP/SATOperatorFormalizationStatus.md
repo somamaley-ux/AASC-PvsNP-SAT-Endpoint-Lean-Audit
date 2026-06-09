@@ -33,6 +33,8 @@ setting, not a free-floating non-AASC theorem object.
 The final SAT endpoint audit anchors are:
 
 ```lean
+cnfSATBareNegativeBranch_standardLowerBoundNormalForm
+cnfSATBareNegativeBranch_theoremLevelDiscriminator
 cnfBareNegativeBranch_forces_imageSeparatorBranch
 cnfSATImageSeparatorBranch_requires_independentSeparatorDiscriminator
 cnfBareNegativeBranch_impossible_of_noIndependentDiscriminator
@@ -40,6 +42,25 @@ cnfPositiveEndpoint_of_noIndependentDiscriminator
 cnfSATInPolyTime_of_noIndependentDiscriminator
 cnfSATInPolyTime_of_context_noIndependentDiscriminator
 ```
+
+The SAT-native normal-form anchors make explicit that the raw negative branch
+is not merely "absence of a decider" inside the fixed encoded CNF-SAT carrier.
+It gives candidate-image exclusion: every encoded polynomial-time candidate is
+classified as failing to occupy the positive endpoint.  The theorem-level
+discriminator anchors are deliberately not algorithmic selectors; they record
+global endpoint-status governance over the candidate image.
+
+The invariant-use distinction is also named in Lean:
+
+```lean
+CnfSATInvariantUseKind
+CnfSATInvariantUseLegitimate
+cnfSATEndpointStatusGovernance_not_legitimate
+```
+
+This records the intended distinction between legitimate auxiliary proof
+invariants/local obstructions and the forbidden same-domain endpoint-status
+governance performed by the SAT separator branch.
 
 ## Current Endpoint Route
 

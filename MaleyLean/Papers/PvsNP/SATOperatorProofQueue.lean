@@ -10110,6 +10110,157 @@ theorem cnfSATBareSeparator_forces_imageSeparatorBranch
   cnfBareNegativeBranch_forces_imageSeparatorBranch hBare
 
 /--
+SAT-native standard lower-bound normal form over the encoded candidate image:
+every encoded polynomial-time candidate is excluded by a concrete SAT failure.
+This is the Lean-side analogue of the ordinary `forall M,k, exists phi`
+lower-bound reading, restricted to the fixed CNF candidate image supplied by
+`model`.
+-/
+def CnfSATStandardLowerBoundNormalForm
+    (model : CnfEncodedCandidateModel) : Prop :=
+  forall code : model.Code,
+    model.codeInPolyTime code ->
+      CnfProcedureFailsSAT (model.decode code)
+
+/--
+An encoded candidate is excluded from positive endpoint occupation when its
+decoded procedure fails SAT.  The word "exclusion" here is endpoint-status
+language, not an algorithm for uniformly selecting witnesses.
+-/
+def CnfSATCandidateEndpointImageExclusion
+    (model : CnfEncodedCandidateModel) : Prop :=
+  forall code : model.Code,
+    model.codeInPolyTime code ->
+      CnfProcedureFailsSAT (model.decode code)
+
+/--
+Theorem-level endpoint-status discriminator: a classifier assigning the
+excluded status to every encoded polynomial-time SAT candidate.  This is not
+an algorithmic selector and does not require a uniform witness-choosing
+procedure; it is the global theorem-level candidate-status role induced by the
+separator endpoint branch.
+-/
+def CnfSATTheoremLevelEndpointStatusDiscriminator
+    (model : CnfEncodedCandidateModel) : Prop :=
+  exists classifier : CnfCandidateStatusClassifier model,
+    CnfClassifierSeparatesPolynomialCandidates model classifier
+
+/--
+Legitimate auxiliary proof data are distinguished from forbidden endpoint
+status governance.  The first two cases can support a proof without becoming a
+rival endpoint authority; the separator endpoint case is the status-governing
+case ruled out by the AASC no-independent-discriminator route.
+-/
+inductive CnfSATInvariantUseKind where
+  | auxiliaryInvariant
+  | localObstruction
+  | endpointStatusGovernance
+deriving DecidableEq, Repr
+
+/-- Auxiliary invariants and local obstructions are legitimate proof data. -/
+def CnfSATInvariantUseLegitimate :
+    CnfSATInvariantUseKind -> Prop
+  | .auxiliaryInvariant => True
+  | .localObstruction => True
+  | .endpointStatusGovernance => False
+
+/-- Endpoint-status governance is precisely the non-legitimate invariant role. -/
+theorem cnfSATEndpointStatusGovernance_not_legitimate :
+    Not (CnfSATInvariantUseLegitimate
+      CnfSATInvariantUseKind.endpointStatusGovernance) := by
+  intro h
+  exact h
+
+/--
+Image-separator occupation is exactly standard lower-bound exclusion over the
+encoded SAT candidate image: every encoded polynomial-time candidate is
+classified as failing to occupy the positive endpoint.
+-/
+theorem cnfSATImageSeparatorBranch_standardLowerBoundNormalForm
+    {Act Object : Type}
+    {R : MinimalConditionsForAdmissibleConstruction.ConstructionRegime Act Object}
+    {model : CnfEncodedCandidateModel}
+    (hSep : CnfSATImageSeparatorBranch R model) :
+    CnfSATStandardLowerBoundNormalForm model := by
+  have hSameDomain : CnfSameDomainSeparator :=
+    (cnfDirectGateLowerBoundResidualTarget_iff_sameDomainSeparator).1 hSep
+  intro code hCodePoly
+  exact hSameDomain (model.decode code) (model.sound code hCodePoly)
+
+/--
+The bare negative branch has the SAT-native lower-bound normal form over the
+fixed encoded candidate image.
+-/
+theorem cnfSATBareNegativeBranch_standardLowerBoundNormalForm
+    {Act Object : Type}
+    {R : MinimalConditionsForAdmissibleConstruction.ConstructionRegime Act Object}
+    {model : CnfEncodedCandidateModel}
+    (hBare : CnfSATBareNegativeBranch R model) :
+    CnfSATStandardLowerBoundNormalForm model :=
+  cnfSATImageSeparatorBranch_standardLowerBoundNormalForm
+    (R := R)
+    (cnfBareNegativeBranch_forces_imageSeparatorBranch hBare)
+
+/--
+The standard lower-bound normal form is candidate-image exclusion: it excludes
+every encoded polynomial-time candidate from positive endpoint occupation.
+-/
+theorem cnfSATCandidateEndpointImageExclusion_of_standardLowerBoundNormalForm
+    {model : CnfEncodedCandidateModel}
+    (hLower : CnfSATStandardLowerBoundNormalForm model) :
+    CnfSATCandidateEndpointImageExclusion model :=
+  hLower
+
+/--
+Candidate-image exclusion induces a theorem-level endpoint-status
+discriminator.  This closes the "universal nonexistence is not a classifier"
+escape at the theorem-status level: no computation of witnesses is asserted.
+-/
+theorem cnfSATTheoremLevelEndpointStatusDiscriminator_of_candidateImageExclusion
+    {model : CnfEncodedCandidateModel}
+    (hExclusion : CnfSATCandidateEndpointImageExclusion model) :
+    CnfSATTheoremLevelEndpointStatusDiscriminator model := by
+  let classifier : CnfCandidateStatusClassifier model :=
+    fun code => CnfProcedureFailsSAT (model.decode code)
+  have hSeparates :
+      CnfClassifierSeparatesPolynomialCandidates model classifier := by
+    intro code hCodePoly
+    have hFail : CnfProcedureFailsSAT (model.decode code) :=
+      hExclusion code hCodePoly
+    exact And.intro hFail hFail
+  exact Exists.intro classifier hSeparates
+
+/--
+Image-separator occupation induces theorem-level endpoint-status
+discrimination over the fixed encoded SAT candidate image.
+-/
+theorem cnfSATImageSeparatorBranch_theoremLevelDiscriminator
+    {Act Object : Type}
+    {R : MinimalConditionsForAdmissibleConstruction.ConstructionRegime Act Object}
+    {model : CnfEncodedCandidateModel}
+    (hSep : CnfSATImageSeparatorBranch R model) :
+    CnfSATTheoremLevelEndpointStatusDiscriminator model :=
+  cnfSATTheoremLevelEndpointStatusDiscriminator_of_candidateImageExclusion
+    (cnfSATCandidateEndpointImageExclusion_of_standardLowerBoundNormalForm
+      (cnfSATImageSeparatorBranch_standardLowerBoundNormalForm
+        (R := R)
+        hSep))
+
+/--
+The bare negative branch therefore has the SAT-native theorem-level
+discriminator role before the AASC independence bridge is applied.
+-/
+theorem cnfSATBareNegativeBranch_theoremLevelDiscriminator
+    {Act Object : Type}
+    {R : MinimalConditionsForAdmissibleConstruction.ConstructionRegime Act Object}
+    {model : CnfEncodedCandidateModel}
+    (hBare : CnfSATBareNegativeBranch R model) :
+    CnfSATTheoremLevelEndpointStatusDiscriminator model :=
+  cnfSATImageSeparatorBranch_theoremLevelDiscriminator
+    (R := R)
+    (cnfBareNegativeBranch_forces_imageSeparatorBranch hBare)
+
+/--
 The ordinary-negative alternative for the positive SAT endpoint.  In the
 AASC-facing SAT interface, an ordinary negative theorem alternative would have
 to cross/import the ametric boundary rather than remain inside the fixed

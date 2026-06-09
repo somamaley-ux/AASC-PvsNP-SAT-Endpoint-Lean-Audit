@@ -2104,6 +2104,8 @@ theorem cnfSATImageSeparatorBranch_of_negativeGovernedEndpointUse
 
 The focused audit files in the release issue \texttt{\#print axioms} commands for the AASC foundation anchors and the SAT endpoint bridge anchors below. The release records the following focused axiom surface for these proof-spine theorems: the AASC foundation anchors report no project axioms, and the SAT bridge anchors report only the standard Lean/classical/mathlib base dependencies \LeanName{propext}, \LeanName{Classical.choice}, and \LeanName{Quot.sound}. No project-specific axiom, \LeanName{sorry}, \LeanName{admit}, or \LeanName{unsafe} declaration is used by these anchors.
 
+The final Lean audit also names the SAT-native form of the remaining bridge objection.  The theorem \LeanName{cnfSATBareNegativeBranch_standardLowerBoundNormalForm} records that the bare negative branch gives lower-bound normal form over the fixed encoded candidate image: every encoded polynomial-time candidate is excluded by SAT failure.  The theorem \LeanName{cnfSATBareNegativeBranch_theoremLevelDiscriminator} records the corresponding theorem-level endpoint-status discriminator.  This discriminator is not an algorithmic selector and does not assert uniform witness choice; it is the global candidate-status role of the separator endpoint branch.  The distinction between legitimate auxiliary invariants and forbidden endpoint-status governance is named by \LeanName{CnfSATInvariantUseKind}, \LeanName{CnfSATInvariantUseLegitimate}, and \LeanName{cnfSATEndpointStatusGovernance_not_legitimate}.
+
 \begin{center}
 \scriptsize
 \begin{tabularx}{0.96\linewidth}{>{\raggedright\arraybackslash}p{0.50\linewidth}>{\raggedright\arraybackslash}X}

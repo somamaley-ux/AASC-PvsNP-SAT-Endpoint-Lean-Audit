@@ -19,6 +19,11 @@ Included:
 - SAT endpoint-status bivalence anchors, including
   `cnfSATGovernedEndpointUse_bivalent` and
   `cnfSATNegativeGovernedEndpointUse_has_separatorStatus`.
+- SAT-native lower-bound normal-form and theorem-level discriminator anchors,
+  including `cnfSATBareNegativeBranch_standardLowerBoundNormalForm` and
+  `cnfSATBareNegativeBranch_theoremLevelDiscriminator`.
+- A formal legitimate-invariant / forbidden endpoint-status-governance
+  distinction via `CnfSATInvariantUseKind`.
 - Audit runner: `scripts/check-pvsnp-sat-operator-bridge-audit.ps1`.
 - Manuscript-facing PDF/source and ledger artifacts when available from the
   workspace.

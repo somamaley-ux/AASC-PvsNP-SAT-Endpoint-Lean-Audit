@@ -88,6 +88,16 @@ Key AASC foundation anchors:
 
 Key final anchors:
 
+- `CnfSATStandardLowerBoundNormalForm`
+- `CnfSATCandidateEndpointImageExclusion`
+- `CnfSATTheoremLevelEndpointStatusDiscriminator`
+- `CnfSATInvariantUseKind`
+- `CnfSATInvariantUseLegitimate`
+- `cnfSATImageSeparatorBranch_standardLowerBoundNormalForm`
+- `cnfSATBareNegativeBranch_standardLowerBoundNormalForm`
+- `cnfSATTheoremLevelEndpointStatusDiscriminator_of_candidateImageExclusion`
+- `cnfSATImageSeparatorBranch_theoremLevelDiscriminator`
+- `cnfSATBareNegativeBranch_theoremLevelDiscriminator`
 - `CnfSATClayEndpointImageContext`
 - `CnfSATFixedEndpointDomain`
 - `CnfSATContextBoundCNFModel`
