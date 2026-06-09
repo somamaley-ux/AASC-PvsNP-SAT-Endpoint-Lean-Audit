@@ -268,6 +268,49 @@ Throughout this manuscript, ``bounded-CNF'' means the ordinary finitely encoded 
 is the assertion that arbitrary finite CNF-SAT is decidable by a deterministic polynomial-time machine.
 \end{definition}
 
+\begin{definition}[Encoded candidate model adequacy for unrestricted finite CNF-SAT]\label{def:encoded-candidate-model-adequacy}
+The predicate \(\ModelOfCnf(model,R)\) uses an encoded candidate model only as ordinary complexity-theoretic bookkeeping for deterministic polynomial-time CNF-SAT candidates.  Its intended adequacy packet has the following components:
+\begin{enumerate}[label=(\roman*)]
+\item \emph{Coverage}: every deterministic polynomial-time CNF-SAT candidate procedure has a code \(c\) with \(model.codeInPolyTime(c)\) and \(model.decode(c)\) extensionally equal to that procedure.
+\item \emph{Sound decoding}: every code marked \(model.codeInPolyTime(c)\) decodes to a deterministic polynomial-time CNF-SAT candidate.
+\item \emph{Failure adequacy}: \(CnfProcedureFailsSAT(model.decode(c))\) is ordinary failure to decide arbitrary finite CNF-SAT correctly, witnessed by a finite CNF formula on which the decoded procedure disagrees with the SAT characteristic function.
+\item \emph{Extensional invariance}: equal decoded procedures have the same failure status, so endpoint-relevant status is not an artifact of which code names the procedure.
+\item \emph{No restriction}: the carrier remains arbitrary finite CNF-SAT, not \(k\)-SAT, bounded-size SAT, promise SAT, heuristic solver SAT, nonuniform circuit SAT, finite-test SAT, or any parameterized tractable fragment.
+\item \emph{No extra governance}: the encoding layer does not introduce a selector, classifier, AASC endpoint status, or separator authority.  It only presents the ordinary polynomial-time candidate image.
+\end{enumerate}
+\end{definition}
+
+\begin{theorem}[Encoded candidate image exactness]\label{thm:encoded-candidate-image-exactness}
+For an adequate encoded CNF-SAT candidate model,
+\[
+  \CnfSATP
+  \Longleftrightarrow
+  \exists c\,
+  \bigl(model.codeInPolyTime(c)\wedge
+  \neg CnfProcedureFailsSAT(model.decode(c))\bigr),
+\]
+and therefore
+\[
+  \neg\CnfSATP
+  \Longleftrightarrow
+  \forall c\,
+  \bigl(model.codeInPolyTime(c)\Rightarrow
+  CnfProcedureFailsSAT(model.decode(c))\bigr).
+\]
+The corresponding Lean anchors are
+\LeanName{CnfEncodedCandidateModelAdequate},
+\LeanName{cnfSATInPolyTime_iff_exists_encoded_nonfailing_candidate}, and
+\LeanName{cnfSATNotInPolyTime_iff_all_encoded_candidates_fail}.
+\end{theorem}
+
+\begin{proof}
+The forward positive direction encodes the ordinary deterministic polynomial-time SAT procedure supplied by \(\CnfSATP\).  The backward positive direction decodes an encoded polynomial-time candidate and uses absence of a SAT-failure witness to obtain agreement with SAT on every finite CNF formula.  The negative equivalence is the contrapositive lower-bound form over the same encoded candidate image: failure of \(\CnfSATP\) means every encoded polynomial-time candidate fails SAT, and if every encoded polynomial-time candidate fails, then no polynomial-time SAT decider exists.  This is coding hygiene for the standard candidate space, not AASC proof machinery.
+\end{proof}
+
+\begin{remark}[Model-adequacy objection burden]\label{rem:model-adequacy-objection-burden}
+A model-adequacy objection has standing only if it identifies a deterministic polynomial-time CNF-SAT candidate not represented by the encoded candidate image, an encoded polynomial-time code whose decoding is not a lawful deterministic polynomial-time CNF-SAT candidate, or a mismatch between \(CnfProcedureFailsSAT\) and ordinary failure to decide arbitrary finite CNF-SAT.  Merely objecting that the proof uses an encoded model does not meet the burden, since every standard presentation of \(P\) quantifies over effective descriptions of deterministic machines together with polynomial-time bounds.
+\end{remark}
+
 \subsection{Raw bivalence is bare-level bivalence}
 Raw bivalence is stated at the bare layer:
 \[
@@ -2114,6 +2157,9 @@ The audit further isolates the final candidate-image exclusion fork.  The Lean o
 \toprule
 Lean theorem & Focused axiom output \\
 \midrule
+\begin{tabular}[t]{@{}l@{}}\LeanName{cnfSATInPolyTime}\\\LeanName{iff_exists_encoded_nonfailing_candidate}\end{tabular} & \LeanName{[propext, Classical.choice, Quot.sound]} \\
+\begin{tabular}[t]{@{}l@{}}\LeanName{cnfSATNotInPolyTime}\\\LeanName{iff_all_encoded_candidates_fail}\end{tabular} & \LeanName{[propext, Classical.choice, Quot.sound]} \\
+\begin{tabular}[t]{@{}l@{}}\LeanName{cnfEncodedCandidateModel}\\\LeanName{Adequate}\end{tabular} & \LeanName{[propext, Classical.choice, Quot.sound]} \\
 \begin{tabular}[t]{@{}l@{}}\LeanName{cnfBareNegativeBranch}\\\LeanName{forces_imageSeparatorBranch}\end{tabular} & \LeanName{[propext, Classical.choice, Quot.sound]} \\
 \begin{tabular}[t]{@{}l@{}}\LeanName{cnfImageSeparatorBranch}\\\LeanName{of_not_positiveEndpoint}\end{tabular} & \LeanName{[propext, Classical.choice, Quot.sound]} \\
 \begin{tabular}[t]{@{}l@{}}\LeanName{cnfSATImageSeparatorBranch}\\\LeanName{endpointUse}\end{tabular} & \LeanName{[propext, Classical.choice, Quot.sound]} \\

@@ -13,6 +13,11 @@ Included:
   non-derivability, structural-rigidity, and global-synthesis anchors.
 - Focused P vs NP SAT endpoint axiom checks and a combined full-stack AASC/SAT
   axiom check under `Checks/Axiom`.
+- Encoded candidate model adequacy anchors, including
+  `CnfEncodedCandidateModelAdequate`,
+  `cnfSATInPolyTime_iff_exists_encoded_nonfailing_candidate`, and
+  `cnfSATNotInPolyTime_iff_all_encoded_candidates_fail`, making the encoded
+  model exact for ordinary deterministic polynomial-time CNF-SAT candidates.
 - SAT negative occupation-exhaustion anchors, including
   `cnfSATNegativeOccupation_exhaustion` and
   `cnfSATNegativeOccupation_nonoptional`.

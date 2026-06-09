@@ -33,6 +33,9 @@ setting, not a free-floating non-AASC theorem object.
 The final SAT endpoint audit anchors are:
 
 ```lean
+CnfEncodedCandidateModelAdequate
+cnfSATInPolyTime_iff_exists_encoded_nonfailing_candidate
+cnfSATNotInPolyTime_iff_all_encoded_candidates_fail
 cnfSATBareNegativeBranch_standardLowerBoundNormalForm
 cnfSATBareNegativeBranch_theoremLevelDiscriminator
 cnfBareNegativeBranch_forces_imageSeparatorBranch
@@ -42,6 +45,15 @@ cnfPositiveEndpoint_of_noIndependentDiscriminator
 cnfSATInPolyTime_of_noIndependentDiscriminator
 cnfSATInPolyTime_of_context_noIndependentDiscriminator
 ```
+
+The encoded model adequacy anchors isolate the ordinary complexity-theoretic
+coding layer.  They record coverage of deterministic polynomial-time CNF-SAT
+candidate procedures, sound decoding of encoded polynomial-time codes,
+failure-status invariance under equal decoded procedures, and exactness of the
+encoded candidate image for `CnfSATInPolyTime` and its negation.  This model
+binding is not an AASC assumption and does not introduce a selector or endpoint
+classifier; it presents the ordinary polynomial-time candidate image over the
+unrestricted finite CNF-SAT carrier.
 
 The SAT-native normal-form anchors make explicit that the raw negative branch
 is not merely "absence of a decider" inside the fixed encoded CNF-SAT carrier.

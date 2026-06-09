@@ -3,6 +3,18 @@ import MaleyLean.Papers.PvsNP.AnticheckerReduction
 open MaleyLean.Papers.PvsNP
 
 #print axioms CnfEncodedCandidateModel
+#print axioms CnfSATCandidateModelCoverage
+#print axioms CnfSATCandidateModelSoundness
+#print axioms CnfSATCandidateFailureAdequacy
+#print axioms CnfSATCandidateImageExactness
+#print axioms CnfEncodedCandidateModelAdequate
+#print axioms cnfSATCandidateModelCoverage
+#print axioms cnfSATCandidateModelSoundness
+#print axioms cnfSATCandidateFailureAdequacy
+#print axioms cnfSATInPolyTime_iff_exists_encoded_nonfailing_candidate
+#print axioms cnfSATNotInPolyTime_iff_all_encoded_candidates_fail
+#print axioms cnfSATCandidateImageExactness
+#print axioms cnfEncodedCandidateModelAdequate
 #print axioms CnfEncodedAnticheckerPackage
 #print axioms CnfEncodedAnticheckerSelection
 #print axioms CnfEncodedAnticheckerFeasibility

@@ -41,6 +41,137 @@ structure CnfEncodedCandidateModel where
       CnfProcedureInPolyTime procedure ->
         exists code : Code, codeInPolyTime code /\ decode code = procedure
 
+/-- Coverage of the ordinary deterministic polynomial-time CNF-SAT candidate space. -/
+def CnfSATCandidateModelCoverage
+    (model : CnfEncodedCandidateModel) : Prop :=
+  forall procedure : CnfBooleanProcedure,
+    CnfProcedureInPolyTime procedure ->
+      exists code : model.Code,
+        model.codeInPolyTime code /\ model.decode code = procedure
+
+/-- Sound decoding: every encoded polynomial-time code decodes to a polynomial-time candidate. -/
+def CnfSATCandidateModelSoundness
+    (model : CnfEncodedCandidateModel) : Prop :=
+  forall code : model.Code,
+    model.codeInPolyTime code ->
+      CnfProcedureInPolyTime (model.decode code)
+
+/--
+Encoding-artifact invariance for the SAT failure predicate: extensionally equal
+decoded procedures have the same failure status.
+-/
+def CnfSATCandidateFailureAdequacy
+    (model : CnfEncodedCandidateModel) : Prop :=
+  forall code₁ code₂ : model.Code,
+    model.decode code₁ = model.decode code₂ ->
+      (CnfProcedureFailsSAT (model.decode code₁) <->
+        CnfProcedureFailsSAT (model.decode code₂))
+
+/--
+The encoded candidate image is exact when the positive endpoint is equivalent
+to the existence of an encoded polynomial-time candidate with no SAT failure.
+-/
+def CnfSATCandidateImageExactness
+    (model : CnfEncodedCandidateModel) : Prop :=
+  CnfSATInPolyTime <->
+    exists code : model.Code,
+      model.codeInPolyTime code /\
+        Not (CnfProcedureFailsSAT (model.decode code))
+
+/--
+Adequacy packet for the encoded deterministic polynomial-time CNF-SAT candidate
+model.  This is ordinary candidate-space bookkeeping: coverage, sound decoding,
+failure invariance under equal decoded procedures, and exact agreement between
+the encoded candidate image and the `CnfSATInPolyTime` endpoint.
+-/
+structure CnfEncodedCandidateModelAdequate
+    (model : CnfEncodedCandidateModel) : Prop where
+  coverage : CnfSATCandidateModelCoverage model
+  soundness : CnfSATCandidateModelSoundness model
+  failureAdequacy : CnfSATCandidateFailureAdequacy model
+  imageExactness : CnfSATCandidateImageExactness model
+
+/-- Every encoded candidate model carries its coverage theorem as a named anchor. -/
+theorem cnfSATCandidateModelCoverage
+    (model : CnfEncodedCandidateModel) :
+    CnfSATCandidateModelCoverage model :=
+  model.complete
+
+/-- Every encoded candidate model carries its soundness theorem as a named anchor. -/
+theorem cnfSATCandidateModelSoundness
+    (model : CnfEncodedCandidateModel) :
+    CnfSATCandidateModelSoundness model :=
+  model.sound
+
+/-- Failure status is invariant under equal decoded procedures. -/
+theorem cnfSATCandidateFailureAdequacy
+    (model : CnfEncodedCandidateModel) :
+    CnfSATCandidateFailureAdequacy model := by
+  intro code₁ code₂ hDecode
+  rw [hDecode]
+
+/--
+The positive SAT endpoint is equivalent to an encoded polynomial-time candidate
+whose decoded procedure has no SAT counterexample.
+-/
+theorem cnfSATInPolyTime_iff_exists_encoded_nonfailing_candidate
+    (model : CnfEncodedCandidateModel) :
+    CnfSATInPolyTime <->
+      exists code : model.Code,
+        model.codeInPolyTime code /\
+          Not (CnfProcedureFailsSAT (model.decode code)) := by
+  constructor
+  · intro hSAT
+    rcases model.complete CnfFormula.satChar hSAT with ⟨code, hCodePoly, hDecode⟩
+    refine ⟨code, hCodePoly, ?_⟩
+    rw [hDecode]
+    exact not_satChar_failsSAT
+  · intro hEncoded
+    rcases hEncoded with ⟨code, hCodePoly, hNoFail⟩
+    exact
+      cnfSATInPolyTime_of_agreeingProcedure
+        (model.sound code hCodePoly)
+        (agreesWithSAT_of_not_failsSAT hNoFail)
+
+/--
+The raw negative SAT endpoint is equivalent to failure of every encoded
+polynomial-time candidate in any adequate encoded candidate model.
+-/
+theorem cnfSATNotInPolyTime_iff_all_encoded_candidates_fail
+    (model : CnfEncodedCandidateModel) :
+    Not CnfSATInPolyTime <->
+      forall code : model.Code,
+        model.codeInPolyTime code ->
+          CnfProcedureFailsSAT (model.decode code) := by
+  constructor
+  · intro hNoSAT code hCodePoly
+    exact
+      counterexampleLowerBound_of_noCnfSATInPolyTime hNoSAT
+        (model.decode code)
+        (model.sound code hCodePoly)
+  · intro hAllFail
+    exact
+      noCnfSATInPolyTime_of_counterexampleLowerBound
+        (by
+          intro procedure hPoly
+          rcases model.complete procedure hPoly with ⟨code, hCodePoly, hDecode⟩
+          simpa [hDecode] using hAllFail code hCodePoly)
+
+/-- The encoded candidate image is exact for every encoded candidate model. -/
+theorem cnfSATCandidateImageExactness
+    (model : CnfEncodedCandidateModel) :
+    CnfSATCandidateImageExactness model :=
+  cnfSATInPolyTime_iff_exists_encoded_nonfailing_candidate model
+
+/-- The standard model adequacy packet is assembled from the model fields. -/
+theorem cnfEncodedCandidateModelAdequate
+    (model : CnfEncodedCandidateModel) :
+    CnfEncodedCandidateModelAdequate model where
+  coverage := cnfSATCandidateModelCoverage model
+  soundness := cnfSATCandidateModelSoundness model
+  failureAdequacy := cnfSATCandidateFailureAdequacy model
+  imageExactness := cnfSATCandidateImageExactness model
+
 /--
 An antichecker package for an encoded candidate model.
 

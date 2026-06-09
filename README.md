@@ -88,6 +88,13 @@ Key AASC foundation anchors:
 
 Key final anchors:
 
+- `CnfEncodedCandidateModelAdequate`
+- `CnfSATCandidateModelCoverage`
+- `CnfSATCandidateModelSoundness`
+- `CnfSATCandidateFailureAdequacy`
+- `CnfSATCandidateImageExactness`
+- `cnfSATInPolyTime_iff_exists_encoded_nonfailing_candidate`
+- `cnfSATNotInPolyTime_iff_all_encoded_candidates_fail`
 - `CnfSATStandardLowerBoundNormalForm`
 - `CnfSATCandidateEndpointImageExclusion`
 - `CnfSATTheoremLevelEndpointStatusDiscriminator`
@@ -127,6 +134,14 @@ Key final anchors:
 
 The current status ledger is in
 `MaleyLean/Papers/PvsNP/SATOperatorStatusLedger.lean`.
+
+The encoded model adequacy packet is ordinary complexity bookkeeping, not AASC
+proof machinery. The model covers every deterministic polynomial-time CNF-SAT
+candidate procedure, decodes only polynomial-time candidates from
+`codeInPolyTime`, preserves SAT failure under equal decoded procedures, and is
+exact for the endpoint: `CnfSATInPolyTime` iff some encoded polynomial-time
+candidate does not fail SAT, while `Not CnfSATInPolyTime` iff every encoded
+polynomial-time candidate fails SAT.
 
 The candidate-image exclusion fork is now explicit in Lean. A
 candidate-image exclusion used only as proof support is classified as
