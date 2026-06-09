@@ -27,9 +27,9 @@ The strongest truthful claim for this archive is:
   route encoded in `SATOperatorProofQueue.lean`.
 - The audit runner reports `AASCSATEndpointClosure=100%` and
   `CnfSATInPolyTimeClosure=100%`.
-- The audited P vs NP SAT endpoint surface contains no live project-level
+- The audited AASC foundation plus P vs NP SAT endpoint surface contains no live project-level
   `axiom`, `sorry`, `admit`, or `unsafe` declaration in
-  `MaleyLean/Papers/PvsNP` or `Checks/Axiom`.
+  the checked AASC/P vs NP source roots or `Checks/Axiom`.
 - Standard Lean/classical foundations may still appear in `#print axioms`
   output, especially `propext`, `Classical.choice`, and `Quot.sound`. Those are
   standard imported foundations, not project-specific SAT support axioms.
@@ -54,8 +54,8 @@ The audit runner:
 - prints the pinned mathlib manifest revision;
 - builds `MaleyLean.Papers.PvsNP.SATOperatorAuditRunners`;
 - evaluates the current formalization-status and progress summaries;
-- scans the audited SAT endpoint surface for live `axiom`, `sorry`, `admit`,
-  or `unsafe` declarations;
+- scans the audited AASC foundation plus SAT endpoint surface for live
+  `axiom`, `sorry`, `admit`, or `unsafe` declarations;
 - builds and audits the AASC foundation/kernel support modules used by the SAT
   route;
 - builds the main SAT proof queue and bridge-callability modules;

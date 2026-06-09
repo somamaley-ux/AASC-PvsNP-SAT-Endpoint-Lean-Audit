@@ -8,8 +8,11 @@ SAT endpoint proof spine.
 Included:
 
 - P vs NP SAT endpoint Lean files under `MaleyLean/Papers/PvsNP`.
-- The AASC support import spine required by the SAT route.
-- Focused P vs NP SAT endpoint axiom checks under `Checks/Axiom`.
+- The AASC foundation layer required by the SAT route, including Minimal
+  Conditions, Nondegenerate Kernel, A+ certificate, Ametric-boundary,
+  non-derivability, structural-rigidity, and global-synthesis anchors.
+- Focused P vs NP SAT endpoint axiom checks and a combined full-stack AASC/SAT
+  axiom check under `Checks/Axiom`.
 - SAT negative occupation-exhaustion anchors, including
   `cnfSATNegativeOccupation_exhaustion` and
   `cnfSATNegativeOccupation_nonoptional`.
@@ -22,6 +25,8 @@ Included:
 - Final manuscript snapshot refreshed from the June 9 hardening bundle,
   including the no-fifth-negative-occupation and endpoint-status-bivalence
   manuscript ledgers.
+- Full-stack audit path exposed in commit `f2df564`, including
+  `Checks/Axiom/PvsNPFullStackAASCAxiomCheck.lean`.
 
 Verification command:
 
@@ -32,7 +37,7 @@ powershell -ExecutionPolicy Bypass -File scripts/check-pvsnp-sat-operator-bridge
 Audit framing:
 
 - no live project-level `axiom`, `sorry`, `admit`, or `unsafe` declaration on
-  the audited P vs NP SAT endpoint surface;
+  the audited AASC foundation plus P vs NP SAT endpoint surface;
 - `AASCSATEndpointClosure=100%`;
 - `CnfSATInPolyTimeClosure=100%`;
 - Cook-Levin/Karp is treated as external endpoint correspondence, not as proof

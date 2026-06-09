@@ -1675,7 +1675,7 @@ The manuscript proof above remains the primary proof. The Lean4 material in this
 \[
   \SepBare \Rightarrow \SepImg \Rightarrow \SepDisc(model) \Rightarrow \bot .
 \]
-It is not used as a substitute for the kernel proof, and it does not mechanize the external Cook--Levin/Karp endpoint correspondence from \(\CnfSATP\) to \(P=NP\). Its role is reproducibility support for the SAT endpoint-operator bridge and negative-branch closure formalized in the release archive \cite{LeanAuditZenodo,LeanAuditGitHub}.
+It is not used as a substitute for the external Cook--Levin/Karp endpoint correspondence from \(\CnfSATP\) to \(P=NP\). Its role is reproducibility support for the AASC foundation-to-SAT endpoint proof spine: the release archive includes the Minimal Conditions/A+ and non-degenerate-kernel audit layers together with the SAT endpoint-operator bridge and negative-branch closure formalized in the release archive \cite{LeanAuditZenodo,LeanAuditGitHub}.
 
 \subsection{Release, environment, and audit runner}
 
@@ -1704,7 +1704,7 @@ The verification command supplied by the release is:
 \begin{lstlisting}[basicstyle=\ttfamily\scriptsize]
 powershell -ExecutionPolicy Bypass -File scripts/check-pvsnp-sat-operator-bridge-audit.ps1
 \end{lstlisting}
-The runner prints the Lean toolchain, prints the pinned mathlib manifest revision, builds \LeanName{MaleyLean.Papers.PvsNP.SATOperatorAuditRunners}, evaluates the SAT-operator formalization-status and progress summaries, scans the audited P vs NP SAT endpoint surface for live \LeanName{axiom}, \LeanName{sorry}, \LeanName{admit}, or \LeanName{unsafe} declarations, builds the SAT proof queue and bridge-callability modules, and runs the seven focused P vs NP SAT endpoint axiom-check files. The release notes record complete closure for the AASC SAT endpoint and CNF-SAT-in-polynomial-time status summaries. Focused axiom output for the bridge anchors is reported against only the standard Lean/classical/mathlib base dependencies \LeanName{propext}, \LeanName{Classical.choice}, and \LeanName{Quot.sound}.
+The runner prints the Lean toolchain, prints the pinned mathlib manifest revision, builds \LeanName{MaleyLean.Papers.PvsNP.SATOperatorAuditRunners}, evaluates the SAT-operator formalization-status and progress summaries, scans the audited AASC foundation plus P vs NP SAT endpoint surface for live \LeanName{axiom}, \LeanName{sorry}, \LeanName{admit}, or \LeanName{unsafe} declarations, builds the AASC foundation/kernel support modules, builds the SAT proof queue and bridge-callability modules, and runs ten audit files: the Minimal Conditions/A+ audit, the non-degenerate-kernel audit, the SAT endpoint checks, and the combined full-stack AASC/SAT check. The release notes record complete closure for the AASC SAT endpoint and CNF-SAT-in-polynomial-time status summaries. Focused axiom output for the bridge anchors is reported against only the standard Lean/classical/mathlib base dependencies \LeanName{propext}, \LeanName{Classical.choice}, and \LeanName{Quot.sound}.
 
 \subsection{Declaration locations}
 
@@ -2102,7 +2102,7 @@ theorem cnfSATImageSeparatorBranch_of_negativeGovernedEndpointUse
 
 \subsection{Focused axiom-output table}
 
-The focused audit files in the release issue \texttt{\#print axioms} commands for the SAT endpoint bridge anchors below. The release records the following focused axiom surface for these proof-spine theorems: only the standard Lean/classical/mathlib base dependencies \LeanName{propext}, \LeanName{Classical.choice}, and \LeanName{Quot.sound} appear. No project-specific axiom, \LeanName{sorry}, \LeanName{admit}, or \LeanName{unsafe} declaration is used by these anchors.
+The focused audit files in the release issue \texttt{\#print axioms} commands for the AASC foundation anchors and the SAT endpoint bridge anchors below. The release records the following focused axiom surface for these proof-spine theorems: the AASC foundation anchors report no project axioms, and the SAT bridge anchors report only the standard Lean/classical/mathlib base dependencies \LeanName{propext}, \LeanName{Classical.choice}, and \LeanName{Quot.sound}. No project-specific axiom, \LeanName{sorry}, \LeanName{admit}, or \LeanName{unsafe} declaration is used by these anchors.
 
 \begin{center}
 \scriptsize
@@ -2130,7 +2130,7 @@ Lean theorem & Focused axiom output \\
 
 \subsection{Audit scope and boundary}
 
-The Lean archive formalizes the SAT-operator bridge and negative-branch closeout used in the manuscript proof spine. The current SAT-operator proof queue also includes negative-occupation-exhaustion anchors and endpoint-status-bivalence anchors, corresponding to commits \LeanName{282d4ad} and \LeanName{a938648} in the public Lean repository. It does not attempt to formalize the external Cook--Levin/Karp theorem inside Lean, and it is not the source of the manuscript proof. Its support role is local and reproducibility-oriented: it checks that the formal SAT-side branch chain used by the manuscript has the advertised Lean anchors and that the audit surface is free of live project-level placeholders.
+The Lean archive formalizes the AASC foundation audit surface consumed by the SAT route together with the SAT-operator bridge and negative-branch closeout used in the manuscript proof spine. The current SAT-operator proof queue also includes negative-occupation-exhaustion anchors and endpoint-status-bivalence anchors, corresponding to commits \LeanName{282d4ad} and \LeanName{a938648} in the public Lean repository; commit \LeanName{f2df564} exposes the combined full-stack AASC/SAT audit check. It does not attempt to formalize the external Cook--Levin/Karp theorem inside Lean. Its support role is local and reproducibility-oriented: it checks that the AASC foundation anchors and the formal SAT-side branch chain used by the manuscript have the advertised Lean anchors and that the audit surface is free of live project-level placeholders.
 
 \section{Standard CNF-SAT to P=NP Correspondence}
 The manuscript proof derives \(\CnfSATP\). Here ``bounded-CNF'' means finitely encoded CNF formulas of arbitrary instance size over a finite Boolean alphabet; it does not mean a fixed-width, fixed-size, bounded-variable, fixed-clause, bounded-depth, promise-restricted, parameterized, or otherwise tractable restricted CNF fragment. The equality \(\Pclass=\NPclass\) then uses the standard Cook--Levin/Karp endpoint correspondence: arbitrary finite CNF-SAT is NP-complete under polynomial-time many-one reductions; every \(L\in \NPclass\) reduces to CNF-SAT; composition of a polynomial reduction with a polynomial SAT decider gives a polynomial decider for \(L\); and \(\Pclass\subseteq\NPclass\). Hence \(\NPclass\subseteq\Pclass\) and \(\Pclass=\NPclass\). This correspondence is standard Cook--Levin/Karp background. It is not the proof of separator exclusion; AASC supplies that proof.

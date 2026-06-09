@@ -1,6 +1,6 @@
 # P vs NP SAT Operator Formalization Status
 
-Last updated: 2026-06-08
+Last updated: 2026-06-09
 
 ## Purpose
 
@@ -1884,8 +1884,9 @@ The final manuscript-facing posture is named as a direct Lean proposition by:
 cnfSATOperatorCurrentFormalizationAASCSATEndpointClosed_holds
 ```
 
-The runner registry records six focused audit files plus the aggregate
-PowerShell runner:
+The runner registry records nine focused Lean audit files plus the aggregate
+PowerShell runner.  The focused list now includes the AASC foundation checks
+and the full-stack AASC/SAT check, not only the SAT-local bridge checks:
 
 ```lean
 cnfSATOperatorAuditRunnerRegistryComplete_holds
@@ -1986,17 +1987,20 @@ powershell -ExecutionPolicy Bypass -File scripts/check-pvsnp-sat-operator-bridge
 
 The runner checks:
 
+- the Minimal Conditions/A+ axiom audit;
+- the Non-Degenerate Kernel axiom audit;
 - the SAT operator proof queue axiom audit;
 - the SAT operator status ledger axiom audit;
 - the corpus bridge ledger axiom audit;
 - the corpus bridge callability axiom audit;
 - the A+-boundary-derived route axiom audit;
 - the SAT operator formalization-status axiom audit;
-- the SAT operator audit-runner registry audit.
+- the SAT operator audit-runner registry audit;
+- the full-stack AASC/SAT axiom audit.
 
-It also scans the P vs NP Lean surface and the P vs NP axiom checks for live
-`axiom`, `unsafe`, `sorry`, or `admit` syntax before running the focused builds
-and audit files.
+It also scans the AASC foundation, P vs NP Lean surface, and axiom checks for
+live `axiom`, `unsafe`, `sorry`, or `admit` syntax before running the focused
+builds and audit files.
 
 ## Current Interpretation
 
