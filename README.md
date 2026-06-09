@@ -93,11 +93,17 @@ Key final anchors:
 - `CnfSATTheoremLevelEndpointStatusDiscriminator`
 - `CnfSATInvariantUseKind`
 - `CnfSATInvariantUseLegitimate`
+- `CnfSATCandidateImageExclusionUseKind`
+- `CnfSATCandidateImageExclusionUseClassification`
+- `CnfSATEndpointStatusGovernanceByCandidateImageExclusion`
 - `cnfSATImageSeparatorBranch_standardLowerBoundNormalForm`
 - `cnfSATBareNegativeBranch_standardLowerBoundNormalForm`
 - `cnfSATTheoremLevelEndpointStatusDiscriminator_of_candidateImageExclusion`
 - `cnfSATImageSeparatorBranch_theoremLevelDiscriminator`
 - `cnfSATBareNegativeBranch_theoremLevelDiscriminator`
+- `cnfSATEndpointResolvingNonGovernance_hiddenFifthCase_impossible`
+- `cnfSATOfficialNegativeEndpointUse_endpointStatusGovernance`
+- `cnfSATEndpointResolvingNegativeTheorem_is_endpointStatusGovernance`
 - `CnfSATClayEndpointImageContext`
 - `CnfSATFixedEndpointDomain`
 - `CnfSATContextBoundCNFModel`
@@ -121,6 +127,15 @@ Key final anchors:
 
 The current status ledger is in
 `MaleyLean/Papers/PvsNP/SATOperatorStatusLedger.lean`.
+
+The candidate-image exclusion fork is now explicit in Lean. A
+candidate-image exclusion used only as proof support is classified as
+non-endpoint-resolving. A carrier-changing lower-bound claim is classified as
+domain shift. The endpoint-resolving negative theorem case is classified as
+endpoint-status governance by `cnfSATOfficialNegativeEndpointUse_endpointStatusGovernance`.
+The alleged endpoint-resolving-but-not-governance alternative is the hidden
+fifth case, and `cnfSATEndpointResolvingNonGovernance_hiddenFifthCase_impossible`
+records that it has no inhabitant in the audited SAT endpoint surface.
 
 ## Scope Boundary
 

@@ -62,6 +62,26 @@ This records the intended distinction between legitimate auxiliary proof
 invariants/local obstructions and the forbidden same-domain endpoint-status
 governance performed by the SAT separator branch.
 
+The final candidate-image exclusion fork is also named:
+
+```lean
+CnfSATCandidateImageExclusionUseKind
+CnfSATCandidateImageExclusionUseClassification
+CnfSATEndpointStatusGovernanceByCandidateImageExclusion
+cnfSATEndpointResolvingNonGovernance_hiddenFifthCase_impossible
+cnfSATOfficialNegativeEndpointUse_endpointStatusGovernance
+cnfSATEndpointResolvingNegativeTheorem_is_endpointStatusGovernance
+```
+
+This is the Lean-facing form of the last SAT-local hinge. Candidate-image
+exclusion used merely as proof support is not endpoint-resolving. A
+carrier-changing lower-bound claim is domain shift. Official endpoint-resolving
+negative theorem use is same-carrier endpoint-status governance, because it
+does not occupy the positive endpoint and instead assigns non-occupant status
+over the encoded positive candidate image. The alleged endpoint-resolving but
+non-governing use is the hidden fifth case and is uninhabited in the audited
+classification.
+
 ## Current Endpoint Route
 
 The current manuscript route is:

@@ -24,6 +24,13 @@ Included:
   `cnfSATBareNegativeBranch_theoremLevelDiscriminator`.
 - A formal legitimate-invariant / forbidden endpoint-status-governance
   distinction via `CnfSATInvariantUseKind`.
+- A candidate-image exclusion use fork via
+  `CnfSATCandidateImageExclusionUseKind` and
+  `CnfSATCandidateImageExclusionUseClassification`, with
+  `cnfSATOfficialNegativeEndpointUse_endpointStatusGovernance` identifying
+  official endpoint-resolving negative use as endpoint-status governance and
+  `cnfSATEndpointResolvingNonGovernance_hiddenFifthCase_impossible` closing
+  the endpoint-resolving-but-not-governance escape.
 - Audit runner: `scripts/check-pvsnp-sat-operator-bridge-audit.ps1`.
 - Manuscript-facing PDF/source and ledger artifacts when available from the
   workspace.

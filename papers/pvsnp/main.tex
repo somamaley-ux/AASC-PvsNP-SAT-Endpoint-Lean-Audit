@@ -2106,6 +2106,8 @@ The focused audit files in the release issue \texttt{\#print axioms} commands fo
 
 The final Lean audit also names the SAT-native form of the remaining bridge objection.  The theorem \LeanName{cnfSATBareNegativeBranch_standardLowerBoundNormalForm} records that the bare negative branch gives lower-bound normal form over the fixed encoded candidate image: every encoded polynomial-time candidate is excluded by SAT failure.  The theorem \LeanName{cnfSATBareNegativeBranch_theoremLevelDiscriminator} records the corresponding theorem-level endpoint-status discriminator.  This discriminator is not an algorithmic selector and does not assert uniform witness choice; it is the global candidate-status role of the separator endpoint branch.  The distinction between legitimate auxiliary invariants and forbidden endpoint-status governance is named by \LeanName{CnfSATInvariantUseKind}, \LeanName{CnfSATInvariantUseLegitimate}, and \LeanName{cnfSATEndpointStatusGovernance_not_legitimate}.
 
+The audit further isolates the final candidate-image exclusion fork.  The Lean objects \LeanName{CnfSATCandidateImageExclusionUseKind} and \LeanName{CnfSATCandidateImageExclusionUseClassification} classify candidate-image exclusion use as proof support, endpoint-resolving negative theorem, endpoint-resolving non-governance, or carrier-changing lower-bound claim.  Proof-support use is not endpoint-resolving; carrier-changing use is domain shift; the endpoint-resolving negative theorem case is endpoint-status governance by \LeanName{cnfSATOfficialNegativeEndpointUse_endpointStatusGovernance}; and the endpoint-resolving-but-not-governance alternative is the hidden fifth case ruled out by \LeanName{cnfSATEndpointResolvingNonGovernance_hiddenFifthCase_impossible}.  Thus theorem-level candidate-image exclusion is either non-resolving bookkeeping, domain-shifting, or same-domain endpoint-status governance; it is not ordinary internal theorem content when used as the official negative endpoint resolution.
+
 \begin{center}
 \scriptsize
 \begin{tabularx}{0.96\linewidth}{>{\raggedright\arraybackslash}p{0.50\linewidth}>{\raggedright\arraybackslash}X}
@@ -2126,6 +2128,9 @@ Lean theorem & Focused axiom output \\
 \begin{tabular}[t]{@{}l@{}}\LeanName{cnfSATGovernedEndpointUse}\\\LeanName{bivalent}\end{tabular} & \LeanName{[propext, Classical.choice, Quot.sound]} \\
 \begin{tabular}[t]{@{}l@{}}\LeanName{cnfSATNegativeGovernedEndpointUse}\\\LeanName{has_separatorStatus}\end{tabular} & \LeanName{[propext, Classical.choice, Quot.sound]} \\
 \begin{tabular}[t]{@{}l@{}}\LeanName{cnfSATImageSeparatorBranch}\\\LeanName{of_negativeGovernedEndpointUse}\end{tabular} & \LeanName{[propext, Classical.choice, Quot.sound]} \\
+\begin{tabular}[t]{@{}l@{}}\LeanName{cnfSATOfficialNegativeEndpointUse}\\\LeanName{endpointStatusGovernance}\end{tabular} & \LeanName{[propext, Classical.choice, Quot.sound]} \\
+\begin{tabular}[t]{@{}l@{}}\LeanName{cnfSATEndpointResolvingNonGovernance}\\\LeanName{hiddenFifthCase_impossible}\end{tabular} & \LeanName{[propext, Classical.choice, Quot.sound]} \\
+\begin{tabular}[t]{@{}l@{}}\LeanName{cnfSATEndpointResolvingNegativeTheorem}\\\LeanName{is_endpointStatusGovernance}\end{tabular} & \LeanName{[propext, Classical.choice, Quot.sound]} \\
 \bottomrule
 \end{tabularx}
 \end{center}

@@ -10457,6 +10457,103 @@ theorem cnfPositiveEndpoint_directEndpointOccupation
   hPositive
 
 /--
+Candidate-image exclusion has four possible uses in the SAT endpoint audit:
+proof support only, endpoint-resolving negative theorem, a claimed
+endpoint-resolving non-governance case, or carrier-changing lower-bound claim.
+-/
+inductive CnfSATCandidateImageExclusionUseKind where
+  | proofSupportObservation
+  | endpointResolvingNegativeTheorem
+  | endpointResolvingNonGovernance
+  | carrierChangingLowerBoundClaim
+deriving DecidableEq, Repr
+
+/--
+Classification of a candidate-image exclusion use.  The non-governance
+endpoint-resolving case is deliberately false: it is the hidden fifth case a
+critic must exhibit rather than assume.
+-/
+def CnfSATCandidateImageExclusionUseClassification
+    {Act Object : Type}
+    (R : MinimalConditionsForAdmissibleConstruction.ConstructionRegime Act Object)
+    (model : CnfEncodedCandidateModel) :
+    CnfSATCandidateImageExclusionUseKind -> Prop
+  | .proofSupportObservation =>
+      CnfSATCandidateEndpointImageExclusion model /\
+        Not (CnfSATOfficialNegativeEndpointUse R model)
+  | .endpointResolvingNegativeTheorem =>
+      CnfSATOfficialNegativeEndpointUse R model
+  | .endpointResolvingNonGovernance =>
+      False
+  | .carrierChangingLowerBoundClaim =>
+      CnfSATCandidateEndpointImageExclusion model /\
+        CnfSATCarrierShift R
+
+/--
+Endpoint-status governance induced by theorem-level candidate-image exclusion:
+it is same-carrier, does not occupy the positive endpoint, and assigns
+candidate non-occupant status across the encoded positive candidate image.
+-/
+def CnfSATEndpointStatusGovernanceByCandidateImageExclusion
+    {Act Object : Type}
+    (R : MinimalConditionsForAdmissibleConstruction.ConstructionRegime Act Object)
+    (model : CnfEncodedCandidateModel) : Prop :=
+  CnfSATFixedEndpointDomain R /\
+    Not CnfSATDirectPositiveEndpointOccupation /\
+      CnfSATTheoremLevelEndpointStatusDiscriminator model
+
+/--
+The endpoint-resolving-but-not-governance alternative is the hidden fifth case:
+in the current SAT endpoint classification it has no inhabitant.
+-/
+theorem cnfSATEndpointResolvingNonGovernance_hiddenFifthCase_impossible
+    {Act Object : Type}
+    {R : MinimalConditionsForAdmissibleConstruction.ConstructionRegime Act Object}
+    {model : CnfEncodedCandidateModel} :
+    Not (CnfSATCandidateImageExclusionUseClassification R model
+      CnfSATCandidateImageExclusionUseKind.endpointResolvingNonGovernance) := by
+  intro h
+  exact h
+
+/--
+Official endpoint-resolving negative theorem use is endpoint-status governance,
+not ordinary internal theorem content.  The official negative use supplies the
+fixed carrier and bare negative branch; the bare branch supplies candidate-image
+exclusion and then the theorem-level discriminator.  Since the same use also
+contains `Not CnfPositiveEndpoint`, it does not occupy the positive endpoint.
+-/
+theorem cnfSATOfficialNegativeEndpointUse_endpointStatusGovernance
+    {Act Object : Type}
+    {R : MinimalConditionsForAdmissibleConstruction.ConstructionRegime Act Object}
+    {model : CnfEncodedCandidateModel}
+    (hUse : CnfSATOfficialNegativeEndpointUse R model) :
+    CnfSATEndpointStatusGovernanceByCandidateImageExclusion R model := by
+  have hDiscriminator :
+      CnfSATTheoremLevelEndpointStatusDiscriminator model :=
+    cnfSATBareNegativeBranch_theoremLevelDiscriminator
+      (R := R)
+      (model := model)
+      hUse.2.2.2
+  exact And.intro hUse.2.1
+    (And.intro hUse.2.2.2 hDiscriminator)
+
+/--
+The same result in the use-classification vocabulary: proof-support-only uses
+do not resolve the endpoint, carrier-changing uses leave the fixed carrier, and
+the endpoint-resolving negative theorem use is exactly endpoint-status
+governance.
+-/
+theorem cnfSATEndpointResolvingNegativeTheorem_is_endpointStatusGovernance
+    {Act Object : Type}
+    {R : MinimalConditionsForAdmissibleConstruction.ConstructionRegime Act Object}
+    {model : CnfEncodedCandidateModel}
+    (hEndpoint :
+      CnfSATCandidateImageExclusionUseClassification R model
+        CnfSATCandidateImageExclusionUseKind.endpointResolvingNegativeTheorem) :
+    CnfSATEndpointStatusGovernanceByCandidateImageExclusion R model :=
+  cnfSATOfficialNegativeEndpointUse_endpointStatusGovernance hEndpoint
+
+/--
 The bivalent endpoint-status space for the official finite CNF-SAT endpoint:
 there is positive endpoint occupation or separator endpoint occupation.  No
 third governed endpoint status is part of the same fixed carrier.
