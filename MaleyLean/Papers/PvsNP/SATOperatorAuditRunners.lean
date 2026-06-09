@@ -7,12 +7,15 @@ namespace PvsNP
 
 /-- Canonical focused audit files for the P vs NP SAT operator bridge. -/
 def cnfSATOperatorFocusedAuditRunnerFiles : List String :=
-  [ "Checks/Axiom/PvsNPSATOperatorProofQueueAxiomCheck.lean"
+  [ "Checks/Axiom/MinimalConditionsForAdmissibleConstructionAxiomCheck.lean"
+  , "Checks/Axiom/NonDegenerateConstructionAndKernelOfAdmissibilityAxiomCheck.lean"
+  , "Checks/Axiom/PvsNPSATOperatorProofQueueAxiomCheck.lean"
   , "Checks/Axiom/PvsNPSATOperatorStatusLedgerAxiomCheck.lean"
   , "Checks/Axiom/PvsNPCorpusBridgeLedgerAxiomCheck.lean"
   , "Checks/Axiom/PvsNPCorpusBridgeCallabilityAxiomCheck.lean"
   , "Checks/Axiom/PvsNPSATOperatorAPlusBoundaryDerivedRouteAxiomCheck.lean"
-  , "Checks/Axiom/PvsNPSATOperatorFormalizationStatusAxiomCheck.lean" ]
+  , "Checks/Axiom/PvsNPSATOperatorFormalizationStatusAxiomCheck.lean"
+  , "Checks/Axiom/PvsNPFullStackAASCAxiomCheck.lean" ]
 
 /-- Aggregate PowerShell audit runner for the P vs NP SAT operator bridge. -/
 def cnfSATOperatorAggregateAuditRunnerFiles : List String :=
@@ -84,7 +87,7 @@ def cnfSATOperatorAuditRunnerFormalizationStatusCovered : Prop :=
     , true
     , false )
 theorem cnfSATOperatorFocusedAuditRunnerFiles_count_eq :
-    cnfSATOperatorFocusedAuditRunnerFiles.length = 6 := by
+    cnfSATOperatorFocusedAuditRunnerFiles.length = 9 := by
   rfl
 
 theorem cnfSATOperatorAggregateAuditRunnerFiles_count_eq :
@@ -92,7 +95,7 @@ theorem cnfSATOperatorAggregateAuditRunnerFiles_count_eq :
   rfl
 
 theorem cnfSATOperatorAuditRunnerFiles_count_eq :
-    cnfSATOperatorAuditRunnerFiles.length = 7 := by
+    cnfSATOperatorAuditRunnerFiles.length = 10 := by
   rfl
 
 theorem cnfSATOperatorAuditRunnerFiles_decomposes :
@@ -126,9 +129,9 @@ theorem cnfSATOperatorAuditRunnerFormalizationStatusCovered_holds :
   rfl
 
 def cnfSATOperatorAuditRunnerRegistryComplete : Prop :=
-  cnfSATOperatorFocusedAuditRunnerFiles.length = 6 /\
+  cnfSATOperatorFocusedAuditRunnerFiles.length = 9 /\
   cnfSATOperatorAggregateAuditRunnerFiles.length = 1 /\
-  cnfSATOperatorAuditRunnerFiles.length = 7 /\
+  cnfSATOperatorAuditRunnerFiles.length = 10 /\
   cnfSATOperatorAuditRunnerFiles =
     cnfSATOperatorFocusedAuditRunnerFiles ++
       cnfSATOperatorAggregateAuditRunnerFiles /\

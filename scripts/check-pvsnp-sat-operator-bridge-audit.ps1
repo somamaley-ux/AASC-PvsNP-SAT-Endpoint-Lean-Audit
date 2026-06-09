@@ -3,22 +3,28 @@ $ErrorActionPreference = "Stop"
 
 $prohibitedPattern = "^\s*(axiom|unsafe|sorry|admit)\b|:=\s*(sorry|admit)\b|\bby\s+(sorry|admit)\b"
 $scanRoots = @(
+    "MaleyLean\Papers\BivalenceNonDegenerateReasoning",
+    "MaleyLean\Papers\MinimalConditionsForAdmissibleConstruction",
+    "MaleyLean\Papers\NonDegenerateConstructionAndKernelOfAdmissibility.lean",
     "MaleyLean\Papers\PvsNP",
     "Checks\Axiom"
 )
 
 $auditFiles = @(
+    "Checks\Axiom\MinimalConditionsForAdmissibleConstructionAxiomCheck.lean",
+    "Checks\Axiom\NonDegenerateConstructionAndKernelOfAdmissibilityAxiomCheck.lean",
     "Checks\Axiom\PvsNPSATOperatorProofQueueAxiomCheck.lean",
     "Checks\Axiom\PvsNPSATOperatorStatusLedgerAxiomCheck.lean",
     "Checks\Axiom\PvsNPCorpusBridgeLedgerAxiomCheck.lean",
     "Checks\Axiom\PvsNPCorpusBridgeCallabilityAxiomCheck.lean",
     "Checks\Axiom\PvsNPSATOperatorAPlusBoundaryDerivedRouteAxiomCheck.lean",
     "Checks\Axiom\PvsNPSATOperatorFormalizationStatusAxiomCheck.lean",
-    "Checks\Axiom\PvsNPSATOperatorAuditRunnerRegistryAxiomCheck.lean"
+    "Checks\Axiom\PvsNPSATOperatorAuditRunnerRegistryAxiomCheck.lean",
+    "Checks\Axiom\PvsNPFullStackAASCAxiomCheck.lean"
 )
 
-if ($auditFiles.Count -ne 7) {
-    throw "Expected 7 P vs NP SAT operator bridge audit files, found $($auditFiles.Count)."
+if ($auditFiles.Count -ne 10) {
+    throw "Expected 10 P vs NP SAT/AASC audit files, found $($auditFiles.Count)."
 }
 
 $uniqueAuditFiles = $auditFiles | Select-Object -Unique
@@ -28,7 +34,7 @@ if ($uniqueAuditFiles.Count -ne $auditFiles.Count) {
 
 foreach ($auditFile in $auditFiles) {
     if (-not (Test-Path -LiteralPath $auditFile -PathType Leaf)) {
-        throw "Missing P vs NP SAT operator bridge audit file: $auditFile"
+        throw "Missing P vs NP SAT/AASC audit file: $auditFile"
     }
 }
 
@@ -90,8 +96,9 @@ if ($LASTEXITCODE -eq 0) {
 if ($LASTEXITCODE -ne 1) {
     throw "Prohibited-token scan failed with exit code $LASTEXITCODE."
 }
-Write-Host "No live axiom/sorry/admit/unsafe declarations found in P vs NP SAT operator bridge audit surface."
+Write-Host "No live axiom/sorry/admit/unsafe declarations found in the AASC foundation plus P vs NP SAT audit surface."
 
+lake build MaleyLean.Papers.NonDegenerateConstructionAndKernelOfAdmissibility
 lake build MaleyLean.Papers.PvsNP.SATOperatorProofQueue
 lake build MaleyLean.Papers.PvsNP.CorpusBridgeCallability
 foreach ($auditFile in $auditFiles) {

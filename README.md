@@ -16,6 +16,12 @@ The strongest truthful claim for this archive is:
 - `MaleyLean.Papers.PvsNP.SATOperatorAuditRunners` builds.
 - The SAT endpoint proof queue and status ledger build in a standalone Lake
   project.
+- The AASC foundation layer used by the SAT route is present in the same
+  standalone project and is part of the public audit path:
+  `MinimalConditionsForAdmissibleConstruction`,
+  `NonDegenerateConstructionAndKernelOfAdmissibility`, the A+ certificate
+  layer, Ametric-boundary anchors, kernel non-derivability anchors, structural
+  rigidity anchors, and global-synthesis anchors.
 - The AASC SAT endpoint branch is closed at the formalized proof-spine layer:
   `CnfSATInPolyTime` is obtained from the AASC no-independent-discriminator
   route encoded in `SATOperatorProofQueue.lean`.
@@ -50,8 +56,11 @@ The audit runner:
 - evaluates the current formalization-status and progress summaries;
 - scans the audited SAT endpoint surface for live `axiom`, `sorry`, `admit`,
   or `unsafe` declarations;
+- builds and audits the AASC foundation/kernel support modules used by the SAT
+  route;
 - builds the main SAT proof queue and bridge-callability modules;
-- runs the seven focused P vs NP SAT endpoint axiom-check files.
+- runs the focused P vs NP SAT endpoint axiom-check files and the combined
+  full-stack AASC/SAT axiom check.
 
 Pinned environment:
 
@@ -62,6 +71,20 @@ Pinned environment:
 
 The main proof-spine objects are in
 `MaleyLean/Papers/PvsNP/SATOperatorProofQueue.lean`.
+
+Key AASC foundation anchors:
+
+- `PaperTargetAdequacyForcesKernelRolesStatement`
+- `PaperConstructionForcesKernelStatement`
+- `PaperKernelNonDerivabilityStatement`
+- `PaperNothingDerivableBelowKernelStatement`
+- `PaperNecessityAndBivalenceOfAdmissibilityStatement`
+- `PaperAMetricBoundaryAndNonParameterizationStatement`
+- `PaperStructuralRigidityOfAdmissibilityInvariantClosedStatement`
+- `PaperExhaustionOfFoundationalConditionsClosedStatement`
+- `PaperGlobalSynthesisUnderCorpusClosuresClosedStatement`
+- `KernelAPlusAuditCertificate.ofKernelPacketAndUniqueness`
+- `KernelAPlusAuditCertificate.auditSurfaceComplete_holds`
 
 Key final anchors:
 
@@ -111,7 +134,8 @@ of the branch exclusion.
   spine consumed by the AASC route.
 - `MaleyLean/Papers/NonDegenerateConstructionAndKernelOfAdmissibility.lean` -
   kernel/admissibility support anchor.
-- `Checks/Axiom/` - focused Lean axiom-print and audit entry points.
+- `Checks/Axiom/` - focused Lean axiom-print and audit entry points, including
+  `PvsNPFullStackAASCAxiomCheck.lean` for the foundation-to-SAT stack.
 - `papers/pvsnp/` - manuscript-facing source/PDF snapshot, when present.
 - `reports/ledgers/` - manuscript ledger artifacts, when present.
 
