@@ -1,0 +1,4 @@
+patch,item,location,description
+Kernel cost lock,Cost of abandoning the kernel,Section 10,Adds denial/consequence table for abandoning target determinacy step evaluability act-time finality or same-regime fidelity
+Kernel cost lock,README update,README.md,Documents the kernel-cost denial-burden patch and final PDF copy
+Kernel cost lock,Verification notes,notes/verification_notes.md,Records rebuild and render spot checks for pages 42 and 43

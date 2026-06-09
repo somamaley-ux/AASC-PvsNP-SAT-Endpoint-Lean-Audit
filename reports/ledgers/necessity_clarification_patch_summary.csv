@@ -1,0 +1,7 @@
+item,status,description
+Necessity paragraph,completed,Added early subsection making explicit that AASC is the systematic consequence layer of kernel-neutral evaluability necessities rather than an optional framework.
+Target adequacy sharpening,completed,Added explicit statement that denying adequacy conditions changes the target rather than supplying a same-domain counterexample.
+Forced-role remark,completed,Added remark after target-adequacy lemma stating kernel terms name roles already forced by adequacy conditions.
+Endpoint-method sharpening,completed,Reframed endpoint method so branch exclusion is supplied by necessity constraints and AASC records fixed-domain consequences.
+Denial burden,completed,Added optional-overlay misframing as a denial target that must be converted into a kernel adequacy or consequence-theorem failure.
+Presentation sweep,completed,Swept the manuscript to preserve AASC-owned necessity framing and remove optional-framework language from theorem-facing exposition.

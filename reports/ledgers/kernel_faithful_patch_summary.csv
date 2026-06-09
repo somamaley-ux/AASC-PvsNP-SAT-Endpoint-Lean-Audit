@@ -1,0 +1,8 @@
+patch,status,summary
+Kernel-first interpretation,complete,The kernel is stated as the necessity condition for governed construction and all AASC machinery is downstream consequence.
+AASC-owned framing,complete,The manuscript presents branch exclusion as AASC-internal and Cook-Levin/Karp only as endpoint correspondence after CnfSATInPolyTime is obtained.
+Clay mathematical endpoint definition,complete,Clay-valid is defined only in the official mathematical endpoint sense and not as a procedural claim.
+Direct Lean-chain alignment,complete,SepImg is aligned directly with CnfSATImageSeparatorBranch and the raw negative branch maps to SepImg by the formal lower-bound/no-positive bridge.
+Branch-local bridge ordering,complete,SepIndBridge and NoSepDisc are invoked inside the image-separator contradiction chain rather than as freestanding consequences of context alone.
+Endpoint-use lemma,complete,The manuscript states explicitly that SepImg is theorem-bearing endpoint use before applying kernel-forced no-independent-discriminator closure.
+Presentation sweep,complete,Draft-style bridge language and obsolete residual/reportability/lower-standing routes were removed from the main proof spine.

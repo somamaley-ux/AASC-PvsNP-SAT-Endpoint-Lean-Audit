@@ -1,0 +1,6 @@
+patch_id,location,edit_type,purpose
+DIL-001,after abstract before table of contents,added unnumbered section,front-load dependency order and exclude optional-framework parse
+DIL-002,Section 3.1 after kernel forced-role-name remark,added lemma and proof,force binary concession structure: grant adequacy conditions or exit theorem-bearing target class
+DIL-003,Section 10 opening,added objection-classification paragraph,classify optional-framework objections as dependency-inversion objections requiring theorem-level adequacy failure
+DIL-004,build scripts,updated final PDF copy targets,refresh all named manuscript PDFs from rebuilt build/main.pdf
+DIL-005,verification,added rendered dependency-lock page set and contact sheet,verify patched PDF visually at relevant insertion pages

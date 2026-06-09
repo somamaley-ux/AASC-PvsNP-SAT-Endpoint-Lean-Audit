@@ -1,0 +1,11 @@
+class,standing denial burden,attacked claim
+kernel necessity failure,Show a theorem-bearing endpoint can preserve fixed target fixed carrier theorem-status distinction downstream reuse redescription stability and act-time finality while lacking one kernel role,thm:kernel-necessity
+A+ consequence failure,Show a named A+ component is not forced by kernel plus fixed-domain closure,thm:a-plus
+ordinary theoremhood failure,Show ordinary theoremhood is not kernel-internal,thm:ordinary-theoremhood-kernel-internal
+raw negative bridge failure,Show the raw negative SAT branch does not transport to CnfSATImageSeparatorBranch under the SAT lower-bound/no-positive equivalence,thm:bare-negative-forces-image
+SAT-local bridge failure,Show the image-separator branch does not invoke the SAT-local same-domain independence bridge on the fixed context-bound CNF model,thm:sat-local-bridge-instantiated
+image separator asymmetry failure,Show SepImg plus the branch-local SepIndBridge does not yield the independent separator discriminator,thm:image-separator-requires-independent-discriminator
+endpoint-use failure,Show SepImg is not theorem-bearing endpoint use of the SAT image-separator branch,thm:image-separator-endpoint-use
+no-discriminator failure,Show image-separator endpoint use does not trigger kernel-forced no-independent-discriminator closure,thm:no-independent-sat-separator-classifier
+bare complement failure,Show SepBare is not the raw complement of PosRaw on the unrestricted finite CNF-SAT carrier,thm:bare-complement
+endpoint correspondence failure,Show CnfSATInPolyTime does not imply P=NP under the standard Cook-Levin/Karp endpoint correspondence,cor:pnp

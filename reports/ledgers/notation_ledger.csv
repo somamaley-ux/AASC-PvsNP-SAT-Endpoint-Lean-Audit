@@ -1,0 +1,13 @@
+symbol,meaning,layer
+ClayCtx,Fixed SAT endpoint carrier and branch-slot context,context
+PosRaw,CnfSATInPolyTime,raw positive
+SepBare,Raw complement branch not PosRaw,bare negative
+SepImg,Formal SAT image-separator branch CnfSATImageSeparatorBranch R model induced by the raw negative branch,image separator
+DirPos,Direct constructive occupation of the positive CNF-SAT endpoint,SAT asymmetry
+SepIndBridge,Branch-local SAT independence bridge invoked by SepImg on the context-bound CNF model,SAT asymmetry
+SepDisc,Independent same-domain endpoint-status discriminator induced by SepImg under SepIndBridge,SAT asymmetry
+NoSepDisc,Kernel-forced no-independent-separator-discriminator closure triggered by image-separator endpoint use,consequence layer
+Aplus,Kernel-forced consequence package for endpoint use,consequence layer
+Asep,Role-specific separator status factor downstream only,classification
+Apos,Positive report status factor downstream only,classification
+PosClay,PosRaw and Apos,positive Clay mathematical endpoint

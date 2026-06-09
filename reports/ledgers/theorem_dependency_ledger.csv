@@ -1,0 +1,15 @@
+order,label,statement_role,depends_on
+1,def:clay-valid-math-endpoint,"Clay-valid means official mathematical endpoint only",official target definitions
+2,thm:construction-forces-kernel,"Non-degenerate construction forces Adm/St/Ref/Irr",kernel-neutral target adequacy
+3,thm:a-plus,"Endpoint use plus kernel and fixed domain force A+ consequence layer",kernel closure theorems
+4,thm:positive-direct-occupation,"Positive CNF-SAT branch directly occupies constructive endpoint carrier",SAT branch definitions
+5,thm:raw-positive-formal-positive,"PosRaw equals CnfPositiveEndpoint on the context-bound CNF model",def:bare; def:cnf-model-of-context
+6,cor:bare-negative-formal,"SepBare gives CnfSATBareNegativeBranch on the context-bound CNF model",thm:bare-complement; thm:raw-positive-formal-positive
+7,thm:bare-negative-forces-image,"SepBare transports directly to SepImg",cor:bare-negative-formal; SAT lower-bound/no-positive equivalence
+8,thm:image-separator-requires-independent-discriminator,"SepImg plus branch-local bridge induces SepDisc",SAT operator bridge
+9,thm:no-sepdisc-excludes-sepdisc,"NoSepDisc excludes SepDisc",def:sepdisc-nosepdisc
+10,thm:no-independent-sat-separator-classifier,"Endpoint use of SepImg activates NoSepDisc",kernel-forced discriminator rigidity
+11,thm:no-image-sep,"SepImg is impossible",thm:image-separator-requires-independent-discriminator; thm:no-independent-sat-separator-classifier
+12,thm:no-bare-sep,"SepBare is impossible",thm:bare-negative-forces-image; thm:no-image-sep
+13,thm:positive,"PosRaw follows",thm:bare-complement; thm:no-bare-sep
+14,cor:pnp,"CnfSATP implies P=NP",Cook-Levin/Karp endpoint correspondence

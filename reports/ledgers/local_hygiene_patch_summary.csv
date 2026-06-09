@@ -1,0 +1,6 @@
+item,patch
+1,Added PosRaw <-> CnfPositiveEndpoint bridge on context-bound CNF model
+2,Added SepBare -> CnfSATBareNegativeBranch corollary
+3,Added SepDisc/NoSepDisc definitions and NoSepDisc -> not SepDisc theorem
+4,Changed canonical model binding to instantiated m_SAT rather than arbitrary model
+5,Rebuilt PDF and verified clean final log

@@ -1,0 +1,8 @@
+item,status,description
+Lean appendix,completed,Replaced brief Lean support section with release-based Lean4 SAT operator bridge appendix
+Audit release,completed,Copied Lean audit v1.0.0 zip and key environment/audit files into source_material
+Theorem anchors,completed,Added release line numbers and manuscript-to-Lean correspondence for final proof spine
+Critical proof snippets,completed,Included raw-negative bridge image-separator discriminator and contradiction theorem snippets
+Axiom surface,completed,Documented focused #print axioms targets and standard Lean/classical/mathlib baseline
+References,completed,Added Zenodo and GitHub Lean audit references
+Build verification,completed,Rebuilt PDF with no unresolved references/citations or overfull/underfull boxes

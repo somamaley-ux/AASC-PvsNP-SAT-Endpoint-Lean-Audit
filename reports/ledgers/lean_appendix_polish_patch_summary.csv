@@ -1,0 +1,4 @@
+patch_id,area,change
+LP-01,Lean appendix,Added endpoint-use theorem excerpt for cnfSATImageSeparatorBranch_endpointUse
+LP-02,Lean appendix,Added focused axiom-output table for nine proof-spine theorem anchors
+LP-03,Verification,Rebuilt PDF and regenerated verification renders/contact sheet

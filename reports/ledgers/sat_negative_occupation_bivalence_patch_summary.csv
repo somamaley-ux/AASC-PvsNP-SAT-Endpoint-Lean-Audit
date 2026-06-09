@@ -1,0 +1,4 @@
+object_type,location,patch,lean_anchors,notes
+subsection,src/main.tex Section 6,SAT Negative Occupation Exhaustion and Endpoint-Status Bivalence,cnfSATNegativeOccupation_exhaustion; cnfSATNegativeOccupation_nonoptional; cnfSATGovernedEndpointUse_bivalent; cnfSATNegativeGovernedEndpointUse_has_separatorStatus; cnfSATImageSeparatorBranch_of_negativeGovernedEndpointUse,Blocks third-status/optional-representation reading of official negative endpoint
+appendix,src/main.tex Appendix A,Lean declaration/theorem/correspondence/axiom table updates,282d4ad; a938648,Records new Lean-side anchor names supplied by patch list
+denial_burden,src/main.tex Section 10,Added denial route for occupation-exhaustion and endpoint-status-bivalence locks,thm:sat-negative-occupation-nonoptional; thm:negative-governed-endpoint-use-separator,Forces objections to attack the new SAT-local locks directly

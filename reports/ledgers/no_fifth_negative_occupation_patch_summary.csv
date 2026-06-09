@@ -1,0 +1,5 @@
+patch_id,file,location,change,purpose
+no_fifth_negative_occupation,src/main.tex,after theorem Image-separator branch impossible,"Added paragraph No fifth negative occupation","Explicitly collapses any alleged non-positive non-separator governed negative endpoint occupation to bookkeeping, hidden selector/third-status refinement, repair, or carrier/domain shift."
+no_fifth_negative_occupation,README.md,overview and patch summary,"Updated project description and main file list","Records the final hardening patch and new named final PDF."
+no_fifth_negative_occupation,notes/verification_notes.md,verification notes,"Added build/render verification entry","Documents build success and page-40 render verification."
+no_fifth_negative_occupation,build.sh,final PDF copies,"Added P_equals_NP_AASC_NoFifthOccupationLock_Final.pdf copy","Provides a named final PDF for the no-fifth-negative-occupation lock version."

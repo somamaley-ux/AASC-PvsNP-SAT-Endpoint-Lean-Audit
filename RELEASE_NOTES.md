@@ -19,6 +19,9 @@ Included:
 - Audit runner: `scripts/check-pvsnp-sat-operator-bridge-audit.ps1`.
 - Manuscript-facing PDF/source and ledger artifacts when available from the
   workspace.
+- Final manuscript snapshot refreshed from the June 9 hardening bundle,
+  including the no-fifth-negative-occupation and endpoint-status-bivalence
+  manuscript ledgers.
 
 Verification command:
 
