@@ -173,6 +173,8 @@
 \newcommand{\LocalCountercase}{\mathsf{LocalCountercase}}
 \newcommand{\LocalCountercaseStanding}{\mathsf{LocalCountercaseStanding}}
 \newcommand{\ReductioCountercase}{\mathsf{ReductioCountercase}}
+\newcommand{\OfficialCNFSATRoute}{\mathsf{OfficialCNFSATRoute}}
+\newcommand{\ProjectionRoleContent}{\mathsf{ProjectionRoleContent}}
 
 \title{
 \(P=NP\) by Exclusion of the SAT Separator Endpoint\\[0.5em]
@@ -189,7 +191,7 @@ This manuscript proves \(P=NP\) by excluding the SAT separator endpoint on the u
 
 The proof is kernel-first. Theorem-bearing endpoint use is treated as governed construction, and governed construction is possible only under the kernel of admissibility, standing, reference, and irreversibility. The downstream AASC machinery is therefore not an external classifier or a source of theorem standing; it is the fixed-domain consequence layer forced by kernel necessity. Ordinary theoremhood, positive or negative, is kernel-internal when it is genuine theoremhood rather than raw trace. Ordinary theoremhood alone is distinct from official endpoint resolution: when ordinary mathematical practice uses a theorem as the official resolution of a fixed problem endpoint, the act fixes target, carrier, branch, theorem-status, downstream reuse, act-time finality, and redescription-stable endpoint role. That is exactly theorem-bearing endpoint use.
 
-The decisive step is the SAT-local endpoint asymmetry. The positive branch directly occupies the constructive endpoint carrier. The raw negative branch, by contrast, first transports by the SAT lower-bound/no-positive equivalence into standard lower-bound normal form and candidate endpoint-image exclusion. That support-level lower-bound content is not automatically forbidden. The fixed SAT endpoint image has a single occupation interface: positive encoded non-failing candidate occupation. The candidate-image carrier is nevertheless adequate for the official raw split: the positive raw branch is image occupation, and the bare negative branch is candidate-image exclusion, i.e. non-occupation of that same image. Universal candidate failure is therefore non-occupation of that image, not coequal occupation of it. This single-interface fact alone is non-explosive: it does not forbid lower bounds, non-occupation theorems, or negative complexity results. The contradiction arises only when non-occupation is used as the official same-carrier endpoint-resolving separator occupation. Under that endpoint use, it induces an independent same-domain endpoint-status discriminator, while the same endpoint-use act triggers the kernel-forced no-independent-discriminator closure. Hence the SAT separator route is unavailable.
+The decisive step is the SAT-local endpoint asymmetry. The positive branch directly occupies the constructive endpoint carrier. The raw negative branch, by contrast, first transports by the SAT lower-bound/no-positive equivalence into standard lower-bound normal form and candidate endpoint-image exclusion. That support-level lower-bound content is not automatically forbidden. The fixed SAT endpoint image has a single occupation interface: positive encoded non-failing candidate occupation. The candidate-image carrier is nevertheless adequate for the official raw split: the positive raw branch is image occupation, and the bare negative branch is candidate-image exclusion, i.e. non-occupation of that same image. When ordinary mathematical practice chooses the standard CNF-SAT endpoint route for official resolution, that projection fixes the endpoint-role content of both outcomes; a negative resolution cannot coherently accept the CNF-SAT route while refusing the candidate-image non-occupation role that the route assigns. Universal candidate failure is therefore non-occupation of that image, not coequal occupation of it. This single-interface fact alone is non-explosive: it does not forbid lower bounds, non-occupation theorems, or negative complexity results. The contradiction arises only when non-occupation is used as the official same-carrier endpoint-resolving separator occupation. Under that endpoint use, it induces an independent same-domain endpoint-status discriminator, while the same endpoint-use act triggers the kernel-forced no-independent-discriminator closure. Hence the SAT separator route is unavailable.
 
 It follows that separator endpoint occupation is excluded. The final endpoint step does not use the false principle that raw truth implies theoremhood, and it does not route a temporary reductio assumption through a global negative endpoint outcome. It uses ordinary local reductio discipline: in a proof by cases or reductio, the exact complement branch may be introduced with temporary derivational standing as the live countercase. For the official SAT split, \(\SepBare\) enters the reductio route only when introduced as the live exact-complement assumption against \(\PosRaw\). That exact-complement use yields local endpoint-countercase standing, and the local countercase induces local separator occupation \(\LocalSepImgOcc\), which produces the same forbidden separator-discriminator contradiction as global separator occupation while remaining a local subproof role. The local assumption of \(\SepBare\) therefore discharges to \(\neg\SepBare\) by the exact-complement annotation-discharge rule: the proof-role annotation is not an added object-level premise. Raw complementarity then yields \(\PosRaw\). Therefore arbitrary finite CNF-SAT is decidable in deterministic polynomial time. The final passage from \(\CnfSATP\) to \(P=NP\) is the standard Cook--Levin/Karp endpoint correspondence. The proof of branch exclusion is AASC-internal; external complexity theory is used only to identify the official endpoint consequence.
 \end{abstract}
@@ -209,6 +211,8 @@ The live proof spine is intentionally short. In this display, \(O_R^-\) abbrevia
 \[
 \begin{aligned}
 \OrdOfficialRes_R(B)&\Rightarrow \EndpointUse_R(B),\\[2pt]
+\OfficialCNFSATRoute(R,model)&\Rightarrow \bigl(\Pclass=\NPclass\leftrightarrow\PosRaw\leftrightarrow\SATEndpointImageOcc(model)\bigr)\\[-1pt]
+&\hspace{5em}\wedge\bigl(\Pclass\neq\NPclass\leftrightarrow\SepBare\leftrightarrow\CandImageExcl(model)\bigr),\\[2pt]
 \NonDeg_{\mathsf{SAT}}(R,model) &\Rightarrow \KSAT \Rightarrow \Aplus_{\mathsf{SAT}},\\[2pt]
 \SepBare &\Rightarrow \StdLB(model) \Rightarrow \CandImageExcl(model),\\[2pt]
 \PosRaw &\leftrightarrow \SATEndpointImageOcc(model),\\[2pt]
@@ -223,15 +227,6 @@ The live proof spine is intentionally short. In this display, \(O_R^-\) abbrevia
 \SepDisc(model)\wedge\neg\SepDisc(model) &\Rightarrow \bot.
 \end{aligned}
 \]
-The symmetric outcome carrier and the SAT endpoint-image carrier are connected by the standard CNF-SAT projection:
-\[
-\OutcomePvNP\xrightarrow{\mathrm{SAT}}
-\begin{cases}
-\Pclass=\NPclass \mapsto \SATEndpointImageOcc(model),\\
-\Pclass\neq\NPclass \mapsto \CandImageExcl(model).
-\end{cases}
-\]
-Accordingly, ordinary theorem-bearing negative resolution remains ordinary theoremhood as proof practice, but after SAT projection its endpoint role is candidate-image non-occupation. If that role is used with official endpoint force on the fixed carrier, it is classified by the endpoint-discriminator trichotomy rather than by vocabulary preference.
 Thus \(\SepImgOcc\) is impossible. The final endpoint step is not an inference from a raw hypothetical negative case to official resolution, does not assume endpoint-complete evaluation, and does not promote a local reductio assumption into a global negative endpoint outcome. It uses raw bivalence plus local countercase discipline in the official endpoint-closure proof:
 \[
 \begin{aligned}
@@ -249,7 +244,7 @@ The proof does not infer standing from raw truth; it uses ordinary local assumpt
 The proof does not retype raw non-polynomiality in one step. The raw negative branch first becomes standard SAT lower-bound normal form on the context-bound encoded candidate image. That normal form becomes candidate endpoint-image exclusion. The candidate-image carrier is not a one-sided surrogate for the official split: on the context-bound carrier, \(\PosRaw\) is image occupation and \(\SepBare\) is image non-occupation. Candidate endpoint-image exclusion is still support-level lower-bound content unless it is used as the official endpoint-resolving negative branch. Ordinary theoremhood is proof legitimacy, not endpoint-role equivalence. If ordinary mathematical practice treats a theorem as the official resolution of the fixed endpoint, the act is \(\EndpointUse_R\): it fixes target, carrier, branch, theorem status, downstream reuse, act-time finality, and lawful-redescription stability. The fixed endpoint image has a single occupation interface: encoded non-failing polynomial-time candidate occupation. Universal candidate failure is therefore not a coequal occupant of that image; it is non-occupation of that image. Only when that non-occupation is used as the official endpoint resolution does it become separator endpoint-image occupation and independent endpoint-status work. This is the SAT analogue of the negative-branch bridge audit used throughout the AASC endpoint closure papers.
 
 \paragraph{Role map for the separator route.}
-The symbols in the proof spine deliberately mark different roles. The carrier-adequacy theorem pairs the official raw split with the image interface: \(\PosRaw\) is positive image occupation and \(\SepBare\) is candidate-image exclusion on the same exact encoded image. \(\CandImageExcl(model)\) is support-level universal candidate failure over that encoded candidate image. \(\SepImgOcc\) is endpoint-resolution use of that exclusion as separator occupation. \(\SATEndpointImageOcc(model)\) is positive image occupation by an encoded non-failing polynomial-time SAT candidate. \(\NonPositiveStatusWork_R(model)\) is same-carrier non-occupation status determination under official endpoint use. \(\SepDisc(model)\) is the independent separator discriminator induced by that endpoint-status work. \(\OrdOfficialRes_R(B)\) records ordinary mathematical use of a theorem as the official resolution of branch \(B\); by the ordinary-resolution bridge it is not a looser status than \(\EndpointUse_R(B)\). \(\EndpointCounterforce_R(B)\) records the narrower role in which a raw branch is asserted with force to defeat endpoint closure. \(\ReductioCountercase_R(\SepBare;\PosRaw)\) records the proof-act annotation generated when the sole local assumption \([\SepBare]^i\) is opened as the live exact-complement assumption against \(\PosRaw\), rather than as inert background syntax; it is not an added object-level premise, and the annotation-discharge theorem ensures that a contradiction in the annotated subproof discharges \([\SepBare]^i\) itself. \(\LocalCountercase_R(\SepBare)\) records the temporary derivational-standing role induced by that exact-complement use. Truth without endpoint standing is allowed as epistemic or raw status, but it has no endpoint-counterexample force. Ordinary theorem-bearing non-occupation is not a fifth endpoint role: it is ordinary theoremhood as proof legitimacy and independent non-positive endpoint-status work as endpoint role once official use and SAT projection are fixed. Single-interface typing alone proves none of these forbidden consequences; the contradiction requires either global separator occupation \(\SepImgOcc\) or local separator occupation \(\LocalSepImgOcc(R,model)\) to induce \(\SepDisc(model)\), together with the corresponding no-independent closure yielding \(\neg\SepDisc(model)\).
+The symbols in the proof spine deliberately mark different roles. The carrier-adequacy theorem pairs the official raw split with the image interface: \(\PosRaw\) is positive image occupation and \(\SepBare\) is candidate-image exclusion on the same exact encoded image. \(\CandImageExcl(model)\) is support-level universal candidate failure over that encoded candidate image. \(\SepImgOcc\) is endpoint-resolution use of that exclusion as separator occupation. \(\SATEndpointImageOcc(model)\) is positive image occupation by an encoded non-failing polynomial-time SAT candidate. \(\NonPositiveStatusWork_R(model)\) is same-carrier non-occupation status determination under official endpoint use. \(\SepDisc(model)\) is the independent separator discriminator induced by that endpoint-status work. \(\OrdOfficialRes_R(B)\) records ordinary mathematical use of a theorem as the official resolution of branch \(B\); by the ordinary-resolution bridge it is not a looser status than \(\EndpointUse_R(B)\). \(\EndpointCounterforce_R(B)\) records the narrower role in which a raw branch is asserted with force to defeat endpoint closure. \(\ReductioCountercase_R(\SepBare;\PosRaw)\) records the proof-act annotation generated when the sole local assumption \([\SepBare]^i\) is opened as the live exact-complement assumption against \(\PosRaw\), rather than as inert background syntax; it is not an added object-level premise, and the annotation-discharge theorem ensures that a contradiction in the annotated subproof discharges \([\SepBare]^i\) itself. \(\LocalCountercase_R(\SepBare)\) records the temporary derivational-standing role induced by that exact-complement use. Truth without endpoint standing is allowed as epistemic or raw status, but it has no endpoint-counterexample force. Single-interface typing alone proves none of these forbidden consequences; the contradiction requires either global separator occupation \(\SepImgOcc\) or local separator occupation \(\LocalSepImgOcc(R,model)\) to induce \(\SepDisc(model)\), together with the corresponding no-independent closure yielding \(\neg\SepDisc(model)\). \(\OfficialCNFSATRoute(R,model)\) records that the standard unrestricted finite CNF-SAT correspondence is being used as the route of official resolution, rather than merely as a tool for support-level lower-bound analysis. Ordinary theorem-bearing non-occupation is not a separate endpoint role: it is proof legitimacy for the act whose endpoint role, after the accepted CNF-SAT projection and endpoint use, is candidate-image non-occupation. Once support, bookkeeping, carrier shift, positive occupation, and coequal image occupation are removed, the endpoint-discriminator trichotomy leaves only the independent same-domain separator role. Once that independent role is identified, ordinary mathematical practice has no separate exemption from the consequence layer: ordinary official resolution is \(\EndpointUse_R\), endpoint use instantiates the kernel, and the kernel forces \(\Aplus\), including no-independent-discriminator closure.
 
 \section*{Dependency-Inversion Exclusion}
 \addcontentsline{toc}{section}{Dependency-Inversion Exclusion}
@@ -372,6 +367,10 @@ The symmetric problem-outcome carrier is the two-output presentation
   \OutcomePvNP=\{\Pclass=\NPclass,\;\Pclass\neq\NPclass\}.
 \]
 It is a legitimate broad problem-outcome presentation. It is not the fixed positive CNF-SAT candidate-image carrier used by the branch-exclusion proof. Moving from \(\SATEndpointImageOcc(model)\) to \(\OutcomePvNP\) changes the endpoint interface from candidate-image occupation to two-outcome classification.
+\end{definition}
+
+\begin{definition}[Official CNF-SAT resolution route]\label{def:official-cnf-sat-resolution-route}
+\(\OfficialCNFSATRoute(R,model)\) means that the standard unrestricted finite CNF-SAT correspondence is being used as the route of official resolution for the ordinary \(P\) versus \(NP\) endpoint on the context-bound encoded candidate image. It is stronger than using CNF-SAT as a tool for lower-bound support, examples, reductions, or local obstruction analysis: it says that the official resolution is being read through the CNF-SAT endpoint carrier itself. The predicate does not assert the positive branch, does not assert the negative branch, and does not create endpoint standing. It fixes the route by which the symmetric outcome carrier is projected onto the SAT endpoint-image carrier.
 \end{definition}
 
 \begin{definition}[Endpoint classification layer]\label{def:clay-layer}
@@ -1559,6 +1558,41 @@ For theorem-bearing endpoint use on a fixed domain,
 Endpoint use plus fixed-domain closure yields the A+ consequence package by Theorem~\ref{thm:a-plus}. The AMetric boundary excludes selector, ranking, metric, or parameter work at the endpoint boundary. Bivalence excludes third endpoint status. Standing as reuse-stable admissibility and the unique admissible interior exclude a second same-domain endpoint gate. Conservation excludes creation, recovery, transfer, or amplification of standing by an extra carrier. Transport closure excludes same-domain redescription changes. Therefore no independent same-domain endpoint-status discriminator survives. By Theorem~\ref{thm:rigidity}, any attempted realization is governance-equivalent, illicit same-domain selector work, domain-changing, or bookkeeping; the independent same-domain case is the illicit case.
 \end{proof}
 
+
+\begin{corollary}[A+ consequences bind ordinary official endpoint resolution]
+\label{cor:aplus-binds-ordinary-official-resolution}
+Let \(B\) be a branch used as the ordinary official resolution of a fixed endpoint on a fixed domain. If an endpoint-status discriminator \(C\) for that use is independent same-domain work, then the same endpoint use also triggers the \(\Aplus\) no-independent-discriminator closure against \(C\):
+\[
+\begin{aligned}
+  &\OrdOfficialRes_R(B)\wedge\FixedDom(R)\wedge\IndDisc_R(C,B)\\
+  &\qquad\Rightarrow
+  \Aplus_R(B)\wedge\neg\IndDisc_R(C,B).
+\end{aligned}
+\]
+\end{corollary}
+
+\begin{proof}
+By Theorem~\ref{thm:ordinary-official-resolution-is-endpoint-use}, ordinary official endpoint resolution is \(\EndpointUse_R(B)\). Theorem~\ref{thm:a-plus} gives \(\Aplus_R(B)\) from \(\EndpointUse_R(B)\wedge\FixedDom(R)\). Theorem~\ref{thm:independent-discriminator-forbidden} says that no independent same-domain endpoint-status discriminator survives under theorem-bearing endpoint use on the fixed domain. Hence the identified independent discriminator is excluded. The conclusion is not an optional overlay on ordinary mathematics; it is the fixed-domain consequence of the endpoint-use role already supplied by ordinary official resolution.
+\end{proof}
+
+\begin{remark}[A+ is not an optional overlay on ordinary practice]
+\label{rem:aplus-not-optional-overlay}
+The manuscript does not require ordinary mathematical practice to adopt AASC vocabulary. It requires only that ordinary practice, when it performs official endpoint resolution on a non-degenerate fixed carrier, cannot consistently maintain both that the act is \(\EndpointUse_R\) and that it is exempt from the fixed-domain consequences of \(\EndpointUse_R\). By the kernel concession lemma, any assessment that grants determinate target identity, step evaluability, act-time finality, and same-regime fidelity has already granted the kernel roles under whatever terminology it prefers. The \(\Aplus\) layer is downstream of those roles; it is not a discretionary second standard.
+\end{remark}
+
+\begin{corollary}[EndpointUse plus trichotomy binds the independent role]
+\label{cor:endpointuse-trichotomy-aplus-binding}
+Suppose an ordinary official endpoint-resolution act on a fixed carrier is classified by the endpoint-discriminator trichotomy as independent same-domain endpoint-status work. Then the no-independent-discriminator consequence applies to that very act. In symbols, for any discriminator \(C\) attached to branch \(B\),
+\[
+  \OrdOfficialRes_R(B)\wedge\FixedDom(R)\wedge\IndDisc_R(C,B)
+  \Rightarrow \neg\IndDisc_R(C,B).
+\]
+\end{corollary}
+
+\begin{proof}
+This is the second component of Corollary~\ref{cor:aplus-binds-ordinary-official-resolution}. The trichotomy identifies the role; ordinary official resolution supplies endpoint use; the kernel-forced \(\Aplus\) consequence layer excludes the independent role. Ordinary theoremhood as proof legitimacy does not suspend that consequence once the theorem is used as official endpoint resolution.
+\end{proof}
+
 \begin{corollary}[Role-specific classification is consequence, not source]\label{cor:role-specific-classification}
 If a branch has a role-specific endpoint status, that status is admissible only as a consequence of endpoint use under the kernel-forced fixed-domain interface. It does not create standing for the branch.
 \end{corollary}
@@ -2083,6 +2117,36 @@ Theorem~\ref{thm:single-occupation-interface-sat} identifies the occupant type o
 means theorem-bearing endpoint-status work over the fixed context-bound CNF-SAT candidate image. It assigns non-occupation status to that image, preserves the same carrier and encoded candidate model, does not occupy the positive candidate interface, and is not proof support, bookkeeping, carrier shift, repair, or lawful coequal image occupation.
 \end{definition}
 
+\begin{theorem}[Exhaustiveness of endpoint-role classification on the projected SAT carrier]
+\label{thm:projected-sat-role-exhaustiveness}
+On the unrestricted finite CNF-SAT endpoint-image carrier, after the standard CNF-SAT projection is accepted for official resolution, no stable middle endpoint role remains between positive occupation, lawful coequal occupation, and independent non-positive status work. More precisely, suppose the following are fixed: the context-bound CNF-SAT carrier, the official CNF-SAT resolution route, endpoint use of the act, candidate-image non-occupation as its projected endpoint-role content, and same-domain preservation. If the act is not support, not bookkeeping, not repair, not carrier shift, not positive candidate occupation, and not lawful coequal image occupation, then the act is independent same-domain endpoint-status work. In the SAT image this is the separator-discriminator role:
+\[
+\begin{aligned}
+&\ClayCtx\wedge\FixedDom(R)\wedge\ModelOfCnf(model,R)
+  \wedge\OfficialCNFSATRoute(R,model)\\
+&\quad\wedge\EndpointUse_R(B)\wedge\CandImageExcl(model)\\
+&\quad\wedge\neg\SATEndpointImageOcc(model)
+  \wedge\neg\LawfulCoequalImageOcc_R(model)\\
+&\qquad\Rightarrow \SepDisc(model),
+\end{aligned}
+\]
+provided the act is used as theorem-bearing endpoint resolution rather than support or bookkeeping.
+\end{theorem}
+
+\begin{proof}
+The hypotheses place the act on the fixed unrestricted finite CNF-SAT candidate-image carrier and make the CNF-SAT correspondence the route of official endpoint resolution. Theorem~\ref{thm:sat-projection-fixes-endpoint-role-content} gives the endpoint-role content of a negative resolution on that route: candidate-image non-occupation. Theorem~\ref{thm:single-occupation-interface-sat} gives the single occupation interface of the image, so positive occupation is exactly encoded non-failing polynomial-time candidate occupation. Corollary~\ref{cor:candidate-image-exclusion-not-coequal-occupation} and Theorem~\ref{thm:negative-coequal-requires-interface-change} exclude the reading of candidate-image exclusion as either positive occupation or coequal image occupation. Endpoint use excludes support-only and bookkeeping roles; fixed domain excludes carrier shift; act-time finality excludes repair. Thus the act is theorem-bearing, endpoint-resolving, same-domain, non-positive, non-coequal, non-support, non-bookkeeping, non-repair, and non-carrier-shifting.
+
+By Theorem~\ref{thm:endpoint-discriminator-trichotomy}, endpoint-status work on a fixed domain is bookkeeping, governance-equivalent to the already admitted interface, independent same-domain work, or domain-shifting. The listed exclusions remove bookkeeping and domain shift. The single-interface theorem removes governance-equivalence to positive occupation because the act assigns non-occupation of the positive candidate image. The coequal-image route is excluded by Theorem~\ref{thm:negative-coequal-requires-interface-change}. The remaining trichotomy branch is independent same-domain endpoint-status work. On the SAT candidate image, Theorem~\ref{thm:non-positive-status-work-induces-sepdisc} identifies that work with \(\SepDisc(model)\).
+\end{proof}
+
+\begin{remark}[Proof legitimacy does not neutralize endpoint role]
+Ordinary theoremhood establishes that a proof act meets mathematical standards of justification. It does not determine the endpoint role that act performs once it is used as official resolution on a fixed endpoint image. On the projected SAT carrier, an official negative theorem has the endpoint-role content of candidate-image non-occupation. Proof legitimacy does not cancel, override, or reclassify that role. It only says that the act is theorem-bearing rather than heuristic or unsupported.
+\end{remark}
+
+\begin{remark}[Single-interface typing feeds the trichotomy]
+The single-interface theorem is not an endpoint-closure theorem by itself. It supplies one premise of the trichotomy elimination: on the fixed positive CNF-SAT candidate-image carrier, the only image-occupation interface is encoded non-failing candidate occupation. Any official endpoint-resolving act that determines non-occupation of that same image is therefore non-positive status work. If it is not support, bookkeeping, repair, carrier shift, or coequal image occupation, the endpoint-discriminator trichotomy classifies it as independent same-domain endpoint-status work.
+\end{remark}
+
 \begin{theorem}[Non-positive status work induces the separator discriminator]\label{thm:non-positive-status-work-induces-sepdisc}
 On the fixed SAT endpoint image, non-positive endpoint-status work is separator-discriminator work:
 \[
@@ -2098,46 +2162,44 @@ On the fixed SAT endpoint image, non-positive endpoint-status work is separator-
 By Definition~\ref{def:non-positive-status-work-sat}, the act settles endpoint status on the same fixed encoded candidate image while not occupying the positive interface, not remaining support or bookkeeping, not shifting carrier, and not occupying a lawful coequal image role. Theorem~\ref{thm:single-occupation-interface-sat} supplies the single occupation interface, and Theorem~\ref{thm:negative-coequal-requires-interface-change} excludes coequal negative occupation on that image. Thus the act is an endpoint-status discriminator that is not bookkeeping, not governance-equivalent to positive candidate occupation, and not domain-shifting. By Theorem~\ref{thm:endpoint-status-work-criterion-independence}, it is independent same-domain endpoint-status governance. In the SAT image, such independent same-domain non-positive status work is exactly the separator discriminator \(\SepDisc(model)\).
 \end{proof}
 
+
 \begin{theorem}[Ordinary theorem-bearing non-occupation is not a fifth endpoint role]
 \label{thm:ordinary-nonoccupation-not-fifth-role}
-Ordinary theoremhood supplies proof legitimacy, not a separate endpoint role. On the fixed context-bound SAT endpoint carrier, if an ordinary theorem-bearing negative act is used as the official endpoint resolution and is projected through the CNF-SAT endpoint image as candidate-image non-occupation, then it is the separator-discriminator role rather than a fifth endpoint role:
+On the fixed context-bound SAT endpoint image, ordinary theorem-bearing non-occupation is not a role outside the endpoint-discriminator trichotomy. More precisely, if the accepted CNF-SAT endpoint projection identifies the ordinary negative branch with candidate-image exclusion and that branch is used with official endpoint force, then the induced endpoint role is the separator discriminator:
 \[
-\begin{aligned}
-  &\ClayCtx\wedge\FixedDom(R)\wedge\ModelOfCnf(model,R)\wedge \ProofR(\SepBare)\\
-  &\qquad\wedge\OrdOfficialRes_R(\neg\PosRaw)\wedge(\SepBare\leftrightarrow\CandImageExcl(model))\\
-  &\Rightarrow \SepDisc(model).
-\end{aligned}
+\begin{gathered}
+  \ClayCtx,\quad \FixedDom(R),\quad \ModelOfCnf(model,R),\\
+  \OrdThm(\SepBare),\quad \OrdOfficialRes_R(\neg\PosRaw),\\
+  \SepBare\leftrightarrow\CandImageExcl(model)
+\end{gathered}
+\quad\Rightarrow\quad \SepDisc(model).
 \]
 \end{theorem}
 
 \begin{proof}
-The premise \(\ProofR(\SepBare)\) says that the negative content is ordinary theorem-bearing mathematics. That status is granted; it does not classify the endpoint role. The premise \(\OrdOfficialRes_R(\neg\PosRaw)\) says that the theorem is used as the official endpoint resolution, so Theorem~\ref{thm:ordinary-official-resolution-is-endpoint-use} gives endpoint-use force rather than support-only or bookkeeping use. The accepted projection \(\SepBare\leftrightarrow\CandImageExcl(model)\) gives candidate-image non-occupation on the fixed encoded CNF-SAT carrier. By Theorem~\ref{thm:single-occupation-interface-sat}, positive endpoint-image occupation is exhausted by encoded non-failing polynomial-time candidate occupation; by Theorem~\ref{thm:negative-coequal-requires-interface-change}, this negative content is not coequal image occupation on the same carrier. Fixed context and model exclude carrier shift. Thus the act is theorem-bearing, endpoint-resolving, same-domain, non-positive, non-coequal, non-support, non-bookkeeping endpoint-status work. The endpoint-discriminator trichotomy, Theorem~\ref{thm:endpoint-discriminator-trichotomy}, leaves only independent same-domain endpoint-status work. In the SAT image, that role is exactly \(\SepDisc(model)\), equivalently by Theorem~\ref{thm:non-positive-status-work-induces-sepdisc}. Therefore ordinary theorem-bearing non-occupation is not a fifth endpoint role.
+Ordinary theoremhood certifies proof legitimacy; it does not determine endpoint-interface role. By Theorem~\ref{thm:ordinary-official-resolution-is-endpoint-use}, ordinary official endpoint resolution is endpoint use rather than support or bookkeeping. By Theorem~\ref{thm:sat-projection-fixes-endpoint-role-content}, and in particular by the accepted carrier projection \(\SepBare\leftrightarrow\CandImageExcl(model)\), the endpoint content of the negative branch on the SAT image is candidate-image non-occupation. Corollary~\ref{cor:candidate-image-exclusion-not-coequal-occupation} and Theorem~\ref{thm:negative-coequal-requires-interface-change} show that this is not positive candidate occupation and not coequal image occupation. The fixed context excludes carrier shift, and official endpoint use excludes support-only and bookkeeping roles. Thus the hypotheses of Theorem~\ref{thm:projected-sat-role-exhaustiveness} are exactly the hypotheses of the alleged middle role. That theorem classifies the act as independent same-domain endpoint-status work, and Theorem~\ref{thm:non-positive-status-work-induces-sepdisc} identifies that work on the SAT image with \(\SepDisc(model)\). Therefore ordinary theorem-bearing non-occupation supplies no fifth endpoint role.
 \end{proof}
 
-\begin{theorem}[Remaining same-mode objections are exhausted]
+\begin{theorem}[Exhaustion of remaining same-mode objections]
 \label{thm:remaining-same-mode-objections-exhausted}
-After the SAT projection, single-interface typing, ordinary-resolution bridge, local countercase discipline, and endpoint-discriminator trichotomy are in force, every same-mode objection to the separator contradiction must deny at least one of the following three links:
-\begin{enumerate}
-\item the SAT projection and carrier correspondence
+After the official CNF-SAT resolution route, SAT endpoint projection, single-interface typing, ordinary-resolution bridge, exact-complement reductio discipline, and endpoint-discriminator trichotomy are in force, any same-mode objection to the separator contradiction must deny at least one of the following three links:
+\begin{enumerate}[label=(\roman*)]
+\item the projection link pairing the symmetric outcome carrier with the SAT endpoint-image carrier, including
 \[
-\begin{aligned}
-  \Pclass=\NPclass &\leftrightarrow \PosRaw
-    \leftrightarrow \SATEndpointImageOcc(model),\\
-  \Pclass\neq\NPclass &\leftrightarrow \SepBare
-    \leftrightarrow \CandImageExcl(model).
-\end{aligned}
+\begin{gathered}
+  \Pclass=\NPclass\leftrightarrow\PosRaw\leftrightarrow\SATEndpointImageOcc(model),\\
+  \Pclass\neq\NPclass\leftrightarrow\SepBare\leftrightarrow\CandImageExcl(model).
+\end{gathered}
 \]
-\item the endpoint-discriminator trichotomy that classifies theorem-bearing, endpoint-resolving, same-domain, non-positive, non-coequal, non-support, non-bookkeeping, non-carrier-shifting endpoint-status work as independent same-domain governance;
-\item the kernel-forced \(\Aplus\) no-independent-discriminator consequence excluding that independent same-domain separator role.
+\item the trichotomy link classifying a theorem-bearing, endpoint-resolving, same-domain, non-positive, non-coequal, non-support, non-bookkeeping, non-carrier-shifting act as independent endpoint-status work;
+\item the \(\Aplus\) closure link excluding independent same-domain endpoint-status discriminators on the fixed kernel-governed carrier.
 \end{enumerate}
+Appeal to ordinary theoremhood alone does not supply a fourth endpoint role.
 \end{theorem}
 
 \begin{proof}
-Consider any same-mode objection after the accepted projection has identified the positive outcome with candidate-image occupation and the negative outcome with candidate-image non-occupation. If the objection denies that ordinary negative resolution projects to \(\CandImageExcl(model)\), it attacks the projection link. If it accepts the projection but denies that official non-positive endpoint-status work becomes \(\SepDisc(model)\), it attacks the endpoint-discriminator trichotomy or its SAT instantiation. If it accepts \(\SepDisc(model)\) but denies contradiction with \(\NoSepDisc(model)\), it attacks the \(\Aplus\) no-independent-discriminator consequence. The appeal to ordinary theoremhood supplies no additional case: ordinary theoremhood is proof legitimacy, while endpoint-role classification is determined by official use and carrier role. Support-only, bookkeeping, carrier shift, positive occupation, and coequal image occupation have already been separated. Therefore no fourth same-mode route remains.
+Let a same-mode objection preserve the fixed carrier, context-bound candidate image, official endpoint use, the official CNF-SAT resolution route, and the accepted CNF-SAT projection. If the objection denies that the symmetric negative outcome becomes candidate-image exclusion on the SAT carrier, it attacks the projection link. If it accepts the projection but claims that official theorem-bearing non-occupation is not support, not bookkeeping, not carrier shift, not positive occupation, not coequal image occupation, and yet also not independent endpoint-status work, then it attacks the endpoint-discriminator trichotomy. If it accepts the independent discriminator classification but denies the contradiction with \(\NoSepDisc(model)\), it attacks the \(\Aplus\) no-independent-discriminator consequence. No further case remains: ordinary theoremhood is proof legitimacy, not endpoint-role classification, and Theorem~\ref{thm:ordinary-nonoccupation-not-fifth-role} excludes ordinary theorem-bearing non-occupation as a fifth endpoint role.
 \end{proof}
-
-\paragraph{Referee closure note.}
-The ordinary-practice objection has no remaining middle role once the SAT projection is accepted. An ordinary theorem-bearing negative resolution remains ordinary theoremhood as proof practice, but under the accepted CNF-SAT projection its endpoint role is candidate-image non-occupation. Since official endpoint resolution excludes support-only and bookkeeping use, the fixed carrier excludes domain shift, single-interface typing excludes positive occupation and coequal image occupation, and Theorem~\ref{thm:endpoint-discriminator-trichotomy} exhausts same-domain endpoint-status roles, the only remaining classification is independent same-domain endpoint-status work. A same-mode refutation must therefore attack the SAT projection, the endpoint-discriminator trichotomy, or the \(\Aplus\) no-independent-discriminator consequence.
 
 \begin{theorem}[Separator occupation is non-positive status work]\label{thm:sepocc-is-non-positive-status-work}
 In the fixed SAT context, separator endpoint-image occupation is non-positive endpoint-status work over the candidate image:
@@ -2240,6 +2302,22 @@ For the fixed SAT endpoint carrier, separator endpoint-image occupation in endpo
 Endpoint use is governed construction, hence it instantiates the kernel by Theorem~\ref{thm:kernel-necessity}. The fixed-domain A+ consequence layer then supplies the AMetric boundary, unique admissible interior, standing conservation, no-selector discipline, transport closure, and structural rigidity. On a fixed SAT endpoint carrier, an endpoint-status discriminator must be bookkeeping, governance-equivalent, domain-changing, or independent same-domain governance work by Theorem~\ref{thm:endpoint-discriminator-trichotomy}. The first two cases do not yield \(\SepDisc(model)\), the third is not the same SAT endpoint domain, and the fourth is excluded by the kernel-forced consequence layer. Thus separator endpoint-image use on the context-bound SAT model yields \(\NoSepDisc(model)\).
 \end{proof}
 
+
+
+\begin{corollary}[A+ consequences bind the SAT separator discriminator]
+\label{cor:aplus-binds-sat-separator-discriminator}
+On the fixed context-bound CNF-SAT carrier, once an endpoint act has been classified as the SAT separator discriminator, endpoint use binds that discriminator to the no-independent closure:
+\[
+\begin{aligned}
+  &\ClayCtx\wedge\FixedDom(R)\wedge\ModelOfCnf(model,R)\wedge\EndpointUse_R(\SepImgOcc)\wedge\SepDisc(model)\\
+  &\qquad\Rightarrow \NoSepDisc(model)\wedge\neg\SepDisc(model).
+\end{aligned}
+\]
+\end{corollary}
+
+\begin{proof}
+The endpoint-use premise activates the kernel and the \(\Aplus\) consequence layer by Theorems~\ref{thm:kernel-necessity} and~\ref{thm:a-plus}. The SAT-local form of the no-independent closure is Theorem~\ref{thm:no-independent-sat-separator-classifier}, which yields \(\NoSepDisc(model)\). Theorem~\ref{thm:no-sepdisc-excludes-sepdisc} then gives \(\neg\SepDisc(model)\). Thus, after projection and trichotomy have identified the separator discriminator, ordinary endpoint use cannot retain that discriminator while exempting it from the same \(\Aplus\) closure.
+\end{proof}
 
 \begin{theorem}[Separator endpoint-image occupation impossible]\label{thm:no-image-sep}
 In the fixed SAT context,
@@ -2363,6 +2441,55 @@ For the positive half, Definition~\ref{def:bare} identifies \(\PosRaw\) with \(\
 For the negative half, Theorem~\ref{thm:bare-complement} gives \(\SepBare\leftrightarrow\neg\PosRaw\). The encoded negative endpoint exactness theorem, Theorem~\ref{thm:encoded-negative-endpoint-exactness}, identifies \(\neg\CnfSATP\) with universal failure of every encoded polynomial-time candidate on the fixed candidate image. That universal failure is exactly \(\CandImageExcl(model)\) by Definition~\ref{def:image} and Theorem~\ref{thm:standard-lower-bound-candidate-image-exclusion}. Therefore \(\SepBare\leftrightarrow\CandImageExcl(model)\). Both equivalences are on the same context-bound model and the same unrestricted finite CNF-SAT carrier, so the carrier represents the official raw split without changing endpoint interface.
 \end{proof}
 
+
+
+\subsection{Projection and Ordinary Practice}\label{subsec:projection-ordinary-practice}
+
+Ordinary mathematical practice may present \(P\) versus \(NP\) symmetrically. The present argument does not deny the legitimacy of that presentation. It claims only that once the standard unrestricted finite CNF-SAT endpoint route is used for official resolution, the symmetric statement is decomposed on the fixed carrier into candidate-image occupation and candidate-image non-occupation. The negative resolution remains ordinary theoremhood as a matter of proof legitimacy, but its endpoint-role content on the SAT carrier is non-occupation. Accepting the CNF-SAT correspondence for support-level lower-bound work does not trigger this classification; accepting it as the route of official endpoint resolution does.
+
+\begin{theorem}[SAT projection faithfully carries both symmetric outcomes]\label{thm:sat-projection-faithfully-carries-outcomes}
+On the context-bound unrestricted finite CNF-SAT endpoint carrier, use of the standard CNF-SAT route gives the faithful projection
+\[
+\begin{gathered}
+  \OfficialCNFSATRoute(R,model)\wedge\ClayCtx\wedge\FixedDom(R)\wedge\ModelOfCnf(model,R)\\
+  \Rightarrow
+  \bigl[(\Pclass=\NPclass\leftrightarrow\PosRaw\leftrightarrow\SATEndpointImageOcc(model))\\
+  \wedge(\Pclass\neq\NPclass\leftrightarrow\SepBare\leftrightarrow\CandImageExcl(model))\bigr].
+\end{gathered}
+\]
+\end{theorem}
+
+\begin{proof}
+The Cook--Levin/Karp endpoint correspondence identifies \(\Pclass=\NPclass\) with deterministic polynomial-time decidability of arbitrary finite CNF-SAT, which is \(\PosRaw\). The carrier-adequacy theorem, Theorem~\ref{thm:candidate-image-carrier-adequacy-raw-split}, identifies \(\PosRaw\) with \(\SATEndpointImageOcc(model)\) on the same context-bound candidate image. Negating the same endpoint gives \(\Pclass\neq\NPclass\), which corresponds to \(\SepBare\), and Theorem~\ref{thm:candidate-image-carrier-adequacy-raw-split} identifies \(\SepBare\) with \(\CandImageExcl(model)\). Thus the symmetric outcome carrier and the SAT endpoint-image carrier are not rival interfaces once the CNF-SAT route is used for official resolution; the latter is the fixed endpoint-image projection of the former.
+\end{proof}
+
+\begin{theorem}[SAT projection fixes endpoint-role content]\label{thm:sat-projection-fixes-endpoint-role-content}
+If the standard CNF-SAT correspondence is used as the route of official resolution for \(P\) versus \(NP\) on the unrestricted finite CNF-SAT carrier, then the symmetric outcomes are evaluated through the fixed CNF-SAT endpoint-image carrier. Under that projection, \(\Pclass=\NPclass\) has the endpoint-role content of positive candidate-image occupation, and \(\Pclass\neq\NPclass\) has the endpoint-role content of candidate-image non-occupation. Consequently, a negative resolution cannot coherently claim to resolve the official endpoint through the CNF-SAT route while treating its content as merely an uninterpreted symmetric negative answer rather than as non-occupation on the fixed positive candidate-image carrier.
+\end{theorem}
+
+\begin{proof}
+By Definition~\ref{def:official-cnf-sat-resolution-route}, \(\OfficialCNFSATRoute(R,model)\) fixes the CNF-SAT endpoint carrier as the route of official resolution, not merely as a support-level tool. Theorem~\ref{thm:sat-projection-faithfully-carries-outcomes} then carries both symmetric outcomes to their SAT endpoint-image roles. The positive outcome is \(\SATEndpointImageOcc(model)\), i.e. positive encoded non-failing candidate occupation. The negative outcome is \(\CandImageExcl(model)\), i.e. candidate-image non-occupation. Refusing that role while still claiming official resolution through CNF-SAT would accept the correspondence for endpoint force while refusing what the corresponding fixed image represents. That is not same-route endpoint use; it is either support-level use of CNF-SAT, which does not resolve the endpoint, or a change of endpoint interface.
+\end{proof}
+
+\begin{corollary}[Official negative resolution through CNF-SAT is non-positive status work]\label{cor:official-negative-resolution-through-cnf-sat-nonpositive-work}
+On the fixed context-bound carrier,
+\[
+\begin{gathered}
+  \ClayCtx\wedge\FixedDom(R)\wedge\ModelOfCnf(model,R)\wedge
+  \OfficialCNFSATRoute(R,model)\\
+  \wedge\OrdOfficialRes_R(\Pclass\neq\NPclass)
+  \Rightarrow \NonPositiveStatusWork_R(model).
+\end{gathered}
+\]
+\end{corollary}
+
+\begin{proof}
+By Theorem~\ref{thm:sat-projection-fixes-endpoint-role-content}, an official negative resolution through the CNF-SAT route has endpoint-role content \(\CandImageExcl(model)\) on the fixed SAT endpoint image. Since the use is ordinary official endpoint resolution, Theorem~\ref{thm:ordinary-official-resolution-is-endpoint-use} makes it endpoint use rather than support or bookkeeping. Corollary~\ref{cor:candidate-image-exclusion-not-coequal-occupation} and Theorem~\ref{thm:negative-coequal-requires-interface-change} show that this content is non-occupation of the positive candidate image and not coequal image occupation. The fixed context excludes carrier shift. Hence the act is non-positive endpoint-status work in the sense of Definition~\ref{def:non-positive-status-work-sat}.
+\end{proof}
+
+\begin{remark}[Projection is not optional once used for official resolution]\label{rem:projection-not-optional-once-used}
+The manuscript does not require all mathematical discussion of \(P\) versus \(NP\) to pass through the positive candidate-image carrier. It requires only this: if the CNF-SAT correspondence is the route by which the endpoint is officially resolved, then the branch roles are read through that correspondence. Accepting the CNF-SAT correspondence merely as a tool for lower-bound arguments, examples, or support does not trigger this classification. The classification is triggered only when the correspondence is used as the route of official endpoint resolution.
+\end{remark}
 
 \begin{definition}[Truth branch, epistemic status, and endpoint outcome]
 \label{def:truth-epistemic-endpoint-outcome}
@@ -2585,6 +2712,22 @@ For the fixed SAT endpoint carrier,
 Local separator occupation is a governed local proof act in the same fixed endpoint regime. It preserves the same carrier and model and performs endpoint-facing separator work inside the reductio subproof. Governed local endpoint use is subject to the same kernel-forced A+ consequence layer as global endpoint use: the AMetric boundary, unique admissible interior, standing conservation, no-selector discipline, transport closure, and structural rigidity do not suspend inside a reductio subproof. Therefore the local separator act cannot license an independent same-domain separator discriminator. This is the local form of Theorem~\ref{thm:no-independent-sat-separator-classifier}, and it yields \(\NoSepDisc(model)\).
 \end{proof}
 
+
+\begin{corollary}[A+ consequences bind local separator countercase use]
+\label{cor:aplus-binds-local-separator-countercase-use}
+Local separator occupation in the exact-complement reductio subproof is not exempt from the \(\Aplus\) no-independent-discriminator discipline:
+\[
+\begin{aligned}
+  &\ClayCtx\wedge\FixedDom(R)\wedge\ModelOfCnf(model,R)\wedge\LocalSepImgOcc(R,model)\\
+  &\qquad\Rightarrow \SepDisc(model)\wedge\NoSepDisc(model)\wedge\neg\SepDisc(model).
+\end{aligned}
+\]
+\end{corollary}
+
+\begin{proof}
+Theorem~\ref{thm:local-sepocc-induces-sepdisc} gives \(\SepDisc(model)\). Theorem~\ref{thm:local-sepocc-triggers-noindependent} gives \(\NoSepDisc(model)\). Theorem~\ref{thm:no-sepdisc-excludes-sepdisc} gives \(\neg\SepDisc(model)\). The point is the same as in the global endpoint-use case: local countercase use is a governed proof act on the same fixed endpoint carrier, so the kernel-forced \(\Aplus\) consequence layer does not suspend inside the reductio subproof.
+\end{proof}
+
 \begin{corollary}[Local separator occupation is impossible]
 \label{cor:local-sepocc-impossible}
 In the fixed SAT endpoint context,
@@ -2788,6 +2931,23 @@ Same-regime fidelity & Admissibility boundary & Carrier, domain, encoding image,
 
 Thus kernel denial has only two possible forms. Either it denies none of the four adequacy conditions, in which case the kernel has already been conceded under different vocabulary; or it denies at least one of them, in which case the objector is no longer preserving determinate same-domain theorem-bearing endpoint use. There is no third position from which one may reject the kernel while retaining the same official endpoint-resolution act.
 
+
+\subsection*{Remaining same-mode denial fork}
+After the official CNF-SAT resolution-route, carrier-projection, ordinary-resolution, local-countercase, trichotomy, and A+ binding results are in force, the ordinary-practice objection has no remaining middle role or exemption. A critic who accepts the standard CNF-SAT projection, the fixed candidate-image carrier, and the trichotomy classification must now deny one of three named links.
+\begin{center}
+\small
+\begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}p{0.24\linewidth}X}
+\toprule
+Remaining route & What must be shown \\
+\midrule
+Projection failure & The symmetric \(P=NP/P\neq NP\) outcome carrier does not faithfully project to the SAT endpoint-image carrier; in particular, \(P=NP\) is not \(\PosRaw\) / image occupation, or \(P\neq NP\) is not \(\SepBare\) / candidate-image exclusion. \\
+Trichotomy failure & There exists a theorem-bearing, endpoint-resolving, same-domain, non-positive, non-coequal, non-support, non-bookkeeping, non-repair, non-carrier-shifting role that is nevertheless not independent endpoint-status work. \\
+\(\Aplus\) failure & Endpoint use on a non-degenerate fixed SAT carrier does not bind the identified independent discriminator to the kernel-forced \(\Aplus\) no-independent-discriminator consequence. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+Appeals to ordinary mathematical practice do not by themselves meet any of these burdens. Ordinary theoremhood is granted; the remaining question is the endpoint role of that theorem-bearing act after the accepted SAT projection and official endpoint use.
+
 \subsection*{Right-mode objection targets}
 A standing mathematical objection must attack one of the following load-bearing claims.
 \begin{enumerate}
@@ -2805,6 +2965,10 @@ A standing mathematical objection must attack one of the following load-bearing 
 \item Reductio annotation discipline: show that \(\ReductioCountercase_R(\SepBare;\PosRaw)\) functions as an additional object-level premise rather than as the proof-act annotation of the sole discharged assumption \([\SepBare]^i\).
 \item Annotation-discharge discipline: show that contradiction derived in the annotated exact-complement subproof discharges only a strengthened assumption rather than the original object-level assumption \([\SepBare]^i\).
 \item Ordinary theoremhood shield: show that ordinary theoremhood used as official endpoint resolution is exempt from endpoint-role discipline while retaining official endpoint force.
+\item Projection-role content: show that ordinary practice can use the standard CNF-SAT correspondence as the route of official resolution while refusing the endpoint-role content assigned by that projection, namely positive candidate-image occupation for \(P=NP\) and candidate-image non-occupation for \(P\neq NP\).
+\item Ordinary theorem-bearing non-occupation: show that ordinary theorem-bearing non-occupation, after accepted SAT projection and official endpoint use, supplies a fifth endpoint role that is not support, bookkeeping, carrier shift, positive occupation, coequal image occupation, or independent endpoint-status work.
+\item Remaining denial fork: show that an objection to the separator contradiction avoids all three remaining targets--projection failure, trichotomy failure, and \(\Aplus\) failure.
+\item \(\Aplus\) binding for ordinary official resolution: show an ordinary official endpoint-resolution act that is \(\EndpointUse_R\) and is classified as independent by the trichotomy while nevertheless being exempt from the \(\Aplus\) no-independent-discriminator consequence.
 \item Standard encoded CNF model adequacy: identify a concrete failure of coverage, soundness, failure adequacy, or candidate-image exactness.
 \item Raw complementarity: show \(\SepBare\not\leftrightarrow\neg\PosRaw\) on the unrestricted finite CNF-SAT carrier.
 \item SAT-native bridge: show that \(\SepBare\) does not yield standard lower-bound normal form, or that standard lower-bound normal form is not candidate endpoint-image exclusion.
@@ -2813,8 +2977,6 @@ A standing mathematical objection must attack one of the following load-bearing 
 \item Single-interface theorem: show an endpoint-image occupant of the fixed CNF-SAT carrier that is not an encoded non-failing polynomial-time candidate, or show a same-carrier lawful coequal negative occupation interface inside the positive candidate image.
 \item Single-interface non-explosiveness: show that the proof derives contradiction from \(\CandImageExcl(model)\) alone, rather than from \(\SepImgOcc\Rightarrow\SepDisc(model)\) together with \(\EndpointUse_R(\SepImgOcc)\Rightarrow\NoSepDisc(model)\).
 \item Coequal-role denial: show that \(\SepBare\) is a lawful coequal endpoint role inside the same positive endpoint-image carrier rather than endpoint-status governance, without moving to the symmetric outcome carrier \(\OutcomePvNP\).
-\item Projection/interface denial: show that the symmetric \(P=NP/P\neq NP\) outcome carrier does not faithfully project to the CNF-SAT endpoint-image carrier, or that official resolution through CNF-SAT need not analyze \(P\neq NP\) as \(\CandImageExcl(model)\).
-\item Ordinary theorem-bearing non-occupation: exhibit ordinary theorem-bearing, endpoint-resolving, same-domain, non-positive, non-coequal, non-support, non-bookkeeping, non-carrier-shifting non-occupation that avoids the endpoint-discriminator classification of Theorem~\ref{thm:ordinary-nonoccupation-not-fifth-role}.
 \item Status-work typing: show same-domain non-positive endpoint-status work on the fixed candidate image that is neither positive occupation, support, bookkeeping, carrier shift, repair, lawful coequal image occupation, nor independent separator-discriminator work.
 \item No hidden fifth case: inhabit endpoint-resolving, same-carrier, non-governing candidate-image exclusion.
 \item Endpoint governance: show that official negative endpoint use can remain theorem-bearing while avoiding the occupation-exhaustion and endpoint-status-bivalence locks.
@@ -2824,22 +2986,6 @@ A standing mathematical objection must attack one of the following load-bearing 
 \item Route-locus exhaustion: show a same-carrier endpoint-resolving negative SAT route outside L1--L12.
 \item Cook--Levin/Karp endpoint correspondence: show that \(\CnfSATP\) does not imply \(P=NP\) under the standard NP-completeness correspondence.
 \end{enumerate}
-
-\subsection*{Remaining same-mode denial burden}
-After the ordinary-practice closure theorem, a same-mode objection has only three live routes unless it attacks an earlier bridge already listed above. First, it may deny the SAT projection and carrier correspondence, by showing that the symmetric problem outcomes fail to project to positive image occupation and candidate-image exclusion. Second, it may deny the endpoint-discriminator trichotomy, by exhibiting a theorem-bearing, endpoint-resolving, same-domain, non-positive, non-coequal, non-support, non-bookkeeping, non-carrier-shifting role that is not independent endpoint-status work. Third, it may deny the kernel-forced \(\Aplus\) no-independent-discriminator consequence, by accepting \(\SepDisc(model)\) while showing that \(\NoSepDisc(model)\) does not exclude it. Appeals to ordinary mathematical practice do not by themselves meet any of these burdens. Ordinary theoremhood is granted; the remaining question is the endpoint role of that theorem-bearing act after the CNF-SAT projection.
-
-\begin{center}
-\small
-\begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}p{0.28\linewidth}X}
-\toprule
-Remaining route & What must be shown \\
-\midrule
-Projection failure & The symmetric \(P=NP/P\neq NP\) carrier does not faithfully project to the CNF-SAT endpoint-image carrier, or \(P\neq NP\) does not become candidate-image exclusion under the standard SAT endpoint projection. \\
-Trichotomy failure & A theorem-bearing, endpoint-resolving, same-domain, non-positive, non-coequal, non-support, non-bookkeeping, non-carrier-shifting endpoint role that is not independent endpoint-status work. \\
-\(\Aplus\) failure & The independent separator-discriminator role is accepted, but the kernel-forced \(\Aplus\) consequence layer does not exclude it. \\
-\bottomrule
-\end{tabularx}
-\end{center}
 
 \subsection*{Faithful same-regime counterexample worksheet}
 A successful same-mode objection must complete at least one of the following tasks.
@@ -2859,14 +3005,14 @@ Ordinary official resolution & An ordinary endpoint-resolution act that fixes ta
 Endpoint counterforce without local separator route & A raw branch that defeats endpoint closure on the fixed carrier while avoiding local separator occupation. \\
 Raw-case promotion & A proof that the manuscript treats a merely hypothetical assumption of \(\SepBare\) as official negative endpoint resolution, rather than using the local countercase-to-local-separator route. \\
 Ordinary theoremhood shield & A proof that ordinary theoremhood used as official endpoint resolution remains exempt from endpoint-role discipline while retaining official endpoint force. \\
+Ordinary theorem-bearing non-occupation & A theorem-bearing, endpoint-resolving, same-domain, non-positive, non-coequal, non-support, non-bookkeeping, non-repair, non-carrier-shifting role that is not independent same-domain endpoint-status work. \\
+Remaining denial fork & A same-mode objection that accepts the SAT projection, the endpoint-discriminator trichotomy, and the \(\Aplus\) no-independent-discriminator consequence while still avoiding the separator contradiction. \\
 Single occupation interface & An occupant of the fixed CNF-SAT endpoint image that is not an encoded non-failing polynomial-time candidate, or a proof that universal candidate failure occupies that same image as a coequal occupant. \\
 Single-interface non-explosiveness & A proof that the manuscript infers contradiction from single-interface typing or \(\CandImageExcl(model)\) alone, rather than from endpoint-resolving separator occupation plus the no-independent-discriminator contradiction. \\
 Coequal endpoint & A proof that \(\SepBare\) is a lawful coequal endpoint role inside the same positive endpoint-image carrier, without changing to \(\OutcomePvNP\). \\
-Projection/interface & A failure of the bridge \(P=NP\leftrightarrow\PosRaw\leftrightarrow\SATEndpointImageOcc(model)\) or \(P\neq NP\leftrightarrow\SepBare\leftrightarrow\CandImageExcl(model)\) under the standard CNF-SAT endpoint correspondence. \\
-Ordinary theorem-bearing non-occupation & A theorem-bearing, endpoint-resolving, same-domain, non-positive, non-coequal, non-support, non-bookkeeping, non-carrier-shifting role that remains ordinary theoremhood but is not independent endpoint-status work. \\
 Endpoint governance & Endpoint-resolving candidate-image exclusion that is not proof support, not bookkeeping, not carrier shift, not positive occupation, not lawful coequal image occupation, and not endpoint-status governance. \\
 Independent discriminator & Image-separator endpoint use that does not induce \(\SepDisc(model)\), or an induced \(\SepDisc(model)\) compatible with \(\NoSepDisc(model)\). \\
-Final endpoint & A failure of the local reductio discharge from the annotated exact-complement assumption \([\SepBare]^i\), a failure of raw complementarity from \(\neg\SepBare\) to \(\PosRaw\), or a failure of the Cook--Levin/Karp correspondence from \(\CnfSATP\) to \(P=NP\). \\
+Final endpoint & A failure of \(\neg(\SepBare\wedge\OfficialEndpointResolution_R(\neg\PosRaw))\) in the official endpoint evaluation, or of \((\SepBare\leftrightarrow\neg\PosRaw)\Rightarrow\PosRaw\), or a failure of the Cook--Levin/Karp correspondence from \(\CnfSATP\) to \(P=NP\). \\
 \bottomrule
 \end{tabularx}
 \end{center}
@@ -2879,7 +3025,7 @@ The branch-exclusion argument is AASC-internal and kernel-first. The kernel is n
 
 On the fixed unrestricted finite CNF-SAT carrier, the positive branch is direct constructive endpoint occupation. The raw negative branch is ordinary logical negation at the bare level, but endpoint-bearing use of that negation is role-classified. If it remains proof support or ordinary proposition-targeted theoremhood, it does not resolve the official endpoint. If it changes carrier, it is not the same endpoint. If it is offered as the official negative endpoint resolution, it becomes endpoint use of the negative branch. The SAT-native lower-bound/no-positive bridge then transports it to standard lower-bound normal form, candidate endpoint-image exclusion, and the image-separator branch.
 
-The fixed SAT endpoint image has a single occupation interface: an encoded non-failing polynomial-time CNF-SAT candidate. Ordinary theorem-bearing non-occupation supplies proof legitimacy, not a fifth endpoint role. The candidate-image carrier is adequate for the official raw split: the positive branch is occupation of that image, and the bare negative branch is non-occupation of that same exact image. Universal candidate failure is therefore non-occupation of that image, not a lawful coequal occupant of it. This single-interface fact is not itself an endpoint-closure theorem and does not ban lower-bound or non-occupation statements. Treating the negative outcome as coequal belongs to the symmetric two-output problem carrier, not to the fixed positive candidate-image carrier used in the proof. When candidate-image non-occupation is used to resolve the endpoint on the same carrier, it performs non-positive endpoint-status work. The hidden-fifth alternative--endpoint resolution without endpoint-status work--is impossible. Separator endpoint-image occupation invokes the branch-local SAT independence bridge and induces an independent same-domain endpoint-status discriminator. The kernel-forced consequence layer excludes such discriminators. Therefore separator endpoint-image occupation is unavailable, the bare negative branch is excluded as the official endpoint-resolving branch, and official endpoint evaluation of the raw bivalent split plus raw complementarity yields \(\PosRaw\). Since \(\PosRaw\) is \(\CnfSATP\), arbitrary finite CNF-SAT is decidable in deterministic polynomial time. The standard Cook--Levin/Karp endpoint correspondence then gives \(\Pclass=\NPclass\). The remaining same-mode objections are exhausted by the projection/trichotomy/\(\Aplus\) fork: deny the SAT projection, deny the endpoint-discriminator trichotomy, or deny the kernel-forced no-independent-discriminator consequence. Ordinary mathematical practice supplies no stable middle classification once the projection and official endpoint use are accepted.
+The fixed SAT endpoint image has a single occupation interface: an encoded non-failing polynomial-time CNF-SAT candidate. The candidate-image carrier is adequate for the official raw split: the positive branch is occupation of that image, and the bare negative branch is non-occupation of that same exact image. Universal candidate failure is therefore non-occupation of that image, not a lawful coequal occupant of it. This single-interface fact is not itself an endpoint-closure theorem and does not ban lower-bound or non-occupation statements. Treating the negative outcome as coequal belongs to the symmetric two-output problem carrier, not to the fixed positive candidate-image carrier used in the proof. When candidate-image non-occupation is used to resolve the endpoint on the same carrier, it performs non-positive endpoint-status work. Ordinary theoremhood supplies proof legitimacy, not an exemption from endpoint-role classification. Once the ordinary negative theorem is used as official endpoint resolution after the SAT projection, it is not support, not bookkeeping, not carrier shift, not positive occupation, and not coequal image occupation; the endpoint-discriminator trichotomy therefore leaves only the independent separator-discriminator role. The kernel-forced consequence layer excludes such discriminators. Therefore separator endpoint-image occupation is unavailable, the bare negative branch is excluded in the live exact-complement reductio route, and raw complementarity yields \(\PosRaw\). Since \(\PosRaw\) is \(\CnfSATP\), arbitrary finite CNF-SAT is decidable in deterministic polynomial time. The standard Cook--Levin/Karp endpoint correspondence then gives \(\Pclass=\NPclass\). Ordinary mathematical practice is not asked to adopt AASC vocabulary; it is only asked not to split official endpoint force from the fixed-domain consequences of endpoint use. Once ordinary official resolution supplies endpoint use and the trichotomy identifies an independent discriminator, Corollary~\ref{cor:aplus-binds-ordinary-official-resolution} binds that act to the \(\Aplus\) no-independent-discriminator consequence. The remaining same-mode denial burden is exhausted by failure of the official CNF-SAT projection, failure of the endpoint-discriminator trichotomy, or failure of the \(\Aplus\) no-independent-discriminator consequence.
 
 
 
@@ -3391,8 +3537,10 @@ The proof ladder is ordered so that each theorem cites prior results only. The f
 \item Non-degenerate construction forces \(\Adm,\St,\RefK,\Irr\), and endpoint use is governed construction.
 \item Ordinary official endpoint resolution is endpoint use: ordinary theoremhood used as official resolution fixes the target, carrier, branch, theorem-status, downstream reuse, act-time finality, and redescription-stable endpoint role.
 \item Ordinary theoremhood does not shield official endpoint resolution from endpoint-role discipline; it certifies proof legitimacy but not endpoint-interface equivalence.
-\item Ordinary theorem-bearing non-occupation is not a fifth endpoint role after SAT projection and official endpoint use; it is ordinary proof legitimacy plus independent non-positive endpoint-status work by trichotomy.
-\item Remaining same-mode objections are exhausted by projection failure, trichotomy failure, or \(\Aplus\) no-independent-discriminator failure.
+\item Exhaustiveness of endpoint-role classification on the projected SAT carrier shows that theorem-bearing, endpoint-resolving, same-domain, non-positive, non-coequal, non-support, non-bookkeeping, non-repair, non-carrier-shifting work has no stable middle role.
+\item Ordinary theorem-bearing non-occupation is not a fifth endpoint role after SAT projection and official endpoint use; proof legitimacy does not neutralize endpoint-role classification.
+\item A+ consequences bind ordinary official endpoint resolution: once ordinary practice supplies endpoint use and the trichotomy identifies an independent role, the no-independent-discriminator closure applies.
+\item Remaining same-mode objections are exhausted by the projection link, the endpoint-discriminator trichotomy, or the \(\Aplus\) no-independent-discriminator consequence.
 \item Raw bivalence is separated from endpoint standing: a hypothetical negative case is not official endpoint resolution.
 \item Truth branch, epistemic status, and endpoint outcome are separated: unresolved status is not a third endpoint outcome.
 \item Endpoint completion is derived, not assumed: raw bivalence is combined with local countercase discipline and exclusion of local separator occupation.
@@ -3438,8 +3586,6 @@ The encoded model omits candidates. & Model adequacy requires coverage, soundnes
 Ordinary negative theoremhood is banned. & Theorems~\ref{thm:negative-theorem-not-defective} and~\ref{thm:ordinary-sat-falsity-role-classified} explicitly allow ordinary negative theoremhood. \\
 Ordinary negative resolution stays inside ordinary mathematical practice and therefore avoids \(\Aplus\). & Ordinary theoremhood as theoremhood is harmless. But ordinary theoremhood used as official endpoint resolution fixes target, carrier, branch, theorem-status, downstream reuse, act-time finality, and redescription-stable endpoint role. By Theorem~\ref{thm:ordinary-official-resolution-is-endpoint-use}, that act is \(\EndpointUse_R\). \\
 The manuscript retypes ordinary negative proof as forbidden governance. & No. It first distinguishes ordinary theoremhood from official endpoint resolution. The negative theorem remains ordinary theoremhood as proof legitimacy; when used as official endpoint resolution on the fixed candidate image, its endpoint role is non-positive status work by Theorem~\ref{thm:ordinary-official-negative-sat-resolution-nonpositive-status-work}. \\
-Ordinary theorem-bearing non-occupation avoids the discriminator classification. & No. Ordinary theoremhood gives proof legitimacy. Once the theorem is used as official endpoint resolution and projected onto the fixed SAT candidate image, its endpoint content is candidate-image non-occupation. Since it is not support, bookkeeping, carrier shift, positive occupation, or coequal image occupation, Theorem~\ref{thm:ordinary-nonoccupation-not-fifth-role} classifies it as independent same-domain endpoint-status work. \\
-The manuscript forces standard practice to accept AASC typing. & No. It asks only for role classification after standard SAT projection. If the theorem resolves the official CNF-SAT endpoint negatively, it has endpoint-use force. Its endpoint role is then determined by carrier typing and the endpoint-discriminator trichotomy, not by vocabulary preference. \\
 \(\SepBare\) is retyped by fiat. & No one-step retyping is used: \(\SepBare\) passes through standard lower-bound normal form and candidate endpoint-image exclusion before endpoint-governance classification. \\
 \(\SepImgOcc\) is an arbitrary extra layer. & \(\SepImgOcc\) is the endpoint-occupation form of candidate-image exclusion under official endpoint-resolution use; support-level lower-bound content remains \(\CandImageExcl(model)\). \\
 Candidate-image exclusion is an algorithmic separator. & The theorem-level discriminator is not a witness selector or algorithmic separator; it classifies endpoint status for already-fixed candidate roles. \\
@@ -3448,6 +3594,10 @@ Candidate-image exclusion is automatically forbidden. & No. Candidate-image excl
 The negative branch is ordinary coequal resolution. & Correct only on the symmetric two-output problem carrier \(\OutcomePvNP\). On the fixed SAT endpoint-image carrier, the negative branch is non-occupation of the positive candidate image, not coequal occupation of that image. \\
 The positive route is assumed as the sole admitted interface. & Not assumed. The single-interface theorem proves it from endpoint-image typing: occupation of the fixed SAT image is exactly encoded non-failing polynomial-time candidate occupation. \\
 Standard practice does not call this governance. & The proof uses governance extensionally: status-determining work on the same fixed image that is not equivalent to positive occupation, support, bookkeeping, carrier shift, repair, or coequal image occupation. \\
+Ordinary theorem-bearing non-occupation avoids the discriminator classification. & No. Ordinary theoremhood gives proof legitimacy. Once the theorem is used as official endpoint resolution and projected onto the fixed SAT candidate image, its endpoint content is candidate-image non-occupation. Since it is not support, bookkeeping, repair, carrier shift, positive occupation, or coequal image occupation, Theorem~\ref{thm:projected-sat-role-exhaustiveness} classifies it as independent same-domain endpoint-status work. \\
+Ordinary practice accepts endpoint use and independence but rejects \(\Aplus\). & No. Ordinary practice need not use AASC vocabulary, but ordinary official resolution supplies \(\EndpointUse_R\). By Corollary~\ref{cor:aplus-binds-ordinary-official-resolution}, endpoint use on a fixed carrier triggers the kernel-forced \(\Aplus\) no-independent-discriminator consequence for the identified independent role. \\
+Proof legitimacy neutralizes endpoint-role classification. & No. Proof legitimacy and endpoint role are different dimensions. Legitimacy makes the act theorem-bearing; endpoint-role classification determines what the act does on the fixed carrier once it is used for official resolution. \\
+The manuscript forces standard practice to accept AASC typing. & No. It asks only for role classification after standard SAT projection and official endpoint use. The vocabulary is AASC; the load-bearing facts are projection to candidate-image non-occupation, exclusion of non-governing roles, and the endpoint-discriminator trichotomy. \\
 Single-interface typing proves every positive existence endpoint. & No. The single-interface theorem only identifies the occupant type of this SAT endpoint image. Endpoint closure additionally requires endpoint-resolving separator occupation to induce \(\SepDisc(model)\) while endpoint use yields \(\NoSepDisc(model)\). \\
 The candidate-image carrier is a one-sided surrogate. & No. The carrier-adequacy theorem proves that the same image represents the official raw split: positive occupation corresponds to \(\PosRaw\), and image non-occupation corresponds to \(\SepBare\). \\
 The proof bans lower bounds globally. & The non-explosiveness theorem permits lower bounds, barriers, obstructions, and proof support. Only same-carrier endpoint-resolving separator governance is excluded. \\
@@ -3474,6 +3624,8 @@ Symbol & Meaning & Layer \\
 \(\EndpointUse\) & branch \(B\) offered as theorem-bearing endpoint use & endpoint act \\
 \(\OrdOfficialRes\) & ordinary mathematical use of a theorem-bearing act as the official resolution of branch \(B\) for a fixed endpoint; equivalent to endpoint use by Theorem~\ref{thm:ordinary-official-resolution-is-endpoint-use} & endpoint act \\
 \(\OrdThm\) & ordinary theoremhood/proof legitimacy before endpoint-role classification & theorem status \\
+\(\mathsf{NoFifthOrdNonOcc}\) & closure theorem stating that ordinary theorem-bearing non-occupation is not a fifth endpoint role after SAT projection and official endpoint use & endpoint discipline \\
+\(\mathsf{RemainingFork}\) & final same-mode objection fork: projection failure, trichotomy failure, or \(\Aplus\) failure & denial burden \\
 \begin{tabular}[t]{@{}l@{}}\(\mathsf{OfficialEndpoint}\)\\\(\mathsf{Resolution}\)\end{tabular} & ordinary theoremhood of \(\neg\PosRaw\) offered as the official negative endpoint resolution & endpoint act \\
 \begin{tabular}[t]{@{}l@{}}\(\EndpointClosureEval\)\end{tabular} & endpoint-closure counterforce discipline for the two-branch SAT target; open/unresolved status is epistemic, not an endpoint outcome & endpoint evaluation \\
 \begin{tabular}[t]{@{}l@{}}\(\UnresolvedEvalStatus\)\end{tabular} & epistemic or review status of the problem before or outside proof; not a third endpoint outcome & epistemic status \\
@@ -3483,6 +3635,8 @@ Symbol & Meaning & Layer \\
 \begin{tabular}[t]{@{}l@{}}\(\mathsf{Annotation}\)\\\(\mathsf{Discharge}\)\end{tabular} & admissibility rule for exact-complement reductio annotation: contradiction in the annotated subproof discharges the original assumption \([\SepBare]^i\), not a strengthened object-level conjunction & proof rule \\
 \begin{tabular}[t]{@{}l@{}}\(\mathsf{SATEndpoint}\)\\\(\mathsf{ImageOcc}\)\end{tabular} & occupation of the fixed positive CNF-SAT endpoint image & endpoint image \\
 \begin{tabular}[t]{@{}l@{}}\(\mathsf{Positive}\)\\\(\mathsf{CandidateOcc}\)\end{tabular} & existence of an encoded polynomial-time candidate whose decoded procedure has no SAT failure & endpoint image \\
+\begin{tabular}[t]{@{}l@{}}\(\mathsf{CNFRoute}\)\\\((R,model)\)\end{tabular} & standard unrestricted finite CNF-SAT correspondence used as the route of official resolution, not merely as lower-bound support & projection discipline \\
+\begin{tabular}[t]{@{}l@{}}\(\mathsf{Projection}\)\\\(\mathsf{RoleContent}\)\end{tabular} & endpoint-role content fixed by the CNF-SAT projection: positive occupation for \(P=NP\), candidate-image non-occupation for \(P\neq NP\) & projection discipline \\
 \(\ImageAdeq_{\mathsf{SAT}}\) & carrier-adequacy bridge \(\PosRaw\leftrightarrow\SATEndpointImageOcc(model)\) and \(\SepBare\leftrightarrow\CandImageExcl(model)\) on the context-bound candidate image & carrier adequacy \\
 \(\OutcomePvNP\) & symmetric two-output problem carrier \(\{P=NP,P\neq NP\}\); distinct from the positive candidate-image carrier & outcome carrier \\
 \begin{tabular}[t]{@{}l@{}}\(\mathsf{Endpoint}\)\\\(\mathsf{StatusWork}\)\end{tabular} & functional endpoint-status determination by a theorem-bearing act & consequence layer \\
@@ -3519,6 +3673,7 @@ Symbol & Meaning & Layer \\
 \(\mathsf{GovUse}\) & governed endpoint use on the finite CNF-SAT endpoint carrier & endpoint-status bivalence \\
 \(\mathsf{EndpointStatus}\) & two-status Lean surface: positive or separator & endpoint-status bivalence \\
 \(\Aplus\) & kernel-forced consequence package for endpoint use & consequence layer \\
+\(\Aplus_R(B)\) binding & ordinary official endpoint resolution supplies endpoint use, so the \(\Aplus\) no-independent-discriminator consequences bind any independent role identified by trichotomy & consequence layer \\
 \(\Asep\) & role-specific separator status factor, downstream only & classification \\
 \(\Apos\) & positive report status factor, downstream only & classification \\
 \(\PosClay\) & \(\PosRaw\wedge\Apos\) & positive Clay mathematical endpoint \\

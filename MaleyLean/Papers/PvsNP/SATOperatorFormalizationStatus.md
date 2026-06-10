@@ -118,6 +118,15 @@ CnfSATLocalCountercase
 CnfSATEndpointCounterforce
 CnfSATLocalImageSeparatorOccupation
 cnfSATReductioCountercase_impossible_of_noIndependentDiscriminator
+CnfSATOrdinaryOfficialEndpointResolution
+CnfSATTheoremBearingEndpointUse
+cnfSATOrdinaryOfficialEndpointResolution_is_endpointUse
+CnfSATAPlusEndpointUseBinding
+cnfSATAPlusNotOptionalOverlay_on_ordinaryOfficialResolution
+cnfSATAPlusConsequences_bind_ordinaryOfficialNegativeResolution
+cnfSATEndpointUse_trichotomy_binds_independentRole
+cnfSATAPlusConsequences_bind_satSeparatorDiscriminator
+cnfSATAPlusConsequences_bind_localSeparatorCountercaseUse
 ```
 
 `CnfSATOfficialEndpointEvaluation` records official evaluation of the raw
@@ -141,6 +150,15 @@ CnfSATLocalCountercase
 CnfSATEndpointCounterforce
 CnfSATLocalImageSeparatorOccupation
 cnfSATReductioCountercase_impossible_of_noIndependentDiscriminator
+CnfSATOrdinaryOfficialEndpointResolution
+CnfSATTheoremBearingEndpointUse
+cnfSATOrdinaryOfficialEndpointResolution_is_endpointUse
+CnfSATAPlusEndpointUseBinding
+cnfSATAPlusNotOptionalOverlay_on_ordinaryOfficialResolution
+cnfSATAPlusConsequences_bind_ordinaryOfficialNegativeResolution
+cnfSATEndpointUse_trichotomy_binds_independentRole
+cnfSATAPlusConsequences_bind_satSeparatorDiscriminator
+cnfSATAPlusConsequences_bind_localSeparatorCountercaseUse
 ```
 
 This records the final referee-facing distinction. Ordinary theoremhood is
@@ -150,6 +168,20 @@ same-mode objections must attack SAT projection/carrier correspondence, the
 endpoint-discriminator trichotomy, or the A+ no-independent-discriminator
 consequence. The local reductio path is also named without promoting a
 temporary exact-complement assumption into a global negative endpoint outcome.
+
+The A+ binding hardening layer is now named as well. Ordinary official
+endpoint resolution is `CnfSATOrdinaryOfficialEndpointResolution`, and
+`cnfSATOrdinaryOfficialEndpointResolution_is_endpointUse` records that it is
+theorem-bearing endpoint use rather than support-level theoremhood.
+`cnfSATAPlusNotOptionalOverlay_on_ordinaryOfficialResolution` packages that
+use with the kernel A+ certificate. The consequence binders
+`cnfSATAPlusConsequences_bind_ordinaryOfficialNegativeResolution`,
+`cnfSATEndpointUse_trichotomy_binds_independentRole`,
+`cnfSATAPlusConsequences_bind_satSeparatorDiscriminator`, and
+`cnfSATAPlusConsequences_bind_localSeparatorCountercaseUse` expose the June 11
+manuscript hardening that ordinary endpoint force cannot retain the
+independent separator role while rejecting the A+ no-independent-discriminator
+consequence layer.
 
 ## Current Endpoint Route
 

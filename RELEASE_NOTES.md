@@ -1,6 +1,6 @@
 # Release Notes
 
-## AASC P vs NP SAT Endpoint Full-Stack Lean Audit Archive v1.0.5
+## AASC P vs NP SAT Endpoint Full-Stack Lean Audit Archive v1.0.6
 
 This release packages the hardened Lean 4 audit archive for the AASC-first SAT
 endpoint proof spine.
@@ -54,12 +54,25 @@ Included:
 - Local reductio countercase routing through `CnfSATReductioCountercase`,
   `CnfSATLocalCountercase`, `CnfSATEndpointCounterforce`, and
   `cnfSATReductioCountercase_impossible_of_noIndependentDiscriminator`.
+- A+ binding hardening through
+  `CnfSATOrdinaryOfficialEndpointResolution`,
+  `cnfSATOrdinaryOfficialEndpointResolution_is_endpointUse`,
+  `CnfSATAPlusEndpointUseBinding`, and
+  `cnfSATAPlusNotOptionalOverlay_on_ordinaryOfficialResolution`, recording
+  that ordinary official endpoint resolution is endpoint use and that A+ is
+  downstream of that role rather than an optional overlay.
+- A+ consequence binders for the separator route:
+  `cnfSATAPlusConsequences_bind_ordinaryOfficialNegativeResolution`,
+  `cnfSATEndpointUse_trichotomy_binds_independentRole`,
+  `cnfSATAPlusConsequences_bind_satSeparatorDiscriminator`, and
+  `cnfSATAPlusConsequences_bind_localSeparatorCountercaseUse`.
 - Audit runner: `scripts/check-pvsnp-sat-operator-bridge-audit.ps1`.
 - Manuscript-facing PDF/source and ledger artifacts when available from the
   workspace.
-- Final manuscript snapshot refreshed from the June 10 ordinary-practice
-  closure bundle, including the ordinary theorem-bearing non-occupation and
-  local reductio countercase hardening.
+- Final manuscript snapshot refreshed from the June 11 A+ Binding Final
+  bundle, including the ordinary official endpoint-resolution binding, A+
+  non-optional overlay clarification, trichotomy binding, SAT separator
+  discriminator binding, and local separator countercase binding hardening.
 - Full-stack audit path exposed through
   `Checks/Axiom/PvsNPFullStackAASCAxiomCheck.lean`.
 

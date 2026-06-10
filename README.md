@@ -146,6 +146,15 @@ Key final anchors:
 - `CnfSATEndpointCounterforce`
 - `CnfSATLocalImageSeparatorOccupation`
 - `cnfSATReductioCountercase_impossible_of_noIndependentDiscriminator`
+- `CnfSATOrdinaryOfficialEndpointResolution`
+- `CnfSATTheoremBearingEndpointUse`
+- `cnfSATOrdinaryOfficialEndpointResolution_is_endpointUse`
+- `CnfSATAPlusEndpointUseBinding`
+- `cnfSATAPlusNotOptionalOverlay_on_ordinaryOfficialResolution`
+- `cnfSATAPlusConsequences_bind_ordinaryOfficialNegativeResolution`
+- `cnfSATEndpointUse_trichotomy_binds_independentRole`
+- `cnfSATAPlusConsequences_bind_satSeparatorDiscriminator`
+- `cnfSATAPlusConsequences_bind_localSeparatorCountercaseUse`
 - `cnfSATBareSeparator_impossible_of_context_noIndependentDiscriminator`
 
 The current status ledger is in
@@ -188,6 +197,19 @@ classification.  Remaining same-mode objections are exhausted by
 named through `CnfSATReductioCountercase`, `CnfSATLocalCountercase`,
 `CnfSATEndpointCounterforce`, and
 `cnfSATReductioCountercase_impossible_of_noIndependentDiscriminator`.
+
+The A+ binding hardening layer is explicit in the same Lean surface.  Ordinary
+official endpoint resolution is named by
+`CnfSATOrdinaryOfficialEndpointResolution`, and
+`cnfSATOrdinaryOfficialEndpointResolution_is_endpointUse` records that such
+resolution is theorem-bearing endpoint use, not mere support-level theoremhood.
+`cnfSATAPlusNotOptionalOverlay_on_ordinaryOfficialResolution` packages the
+kernel A+ certificate with that endpoint-use role.  The binding consequences
+are exposed through
+`cnfSATAPlusConsequences_bind_ordinaryOfficialNegativeResolution`,
+`cnfSATEndpointUse_trichotomy_binds_independentRole`,
+`cnfSATAPlusConsequences_bind_satSeparatorDiscriminator`, and
+`cnfSATAPlusConsequences_bind_localSeparatorCountercaseUse`.
 
 ## Scope Boundary
 

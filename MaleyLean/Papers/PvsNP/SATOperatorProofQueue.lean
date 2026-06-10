@@ -11118,6 +11118,165 @@ theorem cnfSATReductioCountercase_impossible_of_noIndependentDiscriminator
           (cnfSATLocalCountercase_of_reductioCountercase hReductio)))
 
 /--
+Ordinary official endpoint resolution: ordinary theoremhood used to settle a
+fixed endpoint branch.  This is intentionally an alias of the existing
+official endpoint-resolution package, keeping the manuscript's latest
+ordinary-practice vocabulary visible without creating a second endpoint
+standard.
+-/
+def CnfSATOrdinaryOfficialEndpointResolution
+    {Act Object : Type}
+    (R : MinimalConditionsForAdmissibleConstruction.ConstructionRegime Act Object)
+    (model : CnfEncodedCandidateModel)
+    (branch : Prop) : Prop :=
+  CnfSATOfficialEndpointResolution R model branch
+
+/-- The theorem-bearing endpoint-use role used by the A+ binding layer. -/
+def CnfSATTheoremBearingEndpointUse
+    {Act Object : Type}
+    (R : MinimalConditionsForAdmissibleConstruction.ConstructionRegime Act Object)
+    (model : CnfEncodedCandidateModel)
+    (branch : Prop) : Prop :=
+  CnfSATOfficialEndpointResolution R model branch
+
+/--
+Ordinary official endpoint resolution is endpoint use.  A theorem can remain
+ordinary support outside this predicate; once it is offered as official
+resolution of the fixed SAT endpoint, it is exactly the endpoint-use role.
+-/
+theorem cnfSATOrdinaryOfficialEndpointResolution_is_endpointUse
+    {Act Object : Type}
+    {R : MinimalConditionsForAdmissibleConstruction.ConstructionRegime Act Object}
+    {model : CnfEncodedCandidateModel}
+    {branch : Prop}
+    (hResolution : CnfSATOrdinaryOfficialEndpointResolution R model branch) :
+    CnfSATTheoremBearingEndpointUse R model branch :=
+  hResolution
+
+/--
+The A+ binding package for ordinary endpoint use: a kernel A+ certificate plus
+the endpoint-use act for the branch.  This records the manuscript claim that
+A+ is downstream of endpoint use, not an optional overlay.
+-/
+def CnfSATAPlusEndpointUseBinding
+    {Act Object : Type}
+    (R : MinimalConditionsForAdmissibleConstruction.ConstructionRegime Act Object)
+    (model : CnfEncodedCandidateModel)
+    (branch : Prop) : Prop :=
+  MinimalConditionsForAdmissibleConstruction.KernelAPlusAuditCertificate R /\
+    CnfSATTheoremBearingEndpointUse R model branch
+
+/--
+A+ is not optional once ordinary practice supplies official endpoint
+resolution on the fixed carrier: the resolution is endpoint use, and the A+
+certificate records the forced consequence layer for that use.
+-/
+theorem cnfSATAPlusNotOptionalOverlay_on_ordinaryOfficialResolution
+    {Act Object : Type}
+    {R : MinimalConditionsForAdmissibleConstruction.ConstructionRegime Act Object}
+    {model : CnfEncodedCandidateModel}
+    {branch : Prop}
+    (hAPlus :
+      MinimalConditionsForAdmissibleConstruction.KernelAPlusAuditCertificate R)
+    (hResolution : CnfSATOrdinaryOfficialEndpointResolution R model branch) :
+    CnfSATAPlusEndpointUseBinding R model branch :=
+  And.intro hAPlus
+    (cnfSATOrdinaryOfficialEndpointResolution_is_endpointUse hResolution)
+
+/--
+A+ consequences bind ordinary official negative endpoint resolution.  If the
+ordinary theorem-bearing negative is used as official SAT endpoint resolution,
+the existing SAT bridge routes it to the image separator; the AASC
+no-independent-discriminator closure then excludes the identified independent
+same-domain separator role.
+-/
+theorem cnfSATAPlusConsequences_bind_ordinaryOfficialNegativeResolution
+    {Act Object : Type}
+    {R : MinimalConditionsForAdmissibleConstruction.ConstructionRegime Act Object}
+    {model : CnfEncodedCandidateModel}
+    (_hAPlus :
+      MinimalConditionsForAdmissibleConstruction.KernelAPlusAuditCertificate R)
+    (hResolution :
+      CnfSATOrdinaryOfficialEndpointResolution R model
+        (Not CnfPositiveEndpoint))
+    (hNoIndependent : CnfNoIndependentSeparatingClassifier model)
+    (hIndependent :
+      CnfSeparatingClassifierIsIndependentSameDomain model) :
+    False := by
+  have hUse : CnfSATOfficialNegativeEndpointUse R model :=
+    cnfSATOfficialNegativeEndpointUse_of_endpointResolution hResolution
+  exact
+    (cnfSATImageSeparatorBranch_impossible_of_noIndependentDiscriminator
+      (R := R)
+      hNoIndependent
+      hIndependent)
+      (cnfSATBareSeparator_forces_imageSeparatorBranch hUse.2.2.2)
+
+/--
+Endpoint use plus the endpoint-discriminator trichotomy binds the independent
+role.  Once official negative endpoint use is classified as candidate-image
+endpoint-status governance, the same no-independent closure applies; there is
+no separate ordinary-practice exemption.
+-/
+theorem cnfSATEndpointUse_trichotomy_binds_independentRole
+    {Act Object : Type}
+    {R : MinimalConditionsForAdmissibleConstruction.ConstructionRegime Act Object}
+    {model : CnfEncodedCandidateModel}
+    (hUse : CnfSATOfficialNegativeEndpointUse R model)
+    (hNoIndependent : CnfNoIndependentSeparatingClassifier model)
+    (hIndependent :
+      CnfSeparatingClassifierIsIndependentSameDomain model) :
+    False :=
+  (cnfSATImageSeparatorBranch_impossible_of_noIndependentDiscriminator
+    (R := R)
+    hNoIndependent
+    hIndependent)
+    (cnfSATBareSeparator_forces_imageSeparatorBranch hUse.2.2.2)
+
+/--
+A+ consequences bind the SAT separator discriminator: a separator image branch
+and the SAT-local independence bridge cannot coexist with the AASC
+no-independent separator closure.
+-/
+theorem cnfSATAPlusConsequences_bind_satSeparatorDiscriminator
+    {Act Object : Type}
+    {R : MinimalConditionsForAdmissibleConstruction.ConstructionRegime Act Object}
+    {model : CnfEncodedCandidateModel}
+    (_hAPlus :
+      MinimalConditionsForAdmissibleConstruction.KernelAPlusAuditCertificate R)
+    (hSep : CnfSATImageSeparatorBranch R model)
+    (hNoIndependent : CnfNoIndependentSeparatingClassifier model)
+    (hIndependent :
+      CnfSeparatingClassifierIsIndependentSameDomain model) :
+    False :=
+  (cnfSATImageSeparatorBranch_impossible_of_noIndependentDiscriminator
+    (R := R)
+    hNoIndependent
+    hIndependent)
+    hSep
+
+/--
+A+ consequences bind local separator countercase use.  The local reductio
+countercase is not promoted to a global negative endpoint outcome; it is still
+ruled out because its local endpoint-counterforce route induces local
+separator occupation, which the same no-independent closure excludes.
+-/
+theorem cnfSATAPlusConsequences_bind_localSeparatorCountercaseUse
+    {Act Object : Type}
+    {R : MinimalConditionsForAdmissibleConstruction.ConstructionRegime Act Object}
+    {model : CnfEncodedCandidateModel}
+    (_hAPlus :
+      MinimalConditionsForAdmissibleConstruction.KernelAPlusAuditCertificate R)
+    (hNoIndependent : CnfNoIndependentSeparatingClassifier model)
+    (hIndependent :
+      CnfSeparatingClassifierIsIndependentSameDomain model) :
+    Not (CnfSATReductioCountercase R model) :=
+  cnfSATReductioCountercase_impossible_of_noIndependentDiscriminator
+    (R := R)
+    hNoIndependent
+    hIndependent
+
+/--
 Context-language exclusion of the manuscript's `Sep_bare`: on the fixed SAT
 endpoint carrier, the bare separator is impossible once the AASC
 no-independent-discriminator closeout and SAT-local bridge are in force.
