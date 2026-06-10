@@ -1,6 +1,6 @@
 # Release Notes
 
-## AASC P vs NP SAT Endpoint Full-Stack Lean Audit Archive v1.0.4
+## AASC P vs NP SAT Endpoint Full-Stack Lean Audit Archive v1.0.5
 
 This release packages the hardened Lean 4 audit archive for the AASC-first SAT
 endpoint proof spine.
@@ -43,13 +43,24 @@ Included:
 - Final separator-occupation unpacking through
   `cnfSATImageSeparatorEndpointUse_contains_candidateImageExclusion`, keeping
   support-level candidate-image exclusion distinct from endpoint occupation.
+- Ordinary-practice closure through
+  `cnfSATOrdinaryTheoremBearingNonOccupation_not_fifthEndpointRole`, recording
+  that ordinary theorem-bearing non-occupation is not a fifth endpoint role
+  once official endpoint use and SAT projection are fixed.
+- Remaining same-mode objection exhaustion through
+  `cnfSATRemainingSameModeObjections_exhausted`, with residual objections
+  classified as SAT projection/carrier failure, endpoint-discriminator
+  trichotomy failure, or A+ no-independent-discriminator consequence failure.
+- Local reductio countercase routing through `CnfSATReductioCountercase`,
+  `CnfSATLocalCountercase`, `CnfSATEndpointCounterforce`, and
+  `cnfSATReductioCountercase_impossible_of_noIndependentDiscriminator`.
 - Audit runner: `scripts/check-pvsnp-sat-operator-bridge-audit.ps1`.
 - Manuscript-facing PDF/source and ledger artifacts when available from the
   workspace.
-- Final manuscript snapshot refreshed from the June 10 hardening bundle,
-  including the official endpoint-evaluation and separator-occupation
-  unpacking hygiene patch.
-- Full-stack audit path exposed in commit `f2df564`, including
+- Final manuscript snapshot refreshed from the June 10 ordinary-practice
+  closure bundle, including the ordinary theorem-bearing non-occupation and
+  local reductio countercase hardening.
+- Full-stack audit path exposed through
   `Checks/Axiom/PvsNPFullStackAASCAxiomCheck.lean`.
 
 Verification command:

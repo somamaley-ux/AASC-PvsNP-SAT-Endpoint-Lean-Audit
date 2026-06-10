@@ -111,6 +111,10 @@ Key final anchors:
 - `cnfSATEndpointResolvingNonGovernance_hiddenFifthCase_impossible`
 - `cnfSATOfficialNegativeEndpointUse_endpointStatusGovernance`
 - `cnfSATEndpointResolvingNegativeTheorem_is_endpointStatusGovernance`
+- `CnfSATOrdinaryTheoremBearingNonOccupation`
+- `cnfSATOrdinaryTheoremBearingNonOccupation_not_fifthEndpointRole`
+- `CnfSATRemainingSameModeObjectionTarget`
+- `cnfSATRemainingSameModeObjections_exhausted`
 - `CnfSATClayEndpointImageContext`
 - `CnfSATFixedEndpointDomain`
 - `CnfSATContextBoundCNFModel`
@@ -137,6 +141,11 @@ Key final anchors:
 - `cnfSATInPolyTime_of_noIndependentDiscriminator`
 - `cnfSATInPolyTime_of_context_noIndependentDiscriminator`
 - `cnfSATInPolyTime_of_officialEndpointEvaluation_noIndependentDiscriminator`
+- `CnfSATReductioCountercase`
+- `CnfSATLocalCountercase`
+- `CnfSATEndpointCounterforce`
+- `CnfSATLocalImageSeparatorOccupation`
+- `cnfSATReductioCountercase_impossible_of_noIndependentDiscriminator`
 - `cnfSATBareSeparator_impossible_of_context_noIndependentDiscriminator`
 
 The current status ledger is in
@@ -169,6 +178,16 @@ The one-way unpacking lemma
 `cnfSATImageSeparatorEndpointUse_contains_candidateImageExclusion` records that
 separator endpoint occupation contains candidate-image exclusion, while
 candidate-image exclusion alone still does not create endpoint occupation.
+
+The ordinary-practice closure layer is now explicit as well.  Ordinary
+theorem-bearing non-occupation is not a fifth endpoint role:
+`cnfSATOrdinaryTheoremBearingNonOccupation_not_fifthEndpointRole` routes
+official theorem-bearing non-occupation into the endpoint-status governance
+classification.  Remaining same-mode objections are exhausted by
+`cnfSATRemainingSameModeObjections_exhausted`, and the local reductio route is
+named through `CnfSATReductioCountercase`, `CnfSATLocalCountercase`,
+`CnfSATEndpointCounterforce`, and
+`cnfSATReductioCountercase_impossible_of_noIndependentDiscriminator`.
 
 ## Scope Boundary
 

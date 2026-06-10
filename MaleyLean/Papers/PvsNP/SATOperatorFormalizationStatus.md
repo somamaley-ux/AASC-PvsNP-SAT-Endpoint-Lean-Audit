@@ -109,6 +109,15 @@ cnfSATOfficialEndpointEvaluation_negativeBranch_endpointResolution
 cnfSATOfficialNegativeEndpointUse_of_endpointResolution
 cnfSATImageSeparatorEndpointUse_contains_candidateImageExclusion
 cnfSATInPolyTime_of_officialEndpointEvaluation_noIndependentDiscriminator
+CnfSATOrdinaryTheoremBearingNonOccupation
+cnfSATOrdinaryTheoremBearingNonOccupation_not_fifthEndpointRole
+CnfSATRemainingSameModeObjectionTarget
+cnfSATRemainingSameModeObjections_exhausted
+CnfSATReductioCountercase
+CnfSATLocalCountercase
+CnfSATEndpointCounterforce
+CnfSATLocalImageSeparatorOccupation
+cnfSATReductioCountercase_impossible_of_noIndependentDiscriminator
 ```
 
 `CnfSATOfficialEndpointEvaluation` records official evaluation of the raw
@@ -119,6 +128,28 @@ named endpoint-resolution lemma supplies the official negative endpoint-use
 package. The separator-occupation unpacking lemma is one-way: endpoint
 occupation contains candidate-image exclusion, but candidate-image exclusion
 alone does not become endpoint occupation.
+
+The ordinary-practice closure layer is now named in the Lean audit surface:
+
+```lean
+CnfSATOrdinaryTheoremBearingNonOccupation
+cnfSATOrdinaryTheoremBearingNonOccupation_not_fifthEndpointRole
+CnfSATRemainingSameModeObjectionTarget
+cnfSATRemainingSameModeObjections_exhausted
+CnfSATReductioCountercase
+CnfSATLocalCountercase
+CnfSATEndpointCounterforce
+CnfSATLocalImageSeparatorOccupation
+cnfSATReductioCountercase_impossible_of_noIndependentDiscriminator
+```
+
+This records the final referee-facing distinction. Ordinary theoremhood is
+proof legitimacy, but ordinary theorem-bearing non-occupation used as official
+same-carrier endpoint resolution is not a fifth endpoint role. Remaining
+same-mode objections must attack SAT projection/carrier correspondence, the
+endpoint-discriminator trichotomy, or the A+ no-independent-discriminator
+consequence. The local reductio path is also named without promoting a
+temporary exact-complement assumption into a global negative endpoint outcome.
 
 ## Current Endpoint Route
 

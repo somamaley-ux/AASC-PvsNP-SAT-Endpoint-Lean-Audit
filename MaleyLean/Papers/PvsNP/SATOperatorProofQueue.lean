@@ -10630,6 +10630,73 @@ theorem cnfSATEndpointResolvingNegativeTheorem_is_endpointStatusGovernance
   cnfSATOfficialNegativeEndpointUse_endpointStatusGovernance hEndpoint
 
 /--
+Ordinary theorem-bearing non-occupation is not a fifth endpoint role.  Ordinary
+theoremhood supplies proof legitimacy; once the act is used as official
+same-carrier SAT endpoint resolution, its endpoint role is classified by the
+candidate-image use fork rather than by ordinary-theorem vocabulary.
+-/
+def CnfSATOrdinaryTheoremBearingNonOccupation
+    {Act Object : Type}
+    (R : MinimalConditionsForAdmissibleConstruction.ConstructionRegime Act Object)
+    (model : CnfEncodedCandidateModel) : Prop :=
+  CnfSATCandidateEndpointImageExclusion model /\
+    CnfSATOfficialEndpointResolution R model (Not CnfPositiveEndpoint)
+
+/--
+An ordinary theorem-bearing non-occupation used as official SAT endpoint
+resolution is endpoint-status governance, not a fifth endpoint role.
+-/
+theorem cnfSATOrdinaryTheoremBearingNonOccupation_not_fifthEndpointRole
+    {Act Object : Type}
+    {R : MinimalConditionsForAdmissibleConstruction.ConstructionRegime Act Object}
+    {model : CnfEncodedCandidateModel}
+    (hOrd : CnfSATOrdinaryTheoremBearingNonOccupation R model) :
+    CnfSATEndpointStatusGovernanceByCandidateImageExclusion R model :=
+  cnfSATOfficialNegativeEndpointUse_endpointStatusGovernance
+    (cnfSATOfficialNegativeEndpointUse_of_endpointResolution hOrd.2)
+
+/--
+The remaining same-mode objections, after official SAT projection and endpoint
+use are fixed, must attack one of the three named links.
+-/
+inductive CnfSATRemainingSameModeObjectionTarget where
+  | satProjectionCarrierCorrespondence
+  | endpointDiscriminatorTrichotomy
+  | aPlusNoIndependentDiscriminatorConsequence
+deriving DecidableEq, Repr
+
+def CnfSATRemainingSameModeObjectionTarget.title :
+    CnfSATRemainingSameModeObjectionTarget -> String
+  | .satProjectionCarrierCorrespondence =>
+      "SAT projection / carrier correspondence failure"
+  | .endpointDiscriminatorTrichotomy =>
+      "endpoint-discriminator trichotomy failure"
+  | .aPlusNoIndependentDiscriminatorConsequence =>
+      "A+ no-independent-discriminator consequence failure"
+
+def CnfSATRemainingSameModeObjectionTargets :
+    List CnfSATRemainingSameModeObjectionTarget :=
+  [ .satProjectionCarrierCorrespondence
+  , .endpointDiscriminatorTrichotomy
+  , .aPlusNoIndependentDiscriminatorConsequence ]
+
+theorem cnfSATRemainingSameModeObjectionTargets_count_eq :
+    CnfSATRemainingSameModeObjectionTargets.length = 3 := by
+  rfl
+
+/-- Remaining same-mode objections are exhausted by the three named targets. -/
+theorem cnfSATRemainingSameModeObjections_exhausted
+    (target : CnfSATRemainingSameModeObjectionTarget) :
+    target = CnfSATRemainingSameModeObjectionTarget.satProjectionCarrierCorrespondence \/
+      target = CnfSATRemainingSameModeObjectionTarget.endpointDiscriminatorTrichotomy \/
+        target =
+          CnfSATRemainingSameModeObjectionTarget.aPlusNoIndependentDiscriminatorConsequence := by
+  cases target with
+  | satProjectionCarrierCorrespondence => exact Or.inl rfl
+  | endpointDiscriminatorTrichotomy => exact Or.inr (Or.inl rfl)
+  | aPlusNoIndependentDiscriminatorConsequence => exact Or.inr (Or.inr rfl)
+
+/--
 The bivalent endpoint-status space for the official finite CNF-SAT endpoint:
 there is positive endpoint occupation or separator endpoint occupation.  No
 third governed endpoint status is part of the same fixed carrier.
@@ -10961,6 +11028,94 @@ theorem cnfSATInPolyTime_of_officialEndpointEvaluation_noIndependentDiscriminato
     hEval.2.2
     hNoIndependent
     hIndependent
+
+/--
+Local reductio countercase annotation for the exact complement branch against
+the official SAT positive endpoint.  This is proof-role standing inside the
+subproof, not a global negative endpoint outcome.
+-/
+def CnfSATReductioCountercase
+    {Act Object : Type}
+    (R : MinimalConditionsForAdmissibleConstruction.ConstructionRegime Act Object)
+    (model : CnfEncodedCandidateModel) : Prop :=
+  CnfSATOfficialEndpointEvaluation R model /\
+    CnfSATBareSeparator R model
+
+def CnfSATLocalCountercase
+    {Act Object : Type}
+    (R : MinimalConditionsForAdmissibleConstruction.ConstructionRegime Act Object)
+    (model : CnfEncodedCandidateModel) : Prop :=
+  CnfSATReductioCountercase R model
+
+def CnfSATEndpointCounterforce
+    {Act Object : Type}
+    (R : MinimalConditionsForAdmissibleConstruction.ConstructionRegime Act Object)
+    (model : CnfEncodedCandidateModel) : Prop :=
+  CnfSATOfficialEndpointResolution R model (Not CnfPositiveEndpoint)
+
+def CnfSATLocalImageSeparatorOccupation
+    {Act Object : Type}
+    (R : MinimalConditionsForAdmissibleConstruction.ConstructionRegime Act Object)
+    (model : CnfEncodedCandidateModel) : Prop :=
+  CnfSATImageSeparatorEndpointUse R model
+
+theorem cnfSATLocalCountercase_of_reductioCountercase
+    {Act Object : Type}
+    {R : MinimalConditionsForAdmissibleConstruction.ConstructionRegime Act Object}
+    {model : CnfEncodedCandidateModel}
+    (hReductio : CnfSATReductioCountercase R model) :
+    CnfSATLocalCountercase R model :=
+  hReductio
+
+theorem cnfSATEndpointCounterforce_of_localCountercase
+    {Act Object : Type}
+    {R : MinimalConditionsForAdmissibleConstruction.ConstructionRegime Act Object}
+    {model : CnfEncodedCandidateModel}
+    (hLocal : CnfSATLocalCountercase R model) :
+    CnfSATEndpointCounterforce R model :=
+  cnfSATOfficialEndpointEvaluation_negativeBranch_endpointResolution
+    hLocal.1 hLocal.2
+
+theorem cnfSATLocalImageSeparatorOccupation_of_endpointCounterforce
+    {Act Object : Type}
+    {R : MinimalConditionsForAdmissibleConstruction.ConstructionRegime Act Object}
+    {model : CnfEncodedCandidateModel}
+    (hCounterforce : CnfSATEndpointCounterforce R model) :
+    CnfSATLocalImageSeparatorOccupation R model :=
+  cnfSATImageSeparatorBranch_endpointUse
+    (cnfSATBareSeparator_forces_imageSeparatorBranch
+      (cnfSATOfficialNegativeEndpointUse_of_endpointResolution hCounterforce).2.2.2)
+
+theorem cnfSATLocalImageSeparatorOccupation_impossible_of_noIndependentDiscriminator
+    {Act Object : Type}
+    {R : MinimalConditionsForAdmissibleConstruction.ConstructionRegime Act Object}
+    {model : CnfEncodedCandidateModel}
+    (hNoIndependent : CnfNoIndependentSeparatingClassifier model)
+    (hIndependent :
+      CnfSeparatingClassifierIsIndependentSameDomain model) :
+    Not (CnfSATLocalImageSeparatorOccupation R model) :=
+  cnfSATImageSeparatorBranch_impossible_of_noIndependentDiscriminator
+    (R := R)
+    hNoIndependent
+    hIndependent
+
+theorem cnfSATReductioCountercase_impossible_of_noIndependentDiscriminator
+    {Act Object : Type}
+    {R : MinimalConditionsForAdmissibleConstruction.ConstructionRegime Act Object}
+    {model : CnfEncodedCandidateModel}
+    (hNoIndependent : CnfNoIndependentSeparatingClassifier model)
+    (hIndependent :
+      CnfSeparatingClassifierIsIndependentSameDomain model) :
+    Not (CnfSATReductioCountercase R model) := by
+  intro hReductio
+  exact
+    (cnfSATLocalImageSeparatorOccupation_impossible_of_noIndependentDiscriminator
+      (R := R)
+      hNoIndependent
+      hIndependent)
+      (cnfSATLocalImageSeparatorOccupation_of_endpointCounterforce
+        (cnfSATEndpointCounterforce_of_localCountercase
+          (cnfSATLocalCountercase_of_reductioCountercase hReductio)))
 
 /--
 Context-language exclusion of the manuscript's `Sep_bare`: on the fixed SAT
