@@ -119,7 +119,13 @@ Key final anchors:
 - `cnfSATBareSeparator_forces_imageSeparatorBranch`
 - `CnfSATImageSeparatorEndpointUse`
 - `cnfSATImageSeparatorBranch_endpointUse`
+- `cnfSATImageSeparatorEndpointUse_contains_candidateImageExclusion`
 - `CnfSATOfficialNegativeEndpointUse`
+- `CnfSATOfficialEndpointEvaluation`
+- `OfficialSATEndpointEvaluation`
+- `CnfSATOfficialEndpointResolution`
+- `cnfSATOfficialEndpointEvaluation_negativeBranch_endpointResolution`
+- `cnfSATOfficialNegativeEndpointUse_of_endpointResolution`
 - `CnfSATNegativeOccupationExhaustion`
 - `cnfSATNegativeOccupation_exhaustion`
 - `cnfSATNegativeOccupation_nonoptional`
@@ -130,6 +136,7 @@ Key final anchors:
 - `cnfPositiveEndpoint_of_noIndependentDiscriminator`
 - `cnfSATInPolyTime_of_noIndependentDiscriminator`
 - `cnfSATInPolyTime_of_context_noIndependentDiscriminator`
+- `cnfSATInPolyTime_of_officialEndpointEvaluation_noIndependentDiscriminator`
 - `cnfSATBareSeparator_impossible_of_context_noIndependentDiscriminator`
 
 The current status ledger is in
@@ -151,6 +158,17 @@ endpoint-status governance by `cnfSATOfficialNegativeEndpointUse_endpointStatusG
 The alleged endpoint-resolving-but-not-governance alternative is the hidden
 fifth case, and `cnfSATEndpointResolvingNonGovernance_hiddenFifthCase_impossible`
 records that it has no inhabitant in the audited SAT endpoint surface.
+
+The final endpoint-evaluation hygiene layer is also explicit.  The official
+raw positive/separator evaluation is named by `CnfSATOfficialEndpointEvaluation`
+and the manuscript-facing alias `OfficialSATEndpointEvaluation`.  If the raw
+negative branch is reached inside that evaluation,
+`cnfSATOfficialEndpointEvaluation_negativeBranch_endpointResolution` supplies
+the official endpoint-resolution use; it does not assert the positive branch.
+The one-way unpacking lemma
+`cnfSATImageSeparatorEndpointUse_contains_candidateImageExclusion` records that
+separator endpoint occupation contains candidate-image exclusion, while
+candidate-image exclusion alone still does not create endpoint occupation.
 
 ## Scope Boundary
 

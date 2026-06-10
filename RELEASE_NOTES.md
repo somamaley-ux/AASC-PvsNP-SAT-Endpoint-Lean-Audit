@@ -1,9 +1,9 @@
 # Release Notes
 
-## P vs NP SAT endpoint Lean audit archive
+## AASC P vs NP SAT Endpoint Full-Stack Lean Audit Archive v1.0.4
 
-This release packages the dedicated Lean 4 audit archive for the AASC-first
-SAT endpoint proof spine.
+This release packages the hardened Lean 4 audit archive for the AASC-first SAT
+endpoint proof spine.
 
 Included:
 
@@ -36,12 +36,19 @@ Included:
   official endpoint-resolving negative use as endpoint-status governance and
   `cnfSATEndpointResolvingNonGovernance_hiddenFifthCase_impossible` closing
   the endpoint-resolving-but-not-governance escape.
+- Final official endpoint-evaluation hygiene through
+  `CnfSATOfficialEndpointEvaluation`,
+  `OfficialSATEndpointEvaluation`, and
+  `cnfSATOfficialEndpointEvaluation_negativeBranch_endpointResolution`.
+- Final separator-occupation unpacking through
+  `cnfSATImageSeparatorEndpointUse_contains_candidateImageExclusion`, keeping
+  support-level candidate-image exclusion distinct from endpoint occupation.
 - Audit runner: `scripts/check-pvsnp-sat-operator-bridge-audit.ps1`.
 - Manuscript-facing PDF/source and ledger artifacts when available from the
   workspace.
-- Final manuscript snapshot refreshed from the June 9 hardening bundle,
-  including the no-fifth-negative-occupation and endpoint-status-bivalence
-  manuscript ledgers.
+- Final manuscript snapshot refreshed from the June 10 hardening bundle,
+  including the official endpoint-evaluation and separator-occupation
+  unpacking hygiene patch.
 - Full-stack audit path exposed in commit `f2df564`, including
   `Checks/Axiom/PvsNPFullStackAASCAxiomCheck.lean`.
 

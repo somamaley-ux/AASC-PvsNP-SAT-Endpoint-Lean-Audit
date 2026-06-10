@@ -39,11 +39,16 @@ cnfSATNotInPolyTime_iff_all_encoded_candidates_fail
 cnfSATBareNegativeBranch_standardLowerBoundNormalForm
 cnfSATBareNegativeBranch_theoremLevelDiscriminator
 cnfBareNegativeBranch_forces_imageSeparatorBranch
+cnfSATImageSeparatorEndpointUse_contains_candidateImageExclusion
+CnfSATOfficialEndpointEvaluation
+OfficialSATEndpointEvaluation
+cnfSATOfficialEndpointEvaluation_negativeBranch_endpointResolution
 cnfSATImageSeparatorBranch_requires_independentSeparatorDiscriminator
 cnfBareNegativeBranch_impossible_of_noIndependentDiscriminator
 cnfPositiveEndpoint_of_noIndependentDiscriminator
 cnfSATInPolyTime_of_noIndependentDiscriminator
 cnfSATInPolyTime_of_context_noIndependentDiscriminator
+cnfSATInPolyTime_of_officialEndpointEvaluation_noIndependentDiscriminator
 ```
 
 The encoded model adequacy anchors isolate the ordinary complexity-theoretic
@@ -93,6 +98,27 @@ does not occupy the positive endpoint and instead assigns non-occupant status
 over the encoded positive candidate image. The alleged endpoint-resolving but
 non-governing use is the hidden fifth case and is uninhabited in the audited
 classification.
+
+The final endpoint-evaluation hygiene is now named at the Lean surface:
+
+```lean
+CnfSATOfficialEndpointEvaluation
+OfficialSATEndpointEvaluation
+CnfSATOfficialEndpointResolution
+cnfSATOfficialEndpointEvaluation_negativeBranch_endpointResolution
+cnfSATOfficialNegativeEndpointUse_of_endpointResolution
+cnfSATImageSeparatorEndpointUse_contains_candidateImageExclusion
+cnfSATInPolyTime_of_officialEndpointEvaluation_noIndependentDiscriminator
+```
+
+`CnfSATOfficialEndpointEvaluation` records official evaluation of the raw
+positive/separator bivalent split on the fixed unrestricted finite CNF-SAT
+carrier. It is an evaluation-context condition, not a positive-branch truth
+assumption. If the raw negative branch is reached inside that evaluation, the
+named endpoint-resolution lemma supplies the official negative endpoint-use
+package. The separator-occupation unpacking lemma is one-way: endpoint
+occupation contains candidate-image exclusion, but candidate-image exclusion
+alone does not become endpoint occupation.
 
 ## Current Endpoint Route
 

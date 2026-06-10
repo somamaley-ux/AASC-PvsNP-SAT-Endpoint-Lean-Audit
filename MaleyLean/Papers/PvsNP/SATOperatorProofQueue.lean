@@ -10305,6 +10305,22 @@ theorem cnfSATImageSeparatorBranch_endpointUse
   hSep
 
 /--
+Separator endpoint-image occupation contains the support-level candidate-image
+exclusion content.  This direction is deliberately one-way: support-level
+candidate-image exclusion alone does not create endpoint occupation.
+-/
+theorem cnfSATImageSeparatorEndpointUse_contains_candidateImageExclusion
+    {Act Object : Type}
+    {R : MinimalConditionsForAdmissibleConstruction.ConstructionRegime Act Object}
+    {model : CnfEncodedCandidateModel}
+    (hUse : CnfSATImageSeparatorEndpointUse R model) :
+    CnfSATCandidateEndpointImageExclusion model :=
+  cnfSATCandidateEndpointImageExclusion_of_standardLowerBoundNormalForm
+    (cnfSATImageSeparatorBranch_standardLowerBoundNormalForm
+      (R := R)
+      hUse)
+
+/--
 Bookkeeping-only negative status: the raw negative branch is present as a
 formal negation, but it is not being used as the SAT image-separator endpoint.
 This is one of the non-endpoint alternatives in the occupation-exhaustion
@@ -10340,6 +10356,66 @@ def CnfSATOfficialNegativeEndpointUse
     CnfSATFixedEndpointDomain R /\
       CnfSATContextBoundCNFModel R model /\
         CnfSATBareSeparator R model
+
+/--
+Official evaluation of the raw positive/separator bivalent split on the fixed
+unrestricted finite CNF-SAT endpoint carrier.  This is an evaluation-context
+condition, not an assertion that either branch is already true.
+-/
+def CnfSATOfficialEndpointEvaluation
+    {Act Object : Type}
+    (R : MinimalConditionsForAdmissibleConstruction.ConstructionRegime Act Object)
+    (model : CnfEncodedCandidateModel) : Prop :=
+  CnfSATClayEndpointImageContext R model /\
+    CnfSATFixedEndpointDomain R /\
+      CnfSATContextBoundCNFModel R model
+
+/-- Manuscript-facing alias for the official SAT endpoint-evaluation context. -/
+abbrev OfficialSATEndpointEvaluation
+    {Act Object : Type}
+    (R : MinimalConditionsForAdmissibleConstruction.ConstructionRegime Act Object)
+    (model : CnfEncodedCandidateModel) : Prop :=
+  CnfSATOfficialEndpointEvaluation R model
+
+/--
+Official endpoint resolution of the negative branch.  The branch argument keeps
+the manuscript's `not Pos_raw` target visible; the endpoint-resolution content
+is the fixed-carrier official negative SAT use.
+-/
+def CnfSATOfficialEndpointResolution
+    {Act Object : Type}
+    (R : MinimalConditionsForAdmissibleConstruction.ConstructionRegime Act Object)
+    (model : CnfEncodedCandidateModel)
+    (_negativeBranch : Prop) : Prop :=
+  CnfSATOfficialNegativeEndpointUse R model
+
+/--
+Inside an official SAT endpoint evaluation, reaching the raw negative branch
+is exactly official endpoint resolution of `not Pos_raw`.
+-/
+theorem cnfSATOfficialEndpointEvaluation_negativeBranch_endpointResolution
+    {Act Object : Type}
+    {R : MinimalConditionsForAdmissibleConstruction.ConstructionRegime Act Object}
+    {model : CnfEncodedCandidateModel}
+    (hEval : CnfSATOfficialEndpointEvaluation R model)
+    (hBare : CnfSATBareSeparator R model) :
+    CnfSATOfficialEndpointResolution R model (Not CnfPositiveEndpoint) :=
+  And.intro hEval.1
+    (And.intro hEval.2.1
+      (And.intro hEval.2.2 hBare))
+
+/--
+The official endpoint-resolution form is the ordinary Lean-side official
+negative endpoint-use package used by the SAT discriminator closeout.
+-/
+theorem cnfSATOfficialNegativeEndpointUse_of_endpointResolution
+    {Act Object : Type}
+    {R : MinimalConditionsForAdmissibleConstruction.ConstructionRegime Act Object}
+    {model : CnfEncodedCandidateModel}
+    (hResolution :
+      CnfSATOfficialEndpointResolution R model (Not CnfPositiveEndpoint)) :
+    CnfSATOfficialNegativeEndpointUse R model :=
+  hResolution
 
 /--
 The four possible readings of a negative SAT occupation before the fixed
@@ -10687,6 +10763,12 @@ theorem cnfSATImageSeparatorBranch_requires_independentSeparatorDiscriminator
       CnfSeparatingClassifierIsIndependentSameDomain model)
     (hSep : CnfSATImageSeparatorBranch R model) :
     CnfSATIndependentSeparatorEndpointStatusDiscriminator model := by
+  have _hCandidateImageExclusion :
+      CnfSATCandidateEndpointImageExclusion model :=
+    cnfSATImageSeparatorEndpointUse_contains_candidateImageExclusion
+      (R := R)
+      (model := model)
+      (cnfSATImageSeparatorBranch_endpointUse hSep)
   have hSameDomain : CnfSameDomainSeparator :=
     (cnfDirectGateLowerBoundResidualTarget_iff_sameDomainSeparator).1 hSep
   let classifier := cnfClassifierOfSameDomainSeparator model hSameDomain
@@ -10855,6 +10937,30 @@ theorem cnfSATInPolyTime_of_context_noIndependentDiscriminator
     (R := R)
     (model := model)
     hNoIndependent hIndependent
+
+/--
+Final endpoint-evaluation hygiene variant: the SAT endpoint closeout carries
+the official raw bivalent endpoint-evaluation context explicitly.  The
+evaluation context supplies carrier standing only; it does not assume the
+positive branch.
+-/
+theorem cnfSATInPolyTime_of_officialEndpointEvaluation_noIndependentDiscriminator
+    {Act Object : Type}
+    {R : MinimalConditionsForAdmissibleConstruction.ConstructionRegime Act Object}
+    {model : CnfEncodedCandidateModel}
+    (hEval : CnfSATOfficialEndpointEvaluation R model)
+    (hNoIndependent : CnfNoIndependentSeparatingClassifier model)
+    (hIndependent :
+      CnfSeparatingClassifierIsIndependentSameDomain model) :
+    CnfSATInPolyTime :=
+  cnfSATInPolyTime_of_context_noIndependentDiscriminator
+    (R := R)
+    (model := model)
+    hEval.1
+    hEval.2.1
+    hEval.2.2
+    hNoIndependent
+    hIndependent
 
 /--
 Context-language exclusion of the manuscript's `Sep_bare`: on the fixed SAT

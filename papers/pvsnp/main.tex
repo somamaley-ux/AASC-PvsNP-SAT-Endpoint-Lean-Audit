@@ -32,6 +32,7 @@
 \newcommand{\SepBare}{\mathsf{Sep}_{\mathsf{bare}}}
 \newcommand{\SepRes}{\mathsf{Sep}_{\mathsf{res}}}
 \newcommand{\SepImg}{\mathsf{Sep}_{\mathsf{img}}}
+\newcommand{\SepImgOcc}{\mathsf{Sep}_{\mathsf{img}}^{\mathsf{occ}}}
 \newcommand{\Asep}{\mathsf{A}_{\mathsf{sep}}}
 \newcommand{\SepClay}{\mathsf{Sep}_{\mathsf{Clay}}}
 \newcommand{\Apos}{\mathsf{A}_{\mathsf{pos}}}
@@ -137,6 +138,14 @@
 \newcommand{\NonBookSep}{\mathsf{NonBook}}
 \newcommand{\NonGovEqSep}{\mathsf{NonGovEq}}
 
+\newcommand{\KSAT}{K_{\mathsf{SAT}}}
+\newcommand{\CoreSAT}{C_{0,\mathsf{SAT}}}
+\newcommand{\WeakSep}{W_{\mathsf{sep}}}
+\newcommand{\RouteSAT}{\mathsf{RouteLocus}_{\mathsf{SAT}}}
+\newcommand{\SepNotCoequal}{\mathsf{SepNotCoequalEndpointRole}}
+\newcommand{\OrdNegRoleClass}{\mathsf{OrdinaryNegationRoleClassified}}
+\newcommand{\NegComplexityLawful}{\mathsf{NegativeComplexityResultsLawful}}
+\newcommand{\OfficialSATEval}{\mathsf{OSEval}}
 
 \title{
 \(P=NP\) by Exclusion of the SAT Separator Endpoint\\[0.5em]
@@ -149,20 +158,61 @@
 \maketitle
 
 \begin{abstract}
-This manuscript proves \(P=NP\) by excluding the SAT separator endpoint on the unrestricted finite CNF-SAT carrier. The proof is AASC-owned: AASC supplies the endpoint-rigidity argument that excludes the bare negative branch, while Cook--Levin/Karp supplies only the standard endpoint correspondence from polynomial-time CNF-SAT to \(P=NP\). The positive raw branch is \(\PosRaw := \CnfSATP\), asserting deterministic polynomial-time decidability of arbitrary finite CNF-SAT. The bare negative branch \(\SepBare\) is the raw complement of \(\PosRaw\) on the same carrier.
+This manuscript proves \(P=NP\) by excluding the SAT separator endpoint on the unrestricted finite CNF-SAT carrier. The branch-exclusion argument is AASC-internal: AASC supplies the endpoint-rigidity argument that excludes the bare negative branch, while Cook--Levin/Karp supplies only the standard endpoint correspondence from polynomial-time CNF-SAT to \(P=NP\). The positive raw branch is \(\PosRaw := \CnfSATP\), asserting deterministic polynomial-time decidability of arbitrary finite CNF-SAT. The bare negative branch \(\SepBare\) is the raw complement of \(\PosRaw\) on the same carrier.
 
 The proof is kernel-first. Theorem-bearing endpoint use is treated as governed construction, and governed construction is possible only under the kernel of admissibility, standing, reference, and irreversibility. The downstream AASC machinery is therefore not an external classifier or a source of theorem standing; it is the fixed-domain consequence layer forced by kernel necessity. Ordinary theoremhood, positive or negative, is kernel-internal when it is genuine theoremhood rather than raw trace.
 
-The decisive step is the SAT-local endpoint asymmetry. The positive branch directly occupies the constructive endpoint carrier. The raw negative branch, by contrast, is transported by the SAT lower-bound/no-positive equivalence into the SAT image-separator branch. That branch induces an independent same-domain endpoint-status discriminator on the fixed CNF-SAT carrier. Kernel-forced structural rigidity excludes such discriminators. Hence the SAT separator route is unavailable.
+The decisive step is the SAT-local endpoint asymmetry. The positive branch directly occupies the constructive endpoint carrier. The raw negative branch, by contrast, first transports by the SAT lower-bound/no-positive equivalence into standard lower-bound normal form and candidate endpoint-image exclusion. That support-level lower-bound content is not automatically forbidden. It becomes separator endpoint-image occupation only when the negative branch is used as the official endpoint-resolving branch on the same fixed carrier. Under that endpoint use, it induces an independent same-domain endpoint-status discriminator, and kernel-forced structural rigidity excludes such discriminators. Hence the SAT separator route is unavailable.
 
-It follows that \(\SepBare\) is excluded. By raw complementarity, \(\SepBare \leftrightarrow \neg\PosRaw\), the positive branch follows. Therefore arbitrary finite CNF-SAT is decidable in deterministic polynomial time. The final passage from \(\CnfSATP\) to \(P=NP\) is the standard Cook--Levin/Karp endpoint correspondence. The proof of branch exclusion is AASC-internal; external complexity theory is used only to identify the official endpoint consequence.
+It follows that \(\SepBare\) is excluded as the official endpoint-resolving negative branch. In the official endpoint evaluation, raw complementarity, \(\SepBare \leftrightarrow \neg\PosRaw\), then forces the positive branch. Therefore arbitrary finite CNF-SAT is decidable in deterministic polynomial time. The final passage from \(\CnfSATP\) to \(P=NP\) is the standard Cook--Levin/Karp endpoint correspondence. The proof of branch exclusion is AASC-internal; external complexity theory is used only to identify the official endpoint consequence.
 \end{abstract}
+
+
+\section*{Mathematical-Status Lock and Lean Support Boundary}
+\addcontentsline{toc}{section}{Mathematical-Status Lock and Lean Support Boundary}
+\paragraph{Mathematical-status lock.}
+AASC is used here as a mathematical constraint formalism, not as philosophical commentary, metaphor, optional narration, or an interpretive overlay. The proof is the theorem chain stated in this manuscript. The AASC primitives used below--reference, standing, admissibility, irreversibility, bivalence, AMetric no-selector discipline, unique admissible interior, report preservation, and no-independent-discriminator closure--are theorem-bearing fixed-domain constraints. A same-mode objection must therefore identify a failure in a definition, theorem link, dependency claim, kernel-forcing argument, SAT bridge, endpoint-governance inference, or final endpoint correspondence. It is not a refutation merely to classify the vocabulary as unfamiliar or to demand a circuit-lower-bound, diagonalization, natural-proofs, algebrization, proof-complexity, or algorithm-construction route.
+
+\paragraph{Lean support boundary.}
+The manuscript proof is the mathematical theorem chain below. The Lean4 material in the appendix is audit support for the local SAT-operator bridge, the kernel consequence interface, and the proof-spine routing. It is not a substitute for the manuscript proof and does not claim to formalize the Cook--Levin/Karp endpoint correspondence from foundations. A challenge to the Lean layer must identify a concrete mismatch between the cited Lean-facing support surface and the manuscript theorem chain. It is not enough to observe that Lean is not itself the proof, because the manuscript does not claim that it is.
+
+\section*{Read This First: Endpoint Proof Spine}
+\addcontentsline{toc}{section}{Read This First: Endpoint Proof Spine}
+The live proof spine is intentionally short. In this display, \(O_R^-\) abbreviates official negative endpoint-resolution use. That use is supplied only inside official SAT endpoint evaluation, not by raw lower-bound content alone:
+\[
+\begin{aligned}
+\NonDeg_{\mathsf{SAT}}(R,model) &\Rightarrow \KSAT \Rightarrow \Aplus_{\mathsf{SAT}},\\[2pt]
+\SepBare &\Rightarrow \StdLB(model) \Rightarrow \CandImageExcl(model),\\[2pt]
+\CandImageExcl(model)\wedge O_R^-
+  &\Rightarrow \SepImgOcc,\\[2pt]
+\SepImgOcc &\Rightarrow \EndpointUse_R(\SepImgOcc),\\[2pt]
+\EndpointUse_R(\SepImgOcc)\wedge\SepImgOcc &\Rightarrow \SepDisc(model),\\[2pt]
+\EndpointUse_R(\SepImgOcc) &\Rightarrow \NoSepDisc(model) \Rightarrow \neg\SepDisc(model),\\[2pt]
+\SepDisc(model)\wedge\neg\SepDisc(model) &\Rightarrow \bot.
+\end{aligned}
+\]
+Thus \(\SepImgOcc\) is impossible. In the official endpoint evaluation,
+\[
+  \neg\bigl(\SepBare\wedge O_R^-\bigr),
+  \qquad \SepBare\leftrightarrow\neg\PosRaw,
+\]
+so the positive branch follows, and \(\PosRaw\Rightarrow P=NP\).
+The proof does not retype raw non-polynomiality in one step. The raw negative branch first becomes standard SAT lower-bound normal form on the context-bound encoded candidate image. That normal form becomes candidate endpoint-image exclusion. Candidate endpoint-image exclusion is still support-level lower-bound content unless it is used as the official endpoint-resolving negative branch. Only under that endpoint-resolution use does it become separator endpoint-image occupation, and only then does it become endpoint-status governance. This is the SAT analogue of the negative-branch bridge audit used throughout the AASC endpoint closure papers.
 
 \section*{Dependency-Inversion Exclusion}
 \addcontentsline{toc}{section}{Dependency-Inversion Exclusion}
-A recurring possible misreading must be excluded at the outset. The manuscript does not argue from an optional AASC framework to a special proof standard and then apply that standard to SAT. The dependency order is the reverse. The demand that an alleged proof, counterproof, endpoint resolution, or theorem-bearing act be determinate already requires a fixed target, evaluable steps, act-time finality, and same-regime fidelity. These four requirements force the roles later named reference, standing, irreversibility, and admissibility. AASC is the systematic consequence layer of those forced roles.
+The dependency order is not
+\[
+  \text{AASC framework} \Rightarrow \text{SAT constraints}.
+\]
+The dependency order is
+\[
+  \text{non-degenerate fixed-carrier SAT endpoint regime}
+  \Rightarrow \text{kernel governance already active}.
+\]
+The official P versus NP target fixes the carrier of evaluation in complexity-theoretic form: the unrestricted finite CNF-SAT carrier, the positive polynomial-time endpoint slot, and the raw negative complement branch. It does not assert the positive endpoint and does not supply truth of the theorem. Once a proof, counterproof, endpoint resolution, or theorem-bearing act is evaluated as a determinate same-carrier endpoint act at all, it already requires target determinacy, step evaluability, act-time finality, and same-regime fidelity. Those kernel-neutral requirements force the roles later named reference, standing, irreversibility, and admissibility. AASC names and audits the consequence layer of those forced roles; it does not impose an optional proof standard from outside complexity theory.
 
-Thus a reading that treats the kernel as an optional framework premise is a dependency inversion. It changes the argument from a necessity proof into a framework-application proof. That is not a competing interpretation of the manuscript. It is a denial of the kernel-neutral adequacy argument and must be assessed only by identifying a specific failure in the passage from target adequacy to the kernel roles.
+Thus a reading that treats the kernel as an optional framework premise is a dependency inversion. It changes the argument from a necessity proof into a framework-application proof. A same-mode denial must identify a specific failure in the passage from target adequacy to the kernel roles, exhibit a faithful weaker same-carrier endpoint regime, or break one of the SAT-native bridge links. A refusal of vocabulary alone does not reach the proof.
 
 \tableofcontents
 \newpage
@@ -216,14 +266,14 @@ The context object
 \[
   \ClayCtx
 \]
-records only the official SAT/P-vs-NP endpoint setting: the unrestricted finite CNF-SAT carrier, the raw positive branch \(\PosRaw\), the raw negative branch \(\SepBare\), the SAT image-separator branch \(\SepImg\), and the fixed model/carrier on which the raw branches are evaluated. It is a carrier-and-slot object. It is not an A+ certificate, not an AMetric premise, not a no-selector axiom, not a separator-classification premise, and not a positive endpoint premise.
+records only the official SAT/P-vs-NP endpoint setting: the unrestricted finite CNF-SAT carrier, the raw positive branch \(\PosRaw\), the raw negative branch \(\SepBare\), candidate endpoint-image exclusion \(\CandImageExcl(model)\), the separator endpoint-image occupation slot \(\SepImgOcc\), and the fixed model/carrier on which the raw branches are evaluated. It is a carrier-and-slot object. It is not an A+ certificate, not an AMetric premise, not a no-selector axiom, not a separator-classification premise, and not a positive endpoint premise.
 \end{definition}
 
 \begin{theorem}[Context non-smuggling]\label{thm:context-non-smuggling}
 The context object \(\ClayCtx\) does not assert any of
 \[
   \Aplus_R(B),\quad \AMetric(R),\quad \Asep,\quad \neg\SepBare,
-  \quad \neg\SepImg,\quad \PosRaw.
+  \quad \neg\SepImgOcc,\quad \PosRaw.
 \]
 It fixes the official SAT carrier and branch slots only.
 \end{theorem}
@@ -242,18 +292,17 @@ The raw positive proposition is
 The bare negative proposition \(\SepBare\) is the raw complement branch for the same unrestricted finite CNF-SAT carrier.
 \end{definition}
 
-\begin{definition}[SAT image-separator branch]\label{def:image}
-The SAT image-separator branch \(\SepImg\) denotes the exact manuscript counterpart of the formal object \(\CnfImageSep(R,model)\). It is the SAT lower-bound/no-positive branch after transport through the fixed SAT operator bridge. The manuscript does not insert an additional residual layer between the raw negative branch and \(\SepImg\): the formal bridge used below is exactly
-\[
-  \CnfBareNeg(R,model)\Rightarrow\CnfImageSep(R,model).
-\]
-Thus \(\SepImg\) is not a generic report act, not ordinary negative theoremhood by itself, and not an A+ premise. It is the image-separator branch used by the SAT-local discriminator theorem.
+\begin{definition}[Candidate-image exclusion and separator occupation]\label{def:image}
+The support-level SAT-native lower-bound image is \(\CandImageExcl(model)\): candidate endpoint-image exclusion on the exact context-bound encoded polynomial-time CNF-SAT candidate image. It is lower-bound content and may remain proof support, local obstruction, or ordinary theorem content.
+
+The separator endpoint-image occupation \(\SepImgOcc\) denotes candidate-image exclusion after it is used as the official endpoint-resolving negative branch on the fixed SAT carrier. Its formal Lean carrier is the object \(\CnfImageSep(R,model)\), but the manuscript keeps the support-level content \(\CandImageExcl(model)\) distinct from endpoint occupation \(\SepImgOcc\). Thus the proof does not infer endpoint use from lower-bound content alone.
 \end{definition}
 
+
 \begin{definition}[Endpoint classification layer]\label{def:clay-layer}
-The symbol \(\Asep\) denotes the role-specific separator endpoint-status factor, if such a factor is asserted for endpoint-image separator occupation \(\SepImg\). The Clay-valid separator endpoint is
+The symbol \(\Asep\) denotes the role-specific separator endpoint-status factor, if such a factor is asserted for endpoint-image separator occupation \(\SepImgOcc\). The Clay-valid separator endpoint is
 \[
-  \SepClay := \SepImg\wedge\Asep.
+  \SepClay := \SepImgOcc\wedge\Asep.
 \]
 The positive report classification is \(\Apos\), and the Clay-valid positive endpoint is
 \[
@@ -401,9 +450,9 @@ Raw bivalence is stated at the bare layer:
 \]
 The final proof does not infer reportability from the raw disjunction. It uses the context-bound model adequacy packet of Subsection~\ref{subsec:encoded-candidate-model-adequacy} and the SAT-local lower-bound/no-positive bridge
 \[
-  \SepBare\Rightarrow\StdLB(model)\Rightarrow\CandImageExcl(model)\Rightarrow\SepImg
+  \SepBare\Rightarrow\StdLB(model)\Rightarrow\CandImageExcl(model)
 \]
-to move the raw negative branch directly into the SAT image-separator branch. No reportability theorem is used in the bare-branch exclusion. Report acts reappear only after the positive endpoint has been derived.
+to move the raw negative branch first into candidate endpoint-image exclusion. No reportability theorem is used in the bare-branch exclusion. Report acts reappear only after the positive endpoint has been derived.
 
 
 \section{Self-Contained Kernel Proof for Non-Degenerate Construction}\label{sec:self-contained-kernel}
@@ -1228,6 +1277,122 @@ The context supplies the carrier and branch slots. Endpoint use plus fixed-domai
 \end{proof}
 
 
+
+\section{Local SAT Kernel Packet and Weakening Resistance}\label{sec:local-sat-kernel-packet}
+
+The self-contained kernel proof above establishes the general necessity of the kernel for non-degenerate construction. The present section records the SAT-local consequences actually used by the endpoint proof and audits the possible weakening routes. The claim is local: the manuscript does not require every formalism to use the same vocabulary. It requires that, on the fixed unrestricted finite CNF-SAT carrier, a theorem-bearing endpoint regime that preserves the same carrier, candidate image, branch slots, endpoint role, and act-time finality already performs the governance work named by the local kernel packet.
+
+\subsection{Local SAT kernel packet}
+
+\begin{longtable}{>{\raggedright\arraybackslash}p{0.10\linewidth}>{\raggedright\arraybackslash}p{0.25\linewidth}>{\raggedright\arraybackslash}p{0.56\linewidth}}
+\toprule
+Node & General necessity & Local SAT form \\
+\midrule
+K1 & Fixed-domain kernel & A theorem-bearing SAT endpoint requires the fixed unrestricted finite CNF carrier, encoded candidate image, branch slots, admissibility boundary, and act-time irreversibility. \\
+K2 & Reference fixation & A SAT report cannot be licensed by silently replacing arbitrary finite CNF-SAT with fixed-width k-SAT, a promise fragment, nonuniform circuits, finite benchmarks, oracle behavior, per-length advice, or a different encoding carrier. \\
+K3 & Standing-readout separation & \(\CnfSATP\) is the positive endpoint readout. Lower-bound data, solver hardness, failure traces, or candidate obstruction data are not that readout by definition. \\
+K4 & Bivalence and fail-closed status & On the fixed endpoint role, a theorem-bearing branch is admitted or not admitted. Unknown, hard, unproved, heuristic, benchmark-failed, partial, or open status is not a third endpoint truth branch. \\
+K5 & Unique admissible interior & The same SAT endpoint slot cannot carry plural independent endpoint-governing interiors. A second endpoint-status classifier must collapse to the bridge interface, reset carrier, or fail. \\
+K6 & Standing-admissibility identity & Separator standing cannot float outside admissibility. A negative endpoint branch with standing must be admissibly typed; otherwise it is proof support, bookkeeping, or carrier drift. \\
+K7 & No generators & Writing that all encoded polynomial-time candidates fail does not self-authorize endpoint standing. \\
+K8 & No carriers & Finite tests, solver hardness, oracle separations, nonuniform fragments, proof-complexity fragments, lower-bound templates, or circuit families cannot carry CNF-SAT endpoint status without a lawful bridge back to the fixed carrier. \\
+K9 & No post-selection repair & Later candidate discovery, encoding shift, oracle shift, reclassification, or benchmark extension creates a new certified act; it does not repair an earlier unbridged endpoint report as the same act. \\
+K10 & AMetric no-selector boundary & No preferred encoding, candidate order, search depth, benchmark set, ranking, heuristic metric, or finite table decides endpoint status before admissibility is fixed. \\
+K11 & Report preservation & A report may not exceed its carrier, candidate image, and bridge support. Candidate failure evidence alone cannot replace endpoint proof; candidate-image exclusion becomes endpoint governance only under endpoint-resolving use. \\
+K12 & ATS skin non-authority & Labels, syntax, model names, code orderings, proof sketches, and bookkeeping do not become theorem-bearing by being written. \\
+K13 & Endpoint exhaustion & Once the carrier, branch slots, endpoint role, and admissibility boundary are fixed, endpoint-bearing branches are exhausted by positive endpoint occupation or governed separator use. Proof support, bookkeeping, unknown status, deferred status, repair, carrier shift, unsupported separator status, and hidden-fifth statuses do not occupy endpoint truth. \\
+\bottomrule
+\end{longtable}
+
+\begin{theorem}[Local SAT kernel packet]\label{thm:local-sat-kernel-packet}
+For every theorem-bearing endpoint use on the fixed unrestricted finite CNF-SAT carrier, the local SAT consequences K1--K13 are in force.
+\end{theorem}
+
+\begin{proof}
+By Theorem~\ref{thm:kernel-necessity}, endpoint use instantiates reference, standing, admissibility, and irreversibility. K1 records their joint fixed-domain role. K2 and K3 are reference and role-separation consequences. K4--K6 are fail-closed, unique-interior, and standing-admissibility consequences. K7--K9 block self-authorization, unlicensed carrier transfer, and post-selection repair. K10 blocks selector authority at the endpoint boundary. K11 is the SAT report-preservation rule. K12 prevents skin-level notation from becoming theorem-bearing. K13 is endpoint exhaustion: after the SAT endpoint coordinates are fixed, a purported negative branch is positive occupation, proof support, bookkeeping, repair, carrier reset, selector/surrogate import, lawful external comparison, or forbidden second endpoint authority. No additional same-domain endpoint truth occupation remains.
+\end{proof}
+
+\subsection{Weakening-resistance of the local SAT packet}
+
+\begin{definition}[Core SAT endpoint adequacy packet]\label{def:core-sat-endpoint-adequacy}
+The core SAT endpoint adequacy packet is
+\[
+  \CoreSAT(R,model)=\{\RefK_R,\St_R,\Adm_R,\Irr_R\},
+\]
+together with target determinacy, step evaluability, act-time finality, same-regime fidelity, the fixed unrestricted finite CNF-SAT carrier, and the context-bound encoded candidate image of Subsection~\ref{subsec:encoded-candidate-model-adequacy}.
+\end{definition}
+
+\begin{definition}[Separator-governance-permissive weakening]\label{def:separator-governance-permissive-weakening}
+A separator-governance-permissive weakening is a regime \(\WeakSep\) such that:
+\begin{enumerate}
+\item \(\WeakSep\) preserves the same unrestricted finite CNF-SAT carrier;
+\item \(\WeakSep\) preserves the same encoded candidate image, positive endpoint slot, and raw negative branch slot;
+\item \(\WeakSep\) preserves theorem-bearing target-slot fixation, minimal report evaluability, same-regime fidelity, and act-time finality;
+\item \(\WeakSep\) preserves the core packet \(\CoreSAT(R,model)\);
+\item \(\WeakSep\) permits endpoint-resolving separator governance that is not positive endpoint occupation, proof support only, bookkeeping, carrier shift, repair, or a lawful coequal target role.
+\end{enumerate}
+Target-slot fixation in this definition is weaker than K13: it fixes what is being evaluated but does not itself exclude unknown, deferred, bookkeeping, or hidden-fifth endpoint statuses. Minimal report evaluability is weaker than K11: it attaches reports to the fixed target and classifies their role, but it does not itself impose no-overreporting. K11 and K13 are proved below as local necessities; they are not smuggled into the definition of \(\WeakSep\).
+\end{definition}
+
+\begin{lemma}[Plural SAT data are permitted; plural endpoint interiors are not]\label{lem:plural-sat-data-not-plural-interiors}
+K5 does not prohibit multiple encodings, candidate procedures, proof routes, reductions, lower-bound attempts, solver traces, oracle comparisons, circuit families, proof-complexity systems, or heuristic studies. It prohibits only plural endpoint-governing admissible interiors for the same fixed SAT endpoint slot when those interiors assign endpoint status while preserving the same carrier, candidate image, branch roles, and endpoint target.
+\end{lemma}
+
+\begin{proof}
+Plural SAT data may be proof support, auxiliary structure, representation, or bridge material without deciding endpoint status. If two alleged endpoint interiors agree on all endpoint-bearing acts, the second is endpoint bookkeeping. If they disagree while preserving the same carrier and endpoint slot, then the same SAT endpoint has two governing authorities. That is not harmless mathematical plurality; it is plural endpoint governance.
+\end{proof}
+
+\begin{lemma}[Local necessity of K5]\label{lem:sat-k5-necessity}
+Under \(\CoreSAT(R,model)\), a weakening that permits two distinct endpoint-governing admissible interiors for the same SAT endpoint slot either collapses to bookkeeping, splits the domain, or creates a second same-domain endpoint classifier.
+\end{lemma}
+
+\begin{proof}
+Let \(I_1\) and \(I_2\) be endpoint-governing interiors for the same fixed endpoint slot. If they agree on all endpoint-bearing acts, they are extensionally identical for endpoint purposes. If they disagree, then the disagreement must be resolved by a higher selector, a domain split, or a second classifier. A higher selector is endpoint governance above the gate; a domain split exits same-carrier use; a second classifier is precisely the forbidden plural endpoint authority. Thus K5 is locally necessary for non-degenerate SAT endpoint determinacy.
+\end{proof}
+
+\begin{lemma}[Local necessity of K6]\label{lem:sat-k6-necessity}
+Under \(\CoreSAT(R,model)\), separator standing outside admissibility is either support-only, carrier shift, or a second endpoint-status gate.
+\end{lemma}
+
+\begin{proof}
+Suppose a separator branch has endpoint standing while not being admissibility-bound. If it does not affect endpoint status, it is support, bookkeeping, or lower-status report material. If it affects endpoint status on the same carrier, it performs endpoint-status work outside the admissibility boundary and therefore acts as a second gate. If it avoids that conclusion by changing the carrier, encoding image, branch role, or endpoint slot, it is carrier or domain shift.
+\end{proof}
+
+\begin{lemma}[Local necessity of K11]\label{lem:sat-k11-necessity}
+Under \(\CoreSAT(R,model)\) plus minimal report evaluability, a theorem-bearing SAT endpoint report that exceeds its carrier, encoded candidate image, bridge position, and support is unsupported endpoint authority, silent redescription, or no-carrier transfer.
+\end{lemma}
+
+\begin{proof}
+Minimal report evaluability says that a report is attached to the fixed target and can be classified as theorem-bearing, support-level, bookkeeping, or out-of-domain. K11 adds no-overreporting: endpoint force may not exceed the fixed carrier, candidate image, bridge position, and tensor support. A finite obstruction, heuristic lower-bound trace, or candidate failure datum may support a proof; it does not by itself settle the endpoint. If it is reported as endpoint failure on the same carrier without lawful bridge support, it overstates its support. The overstatement is unsupported endpoint authority, silent redescription of a surrogate as the endpoint, or transfer from another carrier.
+\end{proof}
+
+\begin{lemma}[Local necessity of K13]\label{lem:sat-k13-necessity}
+K13 does not deny epistemic uncertainty, open problem status, incomplete proof search, heuristic evidence, or review status. It states that unknown, deferred, unsupported, bookkeeping, support-level, and hidden-fifth statuses are report or epistemic statuses, not endpoint truth branches on the fixed SAT endpoint slot.
+\end{lemma}
+
+\begin{proof}
+Target-slot fixation fixes what is being evaluated. It does not by itself exhaust the endpoint truth slot. K13 supplies the fail-closed endpoint-exhaustion rule: once carrier, branch slots, endpoint role, and admissibility boundary are fixed, an endpoint branch is admitted for endpoint standing or not. Unknown status may describe the state of a problem; support status may describe evidence; bookkeeping may organize notation. None of these occupies endpoint truth. Treating any of them as a third theorem-bearing endpoint branch degenerates the fixed endpoint regime.
+\end{proof}
+
+\begin{theorem}[No strict same-carrier weakening permits independent SAT separator governance]\label{thm:no-strict-sat-weakening-permits-separator-governance}
+Under the core SAT endpoint adequacy packet \(\CoreSAT(R,model)\), no separator-governance-permissive weakening \(\WeakSep\) preserves non-degenerate same-carrier SAT endpoint use.
+\end{theorem}
+
+\begin{proof}
+Assume such a weakening exists, and let \(G_{\mathsf{sep}}\) be the endpoint-resolving separator act it permits. Since \(G_{\mathsf{sep}}\) is endpoint-resolving, it changes the endpoint status of the fixed SAT slot. Since it is not proof support or bookkeeping, it is theorem-bearing. Since it is not carrier shift or repair, it acts on the same carrier and same endpoint act. Since it is not positive endpoint occupation, it does not occupy the constructive SAT endpoint. Since it is not a lawful coequal target role, it cannot be a separately declared alternative endpoint inside the same positive endpoint-image carrier.
+
+If \(G_{\mathsf{sep}}\) shares the same admissible interior as the positive bridge, it collapses into bridge occupation and cannot supply separator exclusion. If it has a distinct admissible interior, Lemma~\ref{lem:sat-k5-necessity} yields plural endpoint governance, a second classifier, or domain split. If it has standing without admissibility, Lemma~\ref{lem:sat-k6-necessity} makes it support-only, carrier shift, or second gate. If its report force exceeds carrier and bridge support, Lemma~\ref{lem:sat-k11-necessity} gives unsupported endpoint authority, silent redescription, or no-carrier transfer. If it is neither admitted nor rejected while remaining endpoint-resolving, Lemma~\ref{lem:sat-k13-necessity} gives third-status degeneration. In every case the alleged weakening either preserves the original endpoint behavior extensionally, lowers the separator to support or bookkeeping, shifts carrier, or reproduces forbidden second endpoint authority. Hence no strict same-carrier weakening survives.
+\end{proof}
+
+\begin{corollary}[Strict SAT weakening either preserves the packet extensionally or exits endpoint use]\label{cor:sat-weakening-extension-or-exit}
+Let \(\WeakSep\) be a weaker same-carrier SAT regime preserving core endpoint adequacy. If \(\WeakSep\) does not permit independent endpoint governance, it is extensionally equivalent to the local SAT packet for endpoint purposes. If it does permit independent endpoint governance, it fails reference, standing, admissibility, irreversibility, target-slot fixation, minimal report evaluability, no-overreporting, endpoint exhaustion, or same-carrier fidelity.
+\end{corollary}
+
+\begin{proof}
+If the weakening does not alter endpoint-bearing statuses, its differences are support-level or presentation-level for the endpoint. If it alters endpoint status by permitting independent separator governance, Theorem~\ref{thm:no-strict-sat-weakening-permits-separator-governance} shows that it exits non-degenerate same-carrier endpoint use by one of the listed failures.
+\end{proof}
+
+
 \section{Endpoint-Status Discriminator Discipline}\label{sec:discriminator-discipline}
 
 \begin{definition}[Endpoint-status discriminator]\label{def:endpoint-discriminator}
@@ -1303,13 +1468,38 @@ Ordinary theoremhood of the negative proposition is not, merely as theoremhood, 
 \[
   \NegThm_R \;\text{by theorem status alone does not equal}\; \SepDisc(model).
 \]
-When the content proved is the raw negative branch \(\SepBare\), the SAT-specific lower-bound/no-positive bridge transports that content directly to the image-separator branch \(\SepImg\); the resulting contradiction targets the discriminator induced by that branch, not negative theoremhood as such.
+When the content proved is the raw negative branch \(\SepBare\), the SAT-specific lower-bound/no-positive bridge transports that content to candidate endpoint-image exclusion. Only when the negative content is offered as the official endpoint resolution is that support-level exclusion promoted to \(\SepImgOcc\). The resulting contradiction targets the discriminator induced by endpoint occupation, not negative theoremhood as such.
 \end{theorem}
 
 \begin{proof}
-Ordinary theoremhood is a proposition-targeted governed derivation, hence kernel-internal by Theorem~\ref{thm:negative-theorem-not-defective}. The discriminator excluded below is not a theorem-status predicate. It is the endpoint-status discriminator induced by the SAT image-separator branch obtained in Theorem~\ref{thm:bare-negative-forces-image}. Thus an ordinary negative theorem is not rejected for polarity or for being theoremhood; the rejected object is the same-domain separator endpoint-status discrimination induced by the raw negative branch through the image-separator bridge.
+Ordinary theoremhood is a proposition-targeted governed derivation, hence kernel-internal by Theorem~\ref{thm:negative-theorem-not-defective}. The discriminator excluded below is not a theorem-status predicate. Theorem~\ref{thm:bare-negative-forces-image} supplies only candidate endpoint-image exclusion; endpoint-resolution use is required before that support-level content becomes separator endpoint-image occupation. Thus an ordinary negative theorem is not rejected for polarity or for being theoremhood; the rejected object is the same-domain separator endpoint-status discrimination induced only after official endpoint-resolution use promotes the negative content to \(\SepImgOcc\).
 \end{proof}
 
+
+
+\begin{theorem}[Ordinary SAT falsity is not lost; endpoint-bearing negation is role-classified]\label{thm:ordinary-sat-falsity-role-classified}
+The manuscript does not deny that \(\neg\PosRaw\) is the ordinary logical negation of the positive SAT endpoint. It denies only that this negation can occupy theorem-bearing endpoint status on the same fixed SAT carrier without taking one of the audited roles. If it is proposition-targeted theoremhood only, it is kernel-internal and not rejected. If it is proof support, it does not resolve the official endpoint. If it changes the carrier, it is not the same endpoint. If it is offered as the official negative endpoint resolution, it becomes endpoint use of \(\SepBare\), and the SAT lower-bound/no-positive bridge transports it first into \(\CandImageExcl(model)\) and then, under that endpoint-resolution use, into separator endpoint-image occupation \(\SepImgOcc\).
+\end{theorem}
+
+\begin{proof}
+Theorem~\ref{thm:negative-theorem-not-defective} grants ordinary negative theoremhood as kernel-internal theoremhood. Theorem~\ref{thm:ordinary-negative-not-discriminator} separates that theoremhood from the rejected separator discriminator. The additional act of offering the negative theorem as the official endpoint resolution is classified by Definition~\ref{def:official-negative-endpoint-resolution}. Under that use, Theorem~\ref{thm:official-negative-theoremhood-endpoint-use} yields endpoint use of \(\SepBare\); the SAT-native bridge then routes \(\SepBare\) through lower-bound normal form to \(\CandImageExcl(model)\), and official endpoint-resolution use promotes that content to \(\SepImgOcc\). Thus ordinary negation remains ordinary negation, while endpoint-bearing use of that negation is role-classified.
+\end{proof}
+
+\begin{theorem}[The SAT separator branch is not a lawful coequal endpoint role]\label{thm:separator-not-lawful-coequal-role}
+Inside the fixed unrestricted finite CNF-SAT endpoint-image carrier, \(\SepBare\) is not a separately declared lawful coequal target role alongside positive endpoint occupation. The positive branch is direct constructive occupation of \(\CnfSATP\). A same-carrier negative branch that resolves the official endpoint is proof support, bookkeeping, carrier/domain shift, or endpoint-status governance by candidate-image exclusion. It is not an additional coequal truth slot inside the same positive endpoint-image carrier.
+\end{theorem}
+
+\begin{proof}
+The official problem admits the ordinary mathematical alternatives \(P=NP\) and \(P\ne NP\). The present proof spine, however, evaluates the unrestricted finite CNF-SAT endpoint carrier whose positive endpoint image is polynomial-time CNF-SAT decidability. On that carrier, Theorem~\ref{thm:positive-direct-occupation} identifies the positive branch as direct constructive endpoint occupation. The negative CNF branch is the raw complement of that positive image and, by the SAT-native lower-bound/no-positive bridge, becomes candidate endpoint-image exclusion and, under endpoint-resolution use, separator endpoint-image occupation. If this negative branch is not endpoint-resolving, it is support or bookkeeping. If it changes the carrier, it is not the same endpoint. If it resolves the same carrier negatively, it governs endpoint status from outside positive occupation and therefore enters independent-discriminator analysis. Hence it is not a lawful coequal endpoint role inside the same endpoint-image carrier.
+\end{proof}
+
+\begin{theorem}[Separator exclusion is not a ban on negative complexity theory]\label{thm:negative-complexity-not-globally-forbidden}
+The proof does not forbid negative complexity-theoretic mathematics. Circuit lower bounds, proof-complexity lower bounds, relativization or oracle separations, natural-proofs and algebrization barriers, failed candidate algorithms, finite solver-hardness evidence, local obstructions, and proposition-targeted negative theoremhood are legitimate when they remain in their lawful roles. The excluded structure is narrower: same-carrier endpoint-resolving separator governance that does not occupy the positive CNF-SAT endpoint, does not remain proof support or bookkeeping, does not change carrier, and nevertheless governs endpoint status through an independent same-domain discriminator.
+\end{theorem}
+
+\begin{proof}
+Negative mathematical data may be proof support, local obstruction, barrier analysis, domain diagnosis, or ordinary theoremhood. None of those roles is excluded by the no-independent-discriminator theorem. The excluded case is the residue after lawful roles have been removed: a same-carrier endpoint-resolving negative branch that does endpoint-status work outside positive occupation while preserving the same carrier. By Theorem~\ref{thm:ordinary-sat-falsity-role-classified} this is endpoint-bearing negative governance, and by Theorem~\ref{thm:separator-not-lawful-coequal-role} it is not a lawful coequal endpoint role inside the same positive endpoint-image carrier. It is therefore routed to the independent-discriminator closure.
+\end{proof}
 
 \begin{definition}[Official negative endpoint resolution]\label{def:official-negative-endpoint-resolution}
 \[
@@ -1444,7 +1634,7 @@ The Lean counterpart is \LeanName{cnfSATImageSeparatorBranch_standardLowerBoundN
 The standard lower-bound normal form says that every encoded polynomial-time candidate fails SAT on the fixed unrestricted finite CNF carrier. By Theorem~\ref{thm:encoded-positive-endpoint-exactness}, the positive endpoint image is exactly the image of encoded polynomial-time candidates with no SAT failure. Universal failure of those candidates is therefore universal exclusion from the positive endpoint image. This is candidate endpoint-image exclusion.
 \end{proof}
 
-\begin{theorem}[Candidate endpoint-image exclusion induces theorem-level discrimination]\label{thm:candidate-image-exclusion-theorem-level-discriminator}
+\begin{theorem}[Candidate endpoint-image exclusion induces theorem-level candidate-image classification]\label{thm:candidate-image-exclusion-theorem-level-discriminator}
 For the context-bound CNF-SAT endpoint model,
 \[
   \CandImageExcl(model)\Rightarrow \ThmLevelDisc(model).
@@ -1453,7 +1643,7 @@ The Lean anchor is \LeanName{cnfSATTheoremLevelEndpointStatusDiscriminator_of_ca
 \end{theorem}
 
 \begin{proof}
-Candidate endpoint-image exclusion globally assigns each encoded polynomial-time candidate the endpoint-relevant status ``non-occupant of the positive CNF-SAT endpoint image.'' This is theorem-level endpoint-status discrimination. It does not compute a failing formula uniformly, does not select a canonical witness, and does not claim an algorithmic separator. Its role is classification of candidate endpoint occupation at theorem level, exactly as formalized by the cited Lean anchor.
+Candidate endpoint-image exclusion globally assigns each encoded polynomial-time candidate the endpoint-relevant status ``non-occupant of the positive CNF-SAT endpoint image.'' This is theorem-level candidate-image classification. It does not compute a failing formula uniformly, does not select a canonical witness, and does not claim an algorithmic separator. It becomes endpoint-status governance only when the classification is used as the endpoint-resolving negative branch on the fixed carrier; otherwise it remains lower-bound or proof-support content. The cited Lean anchor records the theorem-level classification surface.
 \end{proof}
 
 \begin{definition}[Legitimate invariant use versus endpoint-status governance]\label{def:invariant-use-kind}
@@ -1535,19 +1725,45 @@ The Lean anchor is \LeanName{cnfSATEndpointResolvingNegativeTheorem_is_endpointS
 By Definition~\ref{def:candidate-image-exclusion-use-classification}, the endpoint-resolving negative-theorem case is official negative endpoint use. Theorem~\ref{thm:official-negative-use-candidate-image-governance} then gives endpoint-status governance by candidate-image exclusion. Proof-support-only use does not resolve the endpoint, and carrier-changing use exits the fixed carrier; the alleged endpoint-resolving non-governance use is ruled out by Theorem~\ref{thm:endpoint-resolving-nongovernance-hidden-fifth-impossible}.
 \end{proof}
 
-\begin{theorem}[Raw negative branch forces the SAT image-separator branch]\label{thm:bare-negative-forces-image}
-In the fixed SAT endpoint setting, the raw negative branch transports through SAT-native lower-bound normal form to the formal SAT image-separator branch:
+\begin{theorem}[Raw negative branch forces candidate endpoint-image exclusion]\label{thm:bare-negative-forces-image}
+On the fixed context-bound CNF-SAT endpoint carrier,
 \[
-  \ClayCtx\wedge\FixedDom(R)\wedge\ModelOfCnf(model,R)\wedge\SepBare\Rightarrow\SepImg.
+  \ClayCtx\wedge\FixedDom(R)\wedge\ModelOfCnf(model,R)\wedge\SepBare
+  \Rightarrow \CandImageExcl(model).
+\]
+The audited Lean support is the route through \LeanName{cnfSATBareNegativeBranch_standardLowerBoundNormalForm} and the candidate-image exclusion bridge.
+\end{theorem}
+
+\begin{proof}
+The implication is not a reportability principle and does not assert that raw truth creates a Clay report act. By Theorem~\ref{thm:bare-negative-standard-lower-bound-form}, \(\SepBare\) gives standard SAT lower-bound normal form over the fixed encoded candidate image. By Theorem~\ref{thm:standard-lower-bound-candidate-image-exclusion}, that normal form is candidate endpoint-image exclusion. Therefore \(\CandImageExcl(model)\) follows. No endpoint-image separator occupation is inferred at this stage.
+\end{proof}
+
+\begin{theorem}[Candidate-image exclusion becomes separator occupation only under official endpoint resolution]\label{thm:candidate-image-exclusion-to-separator-occupation}
+On the fixed context-bound CNF-SAT endpoint carrier,
+\[
+\begin{aligned}
+  &\ClayCtx\wedge\FixedDom(R)\wedge\ModelOfCnf(model,R)\wedge\CandImageExcl(model)\\
+  &\qquad\wedge\OfficialEndpointResolution_R(\neg\PosRaw)
+  \Rightarrow \SepImgOcc .
+\end{aligned}
 \]
 \end{theorem}
 
 \begin{proof}
-The implication is not a reportability principle and does not assert that raw truth creates a Clay report act. By Theorem~\ref{thm:bare-negative-standard-lower-bound-form}, \(\SepBare\) gives standard SAT lower-bound normal form over the fixed encoded candidate image. By Theorem~\ref{thm:standard-lower-bound-candidate-image-exclusion}, that normal form is candidate endpoint-image exclusion. In the formal SAT operator layer, candidate endpoint-image exclusion is exactly the lower-bound/no-positive form of the SAT image-separator branch. The audited anchors \LeanName{cnfSATBareNegativeBranch_standardLowerBoundNormalForm} and \LeanName{cnfSATImageSeparatorBranch_standardLowerBoundNormalForm} record this route. Therefore \(\CnfImageSep(R,model)\), denoted here by \(\SepImg\), follows.
-
-Thus the raw negative SAT branch is not laundered through reportability, not treated as defective theoremhood, and not routed through an additional residual layer. It is transported into the SAT image-separator branch by the SAT-native lower-bound normal form: universal exclusion of encoded polynomial-time candidate occupants from the positive SAT endpoint image.
+Candidate-image exclusion by itself is lower-bound content: it may be proof support, a local obstruction, ordinary theorem content, or carrier-diagnostic information. The additional hypothesis \(\OfficialEndpointResolution_R(\neg\PosRaw)\) changes the act under assessment. It says that the negative content is being used as the official endpoint-resolving branch for the same unrestricted finite CNF-SAT endpoint. Under that use, the support-level image exclusion is promoted to separator endpoint-image occupation. This is precisely \(\SepImgOcc\). No support-level lower-bound statement is promoted merely by being true or written.
 \end{proof}
 
+\begin{lemma}[Separator occupation contains candidate-image exclusion]\label{lem:separator-occupation-contains-candidate-image-exclusion}
+On the fixed context-bound CNF-SAT endpoint carrier, separator endpoint-image occupation includes the support-level candidate-image exclusion content:
+\[
+  \ClayCtx\wedge\FixedDom(R)\wedge\ModelOfCnf(model,R)\wedge\SepImgOcc
+  \Rightarrow \CandImageExcl(model).
+\]
+\end{lemma}
+
+\begin{proof}
+By Definition~\ref{def:image}, \(\SepImgOcc\) is candidate-image exclusion after that content is used as the official endpoint-resolving negative branch on the fixed carrier. The occupation status therefore contains, rather than replaces, the support-level content \(\CandImageExcl(model)\). This lemma is an unpacking lemma only: it does not promote lower-bound content into endpoint occupation and does not assert endpoint use from \(\CandImageExcl(model)\) alone.
+\end{proof}
 
 
 \subsection{SAT Negative Occupation Exhaustion and Endpoint-Status Bivalence}\label{subsec:sat-negative-occupation-bivalence}
@@ -1560,11 +1776,11 @@ The phrase ``official negative endpoint use'' is not a new escape hatch and not 
 For the context-bound CNF-SAT endpoint model, \(\CnfOfficialNegUse(R,model)\) denotes theorem-bearing official negative endpoint use of the finite CNF-SAT carrier. The Lean surface distinguishes four exhaustive negative-occupation alternatives:
 \[
 \begin{aligned}
-  &\SepImg,\qquad \OrdNeg_R^{\mathsf{alt}},\\
+  &\SepImgOcc,\qquad \OrdNeg_R^{\mathsf{alt}},\\
   &\CnfBookNegOnly(R,model),\qquad \CnfCarrierShift(R,model).
 \end{aligned}
 \]
-The first is image-separator occupation. The second is a putative ordinary negative endpoint alternative that remains governed but does not occupy separator status. The third is bookkeeping-only negation, not theorem-bearing endpoint use. The fourth is a change of carrier or domain. The corresponding Lean objects are \LeanName{CnfSATOfficialNegativeEndpointUse}, \LeanName{CnfSATNegativeOccupationExhaustion}, \LeanName{CnfSATBookkeepingNegativeOnly}, and \LeanName{CnfSATCarrierShift}.
+The first is separator endpoint-image occupation. The second is a putative ordinary negative endpoint alternative that remains governed but does not occupy separator status. The third is bookkeeping-only negation, not theorem-bearing endpoint use. The fourth is a change of carrier or domain. The corresponding Lean objects are \LeanName{CnfSATOfficialNegativeEndpointUse}, \LeanName{CnfSATNegativeOccupationExhaustion}, \LeanName{CnfSATBookkeepingNegativeOnly}, and \LeanName{CnfSATCarrierShift}.
 \end{definition}
 
 \begin{theorem}[SAT negative occupation exhaustion]\label{thm:sat-negative-occupation-exhaustion}
@@ -1581,7 +1797,7 @@ On the fixed context-bound finite CNF-SAT endpoint carrier, official negative en
 \begin{aligned}
   &\CnfOfficialNegUse(R,model)\wedge \FixedDom(R)
     \wedge \ModelOfCnf(model,R)\\
-  &\qquad\wedge \AMetric(R)\Rightarrow \SepImg .
+  &\qquad\wedge \AMetric(R)\Rightarrow \SepImgOcc .
 \end{aligned}
 \]
 The Lean anchor is \LeanName{cnfSATNegativeOccupation_nonoptional}.
@@ -1595,7 +1811,7 @@ cnfSATOfficialNegativeEndpointUse_not_bookkeepingOnly
 cnfSATNoOrdinaryNegativeAlternative_of_ametricBoundary
 cnfSATNegativeOccupation_nonoptional
 \end{lstlisting}
-The remaining exhaustive branch is the SAT image-separator branch.
+The remaining exhaustive branch is separator endpoint-image occupation.
 \end{proof}
 
 \begin{definition}[SAT endpoint-status bivalence]\label{def:governed-sat-endpoint-status-bivalence}
@@ -1625,7 +1841,7 @@ Equivalently, a governed endpoint use that is not positive occupies separator st
 By Theorem~\ref{thm:governed-endpoint-status-bivalence}, governed endpoint use is positive or separator. The assumption \(\neg\CnfPositiveEndpoint\) eliminates positive endpoint occupation. The only remaining governed endpoint status is separator status, and separator status is the SAT image-separator branch on the context-bound CNF model. This is the direct branch form formalized by \LeanName{cnfSATImageSeparatorBranch_of_negativeGovernedEndpointUse}.
 \end{proof}
 
-Consequently, the objection that the official raw negative may be theorem-bearing while avoiding image-separator occupation is not a remaining third route. Mere proposition-targeted negative theoremhood is harmless but does not by itself resolve the official endpoint. Once the same theorem is offered as the official negative endpoint resolution, Theorem~\ref{thm:official-negative-theoremhood-endpoint-use} makes it endpoint use; on the fixed governed finite CNF-SAT carrier, a negative endpoint is not positive; endpoint-status bivalence forces separator status; separator status occupies the image-separator branch; and the image-separator branch is the branch closed by the no-independent-discriminator route below.
+Consequently, the objection that the official raw negative may be theorem-bearing while avoiding image-separator occupation is not a remaining third route. Mere proposition-targeted negative theoremhood is harmless but does not by itself resolve the official endpoint. Once the same theorem is offered as the official negative endpoint resolution, Theorem~\ref{thm:official-negative-theoremhood-endpoint-use} makes it endpoint use; on the fixed governed finite CNF-SAT carrier, a negative endpoint is not positive; endpoint-status bivalence forces separator status; separator status occupies the image-separator branch; and separator endpoint-image occupation is the branch closed by the no-independent-discriminator route below.
 
 \begin{definition}[SAT-local independence bridge]\label{def:sat-local-independence-bridge}
 \(\SepIndBridge(model)\) denotes the SAT-local same-domain independence bridge: a separating candidate-status classifier for the context-bound CNF-SAT model is independent same-domain endpoint-status discrimination. In the Lean surface this is the predicate \(\CnfSepClassInd(model)\). It is not a source of standing and not an A+ premise; it records the SAT-local condition under which an image-separator branch produces the independent discriminator excluded by kernel-forced rigidity.
@@ -1654,101 +1870,174 @@ For the context-bound CNF-SAT model,
 By Definition~\ref{def:sepdisc-nosepdisc}, \(\SepDisc(model)\) is the formal independent separator endpoint-status discriminator and \(\NoSepDisc(model)\) is the corresponding no-independent-separator-classifier closure. The latter is precisely the negation of the former at the fixed SAT endpoint carrier: independent same-domain separator discrimination is excluded. Thus \(\NoSepDisc(model)\Rightarrow\neg\SepDisc(model)\).
 \end{proof}
 
-\begin{theorem}[SAT-local bridge instantiated by the image-separator branch]\label{thm:sat-local-bridge-instantiated}
-In the fixed SAT context, the SAT-local independence bridge is invoked only by the image-separator branch:
+\begin{theorem}[Endpoint-image exclusion is independent only under endpoint-resolving use]\label{thm:endpoint-image-exclusion-independent-only-under-endpoint-use}
+Candidate endpoint-image exclusion is not automatically forbidden and is not automatically an independent same-domain discriminator. On the fixed unrestricted finite CNF-SAT carrier, \(\CandImageExcl(model)\) remains legitimate when it is used as proof support, a local obstruction, lower-bound lemma, ordinary theorem content not offered as the official endpoint resolution, or carrier-diagnostic information. It invokes the SAT-local independence bridge only when it is used to resolve the fixed endpoint negatively while preserving the same carrier and while not occupying the positive endpoint:
 \[
-  \ClayCtx\wedge\FixedDom(R)\wedge\ModelOfCnf(model,R)\wedge\SepImg
-  \Rightarrow
-  \SepIndBridge(model).
+\begin{aligned}
+  &\ClayCtx\wedge\FixedDom(R)\wedge\ModelOfCnf(model,R)\\
+  &\qquad\wedge\CandImageExcl(model)\wedge\SepImgOcc\wedge\EndpointUse_R(\SepImgOcc)\\
+  &\Rightarrow \SepIndBridge(model).
+\end{aligned}
 \]
 \end{theorem}
 
 \begin{proof}
-The model-binding clause fixes the encoded CNF-SAT carrier: arbitrary finite CNF instances over finite Boolean alphabets, evaluated by formula size, with admissible encodings preserving the same SAT endpoint image. When \(\SepImg\) is present, the branch is the SAT image-separator branch on that same carrier. By the SAT-native bridge in Subsection~\ref{subsec:sat-native-lower-bound-governance}, such a branch is candidate endpoint-image exclusion; if it is used to resolve the official endpoint negatively, Theorem~\ref{thm:official-negative-use-candidate-image-governance} classifies it as endpoint-status governance by candidate-image exclusion. Hence the separating classifier is same-domain endpoint-status work rather than transported proof support or report bookkeeping. This is the SAT-local bridge represented in Lean by \(\CnfSepClassInd(model)\). The theorem does not assert an independent discriminator from context alone; it states the branch-local condition under which the image-separator theorem applies.
+Proof-support use of candidate-image exclusion does not settle the official endpoint; it remains lawful lower-bound or obstruction material. Carrier-changing use is not the same endpoint. Bookkeeping use changes no endpoint status. The only remaining case in which candidate-image exclusion does endpoint work on the fixed carrier is endpoint-resolving use of the separator endpoint-image occupation \(\SepImgOcc\). In that case the report classifies the positive endpoint image from outside positive occupation. By Theorems~\ref{thm:official-negative-use-candidate-image-governance} and~\ref{thm:separator-not-lawful-coequal-role}, such use is not positive endpoint occupation, proof support, bookkeeping, carrier shift, or a lawful coequal target role. It is same-domain endpoint-status governance by candidate-image exclusion, and that is exactly the SAT-local independence bridge \(\SepIndBridge(model)\). Thus lower-bound content is not globally banned; only endpoint-resolving use on the fixed carrier invokes the independence bridge.
 \end{proof}
 
-\begin{theorem}[Image-separator branch requires independent separator discriminator]\label{thm:image-separator-requires-independent-discriminator}
+
+\begin{theorem}[SAT-local bridge instantiated by endpoint-resolving separator occupation]\label{thm:sat-local-bridge-instantiated}
+In the fixed SAT context, the SAT-local independence bridge is invoked by candidate-image exclusion only when that content is in endpoint-resolving separator occupation:
+\[
+\begin{aligned}
+  &\ClayCtx\wedge\FixedDom(R)\wedge\ModelOfCnf(model,R)\wedge\CandImageExcl(model)\\
+  &\qquad\wedge\SepImgOcc\wedge\EndpointUse_R(\SepImgOcc)
+  \Rightarrow \SepIndBridge(model).
+\end{aligned}
+\]
+\end{theorem}
+
+\begin{proof}
+The model-binding clause fixes the encoded CNF-SAT carrier: arbitrary finite CNF instances over finite Boolean alphabets, evaluated by formula size, with admissible encodings preserving the same SAT endpoint image. The support-level lower-bound content is \(\CandImageExcl(model)\); it may remain legitimate proof support. The hypothesis \(\SepImgOcc\) identifies endpoint-image separator occupation, not mere lower-bound content. The hypothesis \(\EndpointUse_R(\SepImgOcc)\) says that this occupation is being used to resolve the fixed endpoint negatively. Under these conditions, Theorem~\ref{thm:endpoint-image-exclusion-independent-only-under-endpoint-use} applies: candidate-image exclusion classifies the positive endpoint image from outside positive occupation. Hence the separating classifier is same-domain endpoint-status work rather than transported proof support or report bookkeeping. This is the SAT-local bridge represented in Lean by \(\CnfSepClassInd(model)\). The theorem therefore does not assert an independent discriminator from lower-bound content alone; it states the endpoint-use condition under which the image-separator theorem applies.
+\end{proof}
+
+
+\begin{theorem}[Separator endpoint occupation requires independent separator discriminator]\label{thm:image-separator-requires-independent-discriminator}
 For the fixed SAT endpoint carrier,
 \[
-  \ClayCtx\wedge\FixedDom(R)\wedge\ModelOfCnf(model,R)\wedge\SepIndBridge(model)\wedge\SepImg
+  \ClayCtx\wedge\FixedDom(R)\wedge\ModelOfCnf(model,R)\wedge\SepIndBridge(model)\wedge\SepImgOcc
   \Rightarrow
   \SepDisc(model).
 \]
 \end{theorem}
 
 \begin{proof}
-The formal SAT operator theorem states exactly the displayed manuscript implication: a context-bound independent same-domain separating classifier together with the SAT image-separator branch yields the independent separator endpoint-status discriminator. The corresponding Lean anchor is listed in Appendix~A. This is the exact branch asymmetry: the positive branch is direct endpoint occupation, while the image-separator branch induces independent same-domain endpoint-status discrimination.
+The formal SAT operator theorem supplies the Lean-side rule for the image-separator branch. In manuscript terms, that branch is invoked here only as separator endpoint occupation \(\SepImgOcc\), together with the explicit SAT-local independence bridge. Under those two conditions, it yields \(\SepDisc(model)\). This is the exact branch asymmetry: the positive branch is direct endpoint occupation, while endpoint-resolving separator occupation induces independent same-domain endpoint-status discrimination.
 \end{proof}
 
-\begin{theorem}[Bare negative branch requires independent separator discriminator]\label{thm:bare-negative-requires-independent-discriminator}
+
+\begin{theorem}[Official endpoint-resolving bare negative branch requires independent separator discriminator]\label{thm:bare-negative-requires-independent-discriminator}
 For the fixed SAT endpoint carrier,
 \[
-  \ClayCtx\wedge\FixedDom(R)\wedge\ModelOfCnf(model,R)\wedge\SepBare
-  \Rightarrow
-  \SepDisc(model).
+\begin{aligned}
+  &\ClayCtx\wedge\FixedDom(R)\wedge\ModelOfCnf(model,R)\wedge\SepBare\\
+  &\qquad\wedge\OfficialEndpointResolution_R(\neg\PosRaw)
+  \Rightarrow \SepDisc(model).
+\end{aligned}
 \]
 \end{theorem}
 
 \begin{proof}
-By Theorem~\ref{thm:bare-negative-forces-image}, \(\SepBare\) gives \(\SepImg\). The official-negative-theoremhood lock of Theorem~\ref{thm:official-negative-theoremhood-endpoint-use} blocks the attempted escape in which an ordinary proof of \(\neg\PosRaw\) is offered as the official endpoint resolution while refusing endpoint-use status. Once it is endpoint use, Theorem~\ref{thm:official-negative-use-candidate-image-governance} supplies the final hinge: the endpoint-resolving negative theorem is endpoint-status governance by candidate-image exclusion, not ordinary internal theorem content and not proof-support-only observation. The alleged endpoint-resolving non-governance alternative is the hidden fifth case excluded by Theorem~\ref{thm:endpoint-resolving-nongovernance-hidden-fifth-impossible}.
-
-The occupation-exhaustion and endpoint-status-bivalence locks in Theorems~\ref{thm:sat-negative-occupation-nonoptional}--\ref{thm:negative-governed-endpoint-use-separator} then make explicit that this is not an optional representation choice: a governed official negative endpoint on the fixed CNF-SAT carrier cannot remain a third status. The branch-local bridge theorem gives \(\SepIndBridge(model)\) from the same \(\SepImg\), and Theorem~\ref{thm:image-separator-requires-independent-discriminator} gives \(\SepDisc(model)\). The direct audited formal counterpart is listed in Appendix~A.
+By Theorem~\ref{thm:bare-negative-forces-image}, \(\SepBare\) gives \(\CandImageExcl(model)\), not endpoint occupation by itself. The additional endpoint-resolution premise is essential. Together with candidate-image exclusion, Theorem~\ref{thm:candidate-image-exclusion-to-separator-occupation} gives \(\SepImgOcc\). Theorem~\ref{thm:image-separator-endpoint-use} gives \(\EndpointUse_R(\SepImgOcc)\). With endpoint use explicit, Theorem~\ref{thm:sat-local-bridge-instantiated} gives \(\SepIndBridge(model)\), and Theorem~\ref{thm:image-separator-requires-independent-discriminator} gives \(\SepDisc(model)\). Thus the independent discriminator is required only for the official endpoint-resolving use of the bare negative branch, not for lower-bound content or ordinary negative theoremhood as such.
 \end{proof}
 
-\begin{theorem}[Image-separator branch is endpoint use]\label{thm:image-separator-endpoint-use}
-In the fixed SAT context,
+
+\begin{theorem}[Separator endpoint-image occupation is endpoint use]\label{thm:image-separator-endpoint-use}
+In the fixed SAT context, occupation of the separator endpoint-image branch is endpoint use:
 \[
-  \ClayCtx\wedge\FixedDom(R)\wedge\ModelOfCnf(model,R)\wedge\SepImg
+  \ClayCtx\wedge\FixedDom(R)\wedge\ModelOfCnf(model,R)\wedge\SepImgOcc
   \Rightarrow
-  \EndpointUse_R(\SepImg).
+  \EndpointUse_R(\SepImgOcc).
 \]
 \end{theorem}
 
 \begin{proof}
-The symbol \(\SepImg\) denotes the formal SAT image-separator branch, not raw syntax and not a reportability act. In formal notation,
-\[
-  \SepImg \equiv \CnfImageSep(R,model).
-\]
-In the endpoint-image layer, that branch is the separator branch occupying the SAT endpoint image. Therefore, under the fixed carrier and bound CNF model, its presence is theorem-bearing endpoint use of the image-separator branch.
+The support-level lower-bound content is \(\CandImageExcl(model)\). It may appear as a lower-bound lemma, obstruction, or proof-support statement without endpoint use. The symbol \(\SepImgOcc\), by contrast, denotes endpoint-image separator occupation: candidate-image exclusion after it is used as the official endpoint-resolving negative branch on the fixed carrier. Thus the theorem does not promote arbitrary lower-bound content into endpoint governance. It only unpacks the occupation notation: when separator endpoint-image occupation is present on the fixed endpoint carrier, that presence is theorem-bearing endpoint use of the separator branch.
 \end{proof}
+
 
 \begin{theorem}[Branch-local no independent SAT separator classifier]\label{thm:no-independent-sat-separator-classifier}
-For the fixed SAT endpoint carrier, image-separator endpoint use triggers the kernel-forced no-independent-discriminator consequence:
+For the fixed SAT endpoint carrier, separator endpoint-image occupation in endpoint use triggers the kernel-forced no-independent-discriminator consequence:
 \[
-  \ClayCtx\wedge\FixedDom(R)\wedge\ModelOfCnf(model,R)\wedge\EndpointUse_R(\SepImg)
+  \ClayCtx\wedge\FixedDom(R)\wedge\ModelOfCnf(model,R)\wedge\EndpointUse_R(\SepImgOcc)
   \Rightarrow
   \NoSepDisc(model).
 \]
 \end{theorem}
 
 \begin{proof}
-Endpoint use is governed construction, hence it instantiates the kernel by Theorem~\ref{thm:kernel-necessity}. The fixed-domain A+ consequence layer then supplies the AMetric boundary, unique admissible interior, standing conservation, no-selector discipline, transport closure, and structural rigidity. On a fixed SAT endpoint carrier, an endpoint-status discriminator must be bookkeeping, governance-equivalent, domain-changing, or independent same-domain governance work by Theorem~\ref{thm:endpoint-discriminator-trichotomy}. The first two cases do not yield \(\SepDisc(model)\), the third is not the same SAT endpoint domain, and the fourth is excluded by the kernel-forced consequence layer. Thus image-separator endpoint use on the context-bound SAT model yields \(\NoSepDisc(model)\).
+Endpoint use is governed construction, hence it instantiates the kernel by Theorem~\ref{thm:kernel-necessity}. The fixed-domain A+ consequence layer then supplies the AMetric boundary, unique admissible interior, standing conservation, no-selector discipline, transport closure, and structural rigidity. On a fixed SAT endpoint carrier, an endpoint-status discriminator must be bookkeeping, governance-equivalent, domain-changing, or independent same-domain governance work by Theorem~\ref{thm:endpoint-discriminator-trichotomy}. The first two cases do not yield \(\SepDisc(model)\), the third is not the same SAT endpoint domain, and the fourth is excluded by the kernel-forced consequence layer. Thus separator endpoint-image use on the context-bound SAT model yields \(\NoSepDisc(model)\).
 \end{proof}
 
-\begin{theorem}[Image-separator branch impossible]\label{thm:no-image-sep}
+
+\begin{theorem}[Separator endpoint-image occupation impossible]\label{thm:no-image-sep}
 In the fixed SAT context,
 \[
-  \ClayCtx\wedge\FixedDom(R)\wedge\ModelOfCnf(model,R)\Rightarrow\neg\SepImg.
+  \ClayCtx\wedge\FixedDom(R)\wedge\ModelOfCnf(model,R)
+  \Rightarrow \neg\SepImgOcc.
 \]
 \end{theorem}
 
 \begin{proof}
-Assume \(\ClayCtx\wedge\FixedDom(R)\wedge\ModelOfCnf(model,R)\) and suppose \(\SepImg\). The branch-local bridge theorem gives \(\SepIndBridge(model)\). Theorem~\ref{thm:image-separator-endpoint-use} gives \(\EndpointUse_R(\SepImg)\), and Theorem~\ref{thm:no-independent-sat-separator-classifier} gives \(\NoSepDisc(model)\). By Theorem~\ref{thm:no-sepdisc-excludes-sepdisc}, \(\neg\SepDisc(model)\). But Theorem~\ref{thm:image-separator-requires-independent-discriminator} gives \(\SepDisc(model)\). Contradiction. Therefore \(\neg\SepImg\).
+Assume \(\ClayCtx\wedge\FixedDom(R)\wedge\ModelOfCnf(model,R)\) and suppose \(\SepImgOcc\). Theorem~\ref{thm:image-separator-endpoint-use} gives \(\EndpointUse_R(\SepImgOcc)\). Lemma~\ref{lem:separator-occupation-contains-candidate-image-exclusion} gives the support-level content \(\CandImageExcl(model)\). With endpoint use explicit, Theorem~\ref{thm:sat-local-bridge-instantiated} gives \(\SepIndBridge(model)\). Theorem~\ref{thm:no-independent-sat-separator-classifier} gives \(\NoSepDisc(model)\). By Theorem~\ref{thm:no-sepdisc-excludes-sepdisc}, \(\neg\SepDisc(model)\). But Theorem~\ref{thm:image-separator-requires-independent-discriminator} gives \(\SepDisc(model)\). Contradiction. Therefore \(\neg\SepImgOcc\).
 \end{proof}
+
 
 
 \paragraph{No fifth negative occupation.}
 Thus the alleged third governed negative occupation is not a fifth case. If it has no endpoint-governance effect, it is bookkeeping. If it has endpoint-governance effect on the fixed carrier while being neither positive nor separator, it is hidden selector work or forbidden third-status refinement. If it depends on later reclassification of the same act, it is repair-sensitive middle status. If it avoids those consequences only by changing the admissibility-relevant invariant bundle, it is carrier or domain shift. Hence every purported governed negative endpoint occupation that is not separator either fails to be endpoint-bearing, violates the fixed-domain endpoint-status discipline, reopens repair, or leaves the fixed CNF-SAT carrier. No coherent fifth occupation remains.
 
-\begin{theorem}[Bare negative branch impossible]\label{thm:no-bare-sep}
+\begin{theorem}[Official endpoint-resolving bare negative branch impossible]\label{thm:no-bare-sep}
 In the fixed SAT context,
 \[
-  \ClayCtx\wedge\FixedDom(R)\wedge\ModelOfCnf(model,R)\Rightarrow\neg\SepBare.
+\begin{aligned}
+  &\ClayCtx\wedge\FixedDom(R)\wedge\ModelOfCnf(model,R)\\
+  &\Rightarrow \neg\bigl(\SepBare\wedge\OfficialEndpointResolution_R(\neg\PosRaw)\bigr).
+\end{aligned}
 \]
 \end{theorem}
 
 \begin{proof}
-Assume \(\ClayCtx\wedge\FixedDom(R)\wedge\ModelOfCnf(model,R)\) and suppose \(\SepBare\). By Theorem~\ref{thm:bare-negative-forces-image}, \(\SepImg\). But Theorem~\ref{thm:no-image-sep} excludes \(\SepImg\) under the same fixed context. Contradiction. Equivalently, the direct audited formal theorem listed in Appendix~A gives the same exclusion of \(\CnfBareNeg(R,model)\).
+Assume \(\ClayCtx\wedge\FixedDom(R)\wedge\ModelOfCnf(model,R)\) and suppose \(\SepBare\wedge\OfficialEndpointResolution_R(\neg\PosRaw)\). Theorem~\ref{thm:bare-negative-forces-image} gives \(\CandImageExcl(model)\). By Theorem~\ref{thm:candidate-image-exclusion-to-separator-occupation}, the conjunction of candidate-image exclusion with official endpoint-resolution use gives \(\SepImgOcc\). But Theorem~\ref{thm:no-image-sep} excludes \(\SepImgOcc\) under the same fixed context. Contradiction. Thus the bare negative branch is impossible as the official endpoint-resolving negative branch. Non-endpoint lower-bound content and ordinary negative theoremhood remain governed by the non-explosiveness theorem.
+\end{proof}
+
+
+
+\section{Route-Locus Exhaustion for SAT Separator Use}\label{sec:sat-route-locus-exhaustion}
+
+\begin{definition}[Endpoint-resolving negative SAT route]\label{def:endpoint-resolving-negative-sat-route}
+An endpoint-resolving negative SAT route is a proof trace, invariant, obstruction, lower-bound theorem, model comparison, classifier, or report that is used to make \(\SepBare\) the official negative resolution of the unrestricted finite CNF-SAT endpoint on the fixed carrier.
+\end{definition}
+
+\begin{definition}[SAT route loci]\label{def:sat-route-loci}
+The SAT route-locus basis consists of the following loci:
+\begin{center}
+\small
+\begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}p{0.10\linewidth}>{\raggedright\arraybackslash}X>{\raggedright\arraybackslash}p{0.30\linewidth}}
+\toprule
+Locus & SAT form & Disposition \\
+\midrule
+L1 & Carrier identity: unrestricted finite CNF versus fixed-width, promise, oracle, nonuniform, or benchmark carriers. & Carrier/domain shift unless bridged back. \\
+L2 & Candidate image: uniform deterministic polynomial-time machine/bound pairs. & Adequate model by Subsection~\ref{subsec:encoded-candidate-model-adequacy}. \\
+L3 & Encoding or presentation artifacts, duplicate codes, and representative choices. & Bookkeeping unless they change endpoint status, in which case selector/import failure. \\
+L4 & Positive endpoint occupation by a deterministic polynomial-time SAT decider. & Direct positive branch. \\
+L5 & Standard lower-bound normal form: every encoded polynomial-time candidate fails. & Proof support until endpoint-resolving; then enters image exclusion. \\
+L6 & Candidate endpoint-image exclusion. & Endpoint-governing if used as official negative resolution. \\
+L7 & Candidate-status classifier or theorem-level endpoint discriminator. & Routes to independent-discriminator closure. \\
+L8 & Nonuniform, oracle, promise, average-case, parameterized, or restricted-fragment shift. & Not the same endpoint carrier. \\
+L9 & Finite benchmark, empirical solver behavior, or heuristic hardness. & Support only; not endpoint occupation. \\
+L10 & Repair or later reclassification of an earlier endpoint act. & Violates act-time finality. \\
+L11 & Selector or ranking over candidates, encodings, search depths, or benchmarks. & AMetric no-selector violation if endpoint-bearing. \\
+L12 & Endpoint-status governance outside positive occupation. & Forbidden independent same-domain authority. \\
+\bottomrule
+\end{tabularx}
+\end{center}
+\end{definition}
+
+\begin{theorem}[SAT route-locus exhaustion]\label{thm:sat-route-locus-exhaustion}
+Every same-carrier endpoint-resolving negative SAT route enters at least one of L1--L12. If it enters none, it does no endpoint work and cannot resolve the official endpoint.
+\end{theorem}
+
+\begin{proof}
+A negative SAT route that resolves the endpoint must either alter the carrier, quantify over the polynomial-time candidate image, depend on encodings or representatives, deny positive endpoint occupation, express lower-bound normal form, exclude the candidate endpoint image, classify candidate status, shift to nonuniform/oracle/promise scope, rely on finite evidence, repair a prior report, select among candidates, or govern endpoint status. These cases cover the ways a same-carrier negative route can do endpoint work. L1 and L8 are carrier shifts; L3 and L11 are bookkeeping or selector failures; L5 and L9 are proof support until endpoint-resolving; L6 and L7 route to endpoint governance; L10 violates irreversibility; L12 is the forbidden same-domain discriminator case. If none of the loci is entered, the route preserves carrier, candidate image, encoding status, branch slot, lower-bound status, image occupation, classifier status, auxiliary scope, evidential status, act-time status, selector status, and endpoint-status governance. No endpoint-relevant work remains.
+\end{proof}
+
+\begin{corollary}[No surviving same-carrier separator route]\label{cor:no-surviving-sat-separator-route}
+No same-carrier endpoint-resolving negative SAT route survives the route-locus audit outside the image-separator route already excluded by Theorem~\ref{thm:no-image-sep}.
+\end{corollary}
+
+\begin{proof}
+By Theorem~\ref{thm:sat-route-locus-exhaustion}, every route enters L1--L12 or does no endpoint work. The non-endpoint routes are proof support or bookkeeping. The carrier-shift routes do not preserve the official endpoint. Repair and selector routes violate irreversibility or AMetricity. The endpoint-governing routes enter candidate-image exclusion, theorem-level discrimination, or independent-discriminator closure and are excluded by the image-separator argument. Therefore no additional same-carrier endpoint-resolving separator route survives.
 \end{proof}
 
 \section{Endpoint-Image Resolution}\label{sec:final}
@@ -1774,26 +2063,50 @@ By Definition~\ref{def:bare}, \(\PosRaw:=\CnfSATP\), the assertion that arbitrar
 Classical bivalence gives \(\PosRaw\vee\neg\PosRaw\). By Theorem~\ref{thm:bare-complement}, \(\neg\PosRaw\) is equivalent to \(\SepBare\). Hence \(\PosRaw\vee\SepBare\).
 \end{proof}
 
-\begin{theorem}[Positive SAT endpoint]\label{thm:positive}
-In the fixed SAT context,
+\begin{definition}[Official SAT endpoint evaluation of the raw bivalent split]\label{def:official-sat-endpoint-evaluation}
+\(\OfficialSATEval(R,model)\) means that the bivalent case split between \(\PosRaw\) and \(\SepBare\) is being evaluated as the official P versus NP endpoint on the fixed unrestricted finite CNF-SAT carrier. It is a target-evaluation condition, not a truth assumption: it says that the negative branch of the split, if reached, is considered as the official endpoint-resolving negative branch rather than as lower-bound support, ordinary proposition-targeted theoremhood, or bookkeeping.
+\end{definition}
+
+\begin{lemma}[Negative branch in official endpoint evaluation carries endpoint-resolution use]\label{lem:official-evaluation-negative-branch-endpoint-use}
+On the fixed context-bound SAT carrier,
 \[
-  \ClayCtx\wedge\FixedDom(R)\wedge\ModelOfCnf(model,R)\Rightarrow\PosRaw.
+\begin{aligned}
+  &\ClayCtx\wedge\FixedDom(R)\wedge\ModelOfCnf(model,R)\wedge\OfficialSATEval(R,model)\wedge\SepBare\\
+  &\qquad\Rightarrow \OfficialEndpointResolution_R(\neg\PosRaw).
+\end{aligned}
+\]
+\end{lemma}
+
+\begin{proof}
+By Definition~\ref{def:official-sat-endpoint-evaluation}, official SAT endpoint evaluation is the official endpoint case split itself. The positive case is direct positive endpoint occupation. The negative case, if entered on the same fixed carrier, is not being used merely as a lower-bound lemma, proof-support observation, ordinary proposition-targeted theorem, or bookkeeping expression. It is the negative branch of the official endpoint evaluation. Hence it carries the endpoint-resolution use \(\OfficialEndpointResolution_R(\neg\PosRaw)\). The lemma does not promote arbitrary lower-bound content to endpoint use; it applies only inside the official endpoint evaluation of the raw bivalent split.
+\end{proof}
+
+\begin{theorem}[Positive SAT endpoint]\label{thm:positive}
+In the fixed SAT endpoint evaluation,
+\[
+\begin{aligned}
+  &\ClayCtx\wedge\FixedDom(R)\wedge\ModelOfCnf(model,R)\wedge\OfficialSATEval(R,model)\\
+  &\qquad\Rightarrow \PosRaw.
+\end{aligned}
 \]
 \end{theorem}
 
 \begin{proof}
-Assume \(\ClayCtx\wedge\FixedDom(R)\wedge\ModelOfCnf(model,R)\). By Theorem~\ref{thm:bare-bivalence}, either \(\PosRaw\) or \(\SepBare\). If \(\PosRaw\), the conclusion is immediate. If \(\SepBare\), Theorem~\ref{thm:no-bare-sep} contradicts \(\SepBare\). Therefore \(\PosRaw\).
+Assume the four hypotheses displayed in the theorem. By Theorem~\ref{thm:bare-complement}, \(\SepBare\leftrightarrow\neg\PosRaw\), and by Theorem~\ref{thm:bare-bivalence}, either \(\PosRaw\) or \(\SepBare\). If \(\PosRaw\), the conclusion is immediate. If \(\SepBare\), Lemma~\ref{lem:official-evaluation-negative-branch-endpoint-use} gives \(\OfficialEndpointResolution_R(\neg\PosRaw)\). Theorem~\ref{thm:no-bare-sep} excludes \(\SepBare\wedge\OfficialEndpointResolution_R(\neg\PosRaw)\) under the same fixed context. Contradiction. Therefore the negative endpoint branch is unavailable in the official endpoint evaluation, and \(\PosRaw\) follows.
 \end{proof}
 
 \begin{theorem}[Instantiated SAT endpoint context]\label{thm:rsat-context}
-The official unrestricted finite CNF-SAT endpoint carrier instantiates the fixed context, fixed-domain, and bound-model hypotheses:
+The official unrestricted finite CNF-SAT endpoint carrier instantiates the fixed context, fixed-domain, bound-model, and official endpoint-evaluation hypotheses:
 \[
-  \ClayCtx_{\RSATctx}\wedge\FixedDom(\RSATctx)\wedge\ModelOfCnf(m_{\mathsf{SAT}},\RSATctx).
+\begin{aligned}
+  &\ClayCtx_{\RSATctx}\wedge\FixedDom(\RSATctx)\wedge\ModelOfCnf(m_{\mathsf{SAT}},\RSATctx)\\
+  &\qquad\wedge\OfficialSATEval(\RSATctx,m_{\mathsf{SAT}}).
+\end{aligned}
 \]
 \end{theorem}
 
 \begin{proof}
-The official SAT endpoint carrier is arbitrary finite CNF over finite Boolean alphabets with formula length as input size; the positive branch is deterministic polynomial-time CNF-SAT decidability; the raw negative branch is its complement on the same carrier; and admissible encodings preserve the carrier and endpoint image. This is exactly the fixed context of Definition~\ref{def:context} together with fixed-domain preservation and the context-bound CNF model of Definition~\ref{def:cnf-model-of-context}.
+The official SAT endpoint carrier is arbitrary finite CNF over finite Boolean alphabets with formula length as input size; the positive branch is deterministic polynomial-time CNF-SAT decidability; the raw negative branch is its complement on the same carrier; and admissible encodings preserve the carrier and endpoint image. This is exactly the fixed context of Definition~\ref{def:context} together with fixed-domain preservation, the context-bound CNF model of Definition~\ref{def:cnf-model-of-context}, and the official endpoint-evaluation condition of Definition~\ref{def:official-sat-endpoint-evaluation}.
 \end{proof}
 
 \begin{theorem}[Instantiated positive SAT endpoint]\label{thm:positive-instantiated}
@@ -1803,7 +2116,7 @@ The official SAT endpoint carrier is arbitrary finite CNF over finite Boolean al
 \end{theorem}
 
 \begin{proof}
-By Theorem~\ref{thm:rsat-context}, the official SAT carrier supplies \(\ClayCtx_{\RSATctx}\wedge\FixedDom(\RSATctx)\wedge\ModelOfCnf(m_{\mathsf{SAT}},\RSATctx)\). Applying Theorem~\ref{thm:positive} with \(R=\RSATctx\) and \(model=m_{\mathsf{SAT}}\) yields \(\PosRaw\). By Definition~\ref{def:bare}, \(\PosRaw:=\CnfSATP\).
+By Theorem~\ref{thm:rsat-context}, the official SAT carrier supplies the fixed context, fixed-domain, bound-model, and official endpoint-evaluation hypotheses. Applying Theorem~\ref{thm:positive} with \(R=\RSATctx\) and \(model=m_{\mathsf{SAT}}\) yields \(\PosRaw\). By Definition~\ref{def:bare}, \(\PosRaw:=\CnfSATP\).
 \end{proof}
 
 \section{Positive Report Classification}\label{sec:positive-classification}
@@ -1867,15 +2180,14 @@ Arbitrary finite CNF-SAT is NP-complete under the standard Cook--Levin/Karp poly
 Theorem~\ref{thm:positive-instantiated} gives \(\CnfSATP\). Theorem~\ref{cor:pnp} gives \(\Pclass=\NPclass\).
 \end{proof}
 
+
 \section{Denial Burden and Exhaustion of Remaining Routes}\label{sec:denial-burden}
 
-\paragraph{Dependency-inversion objections.}
-An objection that treats the kernel as an optional AASC overlay is not a separate denial route. It is a dependency-inversion objection. Such an objection has standing only if it identifies a failure in the kernel-neutral adequacy argument: either target determinacy, step evaluability, act-time finality, or same-regime fidelity must be shown not to be required for theorem-bearing endpoint use, or a same-regime faithful counterexample must be supplied that preserves all four while omitting at least one kernel role. Without that showing, the objection merely renames a forced precondition as an optional framework and does not reach the proof.
-
+\subsection*{Dependency-inversion objections}
+An objection that treats the kernel as an optional AASC overlay is not a separate denial route. It is a dependency-inversion objection. Such an objection has standing only if it identifies a failure in the kernel-neutral adequacy argument: target determinacy, step evaluability, act-time finality, or same-regime fidelity must be shown not to be required for theorem-bearing endpoint use, or a same-regime faithful counterexample must be supplied that preserves all four while omitting at least one kernel role. Without that showing, the objection merely renames a forced precondition as optional vocabulary.
 
 \subsection*{Cost of abandoning the kernel}
-
-A denial of the kernel is not a harmless refusal of terminology. The kernel is the role-decomposition of the four adequacy conditions required for determinate same-domain theorem-bearing construction. Accordingly, to deny the kernel while still claiming to assess the same endpoint, an objector must identify which adequacy condition is being abandoned and accept the corresponding loss.
+A denial of the kernel is not a harmless refusal of terminology. The kernel is the role-decomposition of the four adequacy conditions required for determinate same-domain theorem-bearing construction. To deny the kernel while still claiming to assess the same endpoint, an objector must identify which adequacy condition is being abandoned and accept the corresponding loss.
 
 \begin{center}
 \small
@@ -1883,43 +2195,71 @@ A denial of the kernel is not a harmless refusal of terminology. The kernel is t
 \toprule
 Denied adequacy condition & Kernel role lost & Consequence of denial \\
 \midrule
-Target determinacy & Reference & No fixed endpoint object is preserved. \\
-Step evaluability & Standing & No transition has theorem-bearing stephood. \\
-Act-time finality & Irreversibility & Same-act repair and retrospective status change remain open. \\
-Same-regime fidelity & Admissibility boundary & Carrier, domain, or admissibility classification may shift under redescription. \\
+Target determinacy & Reference & No fixed endpoint object, carrier, candidate image, or branch slot is preserved. \\
+Step evaluability & Standing & No transition has theorem-bearing stephood; lower-bound traces are inscriptions rather than endpoint acts. \\
+Act-time finality & Irreversibility & Same-act repair, later reclassification, and retrospective status change remain open. \\
+Same-regime fidelity & Admissibility boundary & Carrier, domain, encoding image, or endpoint classification may shift under redescription. \\
 \bottomrule
 \end{tabularx}
 \end{center}
 
-These are not four optional rules imposed by the present formalism. They are the conditions under which a purported proof, counterproof, endpoint resolution, or theorem-bearing act remains assessable as the same determinate mathematical act. If target determinacy is denied, the objection no longer has the official endpoint as its fixed object. If step evaluability is denied, the objection no longer supplies theorem-bearing construction steps. If act-time finality is denied, the objection permits retrospective repair of the same act and loses stable proof status. If same-regime fidelity is denied, the objection no longer preserves the same carrier or domain under admissible redescription.
+Thus kernel denial has only two possible forms. Either it denies none of the four adequacy conditions, in which case the kernel has already been conceded under different vocabulary; or it denies at least one of them, in which case the objector is no longer preserving determinate same-domain theorem-bearing endpoint use. There is no third position from which one may reject the kernel while retaining the same official endpoint-resolution act.
 
-Thus a kernel denial has only two possible forms. Either it denies none of the four adequacy conditions, in which case the kernel has already been conceded under different vocabulary; or it denies at least one of them, in which case the objector is no longer preserving determinate same-domain theorem-bearing endpoint use. There is no third position from which one may reject the kernel while retaining the same official endpoint-resolution act.
-
-Consequently, objections that merely say that the kernel is ``framework-dependent,'' ``nonstandard,'' or ``not part of ordinary complexity theory'' do not yet reach the proof. Such objections must be converted into a precise denial of target determinacy, step evaluability, act-time finality, same-regime fidelity, or a downstream theorem that follows from them. Without that conversion, they are dependency-inversion objections rather than theorem-level objections.
-
-A standing mathematical objection must attack one of the following load-bearing AASC endpoint or endpoint-correspondence claims.
+\subsection*{Right-mode objection targets}
+A standing mathematical objection must attack one of the following load-bearing claims.
 \begin{enumerate}
-\item A theorem-bearing endpoint can preserve fixed target, fixed carrier, theorem-status distinction, downstream reuse, redescription stability, and act-time finality while lacking one of \(\Adm,\St,\RefK,\Irr\).
-\item Some A+ component used here is not forced by the kernel plus fixed-domain closure.
-\item The kernel or its AASC consequence layer can be treated as an optional overlay that may be accepted or rejected independently of the minimal evaluability conditions for determinate same-domain construction.
-\item Ordinary theoremhood is not kernel-internal.
-\item Ordinary theoremhood of \(\neg\PosRaw\) can be offered as the official negative endpoint resolution while refusing endpoint-use status, contrary to Theorem~\ref{thm:official-negative-theoremhood-endpoint-use} and Corollary~\ref{cor:no-floating-official-negative-endpoint}.
-\item The raw negative SAT branch can avoid the SAT image-separator branch despite the SAT lower-bound/no-positive equivalence, contrary to Theorem~\ref{thm:bare-negative-forces-image}.
-\item Official negative endpoint use can remain theorem-bearing while avoiding the occupation-exhaustion and endpoint-status-bivalence locks of Theorems~\ref{thm:sat-negative-occupation-nonoptional} and~\ref{thm:negative-governed-endpoint-use-separator}.
-\item The positive CNF-SAT branch is not direct constructive endpoint occupation.
-\item The SAT image-separator branch can avoid inducing independent same-domain endpoint-status discrimination under the SAT-local independence bridge.
-\item The image-separator branch does not instantiate the SAT-local independence bridge on the fixed context-bound CNF model, or the image-separator branch plus that branch-local bridge does not yield \(\SepDisc(model)\).
-\item Candidate-image exclusion can be used as an official endpoint-resolving negative theorem while remaining non-governing, contrary to Theorem~\ref{thm:endpoint-resolving-nongovernance-hidden-fifth-impossible} and Theorem~\ref{thm:official-negative-use-candidate-image-governance}.
-\item An independent same-domain endpoint-status discriminator can survive structural rigidity, AMetricity, unique interior, conservation, and transport closure.
-\item \(\SepBare\not\leftrightarrow\neg\PosRaw\) at the raw unrestricted finite-CNF layer.
-\item \(\CnfSATP\) does not imply \(P=NP\) under the standard Cook--Levin/Karp endpoint correspondence.
+\item AASC mathematical status: identify a precise failure of a definition, theorem, inference, kernel dependency, or formal constraint.
+\item Lean support boundary: identify a mismatch between a Lean-facing support claim and the manuscript theorem chain, if Lean support is invoked.
+\item Kernel-neutral target adequacy: show that target determinacy, step evaluability, act-time finality, or same-regime fidelity is not required for theorem-bearing endpoint use.
+\item Non-degenerate SAT endpoint regime forcing the kernel: preserve fixed target, carrier, theorem-status distinction, downstream reuse, redescription stability, and act-time finality while lacking one of \(\Adm,\St,\RefK,\Irr\).
+\item Local SAT packet: show that a used A+ component is not forced by the kernel plus fixed-domain closure.
+\item Strict weakening of K5, K6, K11, or K13: define a weaker regime preserving the same endpoint roles while allowing separator governance.
+\item Standard encoded CNF model adequacy: identify a concrete failure of coverage, soundness, failure adequacy, or candidate-image exactness.
+\item Raw complementarity: show \(\SepBare\not\leftrightarrow\neg\PosRaw\) on the unrestricted finite CNF-SAT carrier.
+\item SAT-native bridge: show that \(\SepBare\) does not yield standard lower-bound normal form, or that standard lower-bound normal form is not candidate endpoint-image exclusion.
+\item Theorem-level discriminator: show that candidate endpoint-image exclusion used at endpoint level does not classify endpoint status.
+\item Ordinary negation role-classification: show that the proof rejects ordinary negative theoremhood merely for being negative.
+\item Coequal-role denial: show that \(\SepBare\) is a lawful coequal endpoint role inside the same positive endpoint-image carrier rather than endpoint-status governance.
+\item No hidden fifth case: inhabit endpoint-resolving, same-carrier, non-governing candidate-image exclusion.
+\item Endpoint governance: show that official negative endpoint use can remain theorem-bearing while avoiding the occupation-exhaustion and endpoint-status-bivalence locks.
+\item Independent discriminator: show that the image-separator branch can avoid inducing independent same-domain endpoint-status discrimination under the SAT-local independence bridge.
+\item No independent discriminator: show that such an independent same-domain endpoint-status discriminator survives AMetricity, unique interior, standing conservation, transport closure, and structural rigidity.
+\item Non-explosiveness: show that the proof globally bans negative complexity mathematics rather than excluding only same-carrier endpoint-resolving separator governance.
+\item Route-locus exhaustion: show a same-carrier endpoint-resolving negative SAT route outside L1--L12.
+\item Cook--Levin/Karp endpoint correspondence: show that \(\CnfSATP\) does not imply \(P=NP\) under the standard NP-completeness correspondence.
 \end{enumerate}
 
-Objections outside these classes are non-standing unless they identify a theorem-level failure in one of the cited bridges. The relevant question is whether the manuscript reaches the official mathematical endpoint. Treating AASC as an external overlay is not a separate denial route; it must be converted into a failure of the kernel-neutral adequacy argument or of a stated downstream consequence theorem. It is also not a standing objection to say that a negative theorem would be kernel-defective; the manuscript expressly denies that. The remaining fork is exact: negative theoremhood considered only as theoremhood is harmless but does not resolve the official endpoint; negative theoremhood offered as the official endpoint resolution is endpoint use and enters the SAT negative-occupation lock; a claimed third option is degenerate relative to the fixed endpoint because it withholds the endpoint-use status required for the act to be the same theorem-bearing resolution act. The eliminated negative route is the raw SAT lower-bound/no-positive branch, because that branch transports directly to the SAT image-separator branch; the image-separator branch then induces independent same-domain endpoint-status discrimination under the SAT-local bridge, and the kernel-forced consequence layer excludes such discrimination.
+\subsection*{Faithful same-regime counterexample worksheet}
+A successful same-mode objection must complete at least one of the following tasks.
+\begin{center}
+\small
+\begin{tabularx}{\linewidth}{>{\raggedright\arraybackslash}p{0.34\linewidth}X}
+\toprule
+Target & Successful objection must produce \\
+\midrule
+Kernel denial & A theorem-bearing SAT endpoint act preserving fixed carrier, candidate image, branch slots, target-slot fixation, report evaluability, same-regime fidelity, and act-time finality while abandoning a named kernel role. \\
+Strict weakening & A weaker regime \(\WeakSep\) preserving the unrestricted finite CNF carrier, encoded candidate image, target-slot fixation, minimal report evaluability, standing-admissibility discipline, act-time finality, and no carrier shift while permitting endpoint-resolving separator governance that is not positive occupation, proof support, bookkeeping, carrier shift, repair, lawful coequal target role, or second endpoint authority. \\
+Model adequacy & A deterministic polynomial-time SAT candidate lost by the encoded image, an unlawful candidate admitted as polynomial-time, an encoding artifact that changes SAT-failure status, or a mismatch between \(\CnfSATP\) and the encoded non-failing candidate image. \\
+Raw negative route & A raw negative SAT branch on the unrestricted finite CNF carrier that does not reduce to standard lower-bound normal form over the fixed candidate image. \\
+Candidate-image bridge & A standard lower-bound normal form that is not candidate endpoint-image exclusion. \\
+Ordinary negation & A proof that the manuscript treats negative theoremhood as defective merely because it is negative. \\
+Coequal endpoint & A proof that \(\SepBare\) is a lawful coequal endpoint role inside the same positive endpoint-image carrier. \\
+Endpoint governance & Endpoint-resolving candidate-image exclusion that is not proof support, not bookkeeping, not carrier shift, not positive occupation, and not endpoint-status governance. \\
+Independent discriminator & Image-separator endpoint use that does not induce \(\SepDisc(model)\), or an induced \(\SepDisc(model)\) compatible with \(\NoSepDisc(model)\). \\
+Final endpoint & A failure of \(\neg(\SepBare\wedge\OfficialEndpointResolution_R(\neg\PosRaw))\) in the official endpoint evaluation, or of \((\SepBare\leftrightarrow\neg\PosRaw)\Rightarrow\PosRaw\), or a failure of the Cook--Levin/Karp correspondence from \(\CnfSATP\) to \(P=NP\). \\
+\bottomrule
+\end{tabularx}
+\end{center}
+
+Objections outside these classes are non-standing unless they identify a theorem-level failure in one of the cited bridges. The eliminated negative route is the raw SAT lower-bound/no-positive branch, because that branch transports directly to candidate endpoint-image exclusion and, under endpoint-resolution use, separator endpoint-image occupation; endpoint-resolving separator occupation then induces independent same-domain endpoint-status discrimination under the SAT-local bridge; and the kernel-forced consequence layer excludes such discrimination.
+
 
 \section{Conclusion}
+The branch-exclusion argument is AASC-internal and kernel-first. The kernel is not an optional overlay; it is forced by the conditions under which any proof, counterproof, endpoint resolution, or theorem-bearing act remains a determinate same-carrier mathematical act. Raw traces do not become constructions merely by being written. Genuine theoremhood is governed derivation and is therefore kernel-internal. Negative theoremhood is not rejected for being negative.
 
-The proof has been arranged so that AASC owns the branch-exclusion argument: the kernel is the source of necessity, and AASC is the downstream fixed-domain consequence interface. Raw traces do not become constructions merely by being written. Genuine theoremhood is already governed derivation and is therefore kernel-internal. The positive SAT branch is direct constructive endpoint occupation. The negative SAT branch is not rejected for being negative; ordinary negative theoremhood is harmless as theoremhood. But ordinary negative theoremhood offered as the official P versus NP endpoint resolution is endpoint use of the negative branch. If it refuses endpoint use, it is not the same theorem-bearing resolution act for the official target; if it accepts endpoint use, the SAT occupation-exhaustion and endpoint-status-bivalence locks apply. The raw negative branch then transports through standard SAT lower-bound normal form to candidate endpoint-image exclusion and the image-separator branch. When that exclusion is used as the official endpoint-resolving negative theorem, it is endpoint-status governance by candidate-image exclusion rather than proof-support-only observation; the endpoint-resolving non-governance alternative is the excluded hidden fifth case. The image-separator branch invokes the branch-local SAT independence bridge and induces an independent same-domain endpoint-status discriminator. The kernel-forced consequence layer excludes such discriminators. Bare complementarity then yields the positive unrestricted finite CNF-SAT endpoint. The Cook--Levin/Karp endpoint correspondence then identifies this AASC-derived endpoint as \(\Pclass=\NPclass\).
+On the fixed unrestricted finite CNF-SAT carrier, the positive branch is direct constructive endpoint occupation. The raw negative branch is ordinary logical negation at the bare level, but endpoint-bearing use of that negation is role-classified. If it remains proof support or ordinary proposition-targeted theoremhood, it does not resolve the official endpoint. If it changes carrier, it is not the same endpoint. If it is offered as the official negative endpoint resolution, it becomes endpoint use of the negative branch. The SAT-native lower-bound/no-positive bridge then transports it to standard lower-bound normal form, candidate endpoint-image exclusion, and the image-separator branch.
+
+The image-separator branch is not a lawful coequal endpoint role inside the same positive endpoint-image carrier. When used to resolve the endpoint, it performs endpoint-status governance by candidate-image exclusion. The hidden-fifth alternative--endpoint resolution without endpoint-status governance--is impossible. Separator endpoint-image occupation invokes the branch-local SAT independence bridge and induces an independent same-domain endpoint-status discriminator. The kernel-forced consequence layer excludes such discriminators. Therefore separator endpoint-image occupation is unavailable, the bare negative branch is excluded as the official endpoint-resolving branch, and official endpoint evaluation of the raw bivalent split plus raw complementarity yields \(\PosRaw\). Since \(\PosRaw\) is \(\CnfSATP\), arbitrary finite CNF-SAT is decidable in deterministic polynomial time. The standard Cook--Levin/Karp endpoint correspondence then gives \(\Pclass=\NPclass\).
 
 
 
@@ -1929,7 +2269,11 @@ The proof has been arranged so that AASC owns the branch-exclusion argument: the
 
 The manuscript proof above remains the primary proof. The Lean4 material in this appendix is support for the local SAT-operator bridge used by the AASC endpoint proof spine:
 \[
-  \SepBare \Rightarrow \SepImg \Rightarrow \SepDisc(model) \Rightarrow \bot .
+\begin{aligned}
+  \SepBare &\Rightarrow \CandImageExcl(model),\\
+  \CandImageExcl(model)\wedge\OfficialEndpointResolution_R(\neg\PosRaw)
+    &\Rightarrow \SepImgOcc \Rightarrow \SepDisc(model) \Rightarrow \bot .
+\end{aligned}
 \]
 It is not used as a substitute for the external Cook--Levin/Karp endpoint correspondence from \(\CnfSATP\) to \(P=NP\). Its role is reproducibility support for the AASC foundation-to-SAT endpoint proof spine: the release archive includes the Minimal Conditions/A+ and non-degenerate-kernel audit layers together with the SAT endpoint-operator bridge and negative-branch closure formalized in the release archive \cite{LeanAuditZenodo,LeanAuditGitHub}.
 
@@ -2071,7 +2415,8 @@ The manuscript-to-Lean symbol correspondence is:
 \begin{lstlisting}[basicstyle=\ttfamily\scriptsize]
 PosRaw          <-> CnfPositiveEndpoint  (abbrev. CnfSATInPolyTime)
 SepBare         <-> CnfSATBareNegativeBranch R model
-SepImg          <-> CnfSATImageSeparatorBranch R model
+SepImg          <-> CnfSATImageSeparatorBranch R model (Lean-side image branch)
+SepImgOcc       <-> endpoint-occupation use of CnfSATImageSeparatorBranch R model
 DirPos          <-> CnfSATDirectPositiveEndpointOccupation
 SepDisc(model)  <-> CnfSATIndependentSeparatorEndpointStatusDiscriminator model
 NoSepDisc(model)<-> CnfNoIndependentSeparatingClassifier model
@@ -2360,7 +2705,7 @@ theorem cnfSATImageSeparatorBranch_of_negativeGovernedEndpointUse
 
 The focused audit files in the release issue \texttt{\#print axioms} commands for the AASC foundation anchors and the SAT endpoint bridge anchors below. The release records the following focused axiom surface for these proof-spine theorems: the AASC foundation anchors report no project axioms, and the SAT bridge anchors report only the standard Lean/classical/mathlib base dependencies \LeanName{propext}, \LeanName{Classical.choice}, and \LeanName{Quot.sound}. No project-specific axiom, \LeanName{sorry}, \LeanName{admit}, or \LeanName{unsafe} declaration is used by these anchors.
 
-The model-adequacy audit in \LeanName{AnticheckerReduction.lean} names the ordinary coding bridge consumed by the SAT-native route. It records coverage, sound decoding, failure adequacy, candidate-image exactness, and the positive/negative endpoint equivalences for encoded deterministic polynomial-time CNF-SAT candidates. The final Lean audit also names the SAT-native form of the remaining bridge objection. The lower-bound and theorem-level discriminator anchors record that the bare negative branch gives lower-bound normal form over the fixed encoded candidate image, and that the resulting discriminator is theorem-level rather than algorithmic. The invariant-use and candidate-image-use classifications separate legitimate proof support from forbidden endpoint-status governance. The final hinge is formalized by the following Lean anchors:
+The model-adequacy audit in \LeanName{AnticheckerReduction.lean} names the ordinary coding bridge consumed by the SAT-native route. It records coverage, sound decoding, failure adequacy, candidate-image exactness, and the positive/negative endpoint equivalences for encoded deterministic polynomial-time CNF-SAT candidates. The final Lean audit also names the SAT-native form of the remaining bridge objection. The lower-bound and theorem-level discriminator anchors record that the bare negative branch gives lower-bound normal form over the fixed encoded candidate image, and that the resulting discriminator is theorem-level rather than algorithmic. The invariant-use and candidate-image-use classifications separate legitimate proof support from forbidden endpoint-status governance. The closing hinge is formalized by the following Lean anchors:
 \begin{lstlisting}[basicstyle=\ttfamily\scriptsize]
 CnfSATCandidateImageExclusionUseKind
 CnfSATCandidateImageExclusionUseClassification
@@ -2408,13 +2753,66 @@ Lean theorem & Focused axiom output \\
 
 \subsection{Audit scope and boundary}
 
-The Lean archive formalizes the AASC foundation audit surface consumed by the SAT route together with the SAT-operator bridge and negative-branch closeout used in the manuscript proof spine. The SAT-operator proof queue also includes negative-occupation-exhaustion anchors and endpoint-status-bivalence anchors, corresponding to commits \LeanName{282d4ad} and \LeanName{a938648} in the public Lean repository; commit \LeanName{f2df564} exposes the combined full-stack AASC/SAT audit check. It does not attempt to formalize the external Cook--Levin/Karp theorem inside Lean. Its support role is local and reproducibility-oriented: it checks that the AASC foundation anchors and the formal SAT-side branch chain used by the manuscript have the advertised Lean anchors and that the audit surface is free of live project-level placeholders.
+The Lean archive formalizes the AASC foundation audit surface consumed by the SAT route together with the SAT-operator bridge and negative-branch closeout used in the manuscript proof spine. The SAT-operator proof queue also includes negative-occupation-exhaustion anchors and endpoint-status-bivalence anchors, corresponding to commits \LeanName{282d4ad} and \LeanName{a938648} in the public Lean repository; commit \LeanName{f2df564} exposes the combined full-stack AASC/SAT audit check. It does not attempt to formalize the external Cook--Levin/Karp theorem inside Lean. Its support role is local and reproducibility-oriented: it checks that the AASC foundation anchors and the formal SAT-side branch chain used by the manuscript have the advertised Lean anchors and that the audit surface is free of live project-level incomplete declarations.
 
 \section{Standard CNF-SAT to P=NP Correspondence}
 The manuscript proof derives \(\CnfSATP\). Here ``bounded-CNF'' means finitely encoded CNF formulas of arbitrary instance size over a finite Boolean alphabet; it does not mean a fixed-width, fixed-size, bounded-variable, fixed-clause, bounded-depth, promise-restricted, parameterized, or otherwise tractable restricted CNF fragment. The equality \(\Pclass=\NPclass\) then uses the standard Cook--Levin/Karp endpoint correspondence: arbitrary finite CNF-SAT is NP-complete under polynomial-time many-one reductions; every \(L\in \NPclass\) reduces to CNF-SAT; composition of a polynomial reduction with a polynomial SAT decider gives a polynomial decider for \(L\); and \(\Pclass\subseteq\NPclass\). Hence \(\NPclass\subseteq\Pclass\) and \(\Pclass=\NPclass\). This correspondence is standard Cook--Levin/Karp background. It is not the proof of separator exclusion; AASC supplies that proof.
 
 \section{Reference Integrity Appendix}
-The proof ladder is ordered so that each theorem cites prior results only. The final endpoint theorem cites the context definition, the standard encoded-model instantiation, the encoded candidate model-adequacy packet, positive direct-occupation theorem, model binding, the branch-local SAT image-separator bridge, raw complementarity, the raw-negative-to-image bridge, image-separator exclusion, and the standard CNF-SAT completeness bridge. No theorem cites itself.
+The proof ladder is ordered so that each theorem cites prior results only. The final endpoint theorem cites the context definition, official endpoint-evaluation definition, the standard encoded-model instantiation, the encoded candidate model-adequacy packet, positive direct-occupation theorem, model binding, the branch-local SAT image-separator bridge, raw complementarity, the raw-negative-to-image bridge, image-separator exclusion, and the standard CNF-SAT completeness bridge. No theorem cites itself.
+
+
+\section{Theorem Ladder and Anti-Circularity Audit}
+
+\subsection*{Theorem ladder}
+\begin{enumerate}
+\item Mathematical-status lock and Lean support boundary fix the proof as a manuscript theorem chain with Lean as audit support.
+\item Kernel-neutral target adequacy fixes target determinacy, step evaluability, act-time finality, and same-regime fidelity.
+\item Non-degenerate construction forces \(\Adm,\St,\RefK,\Irr\), and endpoint use is governed construction.
+\item The local SAT kernel packet records the SAT-facing K1--K13 consequences.
+\item Weakening-resistance shows that K5, K6, K11, and K13 cannot be strictly weakened while preserving same-carrier endpoint use and allowing separator governance.
+\item Encoded candidate model adequacy fixes coverage, soundness, failure adequacy, and candidate-image exactness for the unrestricted finite CNF-SAT carrier.
+\item Raw complementarity gives \(\SepBare\leftrightarrow\neg\PosRaw\).
+\item Official SAT endpoint evaluation of the raw bivalent split supplies endpoint-resolution use for the negative branch only when that branch is reached inside the official endpoint case split.
+\item The SAT-native bridge routes \(\SepBare\) to standard lower-bound normal form and candidate endpoint-image exclusion; official endpoint-resolution use promotes that content to \(\SepImgOcc\), and separator occupation explicitly contains the support-level candidate-image exclusion content.
+\item Ordinary negation remains ordinary negation; endpoint-bearing negation is role-classified.
+\item The separator branch is not a lawful coequal endpoint role inside the same positive endpoint-image carrier.
+\item Endpoint-resolving candidate-image exclusion is endpoint-status governance; endpoint-resolving non-governance is the hidden fifth case and is impossible.
+\item Candidate-image exclusion remains lawful as proof support; only endpoint-resolving image-separator use invokes \(\SepIndBridge(model)\) and induces \(\SepDisc(model)\), while image-separator endpoint use also gives \(\NoSepDisc(model)\).
+\item The contradiction excludes \(\SepImgOcc\), hence excludes \(\SepBare\) as the official endpoint-resolving negative branch.
+\item Bare complementarity yields \(\PosRaw\), i.e. \(\CnfSATP\).
+\item Cook--Levin/Karp gives \(P=NP\).
+\end{enumerate}
+
+\subsection*{Anti-circularity audit}
+{\small
+\begin{longtable}{>{\raggedright\arraybackslash}p{0.34\linewidth}>{\raggedright\arraybackslash}p{0.60\linewidth}}
+\toprule
+Potential circle or misreading & Audit response \\
+\midrule
+AASC is merely philosophical. & The manuscript uses AASC as a mathematical constraint formalism. A same-mode objection must identify a failed definition, theorem, dependency claim, or bridge inference. \\
+Kernel governance is optional. & Kernel roles are forced by target determinacy, step evaluability, act-time finality, and same-regime fidelity. Denying the kernel denies non-degenerate endpoint use or supplies a faithful weaker regime. \\
+Endpoint target assumes \(P=NP\). & The official target fixes the carrier and endpoint slots. It does not assert \(\PosRaw\). \\
+Official endpoint evaluation smuggles in the positive result. & No. \(\OfficialSATEval(R,model)\) says only that the raw bivalent split is being evaluated as the official endpoint case split. It supplies endpoint-resolution use to the negative branch only if the negative branch is reached; it does not assert the positive branch. \\
+\(\ClayCtx\) smuggles positivity. & The context non-smuggling theorem states that \(\ClayCtx\) fixes only carrier and branch slots. \\
+Bounded-CNF means a restricted SAT fragment. & Definition~\ref{def:bounded-cnf-clarification} states that it means arbitrary finite encoded CNF-SAT, not fixed-width or promise SAT. \\
+The encoded model omits candidates. & Model adequacy requires coverage, soundness, failure adequacy, and image exactness. A valid objection must identify a concrete failure of one of these clauses. \\
+Ordinary negative theoremhood is banned. & Theorems~\ref{thm:negative-theorem-not-defective} and~\ref{thm:ordinary-sat-falsity-role-classified} explicitly allow ordinary negative theoremhood. \\
+\(\SepBare\) is retyped by fiat. & No one-step retyping is used: \(\SepBare\) passes through standard lower-bound normal form and candidate endpoint-image exclusion before endpoint-governance classification. \\
+\(\SepImgOcc\) is an arbitrary extra layer. & \(\SepImgOcc\) is the endpoint-occupation form of candidate-image exclusion under official endpoint-resolution use; support-level lower-bound content remains \(\CandImageExcl(model)\). \\
+Candidate-image exclusion is an algorithmic separator. & The theorem-level discriminator is not a witness selector or algorithmic separator; it classifies endpoint status for already-fixed candidate roles. \\
+Candidate-image exclusion is automatically forbidden. & No. Candidate-image exclusion may be proof support, a lower-bound lemma, or ordinary theorem content. It invokes the independence bridge only under same-carrier endpoint-resolving use. The separate unpacking lemma says only that \(\SepImgOcc\) contains \(\CandImageExcl(model)\), not conversely. \\
+\(\SepImgOcc\) collapses support use into endpoint use. & No. Support-level content is \(\CandImageExcl(model)\). The symbol \(\SepImgOcc\) is reserved for endpoint-image branch occupation under official endpoint-resolution use on the fixed carrier. \\
+The proof bans lower bounds globally. & The non-explosiveness theorem permits lower bounds, barriers, obstructions, and proof support. Only same-carrier endpoint-resolving separator governance is excluded. \\
+K5 bans multiple candidate procedures. & K5 bans plural endpoint-governing interiors, not multiple candidates, encodings, proof routes, or support structures. \\
+K13 bans open problem status. & K13 classifies open, unknown, deferred, and support statuses as epistemic or report statuses, not endpoint truth branches. \\
+Target-slot fixation smuggles in K13. & Target-slot fixation identifies what is evaluated. K13 separately proves that hidden-fifth, deferred, and bookkeeping statuses cannot occupy endpoint truth. \\
+Minimal report evaluability smuggles in K11. & Minimal report evaluability classifies a report by role. K11 separately imposes no-overreporting: endpoint force may not exceed carrier and bridge support. \\
+Cook--Levin/Karp is used as branch-exclusion machinery. & Cook--Levin/Karp appears only after \(\CnfSATP\) is proved, as the standard endpoint correspondence to \(P=NP\). \\
+Lean is substituted for the proof. & The manuscript is the proof. Lean records a reproducibility audit of the SAT bridge and kernel consequence surface. \\
+\bottomrule
+\end{longtable}
+}
 
 \section{Notation Ledger}
 \begin{longtable}{>{\raggedright\arraybackslash}p{0.16\linewidth}>{\raggedright\arraybackslash}p{0.60\linewidth}>{\raggedright\arraybackslash}p{0.16\linewidth}}
@@ -2424,15 +2822,17 @@ Symbol & Meaning & Layer \\
 \(\ClayCtx\) & fixed SAT endpoint carrier and branch-slot context & context \\
 \(\PosRaw\) & \(\CnfSATP\) & raw positive \\
 \(\SepBare\) & raw complement branch \(\neg\PosRaw\) & bare negative \\
-\(\SepImg\) & formal SAT image-separator branch \(\CnfImageSep(R,model)\) induced by the raw negative branch under the lower-bound/no-positive bridge & image separator \\
+\(\SepImg\) & Lean-side formal SAT image-separator branch \(\CnfImageSep(R,model)\); in the manuscript proof it is separated into support-level \(\CandImageExcl(model)\) and endpoint occupation \(\SepImgOcc\) & Lean bridge \\
+\(\SepImgOcc\) & separator endpoint-image occupation: candidate-image exclusion used as the official endpoint-resolving negative branch on the fixed carrier; it contains \(\CandImageExcl(model)\) but is not entailed by support-level exclusion alone & endpoint occupation \\
 \(\EndpointUse\) & branch \(B\) offered as theorem-bearing endpoint use & endpoint act \\
 \begin{tabular}[t]{@{}l@{}}\(\mathsf{OfficialEndpoint}\)\\\(\mathsf{Resolution}\)\end{tabular} & ordinary theoremhood of \(\neg\PosRaw\) offered as the official negative endpoint resolution & endpoint act \\
+\begin{tabular}[t]{@{}l@{}}\(\OfficialSATEval\)\end{tabular} & official evaluation of the raw \(\PosRaw\) / \(\SepBare\) bivalent split on the fixed unrestricted CNF-SAT endpoint carrier; not a truth assumption & endpoint evaluation \\
 \(\EndpointDisc\) & endpoint-status discriminator attached to branch \(B\) & consequence layer \\
 \(\IndDisc\) & independent same-domain governance work by \(C\) & forbidden case \\
 \(\DirPos\) & direct constructive occupation of the positive CNF-SAT endpoint & SAT asymmetry \\
-\(\SepDisc\) & independent same-domain endpoint-status discriminator induced by the SAT image-separator branch & SAT asymmetry \\
-\(\SepIndBridge\) & branch-local SAT independence bridge invoked by \(\SepImg\) on the context-bound CNF model & SAT asymmetry \\
-\(\NoSepDisc\) & kernel-forced no-independent-separator-classifier closure triggered by image-separator endpoint use & consequence layer \\
+\(\SepDisc\) & independent same-domain endpoint-status discriminator induced by separator endpoint-image occupation & SAT asymmetry \\
+\(\SepIndBridge\) & branch-local SAT independence bridge invoked by endpoint-resolving \(\SepImgOcc\) on the context-bound CNF model & SAT asymmetry \\
+\(\NoSepDisc\) & kernel-forced no-independent-separator-classifier closure triggered by separator endpoint-image use & consequence layer \\
 \(\ModelOfCnf\) & context-bound encoded CNF-SAT model for the fixed SAT endpoint carrier & model adequacy \\
 \(\ModelAdeq\) & model-adequacy packet: coverage, soundness, failure adequacy, and candidate-image exactness & model adequacy \\
 \(\ModelCoverage\) & every deterministic polynomial-time CNF-SAT candidate has an encoded polynomial-time code & model adequacy \\
@@ -2444,8 +2844,9 @@ Symbol & Meaning & Layer \\
 \(\StdLB\) & standard SAT lower-bound normal form: every encoded polynomial-time candidate fails SAT on the fixed CNF carrier & SAT-native bridge \\
 \(\CandImageExcl\) & candidate endpoint-image exclusion: no encoded polynomial-time candidate occupies the positive SAT endpoint image & SAT-native bridge \\
 \(\ThmLevelDisc\) & theorem-level candidate-status discriminator; not an algorithmic witness selector & SAT-native bridge \\
-\(\CandImageGov\) & endpoint-status governance by candidate-image exclusion & final hinge \\
-\begin{tabular}[t]{@{}l@{}}\(\mathsf{CandImage}\)\\\(\mathsf{UseKind}\)\end{tabular} & four-way use classification for candidate-image exclusion & final hinge \\
+\(\mathsf{CandImageUse}\) & candidate-image exclusion is lawful support unless used as endpoint-resolving separator governance & closing hinge \\
+\(\CandImageGov\) & endpoint-status governance by candidate-image exclusion & closing hinge \\
+\begin{tabular}[t]{@{}l@{}}\(\mathsf{CandImage}\)\\\(\mathsf{UseKind}\)\end{tabular} & four-way use classification for candidate-image exclusion & closing hinge \\
 \(\mathsf{OfficialNegUse}\) & official negative endpoint use on the context-bound finite CNF-SAT model & SAT negative occupation \\
 \(\mathsf{NegOccExhaust}\) & four-way exhaustion of official negative occupation alternatives & SAT negative occupation \\
 \(\mathsf{GovUse}\) & governed endpoint use on the finite CNF-SAT endpoint carrier & endpoint-status bivalence \\
@@ -2454,6 +2855,13 @@ Symbol & Meaning & Layer \\
 \(\Asep\) & role-specific separator status factor, downstream only & classification \\
 \(\Apos\) & positive report status factor, downstream only & classification \\
 \(\PosClay\) & \(\PosRaw\wedge\Apos\) & positive Clay mathematical endpoint \\
+\(\KSAT\) & local SAT kernel packet forced by non-degenerate fixed-carrier endpoint use & local kernel \\
+\(\CoreSAT\) & core SAT endpoint adequacy packet: reference, standing, admissibility, irreversibility, target determinacy, report evaluability, act-time finality, and same-regime fidelity & weakening resistance \\
+\(\WeakSep\) & alleged strict weaker same-carrier regime permitting separator governance & weakening resistance \\
+\begin{tabular}[t]{@{}l@{}}\(\mathsf{OrdNeg}\)\\\(\mathsf{RoleClass}\)\end{tabular} & ordinary negation is granted; endpoint-bearing negation is role-classified & SAT branch audit \\
+\begin{tabular}[t]{@{}l@{}}\(\mathsf{SepNot}\)\\\(\mathsf{Coequal}\)\end{tabular} & separator branch is not a lawful coequal endpoint role inside the positive endpoint-image carrier & SAT branch audit \\
+\begin{tabular}[t]{@{}l@{}}\(\mathsf{NegComplexity}\)\\\(\mathsf{Lawful}\)\end{tabular} & negative complexity results remain lawful unless used as forbidden endpoint governance & non-explosiveness \\
+\(\RouteSAT\) & route-locus audit for endpoint-resolving negative SAT routes & route exhaustion \\
 \bottomrule
 \end{longtable}
 
