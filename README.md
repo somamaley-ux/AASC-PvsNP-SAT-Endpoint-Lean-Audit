@@ -275,3 +275,16 @@ Start with:
 - `scripts/check-pvsnp-sat-operator-bridge-audit.ps1`
 - `MaleyLean/Papers/PvsNP/SATOperatorStatusLedger.lean`
 - `MaleyLean/Papers/PvsNP/SATOperatorProofQueue.lean`
+## Manuscript-Faithful Mechanization Standard
+
+This repository is calibrated to the manuscript as the proof object.  The Lean
+surface formalizes the manuscript-facing AASC endpoint route: the governed SAT
+endpoint, the negative-occupation/separator bridge, same-domain discriminator
+exclusion, and the internal closeout to `CnfSATInPolyTime`.
+
+The official complexity target is connected through named endpoint adequacy and
+carrier-correspondence anchors.  Cook-Levin/Karp supplies the external standard
+complexity correspondence from the CNF-SAT endpoint to the usual P vs NP
+statement; it is not used as proof machinery for the AASC exclusion.  The repo
+therefore should be read as a manuscript-faithful AASC endpoint mechanization,
+not as a full independent reconstruction of all surrounding complexity theory.
