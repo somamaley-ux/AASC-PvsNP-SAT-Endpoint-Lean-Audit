@@ -1,6 +1,6 @@
 # Release Notes
 
-## AASC P vs NP SAT Endpoint Full-Stack Lean Audit Archive v1.0.6
+## AASC P vs NP SAT Endpoint Full-Stack Lean Audit Archive v1.0.7
 
 This release packages the hardened Lean 4 audit archive for the AASC-first SAT
 endpoint proof spine.
@@ -66,13 +66,27 @@ Included:
   `cnfSATEndpointUse_trichotomy_binds_independentRole`,
   `cnfSATAPlusConsequences_bind_satSeparatorDiscriminator`, and
   `cnfSATAPlusConsequences_bind_localSeparatorCountercaseUse`.
+- Official endpoint-resolution target-adequacy hardening through
+  `CnfSATOfficialResolutionTargetAdequacy`,
+  `cnfSATOfficialEndpointResolution_satisfies_targetAdequacy`, and
+  `cnfSATOfficialResolutionTargetAdequacy_instantiates_kernelAPlus`,
+  recording that official endpoint resolution in the fixed SAT
+  route/model/domain context is target-adequate endpoint use bound by the
+  kernel A+ certificate.
+- Same-domain incompleteness/Godel defensive hardening through
+  `CnfSATSameDomainIncompletenessRoute`,
+  `CnfSATSameDomainIncompletenessEndpointObjection`,
+  `cnfSATOfficialResolution_stable_against_sameDomainIncompleteness`, and
+  `cnfSATNoSameDomainTrueButUnprovableSeparatorSplit`, routing same-domain
+  incompleteness objections either to endpoint-inert support or to the already
+  forbidden independent endpoint-gate role.
 - Audit runner: `scripts/check-pvsnp-sat-operator-bridge-audit.ps1`.
 - Manuscript-facing PDF/source and ledger artifacts when available from the
   workspace.
-- Final manuscript snapshot refreshed from the June 11 A+ Binding Final
-  bundle, including the ordinary official endpoint-resolution binding, A+
-  non-optional overlay clarification, trichotomy binding, SAT separator
-  discriminator binding, and local separator countercase binding hardening.
+- Final manuscript snapshot refreshed from the June 11 front-facing official
+  resolution adequacy bundle, including the A+ binding layer, target-adequacy
+  clarification, same-domain incompleteness/Godel stability supplement, and
+  companion source material under `papers/pvsnp/source_material`.
 - Full-stack audit path exposed through
   `Checks/Axiom/PvsNPFullStackAASCAxiomCheck.lean`.
 

@@ -1,6 +1,6 @@
 # P vs NP SAT Operator Formalization Status
 
-Last updated: 2026-06-09
+Last updated: 2026-06-11
 
 ## Purpose
 
@@ -127,6 +127,13 @@ cnfSATAPlusConsequences_bind_ordinaryOfficialNegativeResolution
 cnfSATEndpointUse_trichotomy_binds_independentRole
 cnfSATAPlusConsequences_bind_satSeparatorDiscriminator
 cnfSATAPlusConsequences_bind_localSeparatorCountercaseUse
+CnfSATOfficialResolutionTargetAdequacy
+cnfSATOfficialEndpointResolution_satisfies_targetAdequacy
+cnfSATOfficialResolutionTargetAdequacy_instantiates_kernelAPlus
+CnfSATSameDomainIncompletenessRoute
+CnfSATSameDomainIncompletenessEndpointObjection
+cnfSATOfficialResolution_stable_against_sameDomainIncompleteness
+cnfSATNoSameDomainTrueButUnprovableSeparatorSplit
 ```
 
 `CnfSATOfficialEndpointEvaluation` records official evaluation of the raw
@@ -182,6 +189,42 @@ use with the kernel A+ certificate. The consequence binders
 manuscript hardening that ordinary endpoint force cannot retain the
 independent separator role while rejecting the A+ no-independent-discriminator
 consequence layer.
+
+The front-facing official-resolution adequacy patch is now represented in the
+same Lean file:
+
+```lean
+CnfSATOfficialResolutionTargetAdequacy
+cnfSATOfficialEndpointResolution_satisfies_targetAdequacy
+cnfSATOfficialResolutionTargetAdequacy_instantiates_kernelAPlus
+```
+
+This records that ordinary official endpoint resolution, once fixed to the SAT
+endpoint route/model/domain context, satisfies the target-adequacy packet
+needed by the A+ consequence layer.  It is a SAT-facing wrapper over the
+existing endpoint-use and kernel A+ objects, not an additional project axiom.
+
+The same-domain incompleteness/Godel defensive patch is also named:
+
+```lean
+CnfSATSameDomainIncompletenessRoute
+CnfSATSameDomainIncompletenessClassification
+CnfSATSameDomainIncompletenessEndpointObjection
+CnfSATSameDomainIncompletenessEndpointForce
+cnfSATEndpointIncompleteness_without_force_is_endpointInert
+cnfSATCodePredicateEndpointObjection_with_force_is_hiddenGateWork
+cnfSATSameDomainIncompletenessRoute_exhaustive
+cnfSATOfficialResolution_stable_against_sameDomainIncompleteness
+cnfSATNoSameDomainTrueButUnprovableSeparatorSplit
+```
+
+This local layer mirrors the existing axiom-free Godel non-instantiability
+source route at the SAT endpoint surface.  Same-domain incompleteness
+objections that do no endpoint work are endpoint-inert; objections that do
+endpoint work route into hidden endpoint-gate work and are closed by the same
+A+ no-independent-discriminator consequence.  The companion source PDF is kept
+under `papers/pvsnp/source_material/` for manuscript traceability, while the
+Lean audit remains local to the SAT endpoint package.
 
 ## Current Endpoint Route
 

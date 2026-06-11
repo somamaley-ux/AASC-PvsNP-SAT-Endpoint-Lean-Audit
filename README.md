@@ -25,6 +25,11 @@ The strongest truthful claim for this archive is:
 - The AASC SAT endpoint branch is closed at the formalized proof-spine layer:
   `CnfSATInPolyTime` is obtained from the AASC no-independent-discriminator
   route encoded in `SATOperatorProofQueue.lean`.
+- The final official-resolution hardening is present at the Lean surface:
+  ordinary official endpoint resolution is packaged as target-adequate
+  endpoint use, and same-domain incompleteness/Godel-style objections are
+  routed either to endpoint-inert support or to the already-forbidden
+  independent endpoint-gate role.
 - The audit runner reports `AASCSATEndpointClosure=100%` and
   `CnfSATInPolyTimeClosure=100%`.
 - The audited AASC foundation plus P vs NP SAT endpoint surface contains no live project-level
@@ -155,6 +160,13 @@ Key final anchors:
 - `cnfSATEndpointUse_trichotomy_binds_independentRole`
 - `cnfSATAPlusConsequences_bind_satSeparatorDiscriminator`
 - `cnfSATAPlusConsequences_bind_localSeparatorCountercaseUse`
+- `CnfSATOfficialResolutionTargetAdequacy`
+- `cnfSATOfficialEndpointResolution_satisfies_targetAdequacy`
+- `cnfSATOfficialResolutionTargetAdequacy_instantiates_kernelAPlus`
+- `CnfSATSameDomainIncompletenessRoute`
+- `CnfSATSameDomainIncompletenessEndpointObjection`
+- `cnfSATOfficialResolution_stable_against_sameDomainIncompleteness`
+- `cnfSATNoSameDomainTrueButUnprovableSeparatorSplit`
 - `cnfSATBareSeparator_impossible_of_context_noIndependentDiscriminator`
 
 The current status ledger is in
@@ -211,6 +223,21 @@ are exposed through
 `cnfSATAPlusConsequences_bind_satSeparatorDiscriminator`, and
 `cnfSATAPlusConsequences_bind_localSeparatorCountercaseUse`.
 
+The final manuscript hardening layer is also explicit.  Official endpoint
+resolution target adequacy is named by
+`CnfSATOfficialResolutionTargetAdequacy`, with
+`cnfSATOfficialEndpointResolution_satisfies_targetAdequacy` giving the
+front-facing target-adequacy package and
+`cnfSATOfficialResolutionTargetAdequacy_instantiates_kernelAPlus` recording
+that the kernel A+ certificate binds the resulting endpoint use.  The
+same-domain incompleteness defensive layer is recorded by
+`CnfSATSameDomainIncompletenessRoute`,
+`CnfSATSameDomainIncompletenessEndpointObjection`,
+`cnfSATOfficialResolution_stable_against_sameDomainIncompleteness`, and
+`cnfSATNoSameDomainTrueButUnprovableSeparatorSplit`.  This local layer mirrors
+the already axiom-free Godel non-instantiability route used as source support;
+it does not import a new proof engine or weaken the no-project-axiom audit.
+
 ## Scope Boundary
 
 The proof architecture is AASC-internal up to `CnfSATInPolyTime`. Classical
@@ -236,6 +263,8 @@ of the branch exclusion.
 - `Checks/Axiom/` - focused Lean axiom-print and audit entry points, including
   `PvsNPFullStackAASCAxiomCheck.lean` for the foundation-to-SAT stack.
 - `papers/pvsnp/` - manuscript-facing source/PDF snapshot, when present.
+- `papers/pvsnp/source_material/` - companion manuscript-facing source PDFs,
+  including the Godel non-instantiability supplement when present.
 - `reports/ledgers/` - manuscript ledger artifacts, when present.
 
 ## Reading Order

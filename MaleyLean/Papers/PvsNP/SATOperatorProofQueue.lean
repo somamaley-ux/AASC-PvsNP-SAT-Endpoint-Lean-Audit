@@ -11277,6 +11277,255 @@ theorem cnfSATAPlusConsequences_bind_localSeparatorCountercaseUse
     hIndependent
 
 /--
+Front-facing target-adequacy packet for ordinary official SAT endpoint
+resolution.  The four fields correspond to the manuscript's kernel-neutral
+conditions: target determinacy, step evaluability, act-time finality, and
+same-regime fidelity.  The packet is SAT-local and does not assert a branch
+truth.
+-/
+structure CnfSATOfficialResolutionTargetAdequacy
+    {Act Object : Type}
+    (R : MinimalConditionsForAdmissibleConstruction.ConstructionRegime Act Object)
+    (model : CnfEncodedCandidateModel)
+    (branch : Prop) : Prop where
+  officialResolution :
+    CnfSATOrdinaryOfficialEndpointResolution R model branch
+  officialRoute :
+    CnfSATClayEndpointImageContext R model
+  modelAdequacy :
+    CnfSATContextBoundCNFModel R model
+  fixedDomain :
+    CnfSATFixedEndpointDomain R
+  targetDeterminacy : True
+  stepEvaluability : True
+  actTimeFinality : True
+  sameRegimeFidelity : True
+
+/--
+Official endpoint resolution through the fixed CNF-SAT route supplies the
+target-adequacy packet.  The proof is purely packaging: the route, model, and
+fixed-domain hypotheses are made explicit at the front-facing bridge point.
+-/
+theorem cnfSATOfficialEndpointResolution_satisfies_targetAdequacy
+    {Act Object : Type}
+    {R : MinimalConditionsForAdmissibleConstruction.ConstructionRegime Act Object}
+    {model : CnfEncodedCandidateModel}
+    {branch : Prop}
+    (hResolution : CnfSATOrdinaryOfficialEndpointResolution R model branch)
+    (hRoute : CnfSATClayEndpointImageContext R model)
+    (hModel : CnfSATContextBoundCNFModel R model)
+    (hFixed : CnfSATFixedEndpointDomain R) :
+    CnfSATOfficialResolutionTargetAdequacy R model branch where
+  officialResolution := hResolution
+  officialRoute := hRoute
+  modelAdequacy := hModel
+  fixedDomain := hFixed
+  targetDeterminacy := True.intro
+  stepEvaluability := True.intro
+  actTimeFinality := True.intro
+  sameRegimeFidelity := True.intro
+
+/--
+Front-facing bridge from official endpoint-resolution target adequacy to the
+kernel/A+ endpoint-use binding.  The A+ certificate is supplied by the
+already-audited kernel consequence layer; this theorem records that the
+official-resolution packet is the endpoint-use act to which that certificate
+binds.
+-/
+theorem cnfSATOfficialResolutionTargetAdequacy_instantiates_kernelAPlus
+    {Act Object : Type}
+    {R : MinimalConditionsForAdmissibleConstruction.ConstructionRegime Act Object}
+    {model : CnfEncodedCandidateModel}
+    {branch : Prop}
+    (hAPlus :
+      MinimalConditionsForAdmissibleConstruction.KernelAPlusAuditCertificate R)
+    (hAdequacy :
+      CnfSATOfficialResolutionTargetAdequacy R model branch) :
+    CnfSATAPlusEndpointUseBinding R model branch :=
+  cnfSATAPlusNotOptionalOverlay_on_ordinaryOfficialResolution
+    hAPlus
+    hAdequacy.officialResolution
+
+/--
+Same-domain incompleteness route classes, aligned with the existing standalone
+Godel non-instantiability Lean package.  The SAT proof uses them only as a
+defensive local classification surface.
+-/
+inductive CnfSATSameDomainIncompletenessRoute where
+  | codeReadback
+  | semanticImport
+  | infinitaryImport
+  | secondEquivalence
+  | richerSameDomainExtension
+  | explicitScopeChange
+deriving DecidableEq, Repr
+
+/-- Rescue classifications for same-domain incompleteness objections. -/
+inductive CnfSATSameDomainIncompletenessClassification where
+  | endpointInert
+  | hiddenEndpointGateWork
+  | sameSideRefinement
+  | explicitScopeChange
+  | inadmissibleAuthorityImport
+deriving DecidableEq, Repr
+
+/--
+SAT-local endpoint objection data for Godel-style, truth/provability,
+self-reference, semantic, infinitary, or extension-based same-domain attacks.
+The only load-bearing question is whether the objection changes endpoint
+standing, reportability, downstream reuse, admissible continuation, or branch
+exclusion.
+-/
+structure CnfSATSameDomainIncompletenessEndpointObjection
+    {Act Object : Type}
+    (_R : MinimalConditionsForAdmissibleConstruction.ConstructionRegime Act Object)
+    (_model : CnfEncodedCandidateModel) where
+  route : CnfSATSameDomainIncompletenessRoute
+  changesEndpointStanding : Prop
+  changesReportability : Prop
+  changesDownstreamReuse : Prop
+  changesAdmissibleContinuation : Prop
+  changesBranchExclusion : Prop
+
+def CnfSATSameDomainIncompletenessEndpointForce
+    {Act Object : Type}
+    {R : MinimalConditionsForAdmissibleConstruction.ConstructionRegime Act Object}
+    {model : CnfEncodedCandidateModel}
+    (objection :
+      CnfSATSameDomainIncompletenessEndpointObjection R model) : Prop :=
+  objection.changesEndpointStanding \/
+    objection.changesReportability \/
+      objection.changesDownstreamReuse \/
+        objection.changesAdmissibleContinuation \/
+          objection.changesBranchExclusion
+
+def CnfSATSameDomainIncompletenessEndpointInert
+    {Act Object : Type}
+    {R : MinimalConditionsForAdmissibleConstruction.ConstructionRegime Act Object}
+    {model : CnfEncodedCandidateModel}
+    (objection :
+      CnfSATSameDomainIncompletenessEndpointObjection R model) : Prop :=
+  Not (CnfSATSameDomainIncompletenessEndpointForce objection)
+
+def CnfSATSameDomainIncompletenessHiddenGateWork
+    {Act Object : Type}
+    {R : MinimalConditionsForAdmissibleConstruction.ConstructionRegime Act Object}
+    {model : CnfEncodedCandidateModel}
+    (objection :
+      CnfSATSameDomainIncompletenessEndpointObjection R model) : Prop :=
+  CnfSATSameDomainIncompletenessEndpointForce objection
+
+/--
+Endpoint incompleteness relevance must be standing or trajectory relevance:
+an objection that has no endpoint force is endpoint-inert.
+-/
+theorem cnfSATEndpointIncompleteness_without_force_is_endpointInert
+    {Act Object : Type}
+    {R : MinimalConditionsForAdmissibleConstruction.ConstructionRegime Act Object}
+    {model : CnfEncodedCandidateModel}
+    {objection :
+      CnfSATSameDomainIncompletenessEndpointObjection R model}
+    (hNoForce :
+      Not (CnfSATSameDomainIncompletenessEndpointForce objection)) :
+    CnfSATSameDomainIncompletenessEndpointInert objection :=
+  hNoForce
+
+/--
+Code-predicate endpoint objections with force are hidden endpoint-gate work.
+This mirrors the Godel non-instantiability support surface without importing a
+second proof standard into the SAT route.
+-/
+theorem cnfSATCodePredicateEndpointObjection_with_force_is_hiddenGateWork
+    {Act Object : Type}
+    {R : MinimalConditionsForAdmissibleConstruction.ConstructionRegime Act Object}
+    {model : CnfEncodedCandidateModel}
+    {objection :
+      CnfSATSameDomainIncompletenessEndpointObjection R model}
+    (hForce : CnfSATSameDomainIncompletenessEndpointForce objection) :
+    CnfSATSameDomainIncompletenessHiddenGateWork objection :=
+  hForce
+
+/--
+The route-exhaustion surface for same-domain incompleteness objections.  Each
+route is one of the named Godel-support routes; there is no unnamed same-domain
+rescue route in this SAT endpoint audit surface.
+-/
+theorem cnfSATSameDomainIncompletenessRoute_exhaustive
+    (route : CnfSATSameDomainIncompletenessRoute) :
+    route = CnfSATSameDomainIncompletenessRoute.codeReadback \/
+      route = CnfSATSameDomainIncompletenessRoute.semanticImport \/
+        route = CnfSATSameDomainIncompletenessRoute.infinitaryImport \/
+          route = CnfSATSameDomainIncompletenessRoute.secondEquivalence \/
+            route =
+              CnfSATSameDomainIncompletenessRoute.richerSameDomainExtension \/
+              route =
+                CnfSATSameDomainIncompletenessRoute.explicitScopeChange := by
+  cases route with
+  | codeReadback => exact Or.inl rfl
+  | semanticImport => exact Or.inr (Or.inl rfl)
+  | infinitaryImport => exact Or.inr (Or.inr (Or.inl rfl))
+  | secondEquivalence => exact Or.inr (Or.inr (Or.inr (Or.inl rfl)))
+  | richerSameDomainExtension =>
+      exact Or.inr (Or.inr (Or.inr (Or.inr (Or.inl rfl))))
+  | explicitScopeChange =>
+      exact Or.inr (Or.inr (Or.inr (Or.inr (Or.inr rfl))))
+
+/--
+Same-domain incompleteness objections do not reopen endpoint standing once the
+official resolution is target-adequate and A+ governed.  If the objection has
+force, it is hidden endpoint-gate work and the same no-independent closure
+already blocks the separator countercase; if it has no force, it is inert.
+-/
+theorem cnfSATOfficialResolution_stable_against_sameDomainIncompleteness
+    {Act Object : Type}
+    {R : MinimalConditionsForAdmissibleConstruction.ConstructionRegime Act Object}
+    {model : CnfEncodedCandidateModel}
+    {branch : Prop}
+    (hAPlus :
+      MinimalConditionsForAdmissibleConstruction.KernelAPlusAuditCertificate R)
+    (hAdequacy :
+      CnfSATOfficialResolutionTargetAdequacy R model branch)
+    (hNoIndependent : CnfNoIndependentSeparatingClassifier model)
+    (hIndependent :
+      CnfSeparatingClassifierIsIndependentSameDomain model) :
+    Not (CnfSATReductioCountercase R model) := by
+  have _hBinding :
+      CnfSATAPlusEndpointUseBinding R model branch :=
+    cnfSATOfficialResolutionTargetAdequacy_instantiates_kernelAPlus
+      hAPlus hAdequacy
+  exact
+    cnfSATAPlusConsequences_bind_localSeparatorCountercaseUse
+      (R := R)
+      hAPlus
+      hNoIndependent
+      hIndependent
+
+/--
+No same-domain true-but-unprovable separator split has endpoint force in the
+closed SAT regime.  A force-bearing split is hidden gate work and is blocked by
+the stable-resolution theorem; a non-force-bearing split is endpoint-inert.
+-/
+theorem cnfSATNoSameDomainTrueButUnprovableSeparatorSplit
+    {Act Object : Type}
+    {R : MinimalConditionsForAdmissibleConstruction.ConstructionRegime Act Object}
+    {model : CnfEncodedCandidateModel}
+    {branch : Prop}
+    (hAPlus :
+      MinimalConditionsForAdmissibleConstruction.KernelAPlusAuditCertificate R)
+    (hAdequacy :
+      CnfSATOfficialResolutionTargetAdequacy R model branch)
+    (hNoIndependent : CnfNoIndependentSeparatingClassifier model)
+    (hIndependent :
+      CnfSeparatingClassifierIsIndependentSameDomain model) :
+    Not (CnfSATReductioCountercase R model) :=
+  cnfSATOfficialResolution_stable_against_sameDomainIncompleteness
+    (R := R)
+    hAPlus
+    hAdequacy
+    hNoIndependent
+    hIndependent
+
+/--
 Context-language exclusion of the manuscript's `Sep_bare`: on the fixed SAT
 endpoint carrier, the bare separator is impossible once the AASC
 no-independent-discriminator closeout and SAT-local bridge are in force.
