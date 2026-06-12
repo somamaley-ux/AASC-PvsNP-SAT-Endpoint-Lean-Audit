@@ -1,0 +1,6 @@
+unresolved_refs: False
+rerun: False
+overfull: False
+underfull: False
+fatal: False
+Output written on main.pdf (105 pages, 892532 bytes).

@@ -1,0 +1,6 @@
+Final pdflatex verification scan:
+- no unresolved references
+- no rerun warnings
+- no overfull boxes
+- no underfull boxes
+- final PDF page count: 102

@@ -1,0 +1,24 @@
+Final native lower-bound hardening verification
+pdflatex extra pass 2 warnings:
+No overfull/underfull boxes, undefined references, rerun notices, or LaTeX warnings detected in final pass.
+
+Title:           
+Subject:         
+Keywords:        
+Author:          
+Creator:         LaTeX with hyperref
+Producer:        pdfTeX-1.40.26
+CreationDate:    Fri Jun 12 04:29:33 2026 UTC
+ModDate:         Fri Jun 12 04:29:33 2026 UTC
+Custom Metadata: yes
+Metadata Stream: no
+Tagged:          no
+UserProperties:  no
+Suspects:        no
+Form:            none
+JavaScript:      no
+Pages:           111
+Encrypted:       no
+Page size:       612 x 792 pts (letter)
+Page rot:        0
+File size:       923810 bytes

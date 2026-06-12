@@ -1,4 +1,9 @@
-# Release Notes
+﻿
+## v1.0.8 - Hardened Clay endpoint sync
+
+- Synced the manuscript-facing snapshot from the hardened Clay endpoint package.
+- Added HARDENED_ENDPOINT_SYNC.md as the repository-level handoff note.
+- Preserved the existing Lean audit/truth-boundary posture while making the hardened package visible in the public repo surface.# Release Notes
 
 ## AASC P vs NP SAT Endpoint Full-Stack Lean Audit Archive v1.0.7
 
@@ -123,3 +128,4 @@ complexity correspondence from the CNF-SAT endpoint to the usual P vs NP
 statement; it is not used as proof machinery for the AASC exclusion.  The repo
 therefore should be read as a manuscript-faithful AASC endpoint mechanization,
 not as a full independent reconstruction of all surrounding complexity theory.
+
